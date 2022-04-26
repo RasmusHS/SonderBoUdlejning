@@ -11,9 +11,9 @@ using Microsoft.Data.SqlClient;
 
 namespace SonderBoUdlejning
 {
-    public partial class Main : Form
+    public partial class LoginMain : Form
     {
-        public Main()
+        public LoginMain()
         {
             InitializeComponent();
         }
