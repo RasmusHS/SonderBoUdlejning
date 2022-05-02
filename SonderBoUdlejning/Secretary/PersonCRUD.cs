@@ -15,6 +15,7 @@ namespace SonderBoUdlejning.Secretary
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         personSQLBuilder personSQL = new personSQLBuilder();
+        pSQLRunner pRunner = new pSQLRunner();
 
         public PersonCRUD()
         {
@@ -34,6 +35,7 @@ namespace SonderBoUdlejning.Secretary
             personSQL.Update = false;
             personSQL.Delete = false;            
 
+            //Input checkes for igennem Regex
             personSQL.Navn = tbNavn.Text;
             personSQL.Mail = tbMail.Text;
             personSQL.Tlf = tbTlf.Text;
@@ -41,9 +43,21 @@ namespace SonderBoUdlejning.Secretary
             personSQL.ErBeboer = radioBtnBeboer.Checked;
             personSQL.Alt = radioBtnAlt.Checked;
 
-            MessageBox.Show(personSQL.SQLBuilder());
+            //Input sendes videre for blive parameteriseret og kørt
+            MessageBox.Show(personSQL.Navn);
+            if ((!string.IsNullOrEmpty(personSQL.Navn)) && (!string.IsNullOrEmpty(personSQL.Mail)) && (!string.IsNullOrEmpty(personSQL.Tlf)))
+            {
+                pRunner.pSQLC(personSQL.Navn, personSQL.Mail, personSQL.Tlf);
+            }
+            else
+            {
+                string displayError = string.Join(Environment.NewLine, personSQL.pErrorList);
+                MessageBox.Show("Alle felter skal udfyldes.\nAntal fejl fundet: " + personSQL.pErrorList.Count.ToString() + "\n" + displayError);
+            }
 
-            dgvPersonCRUD.DataSource = tableConn.CUD(personSQL.SQLBuilder());
+            //MessageBox.Show(personSQL.SQLBuilder());
+
+            //dgvPersonCRUD.DataSource = tableConn.CUD(personSQL.SQLBuilder());
         }
 
         private void btnPersonR_Click(object sender, EventArgs e)
@@ -53,6 +67,7 @@ namespace SonderBoUdlejning.Secretary
             personSQL.Update = false;
             personSQL.Delete = false;
 
+            //Input checkes for igennem Regex
             personSQL.Navn = tbNavn.Text;
             personSQL.Mail = tbMail.Text;
             personSQL.Tlf = tbTlf.Text;
@@ -60,9 +75,14 @@ namespace SonderBoUdlejning.Secretary
             personSQL.ErBeboer = radioBtnBeboer.Checked;
             personSQL.Alt = radioBtnAlt.Checked;
 
+            //Input sendes videre for blive parameteriseret og kørt
+            MessageBox.Show(personSQL.Navn);
+            
+            pRunner.pSQLR();
+            
             //MessageBox.Show(personSQL.SQLBuilder());
 
-            dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
+            //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
         }
 
         private void btnPersonU_Click(object sender, EventArgs e)
@@ -72,15 +92,28 @@ namespace SonderBoUdlejning.Secretary
             personSQL.Update = true;
             personSQL.Delete = false;
 
+            //Input checkes for igennem Regex
             personSQL.Navn = tbNavn.Text;
             personSQL.Mail = tbMail.Text;
             personSQL.Tlf = tbTlf.Text;
+            personSQL.PId = tbPId.Text;
             personSQL.Medlem = radioBtnMedlem.Checked;
             personSQL.ErBeboer = radioBtnBeboer.Checked;
             personSQL.Alt = radioBtnAlt.Checked;
-            personSQL.PId = tbPId.Text;
 
-            MessageBox.Show(personSQL.SQLBuilder());
+            //Input sendes videre for blive parameteriseret og kørt
+            MessageBox.Show(personSQL.Navn);
+            if ((!string.IsNullOrEmpty(personSQL.Navn)) && (!string.IsNullOrEmpty(personSQL.Mail)) && (!string.IsNullOrEmpty(personSQL.Tlf)) && (!string.IsNullOrEmpty(personSQL.PId)))
+            {
+                pRunner.pSQLU(personSQL.Navn, personSQL.Mail, personSQL.Tlf, personSQL.PId);
+            }
+            else
+            {
+                string displayError = string.Join(Environment.NewLine, personSQL.pErrorList);
+                MessageBox.Show("Alle felter skal udfyldes.\nAntal fejl fundet: " + personSQL.pErrorList.Count.ToString() + "\n" + displayError);
+            }
+
+            //MessageBox.Show(personSQL.SQLBuilder());
 
             //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());            
         }
@@ -99,7 +132,7 @@ namespace SonderBoUdlejning.Secretary
             personSQL.ErBeboer = radioBtnBeboer.Checked;
             personSQL.Alt = radioBtnAlt.Checked;
 
-            MessageBox.Show(personSQL.SQLBuilder());
+            //MessageBox.Show(personSQL.SQLBuilder());
 
             //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
         }

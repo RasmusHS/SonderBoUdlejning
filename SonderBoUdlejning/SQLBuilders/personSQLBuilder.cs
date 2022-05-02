@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.SQLBuilders
 {
-    public class personSQLBuilder : ISQLBuilder
+    public class personSQLBuilder
     {
-        private List<string> pErrorList = new List<string>();
+        public List<string> pErrorList = new List<string>();
         private Regex retal = new Regex(@"(^[0-9]*$)");
         private Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
-        private Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
-        private bool injectedSQL = false;
+        //private Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
+        //private bool injectedSQL = false;
 
         private string _navn = "";
         public string Navn
@@ -24,26 +24,17 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _navn; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if ((!bogstaver.IsMatch(value)) || (value.Length > 50))
                 {
-                    if ((!bogstaver.IsMatch(value)) || (value.Length > 50))
-                    {
-                        pErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
-                        value = "";
-                        _navn = value;
-                    }
-                    else
-                    {
-                        _navn = value;
-                    }
-                }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
+                    pErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
                     value = "";
                     _navn = value;
                 }
+                else
+                {
+                    _navn = value;
+                }
+                
             }
         }
 
@@ -53,26 +44,17 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _mail; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (value.Length > 50)
                 {
-                    if (value.Length > 50)
-                    {
-                        pErrorList.Add("Mail skal være mindre end 50 tegn");
-                        value = "";
-                        _mail = value;
-                    }
-                    else
-                    {
-                        _mail = value;
-                    }
-                }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
+                    pErrorList.Add("Mail skal være mindre end 50 tegn");
                     value = "";
                     _mail = value;
                 }
+                else
+                {
+                    _mail = value;
+                }
+
             }
         }
 
@@ -82,26 +64,17 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _tlf; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if ((!retal.IsMatch(value)) || (value.Length > 8))
                 {
-                    if ((!retal.IsMatch(value)) || (value.Length > 8))
-                    {
-                        pErrorList.Add("Telefon må kun indeholde tal og skal være 8 cifre eller mindre");
-                        value = "";
-                        _tlf = value;
-                    }
-                    else
-                    {
-                        _tlf = value;
-                    }
-                }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
+                    pErrorList.Add("Telefon må kun indeholde tal og skal være 8 cifre eller mindre");
                     value = "";
                     _tlf = value;
                 }
+                else
+                {
+                    _tlf = value;
+                }
+
             }
         }
 
@@ -111,24 +84,14 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _pId; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (!retal.IsMatch(value))
                 {
-                    if (!retal.IsMatch(value))
-                    {
-                        pErrorList.Add("Person ID skal kun indeholde tal");
-                        value = "";
-                        _pId = value;
-                    }
-                    else
-                    {
-                        _pId = value;
-                    }
+                    pErrorList.Add("Person ID skal kun indeholde tal");
+                    value = "";
+                    _pId = value;
                 }
                 else
                 {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    value = "";
                     _pId = value;
                 }
             }
@@ -184,7 +147,7 @@ namespace SonderBoUdlejning.SQLBuilders
             set { _delete = value; }
         }
 
-        public string SQLBuilder()
+        /*public string SQLBuilder()
         {
             string displayError = string.Join(Environment.NewLine, pErrorList);
             MessageBox.Show(pErrorList.Count.ToString());
@@ -235,6 +198,6 @@ namespace SonderBoUdlejning.SQLBuilders
 
             return pSQLQuery;
 
-        }
+        }*/
     }
 }
