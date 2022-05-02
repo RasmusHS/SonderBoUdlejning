@@ -117,47 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="usernameTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 25pt</value>
-  </data>
-  <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 168</value>
-  </data>
-  <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 45</value>
-  </data>
-  <data name="passwordTextBox.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 25pt</value>
-  </data>
-  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 315</value>
-  </data>
-  <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 45</value>
-  </data>
-  <data name="usernameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 111</value>
-  </data>
-  <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 39</value>
-  </data>
-  <data name="usernameLabel.Text" xml:space="preserve">
-    <value>Brugernavn:</value>
-  </data>
-  <data name="PasswordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 263</value>
-  </data>
-  <data name="PasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 39</value>
-  </data>
-  <data name="PasswordLabel.Text" xml:space="preserve">
-    <value>Kodeord:</value>
-  </data>
-  <data name="loginButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 425</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>869, 569</value>
-  </data>
 </root>

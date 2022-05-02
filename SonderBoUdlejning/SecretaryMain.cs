@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SonderBoUdlejning.Secretary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,27 @@ namespace SonderBoUdlejning
             LoginMain loginMain = new LoginMain();
             loginMain.ShowDialog();
             this.Close();
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new PersonCRUD());
+        }
+
+        private Form activeForm = null;
+        private void openFormsLoader(Form loadedForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = loadedForm;
+            loadedForm.TopLevel = false; // Lav Forms om til en Controle
+            loadedForm.FormBorderStyle = FormBorderStyle.None; // Ingen kant på forms, når den loades ind
+            loadedForm.Dock = DockStyle.Fill; // Docker fuldt ud i FormLoader
+            panelSecFormsLoader.Controls.Add(loadedForm); //Tilføjer den til Controle Panelet i Panelet
+            panelSecFormsLoader.Tag = loadedForm; // Vi forbinder Formen til Formloader Panelet
+            loadedForm.BringToFront(); // Bringes til front så den ikke kommer i konflikt med logo
+            loadedForm.Show(); // Formens vises.
+
         }
     }
 }

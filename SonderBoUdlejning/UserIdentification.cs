@@ -15,7 +15,7 @@ namespace SonderBoUdlejning
         public static string DBUsername = "kaspermark_dk";
         public static string DBPass = "69qom3u9PW";
         public static string conString = "SERVER=" + serverHost + ";" + "DATABASE=" + databaseName + ";" + "UID=" + DBUsername + ";" + "PASSWORD=" + DBPass + "; Encrypt=False";
-
+        //"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False";
 
         public static int UserAccess { get; set; }
 

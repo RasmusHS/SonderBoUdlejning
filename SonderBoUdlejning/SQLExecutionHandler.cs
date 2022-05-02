@@ -11,7 +11,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
 {
     public class SQLExecutionHandler
     {
-        private string strconn = @""; //Insert your connection string here
+        private string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
 
         public object tableBinder(string sqlStatement)
         {
@@ -34,9 +34,31 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             return bSource; //returns the binding source object back to the form that called the method
         }
 
+        public object CUD(string sqlStatement)
+        {
+            SqlConnection conn = new SqlConnection(strconn); //Encapsulates conn string in an object
+            conn.Open(); //opens connection to database
+
+            string sqlS = sqlStatement; //SQL statement sent from the form
+            SqlCommand cmd = new SqlCommand(sqlS, conn); //Encapsulates SQL statement in an object
+
+            SqlDataAdapter sqlDA = new SqlDataAdapter(); //Bridge between data source (the SQL server) and the data table
+            sqlDA.SelectCommand = cmd; //Assigns the SQL command to the data adapter
+
+
+            DataTable dt = new DataTable(); //Creates a data table to hold the data
+            sqlDA.Update(dt); //Fills the data table with data from the data source (the SQL server) using the SQL command
+            
+            BindingSource bSource = new BindingSource(); //Creates a binding source object to hold the data table
+            bSource.DataSource = dt; //Assigns the data table to the binding source object
+            conn.Close(); //Closes the connection to the database
+            //sqlDA.Update(dt); //Updates the data grid view if INSERT, UPDATE or DELETE statements were made
+            return bSource; //returns the binding source object back to the form that called the method
+        }    
+        
         //Sample template
         /*
-         TableConnector tableConn = new TableConnector();
+         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         
          private void Form1_Load(object sender, EventArgs e)
          {   
@@ -47,5 +69,10 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
              dataGridView2.DataSource = tableConn.tableBinder(sqlS2);
          }
          */
+
+        public void SQLRunner()
+        {
+            
+        }
     }
 }

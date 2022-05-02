@@ -22,7 +22,7 @@ namespace SonderBoUdlejning
         {
             SqlConnection conn = new SqlConnection(UserIdentification.conString);
             conn.Open();
-            string query = "SELECT accessLevel FROM users WHERE password = '" + passwordTextBox.Text + "' AND username = '" + usernameTextBox.Text + "';";
+            string query = "SELECT accessLevel FROM LoginInfo WHERE loginPass = '" + passwordTextBox.Text + "' AND brugerNavn = '" + usernameTextBox.Text + "';";
 
             //Get data from server
             SqlCommand cmd = new SqlCommand(query, conn);
