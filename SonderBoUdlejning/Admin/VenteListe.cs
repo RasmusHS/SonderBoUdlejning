@@ -37,6 +37,11 @@ namespace SonderBoUdlejning.Admin
             string pId = pIdTextbox.Text;
             string bId = bIdTextbox.Text;
 
+            /*
+             Tjekker om textfelterne er tomme
+             derefter tjekker de om det er et tal der bliver skrevet
+             Til sidst tjekker den for alt og executer en sql til databasen
+            */
             if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
             {
                 MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
@@ -72,7 +77,7 @@ namespace SonderBoUdlejning.Admin
 
                 conn.Close();
                 }
-                catch (Exception err)
+                catch 
                 {
                     MessageBox.Show("Bolig ID eller person ID findes ikke i databasen!");
                 }
@@ -90,31 +95,34 @@ namespace SonderBoUdlejning.Admin
             bool pIdValid = false;
             bool bIdValid = false;
 
-            string q = "DELETE FROM Venteliste WHERE pId = 1 AND bId = 1";
+            
 
             StringBuilder query = new StringBuilder("DELETE FROM Venteliste WHERE ");
 
             
 
-
+            //Hvis begge fetler er tomme, så stopper resten af koden
             if (string.IsNullOrEmpty(pId) && string.IsNullOrEmpty(bId))
             {
                 MessageBox.Show("Indtast venligst enten et pId eller et bId!");
                 return;
             } 
             
+            //Hvis pId er indtastet og bId ikke er
             if (!string.IsNullOrEmpty(pId) && int.TryParse(pId, out int pIdTemp)) 
             {
                 pIdValid = true;
                 query.Append("pId = "+pId);
             }
 
+            //Hvis bId er indtastet og pId ikke er
             if (!string.IsNullOrEmpty(bId) && int.TryParse(bId, out int bIdTemp))
             {
                 bIdValid = true;
                 query.Append("bId = " + bId);
             }
 
+            //Hvis både pId og bId er indtastet, så create en helt ny sql sætning
             if (pIdValid && bIdValid)
             {
                 query.Clear();
@@ -130,6 +138,7 @@ namespace SonderBoUdlejning.Admin
           
                 SqlCommand cmd = new SqlCommand(query.ToString(), conn);
 
+                //Prompt user med en warningbox inden der bliver slettet
                 DialogResult dialogResult = MessageBox.Show("Er du sikker på du vil slette denne entry på ventelisten?", "Er du sikker?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -155,6 +164,9 @@ namespace SonderBoUdlejning.Admin
 
         }
 
-
+        private void GetPosition_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

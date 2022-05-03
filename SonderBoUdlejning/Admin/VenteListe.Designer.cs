@@ -61,7 +61,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(28, 41);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(552, 192);
@@ -71,9 +71,9 @@
             // 
             this.tabPage1.Controls.Add(this.DGVVenteListe);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(1);
             this.tabPage1.Size = new System.Drawing.Size(544, 166);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Venteliste";
@@ -84,7 +84,7 @@
             this.DGVVenteListe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVVenteListe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGVVenteListe.Location = new System.Drawing.Point(1, 1);
-            this.DGVVenteListe.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DGVVenteListe.Margin = new System.Windows.Forms.Padding(1);
             this.DGVVenteListe.Name = "DGVVenteListe";
             this.DGVVenteListe.RowHeadersWidth = 92;
             this.DGVVenteListe.RowTemplate.Height = 37;
@@ -95,9 +95,9 @@
             // 
             this.tabPage2.Controls.Add(this.DGVPersoner);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(1);
             this.tabPage2.Size = new System.Drawing.Size(544, 166);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Personer";
@@ -108,7 +108,7 @@
             this.DGVPersoner.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVPersoner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGVPersoner.Location = new System.Drawing.Point(1, 1);
-            this.DGVPersoner.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DGVPersoner.Margin = new System.Windows.Forms.Padding(1);
             this.DGVPersoner.Name = "DGVPersoner";
             this.DGVPersoner.RowHeadersWidth = 92;
             this.DGVPersoner.RowTemplate.Height = 37;
@@ -119,9 +119,9 @@
             // 
             this.tabPage3.Controls.Add(this.DGVBoliger);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(1);
             this.tabPage3.Size = new System.Drawing.Size(544, 166);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Boliger";
@@ -132,7 +132,7 @@
             this.DGVBoliger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVBoliger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DGVBoliger.Location = new System.Drawing.Point(1, 1);
-            this.DGVBoliger.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DGVBoliger.Margin = new System.Windows.Forms.Padding(1);
             this.DGVBoliger.Name = "DGVBoliger";
             this.DGVBoliger.RowHeadersWidth = 92;
             this.DGVBoliger.RowTemplate.Height = 37;
@@ -143,7 +143,7 @@
             // 
             this.InsertToList.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InsertToList.Location = new System.Drawing.Point(28, 355);
-            this.InsertToList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.InsertToList.Margin = new System.Windows.Forms.Padding(1);
             this.InsertToList.Name = "InsertToList";
             this.InsertToList.Size = new System.Drawing.Size(118, 61);
             this.InsertToList.TabIndex = 2;
@@ -156,7 +156,7 @@
             // pIdTextbox
             // 
             this.pIdTextbox.Location = new System.Drawing.Point(34, 272);
-            this.pIdTextbox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pIdTextbox.Margin = new System.Windows.Forms.Padding(1);
             this.pIdTextbox.Name = "pIdTextbox";
             this.pIdTextbox.Size = new System.Drawing.Size(45, 20);
             this.pIdTextbox.TabIndex = 3;
@@ -164,7 +164,7 @@
             // bIdTextbox
             // 
             this.bIdTextbox.Location = new System.Drawing.Point(34, 315);
-            this.bIdTextbox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.bIdTextbox.Margin = new System.Windows.Forms.Padding(1);
             this.bIdTextbox.Name = "bIdTextbox";
             this.bIdTextbox.Size = new System.Drawing.Size(45, 20);
             this.bIdTextbox.TabIndex = 4;
@@ -213,6 +213,7 @@
             this.GetPosition.Text = "Få position";
             this.toolTip.SetToolTip(this.GetPosition, "Få en persons positionen på en specifik bolig");
             this.GetPosition.UseVisualStyleBackColor = true;
+            this.GetPosition.Click += new System.EventHandler(this.GetPosition_Click);
             // 
             // textBox1
             // 
@@ -245,7 +246,7 @@
             this.Controls.Add(this.pIdTextbox);
             this.Controls.Add(this.InsertToList);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "VenteListe";
             this.Text = "VenteListe";
             this.Load += new System.EventHandler(this.VenteListe_Load);
