@@ -14,19 +14,14 @@ namespace SonderBoUdlejning
     public class pSQLRunner 
     {
         private static string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
-        SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        personSQLBuilder personSQL = new personSQLBuilder();
-        private static string sqlS = "";
-        static SqlConnection conn = new SqlConnection(strconn);
-        SqlCommand cmd = new SqlCommand(sqlS, conn);
-
-        //PersonCRUD personCRUD = new PersonCRUD();
-        SecretaryMain secretaryMain = new SecretaryMain();
+        personSQLBuilder personSQL = personSQLBuilder.getPInstance();        
+        public List<string> paramList = new List<string>();
         internal object personCRUDdgv = null;
 
-        //private static string sqlS = "";
-
-        /*private string _navn = "";
+        private string _pId = "";
+        public string PId { get { return _pId; } set { _pId = value; } }
+        
+        private string _navn = "";
         public string Navn { get { return _navn; } set { _navn = value; } }
 
         private string _mail = "";
@@ -42,22 +37,36 @@ namespace SonderBoUdlejning
         public bool ErBeboer { get { return _erBeboer; } set { _erBeboer = value; } }
 
         private bool _alt = false;
-        public bool Alt { get { return _alt; } set { _alt = value; } }*/
+        public bool Alt { get { return _alt; } set { _alt = value; } }
 
+        private bool _create = false;
+        public bool Create { get { return _create; } set { _create = value; } }
 
+        private bool _read = false;
+        public bool Read { get { return _read; } set { _read = value; } }
+
+        private bool _update = false;
+        public bool Update { get { return _update; } set { _update = value; } }
+
+        private bool _delete = false;
+        public bool Delete { get { return _delete; } set { _delete = value; } }
+
+        public string errorMessage()
+        {
+            string displayError = string.Join(Environment.NewLine, personSQL.pErrorList);
+            MessageBox.Show(displayError);
+            return displayError;
+        }
 
         public void pSQLC(string fNavn, string pMail, string pTlf)
         {
-            //fNavn = Navn;
-            //pMail = Mail;
-            //pTlf = Tlf;
-            //string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf)";
-            sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf)";
-            //SqlConnection conn = new SqlConnection(strconn);
-            //SqlCommand cmd = new SqlCommand(sqlS, conn);
-            cmd.Parameters.Clear();
+            //string didag = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’ ’HH’:’mm’:’ss");
+
+            string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf, @ErBeboer)";
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlCommand cmd = new SqlCommand(sqlS, conn);
             
-            //SqlCommand cmd = new SqlCommand(sqlS, conn);
+            cmd.Parameters.Clear();
 
             cmd.Parameters.Add("@Navn", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@Navn"].Value = Convert.ToString(fNavn);
@@ -68,6 +77,9 @@ namespace SonderBoUdlejning
             cmd.Parameters.Add("@Tlf", System.Data.SqlDbType.Int);
             cmd.Parameters["@Tlf"].Value = Convert.ToInt32(pTlf);
 
+            cmd.Parameters.Add("@ErBeboer", System.Data.SqlDbType.Bit);
+            cmd.Parameters["@ErBeboer"].Value = Convert.ToBoolean(false);
+
             try
             {
                 conn.Open();
@@ -76,9 +88,9 @@ namespace SonderBoUdlejning
                 MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
-                                    cmd.Parameters["@Tlf"].Value +
+                                    cmd.Parameters["@Tlf"].Value + ", " +
+                                    cmd.Parameters["@ErBeboer"].Value +
                                     ")");
-                //tableConn.tableBinder("SELECT * FROM Person");
             }
             catch (Exception ex)
             {
@@ -86,104 +98,77 @@ namespace SonderBoUdlejning
             }
         }
 
-        public void pSQLR()
+        public string pSQLR(string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
         {
-            //string sqlS = "SELECT * FROM Person WHERE 1=1";
-            sqlS = "SELECT * FROM Person WHERE 1=1";
-            //SqlConnection conn = new SqlConnection(strconn);
-            //SqlCommand cmd = new SqlCommand(sqlS, conn);
-            cmd.Parameters.Clear();
+            this.Navn = personSQL.Navn = fNavn;
+            this.Mail = personSQL.Mail = pMail;
+            this.Tlf = personSQL.Tlf = pTlf;
+            this.Medlem = personSQL.Medlem = medlem;
+            this.ErBeboer = personSQL.ErBeboer = erBeboer;
+            this.Alt = personSQL.Alt = alt;
+
+            string sqlS = $"SELECT * FROM Person WHERE 1=1";
             
-            if (!string.IsNullOrEmpty(personSQL.Navn))
-            {
-                sqlS += " AND fNavn LIKE '%@Navn%'";
-                cmd.Parameters.Add("@Navn", System.Data.SqlDbType.VarChar);
-                cmd.Parameters["@Navn"].Value = Convert.ToString(personSQL.Navn);
-            }
-            else
-                sqlS += "";
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlCommand cmd = new SqlCommand(sqlS, conn);
+            
+            SqlDataAdapter sqlDA = new SqlDataAdapter(cmd); //Bridge between data source (the SQL server) and the data table
+            DataTable dt = new DataTable(); //Creates a data table to hold the data
 
-            if (!string.IsNullOrEmpty(personSQL.Mail))
-            {
-                sqlS += " AND pMail = '@Mail'";
-                cmd.Parameters.Add("@Mail", System.Data.SqlDbType.VarChar);
-                cmd.Parameters["@Mail"].Value = Convert.ToString(personSQL.Mail);
-            }
+            if (!string.IsNullOrEmpty(fNavn))
+                sqlS += $" AND fNavn LIKE '%{fNavn}%'";
             else
-                sqlS += "";
+                sqlS += $"";
 
-            if (!string.IsNullOrEmpty(personSQL.Tlf))
-            {
-                sqlS += " AND pTlf = @Tlf";
-                cmd.Parameters.Add("@Tlf", System.Data.SqlDbType.Int);
-                cmd.Parameters["@Tlf"].Value = Convert.ToInt32(personSQL.Tlf);
-            }
+            if (!string.IsNullOrEmpty(pMail))
+                sqlS += $" AND pMail = '{pMail}'";
             else
-                sqlS += "";
+                sqlS += $"";
 
-            if (personSQL.Medlem == true)
-            {
-                sqlS += " AND erBeboer = @erBeboer";
-                cmd.Parameters.Add("@erBeboer", System.Data.SqlDbType.Bit);
-                cmd.Parameters["@erBeboer"].Value = false;
-            }
-            else if (personSQL.ErBeboer == true)
-            {
-                sqlS += " AND erBeboer = @erBeboer";
-                cmd.Parameters.Add("@erBeboer", System.Data.SqlDbType.Bit);
-                cmd.Parameters["@erBeboer"].Value = true;
-            }
-            else if (personSQL.Alt == true)
-            {
-                sqlS += "";
-            }
+            if (!string.IsNullOrEmpty(pTlf))
+                sqlS += $" AND pTlf = '{pTlf}'";
+            else
+                sqlS += $"";
+
+            if (medlem == true)
+                sqlS += $" AND erBeboer = 0";
+            else if (erBeboer == true)
+                sqlS += $" AND erBeboer = 1";
+            else if (alt == true)
+                sqlS += $"";
+            else
+                sqlS += $"";
 
             try
             {
-                SqlConnection conn = new SqlConnection(strconn);
                 conn.Open();
-                MessageBox.Show("Hej");
-                //cmd.ExecuteNonQuery();
-                SqlDataAdapter sqlDA = new SqlDataAdapter(); //Bridge between data source (the SQL server) and the data table
-                sqlDA.SelectCommand.CommandText = cmd.CommandText;
-                MessageBox.Show("" + sqlDA.SelectCommand.CommandText);
+                if (personSQL.injectedSQL == 1)
+                {
+                    sqlS = "";
+                    conn.Close();
+                }
+                else
+                {
+                    sqlDA.Fill(dt);
+                    personCRUDdgv = dt;
+                    conn.Close();
+                    return sqlS;
+                }
 
-                //sqlDA.SelectCommand = cmd; //Assigns the SQL command to the data adapter
-                MessageBox.Show("Hej2");
-                DataTable dt = new DataTable(); //Creates a data table to hold the data
-                //sqlDA.Fill(dt); //Fills the data table with data from the data source (the SQL server) using the SQL command
-                MessageBox.Show("Hej3");
-                //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
-                //personCRUD.DgvPersonCRUD.DataSource = bSource; //Assigns the binding source object to the data grid view
-                //secretaryMain.Controls.Contains(dgvPersonCRUD);
-                sqlDA.Fill(dt);
-                //cmd.ExecuteNonQuery();
-                //cmd.ExecuteReader();
-                //cmd.CommandText = sqlDA;
-                MessageBox.Show("Hej4");
-                conn.Close();
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
-                                    cmd.Parameters["@Navn"].Value + ", " +
-                                    cmd.Parameters["@Mail"].Value + ", " +
-                                    cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@erBeboer"].Value +
-                                    ")");
+                return sqlS;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return ex.ToString();
             }
         }
 
         public void pSQLU(string fNavn, string pMail, string pTlf, string pId)
         {
-            //fNavn = Navn;
-            //pMail = Mail;
-            //pTlf = Tlf;
-            //string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf WHERE pId = @pId";
-            sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf WHERE pId = @pId";
-            //SqlConnection conn = new SqlConnection(strconn);            
-            //SqlCommand cmd = new SqlCommand(sqlS, conn);
+            string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = 0 WHERE pId = @pId";
+            SqlConnection conn = new SqlConnection(strconn);            
+            SqlCommand cmd = new SqlCommand(sqlS, conn);
             cmd.Parameters.Clear();
 
             cmd.Parameters.Add("@Navn", System.Data.SqlDbType.VarChar);
@@ -206,7 +191,8 @@ namespace SonderBoUdlejning
                 MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
-                                    cmd.Parameters["@Tlf"].Value +
+                                    cmd.Parameters["@Tlf"].Value + ", " +
+                                    cmd.Parameters["@pId"].Value +
                                     ")");
             }
             catch (Exception ex)
@@ -217,11 +203,9 @@ namespace SonderBoUdlejning
 
         public void pSQLD(string pTlf)
         {
-            //pTlf = Tlf;
-            //string sqlS = "DELETE FROM Person WHERE pTlf = @Tlf";
-            sqlS = "DELETE FROM Person WHERE pTlf = @Tlf";
-            //SqlConnection conn = new SqlConnection(strconn);
-            //SqlCommand cmd = new SqlCommand(sqlS, conn);
+            string sqlS = "DELETE FROM Person WHERE pTlf = @Tlf";
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlCommand cmd = new SqlCommand(sqlS, conn);
             cmd.Parameters.Clear();
 
             cmd.Parameters.Add("@Tlf", System.Data.SqlDbType.Int);
