@@ -10,13 +10,41 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.SQLBuilders
 {
-    public class personSQLBuilder : ISQLBuilder
+    public class personSQLBuilder
     {
-        private List<string> pErrorList = new List<string>();
+        static personSQLBuilder pInstance;
+
+        private static object locker = new object();
+
+        private personSQLBuilder()
+        {
+
+        }
+
+        public static personSQLBuilder getPInstance()
+        {
+            // Support multithreaded applications through
+            // 'Double checked locking' pattern which (once
+            // the instance exists) avoids locking each
+            // time the method is invoked
+            if (pInstance == null)
+            {
+                lock (locker)
+                {
+                    if (pInstance == null)
+                    {
+                        pInstance = new personSQLBuilder();
+                    }
+                }
+            }
+            return pInstance;
+        }
+
+        public List<string> pErrorList = new List<string>();
         private Regex retal = new Regex(@"(^[0-9]*$)");
         private Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
         private Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
-        private bool injectedSQL = false;
+        public int injectedSQL;
 
         private string _navn = "";
         public string Navn
@@ -24,7 +52,14 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _navn; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (SQLInject.IsMatch(value))
+                {
+                    injectedSQL = 1;
+                    pErrorList.Add("SQL injection er ikke tilladt");
+                    _navn = value;
+
+                }
+                else
                 {
                     if ((!bogstaver.IsMatch(value)) || (value.Length > 50))
                     {
@@ -37,13 +72,7 @@ namespace SonderBoUdlejning.SQLBuilders
                         _navn = value;
                     }
                 }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    value = "";
-                    _navn = value;
-                }
+                
             }
         }
 
@@ -53,7 +82,13 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _mail; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (SQLInject.IsMatch(value))
+                {
+                    injectedSQL = 1;
+                    pErrorList.Add("SQL injection er ikke tilladt");
+                    _mail = value;
+                }
+                else
                 {
                     if (value.Length > 50)
                     {
@@ -66,13 +101,7 @@ namespace SonderBoUdlejning.SQLBuilders
                         _mail = value;
                     }
                 }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    value = "";
-                    _mail = value;
-                }
+
             }
         }
 
@@ -82,7 +111,13 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _tlf; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (SQLInject.IsMatch(value))
+                {
+                    injectedSQL = 1;
+                    pErrorList.Add("SQL injection er ikke tilladt");
+                    _tlf = value;
+                }
+                else
                 {
                     if ((!retal.IsMatch(value)) || (value.Length > 8))
                     {
@@ -95,13 +130,7 @@ namespace SonderBoUdlejning.SQLBuilders
                         _tlf = value;
                     }
                 }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    value = "";
-                    _tlf = value;
-                }
+
             }
         }
 
@@ -111,7 +140,13 @@ namespace SonderBoUdlejning.SQLBuilders
             get { return _pId; }
             set
             {
-                if ((!SQLInject.IsMatch(value)))
+                if (SQLInject.IsMatch(value))
+                {
+                    injectedSQL = 1;
+                    pErrorList.Add("SQL injection er ikke tilladt");
+                    _pId = value;
+                }
+                else
                 {
                     if (!retal.IsMatch(value))
                     {
@@ -123,13 +158,6 @@ namespace SonderBoUdlejning.SQLBuilders
                     {
                         _pId = value;
                     }
-                }
-                else
-                {
-                    injectedSQL = true;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    value = "";
-                    _pId = value;
                 }
             }
         }
@@ -184,57 +212,10 @@ namespace SonderBoUdlejning.SQLBuilders
             set { _delete = value; }
         }
 
-        public string SQLBuilder()
+        public void errorMessage()
         {
             string displayError = string.Join(Environment.NewLine, pErrorList);
-            MessageBox.Show(pErrorList.Count.ToString());
             MessageBox.Show(displayError);
-
-            string pSQLQuery = "SELECT * FROM Person WHERE 1=1";
-
-            if (Create == true)
-                pSQLQuery = $"INSERT INTO Person VALUES (fNavn='{_navn}', pMail='{_mail}', pTlf={_tlf})";
-            else if (Read == true)
-                pSQLQuery = $"SELECT * FROM Person WHERE 1=1";
-            else if (Update == true)
-                pSQLQuery = $"UPDATE Person SET fNavn = '{_navn}', pMail = '{_mail}', pTlf = {_tlf} WHERE pId = {_pId}";
-            else if (Delete == true)
-                pSQLQuery = $"DELETE FROM Person WHERE Tlf = {_tlf}";
-
-            if (Read == true)
-            {
-                if (!string.IsNullOrEmpty(_navn))
-                    pSQLQuery += $" AND fNavn LIKE '%{_navn}%'";
-                else
-                    pSQLQuery += $"";
-
-                if (!string.IsNullOrEmpty(_mail))
-                    pSQLQuery += $" AND pMail = '{_mail}'";
-                else
-                    pSQLQuery += $"";
-
-                if (!string.IsNullOrEmpty(_tlf))
-                    pSQLQuery += $" AND pTlf = '{_tlf}'";
-                else
-                    pSQLQuery += $"";
-
-                if (_medlem == true)
-                    pSQLQuery += $" AND erBeboer = 0";
-                else if (_erBeboer == true)
-                    pSQLQuery += $" AND erBeboer = 1";
-                else if (_alt == true)
-                    pSQLQuery += $"";
-            }
-
-            if (injectedSQL == true)
-                pSQLQuery = "";
-
-            pErrorList.Clear();
-
-            MessageBox.Show(pSQLQuery);
-
-            return pSQLQuery;
-
         }
     }
 }

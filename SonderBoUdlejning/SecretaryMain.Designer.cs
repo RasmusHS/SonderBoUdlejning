@@ -135,6 +135,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelSecFormsLoader;
+        internal System.Windows.Forms.Panel PanelSecFormsLoader { get { return panelSecFormsLoader; } set { panelSecFormsLoader = value; } }
         private System.Windows.Forms.Button btnTest;
     }
 }

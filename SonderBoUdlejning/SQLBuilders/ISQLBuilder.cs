@@ -11,7 +11,7 @@ namespace SonderBoUdlejning.SQLBuilders
 {
     internal interface ISQLBuilder
     {
-        string SQLBuilder();
+        //string SQLBuilder();
         
         //Field/property or method for errorHandling is still WIP
     }
