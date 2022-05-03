@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SonderBoUdlejning.Admin;
 
 namespace SonderBoUdlejning
 {
@@ -26,5 +27,15 @@ namespace SonderBoUdlejning
             loginMain.ShowDialog();
             this.Close();
         }
+
+        private void VenteListeButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VenteListe venteliste = new VenteListe();
+            venteliste.ShowDialog();
+            this.Close();
+        }
+
+
     }
 }
