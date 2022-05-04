@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.SQLBuilders
 {
-    public class personSQLBuilder
+    public sealed class personInputCheck
     {
-        static personSQLBuilder pInstance;
+        static personInputCheck pInstance;
 
         private static object locker = new object();
 
-        private personSQLBuilder()
+        private personInputCheck()
         {
 
         }
 
-        public static personSQLBuilder getPInstance()
+        public static personInputCheck getPInstance()
         {
             // Support multithreaded applications through
             // 'Double checked locking' pattern which (once
@@ -33,7 +33,7 @@ namespace SonderBoUdlejning.SQLBuilders
                 {
                     if (pInstance == null)
                     {
-                        pInstance = new personSQLBuilder();
+                        pInstance = new personInputCheck();
                     }
                 }
             }

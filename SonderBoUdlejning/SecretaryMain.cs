@@ -28,7 +28,7 @@ namespace SonderBoUdlejning
             this.Close();
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void btnTestPersonCRUD_Click(object sender, EventArgs e)
         {
             openFormsLoader(new PersonCRUD());
         }

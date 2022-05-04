@@ -12,14 +12,15 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
 {
     public class SQLExecutionHandler
     {
-        private string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
-        personSQLBuilder personSQL = personSQLBuilder.getPInstance();
+        ConnString connString = ConnString.getConnInstance;
+        //private string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
+        personInputCheck personSQL = personInputCheck.getPInstance();
 
         public object tableBinder(string sqlStatement)
         {
             try
             {
-                SqlConnection conn = new SqlConnection(strconn); //Encapsulates conn string in an object
+                SqlConnection conn = new SqlConnection(connString.connStr); //Encapsulates conn string in an object
                 conn.Open(); //opens connection to database
 
                 string sqlS = sqlStatement; //SQL statement sent from the form

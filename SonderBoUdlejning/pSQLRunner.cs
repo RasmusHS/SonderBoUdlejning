@@ -13,8 +13,9 @@ namespace SonderBoUdlejning
 {
     public class pSQLRunner 
     {
-        private static string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
-        personSQLBuilder personSQL = personSQLBuilder.getPInstance();        
+        //private static string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
+        ConnString connString = ConnString.getConnInstance;
+        personInputCheck personSQL = personInputCheck.getPInstance();        
         public List<string> paramList = new List<string>();
         internal object personCRUDdgv = null;
 
@@ -63,7 +64,7 @@ namespace SonderBoUdlejning
             //string didag = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’ ’HH’:’mm’:’ss");
 
             string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf, @ErBeboer)";
-            SqlConnection conn = new SqlConnection(strconn);
+            SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(sqlS, conn);
             
             cmd.Parameters.Clear();
@@ -108,8 +109,8 @@ namespace SonderBoUdlejning
             this.Alt = personSQL.Alt = alt;
 
             string sqlS = $"SELECT * FROM Person WHERE 1=1";
-            
-            SqlConnection conn = new SqlConnection(strconn);
+
+            SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(sqlS, conn);
             
             SqlDataAdapter sqlDA = new SqlDataAdapter(cmd); //Bridge between data source (the SQL server) and the data table
@@ -167,7 +168,7 @@ namespace SonderBoUdlejning
         public void pSQLU(string fNavn, string pMail, string pTlf, string pId)
         {
             string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = 0 WHERE pId = @pId";
-            SqlConnection conn = new SqlConnection(strconn);            
+            SqlConnection conn = new SqlConnection(connString.connStr);            
             SqlCommand cmd = new SqlCommand(sqlS, conn);
             cmd.Parameters.Clear();
 
@@ -204,7 +205,7 @@ namespace SonderBoUdlejning
         public void pSQLD(string pTlf)
         {
             string sqlS = "DELETE FROM Person WHERE pTlf = @Tlf";
-            SqlConnection conn = new SqlConnection(strconn);
+            SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(sqlS, conn);
             cmd.Parameters.Clear();
 

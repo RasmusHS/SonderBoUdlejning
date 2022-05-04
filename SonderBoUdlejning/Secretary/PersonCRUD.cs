@@ -14,6 +14,7 @@ namespace SonderBoUdlejning.Secretary
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
+        //ConnString connString = ConnString.getConnInstance();
 
         public PersonCRUD()
         {
