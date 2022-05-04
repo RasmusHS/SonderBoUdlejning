@@ -185,6 +185,11 @@
     <Compile Include="LoginMain.Designer.cs">
       <DependentUpon>LoginMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="personCRUD\pCreate.cs" />
+    <Compile Include="personCRUD\pDelete.cs" />
+    <Compile Include="personCRUD\pFacade.cs" />
+    <Compile Include="personCRUD\pRead.cs" />
+    <Compile Include="personCRUD\pUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pSQLRunner.cs" />

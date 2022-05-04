@@ -13,8 +13,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
     public class SQLExecutionHandler
     {
         ConnString connString = ConnString.getConnInstance;
-        //private string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
-        personInputCheck personSQL = personInputCheck.getPInstance();
+        personInputCheck pInputCheck = new personInputCheck();
 
         public object tableBinder(string sqlStatement)
         {
@@ -40,9 +39,9 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch (Exception ex)
             {
-                personSQL.errorMessage();
-                personSQL.pErrorList.Clear();
-                personSQL.injectedSQL = 0;
+                MessageBox.Show(pInputCheck.errorMessage());
+                pInputCheck.pErrorList.Clear();
+                pInputCheck.resetInjectedSQL();
                 return null;
             }
         }

@@ -12,210 +12,109 @@ namespace SonderBoUdlejning.SQLBuilders
 {
     public sealed class personInputCheck
     {
-        static personInputCheck pInstance;
-
-        private static object locker = new object();
-
-        private personInputCheck()
-        {
-
-        }
-
-        public static personInputCheck getPInstance()
-        {
-            // Support multithreaded applications through
-            // 'Double checked locking' pattern which (once
-            // the instance exists) avoids locking each
-            // time the method is invoked
-            if (pInstance == null)
-            {
-                lock (locker)
-                {
-                    if (pInstance == null)
-                    {
-                        pInstance = new personInputCheck();
-                    }
-                }
-            }
-            return pInstance;
-        }
-
         public List<string> pErrorList = new List<string>();
         private Regex retal = new Regex(@"(^[0-9]*$)");
         private Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
         private Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
-        public int injectedSQL;
-
-        private string _navn = "";
-        public string Navn
+        
+        public int injectedSQL { get; private set; }
+        public void resetInjectedSQL()
         {
-            get { return _navn; }
-            set
-            {
-                if (SQLInject.IsMatch(value))
-                {
-                    injectedSQL = 1;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    _navn = value;
-
-                }
-                else
-                {
-                    if ((!bogstaver.IsMatch(value)) || (value.Length > 50))
-                    {
-                        pErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
-                        value = "";
-                        _navn = value;
-                    }
-                    else
-                    {
-                        _navn = value;
-                    }
-                }
-                
-            }
+            injectedSQL = 0;
         }
 
-        private string _mail = "";
-        public string Mail
+        public bool NavnCheck(string navn)
         {
-            get { return _mail; }
-            set
+            if (SQLInject.IsMatch(navn))
             {
-                if (SQLInject.IsMatch(value))
-                {
-                    injectedSQL = 1;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    _mail = value;
-                }
-                else
-                {
-                    if (value.Length > 50)
-                    {
-                        pErrorList.Add("Mail skal være mindre end 50 tegn");
-                        value = "";
-                        _mail = value;
-                    }
-                    else
-                    {
-                        _mail = value;
-                    }
-                }
-
+                pErrorList.Add("Navn indeholder ugyldige tegn");
+                injectedSQL = 1;
+                return false;
             }
-        }
-
-        private string _tlf = "";
-        public string Tlf
-        {
-            get { return _tlf; }
-            set
+            else
             {
-                if (SQLInject.IsMatch(value))
+                if ((!bogstaver.IsMatch(navn)) || (navn.Length > 50))
                 {
-                    injectedSQL = 1;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    _tlf = value;
+                    pErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
+                    return false;
                 }
                 else
                 {
-                    if ((!retal.IsMatch(value)) || (value.Length > 8))
-                    {
-                        pErrorList.Add("Telefon må kun indeholde tal og skal være 8 cifre eller mindre");
-                        value = "";
-                        _tlf = value;
-                    }
-                    else
-                    {
-                        _tlf = value;
-                    }
-                }
-
-            }
-        }
-
-        private string _pId = "";
-        public string PId
-        {
-            get { return _pId; }
-            set
-            {
-                if (SQLInject.IsMatch(value))
-                {
-                    injectedSQL = 1;
-                    pErrorList.Add("SQL injection er ikke tilladt");
-                    _pId = value;
-                }
-                else
-                {
-                    if (!retal.IsMatch(value))
-                    {
-                        pErrorList.Add("Person ID skal kun indeholde tal");
-                        value = "";
-                        _pId = value;
-                    }
-                    else
-                    {
-                        _pId = value;
-                    }
+                    return true;
                 }
             }
         }
 
-
-        private bool _medlem = false;
-        public bool Medlem
+        public bool MailCheck(string mail)
         {
-            get { return _medlem; }
-            set { _medlem = value; }
+            if (SQLInject.IsMatch(mail))
+            {
+                pErrorList.Add("Mail indeholder ugyldige tegn");
+                injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if (mail.Length > 50)
+                {
+                    pErrorList.Add("Mail må ikke være længere end 50 tegn");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
-        private bool _erBeboer = false;
-        public bool ErBeboer
+        public bool TlfCheck(string tlf)
         {
-            get { return _erBeboer; }
-            set { _erBeboer = value; }
+            if (SQLInject.IsMatch(tlf))
+            {
+                pErrorList.Add("Telefonnummer indeholder ugyldige tegn");
+                injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(tlf)) || (tlf.Length > 8))
+                {
+                    pErrorList.Add("Telefonnummer må kun indeholde tal og må ikke være længere end 8 tegn");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
-        private bool _alt = false;
-        public bool Alt
+        public bool PIdCheck(string pId)
         {
-            get { return _alt; }
-            set { _alt = value; }
+            if (SQLInject.IsMatch(pId))
+            {
+                pErrorList.Add("Person ID indeholder ugyldige tegn");
+                injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(pId)))
+                {
+                    pErrorList.Add("Person ID må kun indeholde tal");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
-        private bool _create = false;
-        public bool Create
-        {
-            get { return _create; }
-            set { _create = value; }
-        }
-
-        private bool _read = false;
-        public bool Read
-        {
-            get { return _read; }
-            set { _read = value; }
-        }
-
-        private bool _update = false;
-        public bool Update
-        {
-            get { return _update; }
-            set { _update = value; }
-        }
-
-        private bool _delete = false;
-        public bool Delete
-        {
-            get { return _delete; }
-            set { _delete = value; }
-        }
-
-        public void errorMessage()
+        public string errorMessage()
         {
             string displayError = string.Join(Environment.NewLine, pErrorList);
-            MessageBox.Show(displayError);
+            return displayError;
         }
     }
 }
