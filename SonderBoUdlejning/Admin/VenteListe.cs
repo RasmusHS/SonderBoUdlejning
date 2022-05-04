@@ -166,7 +166,41 @@ namespace SonderBoUdlejning.Admin
 
         private void GetPosition_Click(object sender, EventArgs e)
         {
-            
+
+            string pId = pIdTextbox.Text;
+            string bId = bIdTextbox.Text;
+
+            if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
+            {
+                MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
+            }
+            else if (!int.TryParse(pId, out int pIdTemp) || !int.TryParse(bId, out int bIdTemp))
+            {
+                MessageBox.Show("Indtast venligst kun tal!");
+            }
+            else if (int.TryParse(pId, out int pIdTemp2) || int.TryParse(bId, out int bIdTemp2) || !string.IsNullOrEmpty(pId) || !string.IsNullOrEmpty(bId))
+            {
+                SqlConnection conn = new SqlConnection(UserIdentification.conString);
+                conn.Open();
+
+                string query = "SELECT ROW_NUMBER() OVER(ORDER BY signUpDato) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = " + bIdTextbox.Text + "";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                List<int> getNumbersList = new List<int>();
+                while (reader.Read())
+                {
+                    getNumbersList.Add(Convert.ToInt32(reader.GetValue(3)));
+                }
+                conn.Close();
+
+                int[] positionenArray = getNumbersList.ToArray();
+
+                positionTextBox.Text = Convert.ToString(Array.IndexOf(positionenArray, Convert.ToInt32(pIdTextbox.Text)) + 1);
+
+            }
         }
     }
 }
