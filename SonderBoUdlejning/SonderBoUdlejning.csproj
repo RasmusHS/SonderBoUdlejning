@@ -172,6 +172,12 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\VenteListe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\VenteListe.Designer.cs">
+      <DependentUpon>VenteListe.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnString.cs" />
     <Compile Include="LoginMain.cs">
       <SubType>Form</SubType>
@@ -200,6 +206,9 @@
     <Compile Include="UserIdentification.cs" />
     <EmbeddedResource Include="AdminMain.resx">
       <DependentUpon>AdminMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\VenteListe.resx">
+      <DependentUpon>VenteListe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginMain.aa-ER.resx">
       <DependentUpon>LoginMain.cs</DependentUpon>

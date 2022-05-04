@@ -21,6 +21,7 @@ namespace SonderBoUdlejning
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            
             SqlConnection conn = new SqlConnection(UserIdentification.conString);
             conn.Open();
             string query = "SELECT accessLevel FROM LoginInfo WHERE loginPass = '" + passwordTextBox.Text + "' AND brugerNavn = '" + usernameTextBox.Text + "';";
