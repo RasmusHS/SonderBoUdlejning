@@ -192,7 +192,6 @@
     <Compile Include="personCRUD\pUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pSQLRunner.cs" />
     <Compile Include="SecretaryMain.cs">
       <SubType>Form</SubType>
     </Compile>
