@@ -31,10 +31,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.logOutButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTestPersonCRUD = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelSecFormsLoader = new System.Windows.Forms.Panel();
-            this.btnTest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -63,13 +63,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel1.Controls.Add(this.btnTest);
+            this.panel1.Controls.Add(this.btnTestPersonCRUD);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 726);
             this.panel1.TabIndex = 2;
+            // 
+            // btnTestPersonCRUD
+            // 
+            this.btnTestPersonCRUD.Location = new System.Drawing.Point(29, 131);
+            this.btnTestPersonCRUD.Name = "btnTestPersonCRUD";
+            this.btnTestPersonCRUD.Size = new System.Drawing.Size(130, 60);
+            this.btnTestPersonCRUD.TabIndex = 1;
+            this.btnTestPersonCRUD.Text = "Test Button (PersonCRUD)";
+            this.btnTestPersonCRUD.UseVisualStyleBackColor = true;
+            this.btnTestPersonCRUD.Click += new System.EventHandler(this.btnTestPersonCRUD_Click);
             // 
             // panel2
             // 
@@ -100,16 +110,6 @@
             this.panelSecFormsLoader.Size = new System.Drawing.Size(997, 626);
             this.panelSecFormsLoader.TabIndex = 4;
             // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(29, 131);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(130, 60);
-            this.btnTest.TabIndex = 1;
-            this.btnTest.Text = "Test Button";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
             // SecretaryMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,6 +135,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelSecFormsLoader;
-        private System.Windows.Forms.Button btnTest;
+        internal System.Windows.Forms.Panel PanelSecFormsLoader { get { return panelSecFormsLoader; } set { panelSecFormsLoader = value; } }
+        private System.Windows.Forms.Button btnTestPersonCRUD;
     }
 }

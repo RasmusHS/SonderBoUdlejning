@@ -28,7 +28,7 @@ namespace SonderBoUdlejning
             this.Close();
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void btnTestPersonCRUD_Click(object sender, EventArgs e)
         {
             openFormsLoader(new PersonCRUD());
         }
@@ -39,10 +39,10 @@ namespace SonderBoUdlejning
             if (activeForm != null)
                 activeForm.Close();
             activeForm = loadedForm;
-            loadedForm.TopLevel = false; // Lav Forms om til en Controle
+            loadedForm.TopLevel = false; // Lav Forms om til en Control
             loadedForm.FormBorderStyle = FormBorderStyle.None; // Ingen kant på forms, når den loades ind
             loadedForm.Dock = DockStyle.Fill; // Docker fuldt ud i FormLoader
-            panelSecFormsLoader.Controls.Add(loadedForm); //Tilføjer den til Controle Panelet i Panelet
+            panelSecFormsLoader.Controls.Add(loadedForm); //Tilføjer den til Control Panelet i Panelet
             panelSecFormsLoader.Tag = loadedForm; // Vi forbinder Formen til Formloader Panelet
             loadedForm.BringToFront(); // Bringes til front så den ikke kommer i konflikt med logo
             loadedForm.Show(); // Formens vises.

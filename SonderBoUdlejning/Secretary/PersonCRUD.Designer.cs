@@ -19,7 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
+        pSQLRunner pSQL = new pSQLRunner();
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            pSQL.personCRUDdgv = this.dgvPersonCRUD;
             this.dgvPersonCRUD = new System.Windows.Forms.DataGridView();
             this.tbNavn = new System.Windows.Forms.TextBox();
             this.tbMail = new System.Windows.Forms.TextBox();
@@ -238,7 +239,9 @@
 
         #endregion
 
+
         private System.Windows.Forms.DataGridView dgvPersonCRUD;
+        internal System.Windows.Forms.DataGridView DgvPersonCRUD { get { return dgvPersonCRUD; } set { dgvPersonCRUD = value; } }
         private System.Windows.Forms.TextBox tbNavn;
         private System.Windows.Forms.TextBox tbMail;
         private System.Windows.Forms.TextBox tbTlf;

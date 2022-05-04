@@ -14,7 +14,7 @@ namespace SonderBoUdlejning.Secretary
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        personSQLBuilder personSQL = new personSQLBuilder();
+        //ConnString connString = ConnString.getConnInstance();
 
         public PersonCRUD()
         {
@@ -29,79 +29,118 @@ namespace SonderBoUdlejning.Secretary
 
         private void btnPersonC_Click(object sender, EventArgs e)
         {
-            personSQL.Create = true;
-            personSQL.Read = false;
-            personSQL.Update = false;
-            personSQL.Delete = false;            
+            pSQLRunner pRunner = new pSQLRunner();
+            
+            pRunner.Create = true;
+            pRunner.Read = false;
+            pRunner.Update = false;
+            pRunner.Delete = false;
 
-            personSQL.Navn = tbNavn.Text;
-            personSQL.Mail = tbMail.Text;
-            personSQL.Tlf = tbTlf.Text;
-            personSQL.Medlem = radioBtnMedlem.Checked;
-            personSQL.ErBeboer = radioBtnBeboer.Checked;
-            personSQL.Alt = radioBtnAlt.Checked;
+            //Input checkes for igennem Regex
+            pRunner.PId = tbPId.Text;
+            pRunner.Navn = tbNavn.Text;
+            pRunner.Mail = tbMail.Text;
+            pRunner.Tlf = tbTlf.Text;
+            pRunner.Medlem = radioBtnMedlem.Checked;
+            pRunner.ErBeboer = radioBtnBeboer.Checked;
+            pRunner.Alt = radioBtnAlt.Checked;
 
-            MessageBox.Show(personSQL.SQLBuilder());
-
-            dgvPersonCRUD.DataSource = tableConn.CUD(personSQL.SQLBuilder());
+            //Input sendes videre for blive parameteriseret og kørt
+            if ((!string.IsNullOrEmpty(pRunner.Navn)) && (!string.IsNullOrEmpty(pRunner.Mail)) && (!string.IsNullOrEmpty(pRunner.Tlf)))
+            {
+                pRunner.pSQLC(pRunner.Navn, pRunner.Mail, pRunner.Tlf);
+                string sqlS1 = "SELECT * FROM Person";
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+            }
+            else
+            {
+                string displayError = string.Join(Environment.NewLine, pRunner.errorMessage());
+                MessageBox.Show("Alle felter skal udfyldes.\nAntal fejl fundet:  /*+ pRunner.pErrorList.Count.ToString() +*/ \n" + displayError);
+            }
         }
 
         private void btnPersonR_Click(object sender, EventArgs e)
         {
-            personSQL.Create = false;
-            personSQL.Read = true;
-            personSQL.Update = false;
-            personSQL.Delete = false;
+            pSQLRunner pRunner = new pSQLRunner();
 
-            personSQL.Navn = tbNavn.Text;
-            personSQL.Mail = tbMail.Text;
-            personSQL.Tlf = tbTlf.Text;
-            personSQL.Medlem = radioBtnMedlem.Checked;
-            personSQL.ErBeboer = radioBtnBeboer.Checked;
-            personSQL.Alt = radioBtnAlt.Checked;
+            pRunner.Create = false;
+            pRunner.Read = true;
+            pRunner.Update = false;
+            pRunner.Delete = false;
 
-            //MessageBox.Show(personSQL.SQLBuilder());
+            //Input checkes for igennem Regex
+            pRunner.Navn = tbNavn.Text;
+            pRunner.Mail = tbMail.Text;
+            pRunner.Tlf = tbTlf.Text;
+            pRunner.Medlem = radioBtnMedlem.Checked;
+            pRunner.ErBeboer = radioBtnBeboer.Checked;
+            pRunner.Alt = radioBtnAlt.Checked;
 
-            dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
+            //Input sendes videre for blive parameteriseret og kørt
+            dgvPersonCRUD.DataSource = tableConn.tableBinder(pRunner.pSQLR(pRunner.Navn, pRunner.Mail, pRunner.Tlf, pRunner.Medlem, pRunner.ErBeboer, pRunner.Alt));
         }
 
         private void btnPersonU_Click(object sender, EventArgs e)
         {
-            personSQL.Create = false;
-            personSQL.Read = false;
-            personSQL.Update = true;
-            personSQL.Delete = false;
+            pSQLRunner pRunner = new pSQLRunner();
+            
+            pRunner.Create = false;
+            pRunner.Read = false;
+            pRunner.Update = true;
+            pRunner.Delete = false;
 
-            personSQL.Navn = tbNavn.Text;
-            personSQL.Mail = tbMail.Text;
-            personSQL.Tlf = tbTlf.Text;
-            personSQL.Medlem = radioBtnMedlem.Checked;
-            personSQL.ErBeboer = radioBtnBeboer.Checked;
-            personSQL.Alt = radioBtnAlt.Checked;
-            personSQL.PId = tbPId.Text;
+            //Input checkes for igennem Regex
+            pRunner.Navn = tbNavn.Text;
+            pRunner.Mail = tbMail.Text;
+            pRunner.Tlf = tbTlf.Text;
+            pRunner.PId = tbPId.Text;
+            pRunner.Medlem = radioBtnMedlem.Checked;
+            pRunner.ErBeboer = radioBtnBeboer.Checked;
+            pRunner.Alt = radioBtnAlt.Checked;
 
-            MessageBox.Show(personSQL.SQLBuilder());
-
-            //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());            
+            //Input sendes videre for blive parameteriseret og kørt
+            if ((!string.IsNullOrEmpty(pRunner.Navn)) && (!string.IsNullOrEmpty(pRunner.Mail)) && (!string.IsNullOrEmpty(pRunner.Tlf)) && (!string.IsNullOrEmpty(pRunner.PId)))
+            {
+                pRunner.pSQLU(pRunner.Navn, pRunner.Mail, pRunner.Tlf, pRunner.PId);
+                string sqlS1 = "SELECT * FROM Person";
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+            }
+            else
+            {
+                string displayError = string.Join(Environment.NewLine, pRunner.errorMessage());
+                MessageBox.Show("Alle felter skal udfyldes.\nAntal fejl fundet:  /*+ pRunner.pErrorList.Count.ToString() +*/ \n" + displayError);
+            }            
         }
 
         private void btnPersonD_Click(object sender, EventArgs e)
         {
-            personSQL.Create = false;
-            personSQL.Read = false;
-            personSQL.Update = false;
-            personSQL.Delete = true;
+            pSQLRunner pRunner = new pSQLRunner();
+            
+            pRunner.Create = false;
+            pRunner.Read = false;
+            pRunner.Update = false;
+            pRunner.Delete = true;
 
-            personSQL.Navn = tbNavn.Text;
-            personSQL.Mail = tbMail.Text;
-            personSQL.Tlf = tbTlf.Text;
-            personSQL.Medlem = radioBtnMedlem.Checked;
-            personSQL.ErBeboer = radioBtnBeboer.Checked;
-            personSQL.Alt = radioBtnAlt.Checked;
+            //Input checkes for igennem Regex
+            pRunner.Navn = tbNavn.Text;
+            pRunner.Mail = tbMail.Text;
+            pRunner.Tlf = tbTlf.Text;
+            pRunner.Medlem = radioBtnMedlem.Checked;
+            pRunner.ErBeboer = radioBtnBeboer.Checked;
+            pRunner.Alt = radioBtnAlt.Checked;
 
-            MessageBox.Show(personSQL.SQLBuilder());
-
-            //dgvPersonCRUD.DataSource = tableConn.tableBinder(personSQL.SQLBuilder());
+            //Input sendes videre for blive parameteriseret og kørt
+            if ((!string.IsNullOrEmpty(pRunner.Tlf)))
+            {
+                pRunner.pSQLD(pRunner.Tlf);
+                string sqlS1 = "SELECT * FROM Person";
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+            }
+            else
+            {
+                string displayError = string.Join(Environment.NewLine, pRunner.errorMessage());
+                MessageBox.Show("Alle felter skal udfyldes.\nAntal fejl fundet:  /*+ pRunner.pErrorList.Count.ToString() +*/ \n" + displayError);
+            }
         }
     }
 }

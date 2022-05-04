@@ -178,6 +178,7 @@
     <Compile Include="Admin\VenteListe.Designer.cs">
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConnString.cs" />
     <Compile Include="LoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +187,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="pSQLRunner.cs" />
     <Compile Include="SecretaryMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,7 +201,7 @@
       <DependentUpon>PersonCRUD.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLBuilders\ISQLBuilder.cs" />
-    <Compile Include="SQLBuilders\personSQLBuilder.cs" />
+    <Compile Include="SQLBuilders\personInputCheck.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
     <Compile Include="UserIdentification.cs" />
     <EmbeddedResource Include="AdminMain.resx">

@@ -13,6 +13,7 @@ namespace SonderBoUdlejning
 {
     public partial class LoginMain : Form
     {
+        ConnString connString = ConnString.getConnInstance;
         public LoginMain()
         {
             InitializeComponent();
