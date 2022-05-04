@@ -172,6 +172,7 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConnString.cs" />
     <Compile Include="LoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,7 +195,7 @@
       <DependentUpon>PersonCRUD.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLBuilders\ISQLBuilder.cs" />
-    <Compile Include="SQLBuilders\personSQLBuilder.cs" />
+    <Compile Include="SQLBuilders\personInputCheck.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
     <Compile Include="UserIdentification.cs" />
     <EmbeddedResource Include="AdminMain.resx">
