@@ -179,6 +179,9 @@
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnString.cs" />
+    <Compile Include="InputCheck\ISQLBuilder.cs" />
+    <Compile Include="InputCheck\personInputCheck.cs" />
+    <Compile Include="InputCheck\ventelisteInputCheck.cs" />
     <Compile Include="LoginMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,10 +207,12 @@
     <Compile Include="Admin\PersonCRUD.Designer.cs">
       <DependentUpon>PersonCRUD.cs</DependentUpon>
     </Compile>
-    <Compile Include="SQLBuilders\ISQLBuilder.cs" />
-    <Compile Include="SQLBuilders\personInputCheck.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
     <Compile Include="UserIdentification.cs" />
+    <Compile Include="VentelisteSystems\vAddToList.cs" />
+    <Compile Include="VentelisteSystems\vFacade.cs" />
+    <Compile Include="VentelisteSystems\vGetPos.cs" />
+    <Compile Include="VentelisteSystems\vRemoveFromList.cs" />
     <EmbeddedResource Include="AdminMain.resx">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </EmbeddedResource>

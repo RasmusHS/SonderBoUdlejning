@@ -10,19 +10,28 @@ namespace SonderBoUdlejning.VentelisteSystems
 {
     public class vFacade
     {
+        //Facade til venteliste systemet
+
+        //Opretter et medlem på en venteliste
         public void AddToList(string pId, string bId)
         {
-            
+            vAddToList addToList = new vAddToList();
+            addToList.vAddTo(pId, bId);
         }
 
-        public void RemoveFromList(string pId, string bId, bool pIdValid, bool bIdValid)
+        //Fjerner et medlem fra en venteliste
+        public void RemoveFromList(string pId, string bId)
         {
-
+            vRemoveFromList vRemove = new vRemoveFromList();
+            vRemove.vRemoveFrList(pId, bId);
         }
 
+        //Finder et medlems position i en venteliste
+        public string Position;
         public void GetListPosition(string pId, string bId)
         {
-            
+            vGetPos vGet = new vGetPos();
+            Position = vGet.vGetPosition(pId, bId);
         }
     }
 }

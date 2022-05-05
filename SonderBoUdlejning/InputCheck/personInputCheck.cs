@@ -23,6 +23,12 @@ namespace SonderBoUdlejning.SQLBuilders
             injectedSQL = 0;
         }
 
+        public static string errorMessage()
+        {
+            string displayError = string.Join(Environment.NewLine, pErrorList);
+            return displayError;
+        }
+
         public static bool NavnCheck(string navn)
         {
             if (SQLInject.IsMatch(navn))
@@ -109,12 +115,6 @@ namespace SonderBoUdlejning.SQLBuilders
                     return true;
                 }
             }
-        }
-
-        public static string errorMessage()
-        {
-            string displayError = string.Join(Environment.NewLine, pErrorList);
-            return displayError;
         }
     }
 }

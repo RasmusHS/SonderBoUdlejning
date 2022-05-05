@@ -36,7 +36,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
                 sqlDA.Update(dt); //Updates the data grid view if INSERT, UPDATE or DELETE statements were made
                 return bSource; //returns the binding source object back to the form that called the method
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show(personInputCheck.errorMessage());
                 personInputCheck.pErrorList.Clear();
