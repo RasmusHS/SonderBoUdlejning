@@ -95,7 +95,9 @@ namespace SonderBoUdlejning.Admin
             bool pIdValid = false;
             bool bIdValid = false;
 
-            
+            //Kommentar fra Rasmus: indsætning-, aflæsnings- og sletningsmetoden af personer
+            //fra ventelisten burde have hver deres class.
+            //Overvej at implementere en facade.
 
             StringBuilder query = new StringBuilder("DELETE FROM Venteliste WHERE ");
 
