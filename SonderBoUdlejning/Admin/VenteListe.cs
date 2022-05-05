@@ -226,6 +226,7 @@ namespace SonderBoUdlejning.Admin
                 {
                     MessageBox.Show(ventelisteInputCheck.errorMessage());
                     ventelisteInputCheck.vErrorList.Clear();
+                    ventelisteInputCheck.resetInjectedSQL();
                 }
             }
             else

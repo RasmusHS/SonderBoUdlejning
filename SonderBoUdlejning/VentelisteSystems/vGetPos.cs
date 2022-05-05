@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SonderBoUdlejning.InputCheck;
 
 namespace SonderBoUdlejning.VentelisteSystems
 {
@@ -16,8 +17,8 @@ namespace SonderBoUdlejning.VentelisteSystems
             string position;
             SqlConnection conn = new SqlConnection(connString.connStr);
             conn.Open();
-            string query = $"SELECT ROW_NUMBER() OVER(ORDER BY signUpDato ASC) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = {bId}";
-            SqlCommand cmd = new SqlCommand(query, conn);
+            string sqlS = $"SELECT ROW_NUMBER() OVER(ORDER BY signUpDato ASC) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = {bId}";
+            SqlCommand cmd = new SqlCommand(sqlS, conn);
 
             SqlDataReader reader = cmd.ExecuteReader();
             List<int> getNumbersList = new List<int>();
@@ -31,6 +32,16 @@ namespace SonderBoUdlejning.VentelisteSystems
 
             position = Convert.ToString(Array.IndexOf(positionenArray, Convert.ToInt32(pId)) + 1);
 
+            if (ventelisteInputCheck.injectedSQL == 1)
+            {
+                position = null;
+                conn.Close();
+            }
+            else
+            {
+                conn.Close();
+                return position;
+            }
             return position;
 
         }
