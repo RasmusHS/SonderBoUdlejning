@@ -12,7 +12,7 @@ namespace SonderBoUdlejning.personCRUD
     public class pRead
     {
         ConnString connString = ConnString.getConnInstance;
-        personInputCheck pInputCheck = new personInputCheck();
+        //personInputCheck pInputCheck = new personInputCheck();
 
         public string pSQLR(string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
         {
@@ -47,7 +47,7 @@ namespace SonderBoUdlejning.personCRUD
             try
             {
                 conn.Open();
-                if (pInputCheck.injectedSQL == 1)
+                if (personInputCheck.injectedSQL == 1)
                 {
                     sqlS = "";
                     conn.Close();

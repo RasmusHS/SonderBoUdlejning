@@ -10,20 +10,20 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.SQLBuilders
 {
-    public sealed class personInputCheck
+    public static class personInputCheck
     {
-        public List<string> pErrorList = new List<string>();
-        private Regex retal = new Regex(@"(^[0-9]*$)");
-        private Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
-        private Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
+        public static List<string> pErrorList = new List<string>();
+        private static Regex retal = new Regex(@"(^[0-9]*$)");
+        private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
+        private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
         
-        public int injectedSQL { get; private set; }
-        public void resetInjectedSQL()
+        public static int injectedSQL { get; private set; }
+        public static void resetInjectedSQL()
         {
             injectedSQL = 0;
         }
 
-        public bool NavnCheck(string navn)
+        public static bool NavnCheck(string navn)
         {
             if (SQLInject.IsMatch(navn))
             {
@@ -45,7 +45,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
         }
 
-        public bool MailCheck(string mail)
+        public static bool MailCheck(string mail)
         {
             if (SQLInject.IsMatch(mail))
             {
@@ -67,7 +67,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
         }
 
-        public bool TlfCheck(string tlf)
+        public static bool TlfCheck(string tlf)
         {
             if (SQLInject.IsMatch(tlf))
             {
@@ -89,7 +89,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
         }
 
-        public bool PIdCheck(string pId)
+        public static bool PIdCheck(string pId)
         {
             if (SQLInject.IsMatch(pId))
             {
@@ -111,7 +111,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
         }
 
-        public string errorMessage()
+        public static string errorMessage()
         {
             string displayError = string.Join(Environment.NewLine, pErrorList);
             return displayError;

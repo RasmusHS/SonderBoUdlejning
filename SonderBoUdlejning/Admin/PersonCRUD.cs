@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.Secretary
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        personInputCheck pInputCheck = new personInputCheck();
+        //personInputCheck pInputCheck = new personInputCheck();
         string sqlS1 = "SELECT * FROM Person";
 
         public PersonCRUD()
@@ -38,15 +38,15 @@ namespace SonderBoUdlejning.Secretary
 
             if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)))
             {
-                if ((pInputCheck.NavnCheck(navn) == true) && (pInputCheck.MailCheck(mail) == true) && (pInputCheck.TlfCheck(tlf) == true))
+                if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true))
                 {
                     pCreate.CreatePerson(navn, mail, tlf);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(pInputCheck.errorMessage());
-                    pInputCheck.pErrorList.Clear();
+                    MessageBox.Show(personInputCheck.errorMessage());
+                    personInputCheck.pErrorList.Clear();
                 }
             } 
         }
@@ -62,7 +62,7 @@ namespace SonderBoUdlejning.Secretary
 
             pFacade pRead = new pFacade();
 
-            if ((pInputCheck.NavnCheck(navn) == true) && (pInputCheck.MailCheck(mail) == true) && (pInputCheck.TlfCheck(tlf) == true))
+            if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true))
             {
                 pRead.ReadPerson(navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
@@ -71,8 +71,7 @@ namespace SonderBoUdlejning.Secretary
             {
                 pRead.ReadPerson(navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
-                MessageBox.Show(pInputCheck.errorMessage());
-                pInputCheck.pErrorList.Clear();
+                personInputCheck.pErrorList.Clear();
             }
             
             
@@ -89,15 +88,15 @@ namespace SonderBoUdlejning.Secretary
 
             if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)) && (!string.IsNullOrEmpty(pId)))
             {
-                if ((pInputCheck.NavnCheck(navn) == true) && (pInputCheck.MailCheck(mail) == true) && (pInputCheck.TlfCheck(tlf) == true) && (pInputCheck.PIdCheck(pId) == true))
+                if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true) && (personInputCheck.PIdCheck(pId) == true))
                 {
                     pUpdate.UpdatePerson(navn, mail, tlf, pId);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(pInputCheck.errorMessage());
-                    pInputCheck.pErrorList.Clear();
+                    MessageBox.Show(personInputCheck.errorMessage());
+                    personInputCheck.pErrorList.Clear();
                 }
             }
 
@@ -111,15 +110,15 @@ namespace SonderBoUdlejning.Secretary
 
             if ((!string.IsNullOrEmpty(tlf)))
             {
-                if ((pInputCheck.TlfCheck(tlf) == true))
+                if ((personInputCheck.TlfCheck(tlf) == true))
                 {
                     pDelete.DeletePerson(tlf);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(pInputCheck.errorMessage());
-                    pInputCheck.pErrorList.Clear();
+                    MessageBox.Show(personInputCheck.errorMessage());
+                    personInputCheck.pErrorList.Clear();
                 }
             }
 

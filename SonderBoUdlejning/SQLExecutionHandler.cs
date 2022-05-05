@@ -13,7 +13,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
     public class SQLExecutionHandler
     {
         ConnString connString = ConnString.getConnInstance;
-        personInputCheck pInputCheck = new personInputCheck();
+        //personInputCheck pInputCheck = new personInputCheck();
 
         public object tableBinder(string sqlStatement)
         {
@@ -39,9 +39,9 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch (Exception ex)
             {
-                MessageBox.Show(pInputCheck.errorMessage());
-                pInputCheck.pErrorList.Clear();
-                pInputCheck.resetInjectedSQL();
+                MessageBox.Show(personInputCheck.errorMessage());
+                personInputCheck.pErrorList.Clear();
+                personInputCheck.resetInjectedSQL();
                 return null;
             }
         }
