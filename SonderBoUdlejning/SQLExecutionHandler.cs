@@ -13,7 +13,6 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
     public class SQLExecutionHandler
     {
         ConnString connString = ConnString.getConnInstance;
-        //personInputCheck pInputCheck = new personInputCheck();
 
         public object tableBinder(string sqlStatement)
         {

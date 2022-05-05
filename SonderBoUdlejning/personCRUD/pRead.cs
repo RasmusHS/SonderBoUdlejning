@@ -12,7 +12,6 @@ namespace SonderBoUdlejning.personCRUD
     public class pRead
     {
         ConnString connString = ConnString.getConnInstance;
-        //personInputCheck pInputCheck = new personInputCheck();
 
         public string pSQLR(string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
         {

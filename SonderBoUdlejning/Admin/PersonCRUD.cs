@@ -15,7 +15,6 @@ namespace SonderBoUdlejning.Secretary
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        //personInputCheck pInputCheck = new personInputCheck();
         string sqlS1 = "SELECT * FROM Person";
 
         public PersonCRUD()

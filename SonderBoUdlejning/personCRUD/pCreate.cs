@@ -12,7 +12,6 @@ namespace SonderBoUdlejning
     public class pCreate
     {
         ConnString connString = ConnString.getConnInstance;
-        //personInputCheck pInputCheck = new personInputCheck();
 
         public void pSQLC(string fNavn, string pMail, string pTlf)
         {
