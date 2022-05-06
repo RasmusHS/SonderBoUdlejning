@@ -1,5 +1,4 @@
-﻿using SonderBoUdlejning.Secretary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SonderBoUdlejning.Secretary;
 
 namespace SonderBoUdlejning
 {
@@ -28,7 +28,7 @@ namespace SonderBoUdlejning
             this.Close();
         }
 
-        private void btnTestPersonCRUD_Click(object sender, EventArgs e)
+        private void btnOpretBorger_Click(object sender, EventArgs e)
         {
             openFormsLoader(new PersonCRUD());
         }
@@ -46,7 +46,6 @@ namespace SonderBoUdlejning
             panelSecFormsLoader.Tag = loadedForm; // Vi forbinder Formen til Formloader Panelet
             loadedForm.BringToFront(); // Bringes til front så den ikke kommer i konflikt med logo
             loadedForm.Show(); // Formens vises.
-
         }
     }
 }

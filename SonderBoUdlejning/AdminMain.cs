@@ -30,12 +30,23 @@ namespace SonderBoUdlejning
 
         private void VenteListeButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            VenteListe venteliste = new VenteListe();
-            venteliste.ShowDialog();
-            this.Close();
+            openFormsLoader(new VenteListe());
         }
 
+        private Form activeForm = null;
+        private void openFormsLoader(Form loadedForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = loadedForm;
+            loadedForm.TopLevel = false; // Lav Forms om til en Control
+            loadedForm.FormBorderStyle = FormBorderStyle.None; // Ingen kant på forms, når den loades ind
+            loadedForm.Dock = DockStyle.Fill; // Docker fuldt ud i FormLoader
+            panelAdminFormsLoader.Controls.Add(loadedForm); //Tilføjer den til Control Panelet i Panelet
+            panelAdminFormsLoader.Tag = loadedForm; // Vi forbinder Formen til Formloader Panelet
+            loadedForm.BringToFront(); // Bringes til front så den ikke kommer i konflikt med logo
+            loadedForm.Show(); // Formens vises.
 
+        }
     }
 }

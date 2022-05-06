@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.logOutButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnTestPersonCRUD = new System.Windows.Forms.Button();
+            this.btnOpretBorger = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelSecFormsLoader = new System.Windows.Forms.Panel();
@@ -63,7 +63,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel1.Controls.Add(this.btnTestPersonCRUD);
+            this.panel1.Controls.Add(this.btnOpretBorger);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -71,15 +71,15 @@
             this.panel1.Size = new System.Drawing.Size(200, 726);
             this.panel1.TabIndex = 2;
             // 
-            // btnTestPersonCRUD
+            // btnOpretBorger
             // 
-            this.btnTestPersonCRUD.Location = new System.Drawing.Point(29, 131);
-            this.btnTestPersonCRUD.Name = "btnTestPersonCRUD";
-            this.btnTestPersonCRUD.Size = new System.Drawing.Size(130, 60);
-            this.btnTestPersonCRUD.TabIndex = 1;
-            this.btnTestPersonCRUD.Text = "Test Button (PersonCRUD)";
-            this.btnTestPersonCRUD.UseVisualStyleBackColor = true;
-            this.btnTestPersonCRUD.Click += new System.EventHandler(this.btnTestPersonCRUD_Click);
+            this.btnOpretBorger.Location = new System.Drawing.Point(29, 131);
+            this.btnOpretBorger.Name = "btnOpretBorger";
+            this.btnOpretBorger.Size = new System.Drawing.Size(130, 60);
+            this.btnOpretBorger.TabIndex = 1;
+            this.btnOpretBorger.Text = "Opret Borger";
+            this.btnOpretBorger.UseVisualStyleBackColor = true;
+            this.btnOpretBorger.Click += new System.EventHandler(this.btnOpretBorger_Click);
             // 
             // panel2
             // 
@@ -136,6 +136,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelSecFormsLoader;
         internal System.Windows.Forms.Panel PanelSecFormsLoader { get { return panelSecFormsLoader; } set { panelSecFormsLoader = value; } }
-        private System.Windows.Forms.Button btnTestPersonCRUD;
+        private System.Windows.Forms.Button btnOpretBorger;
     }
 }

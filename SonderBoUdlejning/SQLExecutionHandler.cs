@@ -13,8 +13,6 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
     public class SQLExecutionHandler
     {
         ConnString connString = ConnString.getConnInstance;
-        //private string strconn = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False"; //Insert your connection string here
-        personInputCheck personSQL = personInputCheck.getPInstance();
 
         public object tableBinder(string sqlStatement)
         {
@@ -38,11 +36,11 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
                 sqlDA.Update(dt); //Updates the data grid view if INSERT, UPDATE or DELETE statements were made
                 return bSource; //returns the binding source object back to the form that called the method
             }
-            catch (Exception ex)
+            catch
             {
-                personSQL.errorMessage();
-                personSQL.pErrorList.Clear();
-                personSQL.injectedSQL = 0;
+                MessageBox.Show(personInputCheck.errorMessage());
+                personInputCheck.pErrorList.Clear();
+                personInputCheck.resetInjectedSQL();
                 return null;
             }
         }

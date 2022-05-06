@@ -19,7 +19,7 @@
             }
             base.Dispose(disposing);
         }
-        pSQLRunner pSQL = new pSQLRunner();
+        //pSQLRunner pSQL = new pSQLRunner();
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pSQL.personCRUDdgv = this.dgvPersonCRUD;
+            //pSQL.personCRUDdgv = this.dgvPersonCRUD;
             this.dgvPersonCRUD = new System.Windows.Forms.DataGridView();
             this.tbNavn = new System.Windows.Forms.TextBox();
             this.tbMail = new System.Windows.Forms.TextBox();

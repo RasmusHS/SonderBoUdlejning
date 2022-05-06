@@ -8,12 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using SonderBoUdlejning.InputCheck;
+using SonderBoUdlejning.VentelisteSystems;
 
 namespace SonderBoUdlejning.Admin
 {
     public partial class VenteListe : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
+        string sqlS1 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
+        string sqlS2 = "SELECT * FROM Person";
+        string sqlS3 = "SELECT * FROM BoligInfo";
         public VenteListe()
         {
             InitializeComponent();
@@ -21,13 +26,10 @@ namespace SonderBoUdlejning.Admin
 
         private void VenteListe_Load(object sender, EventArgs e)
         {
-            string sqlS1 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
             DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
 
-            string sqlS2 = "SELECT * FROM Person";
             DGVPersoner.DataSource = tableConn.tableBinder(sqlS2);
 
-            string sqlS3 = "SELECT * FROM BoligInfo";
             DGVBoliger.DataSource = tableConn.tableBinder(sqlS3);
         }
 
@@ -37,12 +39,33 @@ namespace SonderBoUdlejning.Admin
             string pId = pIdTextbox.Text;
             string bId = bIdTextbox.Text;
 
+            vFacade vAddToList = new vFacade();
+
+            if ((!string.IsNullOrEmpty(pId)) && (!string.IsNullOrEmpty(bId)))
+            {
+                if ((ventelisteInputCheck.PIdCheck(pId) == true) && (ventelisteInputCheck.BIdCheck(bId) == true))
+                {
+                    vAddToList.AddToList(pId, bId);
+                    DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+                }
+                else
+                {
+                    MessageBox.Show(ventelisteInputCheck.errorMessage());
+                    ventelisteInputCheck.vErrorList.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
+            }
+
             /*
              Tjekker om textfelterne er tomme
              derefter tjekker de om det er et tal der bliver skrevet
              Til sidst tjekker den for alt og executer en sql til databasen
             */
-            if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
+            
+            /*if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
             {
                 MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
             }
@@ -55,13 +78,13 @@ namespace SonderBoUdlejning.Admin
                 try
                 {
                     SqlConnection conn = new SqlConnection(UserIdentification.conString);
-                conn.Open();
+                    conn.Open();
 
                     //SQL tjekker for om personen allerede har skrevet sig til en bolig. hvis ikke,
                     //så skriver den personen op.
-                string query = "IF NOT EXISTS (SELECT * FROM Venteliste WHERE pId = "+pId+" AND bid = "+bId+") BEGIN INSERT INTO Venteliste(pId, bId, signUpDato) VALUES ("+pId+", "+bId+", getdate()) END";
+                    string query = "IF NOT EXISTS (SELECT * FROM Venteliste WHERE pId = "+pId+" AND bid = "+bId+") BEGIN INSERT INTO Venteliste(pId, bId, signUpDato) VALUES ("+pId+", "+bId+", getdate()) END";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
 
                     if (cmd.ExecuteNonQuery() == -1)
                     {
@@ -72,16 +95,16 @@ namespace SonderBoUdlejning.Admin
                         MessageBox.Show("Personen er blevet tilføjet til ventelisten");
                     }
 
-                string sqlS1 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
-                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+                    string sqlS1 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
+                    DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
 
-                conn.Close();
+                    conn.Close();
                 }
                 catch 
                 {
                     MessageBox.Show("Bolig ID eller person ID findes ikke i databasen!");
                 }
-            }
+            }*/
 
 
             
@@ -92,14 +115,34 @@ namespace SonderBoUdlejning.Admin
             string pId = pIdTextbox.Text;
             string bId = bIdTextbox.Text;
 
-            bool pIdValid = false;
-            bool bIdValid = false;
-
+            //bool pIdValid = false;
+            //bool bIdValid = false;
             
+            vFacade vDeleteFromList = new vFacade();
 
-            StringBuilder query = new StringBuilder("DELETE FROM Venteliste WHERE ");
+            if ((!string.IsNullOrEmpty(pId)) && (!string.IsNullOrEmpty(bId)))
+            {
+                if ((ventelisteInputCheck.PIdCheck(pId) == true) && (ventelisteInputCheck.BIdCheck(bId) == true))
+                {
+                    vDeleteFromList.RemoveFromList(pId, bId);
+                    DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+                }
+                else
+                {
+                    MessageBox.Show(ventelisteInputCheck.errorMessage());
+                    ventelisteInputCheck.vErrorList.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Indtast venligst et pId og et bId!");
+            }
 
-            
+            //Kommentar fra Rasmus: indsætning-, aflæsnings- og sletningsmetoden af personer
+            //fra ventelisten burde have hver deres class.
+            //Overvej at implementere en facade.
+
+            /*StringBuilder query = new StringBuilder("DELETE FROM Venteliste WHERE ");
 
             //Hvis begge fetler er tomme, så stopper resten af koden
             if (string.IsNullOrEmpty(pId) && string.IsNullOrEmpty(bId))
@@ -159,7 +202,7 @@ namespace SonderBoUdlejning.Admin
             catch (Exception err)
             {
                 MessageBox.Show(err.Message);
-            }
+            }*/
 
 
         }
@@ -170,20 +213,41 @@ namespace SonderBoUdlejning.Admin
             string pId = pIdTextbox.Text;
             string bId = bIdTextbox.Text;
 
-            if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
+            vFacade vGetListPos = new vFacade();
+
+            if ((!string.IsNullOrEmpty(pId)) && (!string.IsNullOrEmpty(bId)))
+            {
+                if ((ventelisteInputCheck.PIdCheck(pId) == true) && (ventelisteInputCheck.BIdCheck(bId) == true))
+                {
+                    vGetListPos.GetListPosition(pId, bId);
+                    positionTextBox.Text = vGetListPos.Position;
+                }
+                else
+                {
+                    MessageBox.Show(ventelisteInputCheck.errorMessage());
+                    ventelisteInputCheck.vErrorList.Clear();
+                    ventelisteInputCheck.resetInjectedSQL();
+                }
+            }
+            else
             {
                 MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
             }
+
+            /*if (string.IsNullOrEmpty(pId) || string.IsNullOrEmpty(bId))
+            {
+                //MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
+            }
             else if (!int.TryParse(pId, out int pIdTemp) || !int.TryParse(bId, out int bIdTemp))
             {
-                MessageBox.Show("Indtast venligst kun tal!");
+                //MessageBox.Show("Indtast venligst kun tal!");
             }
             else if (int.TryParse(pId, out int pIdTemp2) || int.TryParse(bId, out int bIdTemp2) || !string.IsNullOrEmpty(pId) || !string.IsNullOrEmpty(bId))
             {
                 SqlConnection conn = new SqlConnection(UserIdentification.conString);
                 conn.Open();
 
-                string query = "SELECT ROW_NUMBER() OVER(ORDER BY signUpDato) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = " + bIdTextbox.Text + "";
+                string query = "SELECT ROW_NUMBER() OVER(ORDER BY signUpDato ASC) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = " + bIdTextbox.Text + "";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -200,7 +264,7 @@ namespace SonderBoUdlejning.Admin
 
                 positionTextBox.Text = Convert.ToString(Array.IndexOf(positionenArray, Convert.ToInt32(pIdTextbox.Text)) + 1);
 
-            }
+            }*/
         }
     }
 }
