@@ -172,6 +172,10 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\TildelBolig.cs" />
+    <Compile Include="Admin\TildelBolig.Designer.cs">
+      <DependentUpon>TildelBolig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\VenteListe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +219,9 @@
     <Compile Include="VentelisteSystems\vRemoveFromList.cs" />
     <EmbeddedResource Include="AdminMain.resx">
       <DependentUpon>AdminMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\TildelBolig.resx">
+      <DependentUpon>TildelBolig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\VenteListe.resx">
       <DependentUpon>VenteListe.cs</DependentUpon>
