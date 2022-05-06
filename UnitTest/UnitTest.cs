@@ -50,7 +50,7 @@ namespace UnitTest
         public void TlfCheck_InValid()
         {
             Assert.IsFalse(SonderBoUdlejning.SQLBuilders.personInputCheck.TlfCheck("+4520202020"));
-            //Assert.IsFalse(SonderBoUdlejning.SQLBuilders.personInputCheck.TlfCheck("0202020"));
+            Assert.IsFalse(SonderBoUdlejning.SQLBuilders.personInputCheck.TlfCheck("0202020"));
             Assert.IsFalse(SonderBoUdlejning.SQLBuilders.personInputCheck.TlfCheck("020202020"));
         }
 
