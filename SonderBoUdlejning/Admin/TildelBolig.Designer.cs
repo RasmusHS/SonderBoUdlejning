@@ -32,40 +32,38 @@
             this.dgvVenteliste = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelBaggrund = new System.Windows.Forms.Panel();
+            this.panelØnskerLejlighed = new System.Windows.Forms.Panel();
+            this.lblIndflytÅrstal = new System.Windows.Forms.Label();
+            this.lblIndflytMåned = new System.Windows.Forms.Label();
+            this.tbIndflytÅrstal = new System.Windows.Forms.TextBox();
+            this.combIndflytMåned = new System.Windows.Forms.ComboBox();
+            this.btnUdskrivLejekontrakt = new System.Windows.Forms.Button();
+            this.ckbJaTilLejlighed = new System.Windows.Forms.CheckBox();
             this.lblØnskerLejlighed = new System.Windows.Forms.Label();
-            this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
             this.tbMedlemsEmail = new System.Windows.Forms.TextBox();
-            this.lblMedlemsEmail = new System.Windows.Forms.Label();
-            this.lblMedlemsTLF = new System.Windows.Forms.Label();
             this.tbMedlemsTLF = new System.Windows.Forms.TextBox();
             this.tbMedlemsNavn = new System.Windows.Forms.TextBox();
             this.lblPID = new System.Windows.Forms.Label();
             this.lblBID = new System.Windows.Forms.Label();
             this.tbPID = new System.Windows.Forms.TextBox();
             this.tbBID = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelPid = new System.Windows.Forms.Panel();
             this.lblMedlemsNavn = new System.Windows.Forms.Label();
-            this.ckbJaTilLejlighed = new System.Windows.Forms.CheckBox();
-            this.btnUdskrivLejekontrakt = new System.Windows.Forms.Button();
-            this.combIndflytMåned = new System.Windows.Forms.ComboBox();
-            this.tbIndflytÅrstal = new System.Windows.Forms.TextBox();
-            this.lblIndflytMåned = new System.Windows.Forms.Label();
-            this.lblIndflytÅrstal = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.ckbOpsigLejemål = new System.Windows.Forms.CheckBox();
-            this.lblOpsigLejlighed = new System.Windows.Forms.Label();
-            this.lblUdflytÅrstal = new System.Windows.Forms.Label();
-            this.lblUdflytMåned = new System.Windows.Forms.Label();
-            this.tbUdflytÅrstal = new System.Windows.Forms.TextBox();
-            this.combUdflytMåned = new System.Windows.Forms.ComboBox();
+            this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
+            this.lblMedlemsTLF = new System.Windows.Forms.Label();
+            this.lblMedlemsEmail = new System.Windows.Forms.Label();
+            this.panelBid = new System.Windows.Forms.Panel();
+            this.panelMedlemsinfo = new System.Windows.Forms.Panel();
+            this.panelUdskrivLejekontrakt = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panelBaggrund.SuspendLayout();
+            this.panelØnskerLejlighed.SuspendLayout();
+            this.panelPid.SuspendLayout();
+            this.panelBid.SuspendLayout();
+            this.panelMedlemsinfo.SuspendLayout();
+            this.panelUdskrivLejekontrakt.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvBolig
@@ -106,38 +104,84 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Venteliste";
             // 
-            // panel1
+            // panelBaggrund
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.btnFindMedlemsInfo);
-            this.panel1.Controls.Add(this.tbMedlemsEmail);
-            this.panel1.Controls.Add(this.tbMedlemsTLF);
-            this.panel1.Controls.Add(this.tbMedlemsNavn);
-            this.panel1.Controls.Add(this.lblPID);
-            this.panel1.Controls.Add(this.lblBID);
-            this.panel1.Controls.Add(this.tbPID);
-            this.panel1.Controls.Add(this.tbBID);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(59, 303);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1015, 329);
-            this.panel1.TabIndex = 4;
+            this.panelBaggrund.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelBaggrund.Controls.Add(this.panelØnskerLejlighed);
+            this.panelBaggrund.Controls.Add(this.tbBID);
+            this.panelBaggrund.Controls.Add(this.panelPid);
+            this.panelBaggrund.Controls.Add(this.panelBid);
+            this.panelBaggrund.Location = new System.Drawing.Point(59, 303);
+            this.panelBaggrund.Name = "panelBaggrund";
+            this.panelBaggrund.Size = new System.Drawing.Size(1015, 398);
+            this.panelBaggrund.TabIndex = 4;
             // 
-            // panel3
+            // panelØnskerLejlighed
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel3.Controls.Add(this.lblIndflytÅrstal);
-            this.panel3.Controls.Add(this.lblIndflytMåned);
-            this.panel3.Controls.Add(this.tbIndflytÅrstal);
-            this.panel3.Controls.Add(this.combIndflytMåned);
-            this.panel3.Controls.Add(this.btnUdskrivLejekontrakt);
-            this.panel3.Controls.Add(this.ckbJaTilLejlighed);
-            this.panel3.Controls.Add(this.lblØnskerLejlighed);
-            this.panel3.Location = new System.Drawing.Point(576, 16);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(417, 265);
-            this.panel3.TabIndex = 15;
+            this.panelØnskerLejlighed.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelØnskerLejlighed.Controls.Add(this.panelUdskrivLejekontrakt);
+            this.panelØnskerLejlighed.Controls.Add(this.ckbJaTilLejlighed);
+            this.panelØnskerLejlighed.Controls.Add(this.lblØnskerLejlighed);
+            this.panelØnskerLejlighed.Location = new System.Drawing.Point(26, 200);
+            this.panelØnskerLejlighed.Name = "panelØnskerLejlighed";
+            this.panelØnskerLejlighed.Size = new System.Drawing.Size(968, 156);
+            this.panelØnskerLejlighed.TabIndex = 15;
+            this.panelØnskerLejlighed.Visible = false;
+            // 
+            // lblIndflytÅrstal
+            // 
+            this.lblIndflytÅrstal.AutoSize = true;
+            this.lblIndflytÅrstal.Location = new System.Drawing.Point(169, 32);
+            this.lblIndflytÅrstal.Name = "lblIndflytÅrstal";
+            this.lblIndflytÅrstal.Size = new System.Drawing.Size(41, 16);
+            this.lblIndflytÅrstal.TabIndex = 21;
+            this.lblIndflytÅrstal.Text = "Årstal";
+            // 
+            // lblIndflytMåned
+            // 
+            this.lblIndflytMåned.AutoSize = true;
+            this.lblIndflytMåned.Location = new System.Drawing.Point(11, 32);
+            this.lblIndflytMåned.Name = "lblIndflytMåned";
+            this.lblIndflytMåned.Size = new System.Drawing.Size(49, 16);
+            this.lblIndflytMåned.TabIndex = 16;
+            this.lblIndflytMåned.Text = "Måned";
+            // 
+            // tbIndflytÅrstal
+            // 
+            this.tbIndflytÅrstal.Location = new System.Drawing.Point(172, 51);
+            this.tbIndflytÅrstal.Name = "tbIndflytÅrstal";
+            this.tbIndflytÅrstal.Size = new System.Drawing.Size(100, 22);
+            this.tbIndflytÅrstal.TabIndex = 20;
+            // 
+            // combIndflytMåned
+            // 
+            this.combIndflytMåned.FormattingEnabled = true;
+            this.combIndflytMåned.Location = new System.Drawing.Point(14, 51);
+            this.combIndflytMåned.Name = "combIndflytMåned";
+            this.combIndflytMåned.Size = new System.Drawing.Size(121, 24);
+            this.combIndflytMåned.TabIndex = 19;
+            // 
+            // btnUdskrivLejekontrakt
+            // 
+            this.btnUdskrivLejekontrakt.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.btnUdskrivLejekontrakt.Location = new System.Drawing.Point(298, 20);
+            this.btnUdskrivLejekontrakt.Name = "btnUdskrivLejekontrakt";
+            this.btnUdskrivLejekontrakt.Size = new System.Drawing.Size(326, 53);
+            this.btnUdskrivLejekontrakt.TabIndex = 18;
+            this.btnUdskrivLejekontrakt.Text = "Udskriv Lejekontrakt";
+            this.btnUdskrivLejekontrakt.UseVisualStyleBackColor = false;
+            this.btnUdskrivLejekontrakt.Click += new System.EventHandler(this.btnUdskrivLejekontrakt_Click);
+            // 
+            // ckbJaTilLejlighed
+            // 
+            this.ckbJaTilLejlighed.AutoSize = true;
+            this.ckbJaTilLejlighed.Location = new System.Drawing.Point(56, 72);
+            this.ckbJaTilLejlighed.Name = "ckbJaTilLejlighed";
+            this.ckbJaTilLejlighed.Size = new System.Drawing.Size(234, 20);
+            this.ckbJaTilLejlighed.TabIndex = 17;
+            this.ckbJaTilLejlighed.Text = "Ja Medlemmet ønsker lejligheden.";
+            this.ckbJaTilLejlighed.UseVisualStyleBackColor = true;
+            this.ckbJaTilLejlighed.CheckedChanged += new System.EventHandler(this.ckbJaTilLejlighed_CheckedChanged);
             // 
             // lblØnskerLejlighed
             // 
@@ -148,50 +192,23 @@
             this.lblØnskerLejlighed.TabIndex = 16;
             this.lblØnskerLejlighed.Text = "Ønsker Medlemmet Lejligheden?";
             // 
-            // btnFindMedlemsInfo
-            // 
-            this.btnFindMedlemsInfo.Location = new System.Drawing.Point(355, 32);
-            this.btnFindMedlemsInfo.Name = "btnFindMedlemsInfo";
-            this.btnFindMedlemsInfo.Size = new System.Drawing.Size(127, 55);
-            this.btnFindMedlemsInfo.TabIndex = 13;
-            this.btnFindMedlemsInfo.Text = "FIND INFO";
-            this.btnFindMedlemsInfo.UseVisualStyleBackColor = true;
-            // 
             // tbMedlemsEmail
             // 
-            this.tbMedlemsEmail.Location = new System.Drawing.Point(225, 226);
+            this.tbMedlemsEmail.Location = new System.Drawing.Point(271, 56);
             this.tbMedlemsEmail.Name = "tbMedlemsEmail";
             this.tbMedlemsEmail.Size = new System.Drawing.Size(100, 22);
             this.tbMedlemsEmail.TabIndex = 12;
             // 
-            // lblMedlemsEmail
-            // 
-            this.lblMedlemsEmail.AutoSize = true;
-            this.lblMedlemsEmail.Location = new System.Drawing.Point(29, 181);
-            this.lblMedlemsEmail.Name = "lblMedlemsEmail";
-            this.lblMedlemsEmail.Size = new System.Drawing.Size(100, 16);
-            this.lblMedlemsEmail.TabIndex = 11;
-            this.lblMedlemsEmail.Text = "Medlems Email";
-            // 
-            // lblMedlemsTLF
-            // 
-            this.lblMedlemsTLF.AutoSize = true;
-            this.lblMedlemsTLF.Location = new System.Drawing.Point(29, 95);
-            this.lblMedlemsTLF.Name = "lblMedlemsTLF";
-            this.lblMedlemsTLF.Size = new System.Drawing.Size(90, 16);
-            this.lblMedlemsTLF.TabIndex = 9;
-            this.lblMedlemsTLF.Text = "Medlems TLF";
-            // 
             // tbMedlemsTLF
             // 
-            this.tbMedlemsTLF.Location = new System.Drawing.Point(225, 142);
+            this.tbMedlemsTLF.Location = new System.Drawing.Point(146, 56);
             this.tbMedlemsTLF.Name = "tbMedlemsTLF";
             this.tbMedlemsTLF.Size = new System.Drawing.Size(100, 22);
             this.tbMedlemsTLF.TabIndex = 8;
             // 
             // tbMedlemsNavn
             // 
-            this.tbMedlemsNavn.Location = new System.Drawing.Point(225, 64);
+            this.tbMedlemsNavn.Location = new System.Drawing.Point(10, 56);
             this.tbMedlemsNavn.Name = "tbMedlemsNavn";
             this.tbMedlemsNavn.Size = new System.Drawing.Size(100, 22);
             this.tbMedlemsNavn.TabIndex = 7;
@@ -200,7 +217,7 @@
             // 
             this.lblPID.AutoSize = true;
             this.lblPID.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblPID.Location = new System.Drawing.Point(35, 111);
+            this.lblPID.Location = new System.Drawing.Point(54, 50);
             this.lblPID.Name = "lblPID";
             this.lblPID.Size = new System.Drawing.Size(68, 16);
             this.lblPID.TabIndex = 6;
@@ -209,7 +226,7 @@
             // lblBID
             // 
             this.lblBID.AutoSize = true;
-            this.lblBID.Location = new System.Drawing.Point(35, 31);
+            this.lblBID.Location = new System.Drawing.Point(28, 46);
             this.lblBID.Name = "lblBID";
             this.lblBID.Size = new System.Drawing.Size(68, 16);
             this.lblBID.TabIndex = 5;
@@ -217,179 +234,133 @@
             // 
             // tbPID
             // 
-            this.tbPID.Location = new System.Drawing.Point(38, 142);
+            this.tbPID.Location = new System.Drawing.Point(57, 79);
             this.tbPID.Name = "tbPID";
             this.tbPID.Size = new System.Drawing.Size(100, 22);
             this.tbPID.TabIndex = 1;
             // 
             // tbBID
             // 
-            this.tbBID.Location = new System.Drawing.Point(38, 65);
+            this.tbBID.Location = new System.Drawing.Point(57, 95);
             this.tbBID.Name = "tbBID";
             this.tbBID.Size = new System.Drawing.Size(100, 22);
             this.tbBID.TabIndex = 0;
+            this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
             // 
-            // panel2
+            // panelPid
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel2.Controls.Add(this.lblMedlemsNavn);
-            this.panel2.Controls.Add(this.lblMedlemsTLF);
-            this.panel2.Controls.Add(this.lblMedlemsEmail);
-            this.panel2.Location = new System.Drawing.Point(193, 16);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(313, 265);
-            this.panel2.TabIndex = 14;
+            this.panelPid.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelPid.Controls.Add(this.panelMedlemsinfo);
+            this.panelPid.Controls.Add(this.lblPID);
+            this.panelPid.Controls.Add(this.tbPID);
+            this.panelPid.Controls.Add(this.btnFindMedlemsInfo);
+            this.panelPid.Location = new System.Drawing.Point(264, 16);
+            this.panelPid.Name = "panelPid";
+            this.panelPid.Size = new System.Drawing.Size(730, 158);
+            this.panelPid.TabIndex = 14;
+            this.panelPid.Visible = false;
             // 
             // lblMedlemsNavn
             // 
             this.lblMedlemsNavn.AutoSize = true;
-            this.lblMedlemsNavn.Location = new System.Drawing.Point(29, 16);
+            this.lblMedlemsNavn.Location = new System.Drawing.Point(7, 27);
             this.lblMedlemsNavn.Name = "lblMedlemsNavn";
             this.lblMedlemsNavn.Size = new System.Drawing.Size(95, 16);
             this.lblMedlemsNavn.TabIndex = 10;
             this.lblMedlemsNavn.Text = "Medlems navn";
             // 
-            // ckbJaTilLejlighed
+            // btnFindMedlemsInfo
             // 
-            this.ckbJaTilLejlighed.AutoSize = true;
-            this.ckbJaTilLejlighed.Location = new System.Drawing.Point(56, 50);
-            this.ckbJaTilLejlighed.Name = "ckbJaTilLejlighed";
-            this.ckbJaTilLejlighed.Size = new System.Drawing.Size(234, 20);
-            this.ckbJaTilLejlighed.TabIndex = 17;
-            this.ckbJaTilLejlighed.Text = "Ja Medlemmet ønsker lejligheden.";
-            this.ckbJaTilLejlighed.UseVisualStyleBackColor = true;
+            this.btnFindMedlemsInfo.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.btnFindMedlemsInfo.Location = new System.Drawing.Point(192, 49);
+            this.btnFindMedlemsInfo.Name = "btnFindMedlemsInfo";
+            this.btnFindMedlemsInfo.Size = new System.Drawing.Size(127, 55);
+            this.btnFindMedlemsInfo.TabIndex = 13;
+            this.btnFindMedlemsInfo.Text = "FIND INFO";
+            this.btnFindMedlemsInfo.UseVisualStyleBackColor = false;
+            this.btnFindMedlemsInfo.Click += new System.EventHandler(this.btnFindMedlemsInfo_Click);
             // 
-            // btnUdskrivLejekontrakt
+            // lblMedlemsTLF
             // 
-            this.btnUdskrivLejekontrakt.Location = new System.Drawing.Point(56, 179);
-            this.btnUdskrivLejekontrakt.Name = "btnUdskrivLejekontrakt";
-            this.btnUdskrivLejekontrakt.Size = new System.Drawing.Size(326, 53);
-            this.btnUdskrivLejekontrakt.TabIndex = 18;
-            this.btnUdskrivLejekontrakt.Text = "Udskriv Lejekontrakt";
-            this.btnUdskrivLejekontrakt.UseVisualStyleBackColor = true;
+            this.lblMedlemsTLF.AutoSize = true;
+            this.lblMedlemsTLF.Location = new System.Drawing.Point(143, 27);
+            this.lblMedlemsTLF.Name = "lblMedlemsTLF";
+            this.lblMedlemsTLF.Size = new System.Drawing.Size(90, 16);
+            this.lblMedlemsTLF.TabIndex = 9;
+            this.lblMedlemsTLF.Text = "Medlems TLF";
             // 
-            // combIndflytMåned
+            // lblMedlemsEmail
             // 
-            this.combIndflytMåned.FormattingEnabled = true;
-            this.combIndflytMåned.Location = new System.Drawing.Point(60, 116);
-            this.combIndflytMåned.Name = "combIndflytMåned";
-            this.combIndflytMåned.Size = new System.Drawing.Size(121, 24);
-            this.combIndflytMåned.TabIndex = 19;
+            this.lblMedlemsEmail.AutoSize = true;
+            this.lblMedlemsEmail.Location = new System.Drawing.Point(268, 27);
+            this.lblMedlemsEmail.Name = "lblMedlemsEmail";
+            this.lblMedlemsEmail.Size = new System.Drawing.Size(100, 16);
+            this.lblMedlemsEmail.TabIndex = 11;
+            this.lblMedlemsEmail.Text = "Medlems Email";
             // 
-            // tbIndflytÅrstal
+            // panelBid
             // 
-            this.tbIndflytÅrstal.Location = new System.Drawing.Point(218, 116);
-            this.tbIndflytÅrstal.Name = "tbIndflytÅrstal";
-            this.tbIndflytÅrstal.Size = new System.Drawing.Size(100, 22);
-            this.tbIndflytÅrstal.TabIndex = 20;
+            this.panelBid.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelBid.Controls.Add(this.lblBID);
+            this.panelBid.Location = new System.Drawing.Point(26, 20);
+            this.panelBid.Name = "panelBid";
+            this.panelBid.Size = new System.Drawing.Size(204, 154);
+            this.panelBid.TabIndex = 16;
             // 
-            // lblIndflytMåned
+            // panelMedlemsinfo
             // 
-            this.lblIndflytMåned.AutoSize = true;
-            this.lblIndflytMåned.Location = new System.Drawing.Point(57, 97);
-            this.lblIndflytMåned.Name = "lblIndflytMåned";
-            this.lblIndflytMåned.Size = new System.Drawing.Size(49, 16);
-            this.lblIndflytMåned.TabIndex = 16;
-            this.lblIndflytMåned.Text = "Måned";
+            this.panelMedlemsinfo.Controls.Add(this.lblMedlemsNavn);
+            this.panelMedlemsinfo.Controls.Add(this.tbMedlemsNavn);
+            this.panelMedlemsinfo.Controls.Add(this.tbMedlemsTLF);
+            this.panelMedlemsinfo.Controls.Add(this.tbMedlemsEmail);
+            this.panelMedlemsinfo.Controls.Add(this.lblMedlemsTLF);
+            this.panelMedlemsinfo.Controls.Add(this.lblMedlemsEmail);
+            this.panelMedlemsinfo.Location = new System.Drawing.Point(337, 22);
+            this.panelMedlemsinfo.Name = "panelMedlemsinfo";
+            this.panelMedlemsinfo.Size = new System.Drawing.Size(381, 117);
+            this.panelMedlemsinfo.TabIndex = 14;
+            this.panelMedlemsinfo.Visible = false;
             // 
-            // lblIndflytÅrstal
+            // panelUdskrivLejekontrakt
             // 
-            this.lblIndflytÅrstal.AutoSize = true;
-            this.lblIndflytÅrstal.Location = new System.Drawing.Point(215, 97);
-            this.lblIndflytÅrstal.Name = "lblIndflytÅrstal";
-            this.lblIndflytÅrstal.Size = new System.Drawing.Size(41, 16);
-            this.lblIndflytÅrstal.TabIndex = 21;
-            this.lblIndflytÅrstal.Text = "Årstal";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel4.Controls.Add(this.lblUdflytÅrstal);
-            this.panel4.Controls.Add(this.lblOpsigLejlighed);
-            this.panel4.Controls.Add(this.lblUdflytMåned);
-            this.panel4.Controls.Add(this.ckbOpsigLejemål);
-            this.panel4.Controls.Add(this.tbUdflytÅrstal);
-            this.panel4.Controls.Add(this.combUdflytMåned);
-            this.panel4.Location = new System.Drawing.Point(59, 656);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1015, 188);
-            this.panel4.TabIndex = 5;
-            // 
-            // ckbOpsigLejemål
-            // 
-            this.ckbOpsigLejemål.AutoSize = true;
-            this.ckbOpsigLejemål.Location = new System.Drawing.Point(112, 99);
-            this.ckbOpsigLejemål.Name = "ckbOpsigLejemål";
-            this.ckbOpsigLejemål.Size = new System.Drawing.Size(266, 20);
-            this.ckbOpsigLejemål.TabIndex = 22;
-            this.ckbOpsigLejemål.Text = "Medlemmet ønsker at opsige sit lejemål";
-            this.ckbOpsigLejemål.UseVisualStyleBackColor = true;
-            // 
-            // lblOpsigLejlighed
-            // 
-            this.lblOpsigLejlighed.AutoSize = true;
-            this.lblOpsigLejlighed.Location = new System.Drawing.Point(461, 14);
-            this.lblOpsigLejlighed.Name = "lblOpsigLejlighed";
-            this.lblOpsigLejlighed.Size = new System.Drawing.Size(141, 16);
-            this.lblOpsigLejlighed.TabIndex = 22;
-            this.lblOpsigLejlighed.Text = "Opsigelse af Lejlighed";
-            // 
-            // lblUdflytÅrstal
-            // 
-            this.lblUdflytÅrstal.AutoSize = true;
-            this.lblUdflytÅrstal.Location = new System.Drawing.Point(629, 72);
-            this.lblUdflytÅrstal.Name = "lblUdflytÅrstal";
-            this.lblUdflytÅrstal.Size = new System.Drawing.Size(41, 16);
-            this.lblUdflytÅrstal.TabIndex = 25;
-            this.lblUdflytÅrstal.Text = "Årstal";
-            // 
-            // lblUdflytMåned
-            // 
-            this.lblUdflytMåned.AutoSize = true;
-            this.lblUdflytMåned.Location = new System.Drawing.Point(453, 76);
-            this.lblUdflytMåned.Name = "lblUdflytMåned";
-            this.lblUdflytMåned.Size = new System.Drawing.Size(49, 16);
-            this.lblUdflytMåned.TabIndex = 22;
-            this.lblUdflytMåned.Text = "Måned";
-            // 
-            // tbUdflytÅrstal
-            // 
-            this.tbUdflytÅrstal.Location = new System.Drawing.Point(632, 97);
-            this.tbUdflytÅrstal.Name = "tbUdflytÅrstal";
-            this.tbUdflytÅrstal.Size = new System.Drawing.Size(100, 22);
-            this.tbUdflytÅrstal.TabIndex = 24;
-            // 
-            // combUdflytMåned
-            // 
-            this.combUdflytMåned.FormattingEnabled = true;
-            this.combUdflytMåned.Location = new System.Drawing.Point(456, 95);
-            this.combUdflytMåned.Name = "combUdflytMåned";
-            this.combUdflytMåned.Size = new System.Drawing.Size(121, 24);
-            this.combUdflytMåned.TabIndex = 23;
+            this.panelUdskrivLejekontrakt.Controls.Add(this.lblIndflytÅrstal);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.lblIndflytMåned);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.tbIndflytÅrstal);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.combIndflytMåned);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.btnUdskrivLejekontrakt);
+            this.panelUdskrivLejekontrakt.Location = new System.Drawing.Point(322, 31);
+            this.panelUdskrivLejekontrakt.Name = "panelUdskrivLejekontrakt";
+            this.panelUdskrivLejekontrakt.Size = new System.Drawing.Size(633, 101);
+            this.panelUdskrivLejekontrakt.TabIndex = 22;
+            this.panelUdskrivLejekontrakt.Visible = false;
             // 
             // TildelBolig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1154, 863);
-            this.Controls.Add(this.panel4);
+            this.ClientSize = new System.Drawing.Size(1154, 728);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvVenteliste);
             this.Controls.Add(this.dgvBolig);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBaggrund);
             this.Name = "TildelBolig";
             this.Text = "TildelBolig";
+            this.Load += new System.EventHandler(this.TildelBolig_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panelBaggrund.ResumeLayout(false);
+            this.panelBaggrund.PerformLayout();
+            this.panelØnskerLejlighed.ResumeLayout(false);
+            this.panelØnskerLejlighed.PerformLayout();
+            this.panelPid.ResumeLayout(false);
+            this.panelPid.PerformLayout();
+            this.panelBid.ResumeLayout(false);
+            this.panelBid.PerformLayout();
+            this.panelMedlemsinfo.ResumeLayout(false);
+            this.panelMedlemsinfo.PerformLayout();
+            this.panelUdskrivLejekontrakt.ResumeLayout(false);
+            this.panelUdskrivLejekontrakt.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,7 +372,7 @@
         private System.Windows.Forms.DataGridView dgvVenteliste;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelBaggrund;
         private System.Windows.Forms.Label lblMedlemsNavn;
         private System.Windows.Forms.Label lblMedlemsTLF;
         private System.Windows.Forms.TextBox tbMedlemsTLF;
@@ -410,24 +381,20 @@
         private System.Windows.Forms.Label lblBID;
         private System.Windows.Forms.TextBox tbPID;
         private System.Windows.Forms.TextBox tbBID;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelØnskerLejlighed;
         private System.Windows.Forms.Label lblØnskerLejlighed;
         private System.Windows.Forms.Button btnFindMedlemsInfo;
         private System.Windows.Forms.TextBox tbMedlemsEmail;
         private System.Windows.Forms.Label lblMedlemsEmail;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelPid;
         private System.Windows.Forms.Label lblIndflytÅrstal;
         private System.Windows.Forms.Label lblIndflytMåned;
         private System.Windows.Forms.TextBox tbIndflytÅrstal;
         private System.Windows.Forms.ComboBox combIndflytMåned;
         private System.Windows.Forms.Button btnUdskrivLejekontrakt;
         private System.Windows.Forms.CheckBox ckbJaTilLejlighed;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label lblUdflytÅrstal;
-        private System.Windows.Forms.Label lblOpsigLejlighed;
-        private System.Windows.Forms.Label lblUdflytMåned;
-        private System.Windows.Forms.CheckBox ckbOpsigLejemål;
-        private System.Windows.Forms.TextBox tbUdflytÅrstal;
-        private System.Windows.Forms.ComboBox combUdflytMåned;
+        private System.Windows.Forms.Panel panelBid;
+        private System.Windows.Forms.Panel panelMedlemsinfo;
+        private System.Windows.Forms.Panel panelUdskrivLejekontrakt;
     }
 }
