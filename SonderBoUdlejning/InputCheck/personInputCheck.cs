@@ -61,7 +61,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
             else
             {
-                if ((mail.Length > 50) || (mail.Contains("@@")) || (mail.Contains("..")) || (mail.Contains(",,")))
+                if ((mail.Length > 50))
                 {
                     pErrorList.Add("Mail må ikke være længere end 50 tegn");
                     return false;
