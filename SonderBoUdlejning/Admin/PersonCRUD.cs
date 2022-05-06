@@ -70,6 +70,7 @@ namespace SonderBoUdlejning.Secretary
             {
                 pRead.ReadPerson(navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
+                MessageBox.Show(personInputCheck.errorMessage());
                 personInputCheck.pErrorList.Clear();
             }
             

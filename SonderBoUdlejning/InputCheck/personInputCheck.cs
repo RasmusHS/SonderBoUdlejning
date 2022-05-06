@@ -61,7 +61,7 @@ namespace SonderBoUdlejning.SQLBuilders
             }
             else
             {
-                if (mail.Length > 50)
+                if ((mail.Length > 50) || (mail.Contains("@@")) || (mail.Contains("..")) || (mail.Contains(",,")))
                 {
                     pErrorList.Add("Mail må ikke være længere end 50 tegn");
                     return false;
@@ -83,10 +83,17 @@ namespace SonderBoUdlejning.SQLBuilders
             }
             else
             {
-                if ((!retal.IsMatch(tlf)) || (tlf.Length > 8))
+                if (!string.IsNullOrEmpty(tlf))
                 {
-                    pErrorList.Add("Telefonnummer må kun indeholde tal og må ikke være længere end 8 tegn");
-                    return false;
+                    if ((!retal.IsMatch(tlf)) || (tlf.Length != 8))
+                    {
+                        pErrorList.Add("Telefonnummer må kun indeholde tal og skal være 8 cifre");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
