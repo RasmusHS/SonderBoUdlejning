@@ -47,16 +47,18 @@ namespace SonderBoUdlejning.Admin
             bool BoligIDValid = ventelisteInputCheck.BIdCheck(tbBiD.Text);
             bool yearCheckValid = ventelisteInputCheck.YearCheck(TBYear.Text);
 
-            int comboBocMonthIndex = Convert.ToInt32(comboBoxMonth.SelectedIndex);
-
-            if (yearCheckValid) 
+            if (yearCheckValid && BoligIDValid && PersonIDValid)
             {
                 string year = TBYear.Text;
-                string monthBuilder = OpsigFunktioner.DateBuilder(comboBocMonthIndex, year);
+                int comboBocMonthIndex = Convert.ToInt32(comboBoxMonth.SelectedIndex);
+                string sqlDateTimeBuilder = OpsigFunktioner.DateBuilder(comboBocMonthIndex, year);
+
+
             }
-
-
-            
+            else 
+            {
+                MessageBox.Show("Ikke alle felter er udfyldt");
+            }
         }
     }
 }

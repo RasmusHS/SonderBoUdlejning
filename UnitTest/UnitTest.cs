@@ -93,7 +93,8 @@ namespace UnitTest
         [TestMethod]
         public void yearCheck_Valid() 
         {
-            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("1111"));
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("2022"));
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("9999"));
         }
 
         [TestMethod]
@@ -103,6 +104,7 @@ namespace UnitTest
             Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("211"));
             Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("21@1"));
             Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("abcd"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("2021"));
         }
 
         [TestMethod]

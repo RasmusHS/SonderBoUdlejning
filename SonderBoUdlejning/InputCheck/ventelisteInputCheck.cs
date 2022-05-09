@@ -91,10 +91,16 @@ namespace SonderBoUdlejning.InputCheck
                     {
                         vErrorList.Add("Årstal skal være på 4 tal");
                         return false;
-                    } else
-                    {
-                        return true;
                     }
+
+                    if (Convert.ToInt32(year) < DateTime.Now.Year) 
+                    {
+                        vErrorList.Add("Årstal skal være i år eller senere");
+                        return false;
+                    }
+                    
+                        return true;
+                    
                 }
             }
         }
