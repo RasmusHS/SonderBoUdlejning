@@ -48,5 +48,13 @@ namespace SonderBoUdlejning
             loadedForm.Show(); // Formens vises.
 
         }
+
+        private void btnOpsigelse_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            OpsigelseAfBolig opsig = new OpsigelseAfBolig();
+            opsig.ShowDialog();
+            this.Close();
+        }
     }
 }
