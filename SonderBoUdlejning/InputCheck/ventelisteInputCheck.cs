@@ -69,5 +69,34 @@ namespace SonderBoUdlejning.InputCheck
                 }
             }
         }
+
+        public static bool YearCheck(string year)
+        {
+            if (SQLInject.IsMatch(year))
+            {
+                vErrorList.Add("Årstal indeholder ugyldige tegn");
+                injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(year)))
+                {
+                    vErrorList.Add("Årstal må kun indeholde tal");
+                    return false;
+                }
+                else
+                {
+                    if (year.Length != 4)
+                    {
+                        vErrorList.Add("Årstal skal være på 4 tal");
+                        return false;
+                    } else
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
     }
 }

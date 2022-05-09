@@ -194,6 +194,7 @@
     <Compile Include="LoginMain.Designer.cs">
       <DependentUpon>LoginMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Opsigelse\OpsigFunktioner.cs" />
     <Compile Include="personCRUD\pCreate.cs" />
     <Compile Include="personCRUD\pDelete.cs" />
     <Compile Include="personCRUD\pFacade.cs" />

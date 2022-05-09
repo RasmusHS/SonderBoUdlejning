@@ -89,5 +89,27 @@ namespace UnitTest
         {
             Assert.That.Equals(SonderBoUdlejning.ConnString.getConnInstance);
         }
+
+        [TestMethod]
+        public void yearCheck_Valid() 
+        {
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("1111"));
+        }
+
+        [TestMethod]
+        public void yearCheck_InValid()
+        {
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("21111"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("211"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("21@1"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("abcd"));
+        }
+
+        [TestMethod]
+        public void Opsigelse_Valid() 
+        {
+            Assert.AreEqual("2020-12-01", SonderBoUdlejning.Opsigelse.OpsigFunktioner.DateBuilder(11, "2020"));
+        }
+
     }
 }
