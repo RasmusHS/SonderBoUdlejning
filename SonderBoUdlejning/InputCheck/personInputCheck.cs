@@ -7,41 +7,52 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Net.Mail;
 
-namespace SonderBoUdlejning.SQLBuilders
+namespace SonderBoUdlejning.InputCheck
 {
-    public static class personInputCheck
+    public static class PersonInputCheck
     {
-        public static List<string> pErrorList = new List<string>();
         private static Regex retal = new Regex(@"(^[0-9]*$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
+        private static Regex email = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
-        
-        public static int injectedSQL { get; private set; }
-        public static void resetInjectedSQL()
-        {
-            injectedSQL = 0;
-        }
 
-        public static string errorMessage()
+        public static bool PIdCheck(string pId)
         {
-            string displayError = string.Join(Environment.NewLine, pErrorList);
-            return displayError;
+            if (SQLInject.IsMatch(pId))
+            {
+                ErrorMessage.ErrorList.Add("Person ID indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(pId)))
+                {
+                    ErrorMessage.ErrorList.Add("Person ID må kun indeholde tal");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
         public static bool NavnCheck(string navn)
         {
             if (SQLInject.IsMatch(navn))
             {
-                pErrorList.Add("Navn indeholder ugyldige tegn");
-                injectedSQL = 1;
+                ErrorMessage.ErrorList.Add("Navn indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
                 if ((!bogstaver.IsMatch(navn)) || (navn.Length > 50))
                 {
-                    pErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
+                    ErrorMessage.ErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
                     return false;
                 }
                 else
@@ -55,39 +66,17 @@ namespace SonderBoUdlejning.SQLBuilders
         {
             if (SQLInject.IsMatch(mail))
             {
-                pErrorList.Add("Mail indeholder ugyldige tegn");
-                injectedSQL = 1;
+                ErrorMessage.ErrorList.Add("Mail indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if ((mail.Length > 50))
+                if (!string.IsNullOrEmpty(mail))
                 {
-                    pErrorList.Add("Mail må ikke være længere end 50 tegn");
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-
-        public static bool TlfCheck(string tlf)
-        {
-            if (SQLInject.IsMatch(tlf))
-            {
-                pErrorList.Add("Telefonnummer indeholder ugyldige tegn");
-                injectedSQL = 1;
-                return false;
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(tlf))
-                {
-                    if ((!retal.IsMatch(tlf)) || (tlf.Length != 8))
+                    if ((mail.Length > 50) || (!email.IsMatch(mail)))
                     {
-                        pErrorList.Add("Telefonnummer må kun indeholde tal og skal være 8 cifre");
+                        ErrorMessage.ErrorList.Add("Mail må ikke være længere end 50 tegn og skal være en gyldig email uden æ, ø eller å");
                         return false;
                     }
                     else
@@ -102,20 +91,27 @@ namespace SonderBoUdlejning.SQLBuilders
             }
         }
 
-        public static bool PIdCheck(string pId)
+        public static bool TlfCheck(string tlf)
         {
-            if (SQLInject.IsMatch(pId))
+            if (SQLInject.IsMatch(tlf))
             {
-                pErrorList.Add("Person ID indeholder ugyldige tegn");
-                injectedSQL = 1;
+                ErrorMessage.ErrorList.Add("Telefonnummer indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if ((!retal.IsMatch(pId)))
+                if (!string.IsNullOrEmpty(tlf))
                 {
-                    pErrorList.Add("Person ID må kun indeholde tal");
-                    return false;
+                    if ((!retal.IsMatch(tlf)) || (tlf.Length != 8))
+                    {
+                        ErrorMessage.ErrorList.Add("Telefonnummer må kun indeholde tal og skal være 8 cifre");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {

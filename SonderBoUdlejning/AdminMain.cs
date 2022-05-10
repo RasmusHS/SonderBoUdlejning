@@ -48,5 +48,10 @@ namespace SonderBoUdlejning
             loadedForm.Show(); // Formens vises.
 
         }
+
+        private void btnTildelingBoligAdmin_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new TildelBolig()); 
+        }
     }
 }

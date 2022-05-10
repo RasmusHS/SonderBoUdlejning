@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
-using SonderBoUdlejning.SQLBuilders;
 
 namespace SonderBoUdlejning //Change this to match your projects namespace
 {
@@ -38,14 +37,14 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                MessageBox.Show(personInputCheck.errorMessage());
-                personInputCheck.pErrorList.Clear();
-                personInputCheck.resetInjectedSQL();
+                MessageBox.Show(ErrorMessage.errorMessage());
+                ErrorMessage.ErrorList.Clear();
+                ErrorMessage.resetInjectedSQL();
                 return null;
             }
         }
 
-        //Sample template
+        //Sample template for connecting dataGridView to a table from the db
         /*
          SQLExecutionHandler tableConn = new SQLExecutionHandler();
         
@@ -57,6 +56,62 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
              string sqlS2 = "SELECT * FROM Kunde";
              dataGridView2.DataSource = tableConn.tableBinder(sqlS2);
          }
-         */        
+         */
+
+        public List<string> comboBoxBinder(string sqlStatement)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(connString.connStr); //Encapsulates conn string in an object
+                conn.Open(); //opens connection to database
+
+                string sqlS = sqlStatement; //SQL statement sent from the form
+                SqlCommand cmd = new SqlCommand(sqlS, conn); //Encapsulates SQL statement in an object
+
+                List<string> comboBoxList = new List<string>(); //Creates a list to hold the data
+                using (SqlDataReader reader = cmd.ExecuteReader()) //Executes the SQL command and returns a data reader object
+                {
+                    while (reader.Read()) //Reads the data from the data reader object
+                    {
+                        comboBoxList.Add(reader[0].ToString()); //Adds the data to the list
+                    }
+                }
+                conn.Close(); //Closes the connection to the database
+                return comboBoxList; //returns the list back to the form that called the method
+            }
+            catch
+            {
+                MessageBox.Show(ErrorMessage.errorMessage());
+                ErrorMessage.ErrorList.Clear();
+                ErrorMessage.resetInjectedSQL();
+                return null;
+            }
+        }
+
+        public string textBoxBinder(string sqlStatement)
+        {
+            string textBoxContent = "";
+            try
+            {
+                SqlConnection conn = new SqlConnection(connString.connStr); //Encapsulates conn string in an object
+                conn.Open(); //opens connection to database
+
+                string sqlS = sqlStatement; //SQL statement sent from the form
+                SqlCommand cmd = new SqlCommand(sqlS, conn); //Encapsulates SQL statement in an object
+
+                textBoxContent = cmd.ExecuteScalar().ToString(); //Executes the SQL statement and returns the first column of the first row of the result set
+
+                conn.Close(); //Closes the connection to the database
+                return textBoxContent;
+            }
+            catch
+            {
+                MessageBox.Show(ErrorMessage.errorMessage());
+                ErrorMessage.ErrorList.Clear();
+                ErrorMessage.resetInjectedSQL();
+                textBoxContent = "";
+                return textBoxContent;
+            }
+        }
     }
 }

@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SonderBoUdlejning.SQLBuilders;
 
 namespace SonderBoUdlejning
 {
-    public class pCreate
+    public class CreatePerson
     {
         ConnString connString = ConnString.getConnInstance;
 

@@ -5,48 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SonderBoUdlejning.SQLBuilders;
+using SonderBoUdlejning.InputCheck;
 
-namespace SonderBoUdlejning.personCRUD
+namespace SonderBoUdlejning.VentelisteSystems
 {
-    public class pRead
+    internal class ReadVenteliste
     {
         ConnString connString = ConnString.getConnInstance;
 
-        public string pSQLR(string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
+        public string rVente(string pId, string bId, string signUpDato)
         {
-            string sqlS = $"SELECT * FROM Person WHERE 1=1";
+            string sqlS = $"SELECT * FROM Venteliste WHERE 1=1";
 
             SqlConnection conn = new SqlConnection(connString.connStr);
 
-            if (!string.IsNullOrEmpty(fNavn))
-                sqlS += $" AND fNavn LIKE '%{fNavn}%'";
+            if (!string.IsNullOrEmpty(pId))
+                sqlS += $" AND pId = {pId}";
             else
                 sqlS += $"";
 
-            if (!string.IsNullOrEmpty(pMail))
-                sqlS += $" AND pMail = '{pMail}'";
+            if (!string.IsNullOrEmpty(bId))
+                sqlS += $" AND bId = {bId}";
             else
                 sqlS += $"";
 
-            if (!string.IsNullOrEmpty(pTlf))
-                sqlS += $" AND pTlf = '{pTlf}'";
+            if (!string.IsNullOrEmpty(signUpDato))
+                sqlS += $" AND signUpDato >= '{signUpDato}'";
             else
                 sqlS += $"";
 
-            if (medlem == true)
-                sqlS += $" AND erBeboer = 0";
-            else if (erBeboer == true)
-                sqlS += $" AND erBeboer = 1";
-            else if (alt == true)
-                sqlS += $"";
-            else
-                sqlS += $"";
+            sqlS += $" ORDER BY signUpDato ASC";
 
             try
             {
                 conn.Open();
-                if (personInputCheck.injectedSQL == 1)
+                if ((ErrorMessage.injectedSQL == 1))
                 {
                     sqlS = "";
                     conn.Close();
