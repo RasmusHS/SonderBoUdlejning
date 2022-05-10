@@ -33,5 +33,12 @@ namespace SonderBoUdlejning.VentelisteSystems
             vGetPos vGet = new vGetPos();
             Position = vGet.vGetPosition(pId, bId);
         }
+
+        public string ReadVente;
+        public void ReadVenteListe(string pId, string bId, string signUpDato)
+        {
+            ReadVenteliste readV = new ReadVenteliste();
+            ReadVente = readV.rVente(pId, bId, signUpDato);
+        }
     }
 }

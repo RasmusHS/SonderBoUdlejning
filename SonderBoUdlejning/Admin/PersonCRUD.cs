@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SonderBoUdlejning.InputCheck;
 using SonderBoUdlejning.personCRUD;
-using SonderBoUdlejning.SQLBuilders;
 
 namespace SonderBoUdlejning.Secretary
 {
@@ -33,25 +33,28 @@ namespace SonderBoUdlejning.Secretary
             string mail = tbMail.Text;
             string tlf = tbTlf.Text;
 
-            pFacade pCreate = new pFacade();
+            PersonFacade pCreate = new PersonFacade();
 
             if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)))
             {
-                if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true))
+                if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
                 {
                     pCreate.CreatePerson(navn, mail, tlf);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(personInputCheck.errorMessage());
-                    personInputCheck.pErrorList.Clear();
+                    MessageBox.Show(ErrorMessage.errorMessage());
+                    ErrorMessage.ErrorList.Clear();
+                    ErrorMessage.resetInjectedSQL();
                 }
             } 
         }
 
         private void btnPersonR_Click(object sender, EventArgs e)
         {
+            string columns = "*";
+            string pId = "";
             string navn = tbNavn.Text;
             string mail = tbMail.Text;
             string tlf = tbTlf.Text;
@@ -59,19 +62,19 @@ namespace SonderBoUdlejning.Secretary
             bool erBeboer = radioBtnBeboer.Checked;
             bool alt = radioBtnAlt.Checked;
 
-            pFacade pRead = new pFacade();
+            PersonFacade pRead = new PersonFacade();
 
-            if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true))
+            if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
             {
-                pRead.ReadPerson(navn, mail, tlf, medlem, erBeboer, alt);
+                pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
             }
             else
             {
-                pRead.ReadPerson(navn, mail, tlf, medlem, erBeboer, alt);
+                pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
-                MessageBox.Show(personInputCheck.errorMessage());
-                personInputCheck.pErrorList.Clear();
+                ErrorMessage.ErrorList.Clear();
+                ErrorMessage.resetInjectedSQL();
             }
             
             
@@ -80,23 +83,27 @@ namespace SonderBoUdlejning.Secretary
         private void btnPersonU_Click(object sender, EventArgs e)
         {
             string navn = tbNavn.Text;
-            string mail = tbMail.Text;
+            string mail = tbMail.Text.ToLower();
             string tlf = tbTlf.Text;
             string pId = tbPId.Text;
+            bool erBeboer = false;
 
-            pFacade pUpdate = new pFacade();
+            PersonFacade pUpdate = new PersonFacade();
 
             if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)) && (!string.IsNullOrEmpty(pId)))
             {
-                if ((personInputCheck.NavnCheck(navn) == true) && (personInputCheck.MailCheck(mail) == true) && (personInputCheck.TlfCheck(tlf) == true) && (personInputCheck.PIdCheck(pId) == true))
+                if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true) && (PersonInputCheck.PIdCheck(pId) == true))
                 {
-                    pUpdate.UpdatePerson(navn, mail, tlf, pId);
+                    erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
+                    MessageBox.Show("" + erBeboer);
+                    pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(personInputCheck.errorMessage());
-                    personInputCheck.pErrorList.Clear();
+                    MessageBox.Show(ErrorMessage.errorMessage());
+                    ErrorMessage.ErrorList.Clear();
+                    ErrorMessage.resetInjectedSQL();
                 }
             }
 
@@ -106,19 +113,20 @@ namespace SonderBoUdlejning.Secretary
         {
             string tlf = tbTlf.Text;
             
-            pFacade pDelete = new pFacade();
+            PersonFacade pDelete = new PersonFacade();
 
             if ((!string.IsNullOrEmpty(tlf)))
             {
-                if ((personInputCheck.TlfCheck(tlf) == true))
+                if ((PersonInputCheck.TlfCheck(tlf) == true))
                 {
                     pDelete.DeletePerson(tlf);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(personInputCheck.errorMessage());
-                    personInputCheck.pErrorList.Clear();
+                    MessageBox.Show(ErrorMessage.errorMessage());
+                    ErrorMessage.ErrorList.Clear();
+                    ErrorMessage.resetInjectedSQL();
                 }
             }
 

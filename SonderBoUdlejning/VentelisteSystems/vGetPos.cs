@@ -32,7 +32,7 @@ namespace SonderBoUdlejning.VentelisteSystems
 
             position = Convert.ToString(Array.IndexOf(positionenArray, Convert.ToInt32(pId)) + 1);
 
-            if (ventelisteInputCheck.injectedSQL == 1)
+            if (ErrorMessage.injectedSQL == 1)
             {
                 position = null;
                 conn.Close();
