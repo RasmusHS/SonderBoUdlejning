@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SonderBoUdlejning
 {
-    internal class UserIdentification
+    internal static class UserIdentification
     {
         //MSSQL server oplysninger
         public static string serverHost = "mssql13.unoeuro.com";
@@ -18,6 +18,6 @@ namespace SonderBoUdlejning
         //"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False";
 
         public static int UserAccess { get; set; }
-
+        
     }
 }
