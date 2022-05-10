@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SonderBoUdlejning.SQLBuilders;
 
 namespace SonderBoUdlejning.personCRUD
 {
-    public class pUpdate
+    public class UpdatePerson
     {
         ConnString connString = ConnString.getConnInstance;
         
-        public void pSQLU(string fNavn, string pMail, string pTlf, string pId)
+        public void pSQLU(string fNavn, string pMail, string pTlf, string pId, bool erBeboer)
         {
-            string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = 0 WHERE pId = @pId";
+            string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = @erBeboer WHERE pId = @pId";
             SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(sqlS, conn);
             cmd.Parameters.Clear();
@@ -32,6 +31,9 @@ namespace SonderBoUdlejning.personCRUD
             cmd.Parameters.Add("@pId", System.Data.SqlDbType.Int);
             cmd.Parameters["@pId"].Value = Convert.ToInt32(pId);
 
+            cmd.Parameters.Add("@erBeboer", System.Data.SqlDbType.Bit);
+            cmd.Parameters["@erBeboer"].Value = Convert.ToBoolean(erBeboer);
+
             try
             {
                 conn.Open();
@@ -41,7 +43,8 @@ namespace SonderBoUdlejning.personCRUD
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
                                     cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@pId"].Value +
+                                    cmd.Parameters["@pId"].Value + ", " +
+                                    cmd.Parameters["@erBeboer"].Value +
                                     ")");
             }
             catch (Exception ex)

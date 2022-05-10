@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using SonderBoUdlejning.SQLBuilders;
 
 namespace SonderBoUdlejning.personCRUD
 {
-    public class pDelete
+    public class DeletePerson
     {
         ConnString connString = ConnString.getConnInstance;
 
