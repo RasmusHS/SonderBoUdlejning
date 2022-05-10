@@ -34,7 +34,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panelBaggrund = new System.Windows.Forms.Panel();
             this.panelØnskerLejlighed = new System.Windows.Forms.Panel();
+            this.combAdresser = new System.Windows.Forms.ComboBox();
             this.panelUdskrivLejekontrakt = new System.Windows.Forms.Panel();
+            this.combIndflytÅr = new System.Windows.Forms.ComboBox();
             this.lblIndflytÅrstal = new System.Windows.Forms.Label();
             this.lblIndflytMåned = new System.Windows.Forms.Label();
             this.combIndflytMåned = new System.Windows.Forms.ComboBox();
@@ -55,8 +57,6 @@
             this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
             this.panelBid = new System.Windows.Forms.Panel();
             this.lblBID = new System.Windows.Forms.Label();
-            this.combIndflytÅr = new System.Windows.Forms.ComboBox();
-            this.combAdresser = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).BeginInit();
             this.panelBaggrund.SuspendLayout();
@@ -69,6 +69,7 @@
             // 
             // dgvBolig
             // 
+            this.dgvBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBolig.Location = new System.Drawing.Point(44, 54);
             this.dgvBolig.Margin = new System.Windows.Forms.Padding(2);
@@ -80,6 +81,7 @@
             // 
             // dgvVenteliste
             // 
+            this.dgvVenteliste.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenteliste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVenteliste.Location = new System.Drawing.Point(476, 54);
             this.dgvVenteliste.Margin = new System.Windows.Forms.Padding(2);
@@ -136,6 +138,15 @@
             this.panelØnskerLejlighed.TabIndex = 15;
             this.panelØnskerLejlighed.Visible = false;
             // 
+            // combAdresser
+            // 
+            this.combAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combAdresser.FormattingEnabled = true;
+            this.combAdresser.Location = new System.Drawing.Point(42, 86);
+            this.combAdresser.Name = "combAdresser";
+            this.combAdresser.Size = new System.Drawing.Size(185, 21);
+            this.combAdresser.TabIndex = 23;
+            // 
             // panelUdskrivLejekontrakt
             // 
             this.panelUdskrivLejekontrakt.Controls.Add(this.combIndflytÅr);
@@ -149,6 +160,15 @@
             this.panelUdskrivLejekontrakt.Size = new System.Drawing.Size(475, 82);
             this.panelUdskrivLejekontrakt.TabIndex = 22;
             this.panelUdskrivLejekontrakt.Visible = false;
+            // 
+            // combIndflytÅr
+            // 
+            this.combIndflytÅr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combIndflytÅr.FormattingEnabled = true;
+            this.combIndflytÅr.Location = new System.Drawing.Point(107, 41);
+            this.combIndflytÅr.Name = "combIndflytÅr";
+            this.combIndflytÅr.Size = new System.Drawing.Size(91, 21);
+            this.combIndflytÅr.TabIndex = 22;
             // 
             // lblIndflytÅrstal
             // 
@@ -359,24 +379,6 @@
             this.lblBID.Size = new System.Drawing.Size(57, 13);
             this.lblBID.TabIndex = 5;
             this.lblBID.Text = "Indtast bId";
-            // 
-            // combIndflytÅr
-            // 
-            this.combIndflytÅr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combIndflytÅr.FormattingEnabled = true;
-            this.combIndflytÅr.Location = new System.Drawing.Point(107, 41);
-            this.combIndflytÅr.Name = "combIndflytÅr";
-            this.combIndflytÅr.Size = new System.Drawing.Size(91, 21);
-            this.combIndflytÅr.TabIndex = 22;
-            // 
-            // combAdresser
-            // 
-            this.combAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combAdresser.FormattingEnabled = true;
-            this.combAdresser.Location = new System.Drawing.Point(42, 86);
-            this.combAdresser.Name = "combAdresser";
-            this.combAdresser.Size = new System.Drawing.Size(185, 21);
-            this.combAdresser.TabIndex = 23;
             // 
             // TildelBolig
             // 

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.InputCheck
 {
-    internal static class BoligInputCheck
+    public static class BoligInputCheck
     {
         private static Regex retal = new Regex(@"(^[0-9]*$)");
         private static Regex dato = new Regex(@"(^[0-9]{2}-[0-9]{2}-[0-9]{4}$)");
