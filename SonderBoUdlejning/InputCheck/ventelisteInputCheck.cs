@@ -104,5 +104,22 @@ namespace SonderBoUdlejning.InputCheck
                 }
             }
         }
+
+        public static bool MonthCheck(int month)
+        {
+            if (month > 0)
+            {
+                //if month or less then or equals to todays month
+                if (month <= DateTime.Now.Month + 3)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else { return false; }
+        }
     }
 }

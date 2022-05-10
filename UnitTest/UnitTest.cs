@@ -113,5 +113,20 @@ namespace UnitTest
             Assert.AreEqual("2020-12-01", SonderBoUdlejning.Opsigelse.OpsigFunktioner.DateBuilder(11, "2020"));
         }
 
+        [TestMethod]
+        public void monnthCheck_InValid()
+        {
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(5));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(6));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(7));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(8));
+        }
+
+        [TestMethod]
+        public void monnthCheck_Valid()
+        {
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(8));
+        }
+
     }
 }
