@@ -89,5 +89,44 @@ namespace UnitTest
         {
             Assert.That.Equals(SonderBoUdlejning.ConnString.getConnInstance);
         }
+
+        [TestMethod]
+        public void yearCheck_Valid() 
+        {
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("2022"));
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("9999"));
+        }
+
+        [TestMethod]
+        public void yearCheck_InValid()
+        {
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("21111"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("211"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("21@1"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("abcd"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("2021"));
+        }
+
+        [TestMethod]
+        public void Opsigelse_Valid() 
+        {
+            Assert.AreEqual("2020-12-01", SonderBoUdlejning.Opsigelse.OpsigFunktioner.DateBuilder(11, "2020"));
+        }
+
+        [TestMethod]
+        public void monnthCheck_InValid()
+        {
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(5));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(6));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(7));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(8));
+        }
+
+        [TestMethod]
+        public void monnthCheck_Valid()
+        {
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(8));
+        }
+
     }
 }
