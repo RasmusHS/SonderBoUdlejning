@@ -45,12 +45,12 @@
             this.tbPId = new System.Windows.Forms.TextBox();
             this.lblPId = new System.Windows.Forms.Label();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.panelRadioBtns = new System.Windows.Forms.Panel();
+            this.panelIndhold = new System.Windows.Forms.Panel();
             this.btnOpret = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.btnOpdater = new System.Windows.Forms.Button();
             this.btnSlet = new System.Windows.Forms.Button();
-            this.panelRadioBtns = new System.Windows.Forms.Panel();
-            this.panelIndhold = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonCRUD)).BeginInit();
             this.panelContainer.SuspendLayout();
             this.panelRadioBtns.SuspendLayout();
@@ -59,6 +59,7 @@
             // dgvPersonCRUD
             // 
             this.dgvPersonCRUD.AllowUserToAddRows = false;
+            this.dgvPersonCRUD.AllowUserToDeleteRows = false;
             this.dgvPersonCRUD.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPersonCRUD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersonCRUD.Location = new System.Drawing.Point(27, 26);
@@ -237,6 +238,23 @@
             this.panelContainer.Size = new System.Drawing.Size(589, 272);
             this.panelContainer.TabIndex = 16;
             // 
+            // panelRadioBtns
+            // 
+            this.panelRadioBtns.Controls.Add(this.radioBtnAlt);
+            this.panelRadioBtns.Controls.Add(this.radioBtnBeboer);
+            this.panelRadioBtns.Controls.Add(this.radioBtnMedlem);
+            this.panelRadioBtns.Location = new System.Drawing.Point(216, 11);
+            this.panelRadioBtns.Name = "panelRadioBtns";
+            this.panelRadioBtns.Size = new System.Drawing.Size(352, 45);
+            this.panelRadioBtns.TabIndex = 16;
+            // 
+            // panelIndhold
+            // 
+            this.panelIndhold.Location = new System.Drawing.Point(0, 0);
+            this.panelIndhold.Name = "panelIndhold";
+            this.panelIndhold.Size = new System.Drawing.Size(589, 272);
+            this.panelIndhold.TabIndex = 21;
+            // 
             // btnOpret
             // 
             this.btnOpret.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -280,23 +298,6 @@
             this.btnSlet.Text = "Slet";
             this.btnSlet.UseVisualStyleBackColor = true;
             this.btnSlet.Click += new System.EventHandler(this.btnSletShow_Click);
-            // 
-            // panelRadioBtns
-            // 
-            this.panelRadioBtns.Controls.Add(this.radioBtnAlt);
-            this.panelRadioBtns.Controls.Add(this.radioBtnBeboer);
-            this.panelRadioBtns.Controls.Add(this.radioBtnMedlem);
-            this.panelRadioBtns.Location = new System.Drawing.Point(216, 11);
-            this.panelRadioBtns.Name = "panelRadioBtns";
-            this.panelRadioBtns.Size = new System.Drawing.Size(352, 45);
-            this.panelRadioBtns.TabIndex = 16;
-            // 
-            // panelIndhold
-            // 
-            this.panelIndhold.Location = new System.Drawing.Point(0, 0);
-            this.panelIndhold.Name = "panelIndhold";
-            this.panelIndhold.Size = new System.Drawing.Size(589, 272);
-            this.panelIndhold.TabIndex = 21;
             // 
             // PersonCRUD
             // 

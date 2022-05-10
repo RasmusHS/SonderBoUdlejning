@@ -69,11 +69,14 @@
             // 
             // dgvBolig
             // 
+            this.dgvBolig.AllowUserToAddRows = false;
+            this.dgvBolig.AllowUserToDeleteRows = false;
             this.dgvBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBolig.Location = new System.Drawing.Point(44, 54);
             this.dgvBolig.Margin = new System.Windows.Forms.Padding(2);
             this.dgvBolig.Name = "dgvBolig";
+            this.dgvBolig.ReadOnly = true;
             this.dgvBolig.RowHeadersWidth = 51;
             this.dgvBolig.RowTemplate.Height = 24;
             this.dgvBolig.Size = new System.Drawing.Size(387, 165);
@@ -81,11 +84,14 @@
             // 
             // dgvVenteliste
             // 
+            this.dgvVenteliste.AllowUserToAddRows = false;
+            this.dgvVenteliste.AllowUserToDeleteRows = false;
             this.dgvVenteliste.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenteliste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVenteliste.Location = new System.Drawing.Point(476, 54);
             this.dgvVenteliste.Margin = new System.Windows.Forms.Padding(2);
             this.dgvVenteliste.Name = "dgvVenteliste";
+            this.dgvVenteliste.ReadOnly = true;
             this.dgvVenteliste.RowHeadersWidth = 51;
             this.dgvVenteliste.RowTemplate.Height = 24;
             this.dgvVenteliste.Size = new System.Drawing.Size(329, 165);
