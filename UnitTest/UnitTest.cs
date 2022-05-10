@@ -90,7 +90,7 @@ namespace UnitTest
             Assert.That.Equals(SonderBoUdlejning.ConnString.getConnInstance);
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void yearCheck_Valid() 
         {
             Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.YearCheck("2022"));
@@ -126,7 +126,7 @@ namespace UnitTest
         public void monnthCheck_Valid()
         {
             Assert.IsTrue(SonderBoUdlejning.InputCheck.ventelisteInputCheck.MonthCheck(8));
-        }
+        }*/
 
     }
 }
