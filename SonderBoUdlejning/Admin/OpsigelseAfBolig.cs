@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SonderBoUdlejning.InputCheck;
 using SonderBoUdlejning.Opsigelse;
 using Microsoft.Data.SqlClient;
+using System.Globalization;
 
 namespace SonderBoUdlejning.Admin
 {
@@ -28,7 +29,7 @@ namespace SonderBoUdlejning.Admin
         {
             DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
-            comboBoxMonth.Items.Add("Januar");
+            /*comboBoxMonth.Items.Add("Januar");
             comboBoxMonth.Items.Add("Februar");
             comboBoxMonth.Items.Add("Marts");
             comboBoxMonth.Items.Add("April");
@@ -39,20 +40,24 @@ namespace SonderBoUdlejning.Admin
             comboBoxMonth.Items.Add("September");
             comboBoxMonth.Items.Add("Oktober");
             comboBoxMonth.Items.Add("November");
-            comboBoxMonth.Items.Add("December");
+            comboBoxMonth.Items.Add("December");*/
+            
+            comboBoxMonth.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
+            comboBoxYear.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
+            comboBoxYear.SelectedItem = DateTime.Now.Year;
         }
 
         private void btnOpsigelse_Click(object sender, EventArgs e)
         {
-            bool PersonIDValid = ventelisteInputCheck.PIdCheck(tbPiD.Text);
-            bool BoligIDValid = ventelisteInputCheck.BIdCheck(tbBiD.Text);
-            bool yearCheckValid = ventelisteInputCheck.YearCheck(TBYear.Text);
-            bool monthCheckValid = ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex + 1);
+            //bool PersonIDValid = PersonInputCheck.PIdCheck(tbPiD.Text);
+            //bool BoligIDValid = BoligInputCheck.BIdCheck(tbBiD.Text);
+            //bool yearCheckValid = ventelisteInputCheck.YearCheck(TBYear.Text);
+            //bool monthCheckValid = ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex + 1);
 
-            MessageBox.Show(Convert.ToString(ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex+1)));
+            //MessageBox.Show(Convert.ToString(ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex+1)));
 
            
-            if (yearCheckValid && BoligIDValid && PersonIDValid && monthCheckValid)
+            /*if (BoligIDValid && PersonIDValid)
             {
                 string year = TBYear.Text;
                 int comboBocMonthIndex = Convert.ToInt32(comboBoxMonth.SelectedIndex);
@@ -125,7 +130,7 @@ namespace SonderBoUdlejning.Admin
             else 
             {
                 MessageBox.Show("Ikke alle felter er udfyldt korrekt");
-            }
+            }*/
         }
     }
 }

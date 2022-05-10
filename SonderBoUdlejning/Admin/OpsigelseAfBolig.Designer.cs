@@ -36,11 +36,11 @@
             this.labelBiD = new System.Windows.Forms.Label();
             this.CBOpsig = new System.Windows.Forms.CheckBox();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
-            this.TBYear = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnOpsigelse = new System.Windows.Forms.Button();
             this.labelÅrstalOpsig = new System.Windows.Forms.Label();
             this.labelMånedOpsig = new System.Windows.Forms.Label();
+            this.comboBoxYear = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).BeginInit();
             this.panel1.SuspendLayout();
@@ -53,7 +53,7 @@
             this.DGVBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVBolig.Location = new System.Drawing.Point(5, 6);
-            this.DGVBolig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGVBolig.Margin = new System.Windows.Forms.Padding(2);
             this.DGVBolig.Name = "DGVBolig";
             this.DGVBolig.ReadOnly = true;
             this.DGVBolig.RowHeadersWidth = 92;
@@ -68,7 +68,7 @@
             this.DGVPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVPerson.Location = new System.Drawing.Point(319, 6);
-            this.DGVPerson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGVPerson.Margin = new System.Windows.Forms.Padding(2);
             this.DGVPerson.Name = "DGVPerson";
             this.DGVPerson.ReadOnly = true;
             this.DGVPerson.RowHeadersWidth = 92;
@@ -79,15 +79,15 @@
             // tbBiD
             // 
             this.tbBiD.Location = new System.Drawing.Point(16, 37);
-            this.tbBiD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbBiD.Margin = new System.Windows.Forms.Padding(2);
             this.tbBiD.Name = "tbBiD";
             this.tbBiD.Size = new System.Drawing.Size(45, 20);
             this.tbBiD.TabIndex = 2;
             // 
             // tbPiD
             // 
-            this.tbPiD.Location = new System.Drawing.Point(139, 37);
-            this.tbPiD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbPiD.Location = new System.Drawing.Point(137, 37);
+            this.tbPiD.Margin = new System.Windows.Forms.Padding(2);
             this.tbPiD.Name = "tbPiD";
             this.tbPiD.Size = new System.Drawing.Size(45, 20);
             this.tbPiD.TabIndex = 3;
@@ -95,7 +95,7 @@
             // labelPiD
             // 
             this.labelPiD.AutoSize = true;
-            this.labelPiD.Location = new System.Drawing.Point(15, 12);
+            this.labelPiD.Location = new System.Drawing.Point(13, 22);
             this.labelPiD.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPiD.Name = "labelPiD";
             this.labelPiD.Size = new System.Drawing.Size(57, 13);
@@ -105,7 +105,7 @@
             // labelBiD
             // 
             this.labelBiD.AutoSize = true;
-            this.labelBiD.Location = new System.Drawing.Point(142, 20);
+            this.labelBiD.Location = new System.Drawing.Point(134, 22);
             this.labelBiD.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelBiD.Name = "labelBiD";
             this.labelBiD.Size = new System.Drawing.Size(50, 13);
@@ -116,7 +116,7 @@
             // 
             this.CBOpsig.AutoSize = true;
             this.CBOpsig.Location = new System.Drawing.Point(16, 93);
-            this.CBOpsig.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CBOpsig.Margin = new System.Windows.Forms.Padding(2);
             this.CBOpsig.Name = "CBOpsig";
             this.CBOpsig.Size = new System.Drawing.Size(147, 17);
             this.CBOpsig.TabIndex = 6;
@@ -125,28 +125,21 @@
             // 
             // comboBoxMonth
             // 
+            this.comboBoxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMonth.FormattingEnabled = true;
             this.comboBoxMonth.Location = new System.Drawing.Point(16, 147);
-            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(114, 21);
             this.comboBoxMonth.TabIndex = 7;
             // 
-            // TBYear
-            // 
-            this.TBYear.Location = new System.Drawing.Point(191, 147);
-            this.TBYear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.TBYear.Name = "TBYear";
-            this.TBYear.Size = new System.Drawing.Size(45, 20);
-            this.TBYear.TabIndex = 8;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.comboBoxYear);
             this.panel1.Controls.Add(this.btnOpsigelse);
             this.panel1.Controls.Add(this.labelÅrstalOpsig);
             this.panel1.Controls.Add(this.labelMånedOpsig);
-            this.panel1.Controls.Add(this.TBYear);
             this.panel1.Controls.Add(this.comboBoxMonth);
             this.panel1.Controls.Add(this.CBOpsig);
             this.panel1.Controls.Add(this.labelBiD);
@@ -154,7 +147,7 @@
             this.panel1.Controls.Add(this.tbPiD);
             this.panel1.Controls.Add(this.tbBiD);
             this.panel1.Location = new System.Drawing.Point(5, 204);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(591, 243);
             this.panel1.TabIndex = 9;
@@ -162,7 +155,7 @@
             // btnOpsigelse
             // 
             this.btnOpsigelse.Location = new System.Drawing.Point(324, 130);
-            this.btnOpsigelse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOpsigelse.Margin = new System.Windows.Forms.Padding(2);
             this.btnOpsigelse.Name = "btnOpsigelse";
             this.btnOpsigelse.Size = new System.Drawing.Size(128, 46);
             this.btnOpsigelse.TabIndex = 11;
@@ -173,7 +166,7 @@
             // labelÅrstalOpsig
             // 
             this.labelÅrstalOpsig.AutoSize = true;
-            this.labelÅrstalOpsig.Location = new System.Drawing.Point(189, 124);
+            this.labelÅrstalOpsig.Location = new System.Drawing.Point(154, 132);
             this.labelÅrstalOpsig.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelÅrstalOpsig.Name = "labelÅrstalOpsig";
             this.labelÅrstalOpsig.Size = new System.Drawing.Size(33, 13);
@@ -183,12 +176,21 @@
             // labelMånedOpsig
             // 
             this.labelMånedOpsig.AutoSize = true;
-            this.labelMånedOpsig.Location = new System.Drawing.Point(14, 124);
+            this.labelMånedOpsig.Location = new System.Drawing.Point(13, 132);
             this.labelMånedOpsig.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMånedOpsig.Name = "labelMånedOpsig";
             this.labelMånedOpsig.Size = new System.Drawing.Size(40, 13);
             this.labelMånedOpsig.TabIndex = 9;
             this.labelMånedOpsig.Text = "Måned";
+            // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(157, 147);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxYear.TabIndex = 12;
             // 
             // OpsigelseAfBolig
             // 
@@ -198,7 +200,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.DGVPerson);
             this.Controls.Add(this.DGVBolig);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "OpsigelseAfBolig";
             this.Text = "OpsigelseAfBolig";
             this.Load += new System.EventHandler(this.OpsigelseAfBolig_Load);
@@ -220,10 +222,10 @@
         private System.Windows.Forms.Label labelBiD;
         private System.Windows.Forms.CheckBox CBOpsig;
         private System.Windows.Forms.ComboBox comboBoxMonth;
-        private System.Windows.Forms.TextBox TBYear;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnOpsigelse;
         private System.Windows.Forms.Label labelÅrstalOpsig;
         private System.Windows.Forms.Label labelMånedOpsig;
+        private System.Windows.Forms.ComboBox comboBoxYear;
     }
 }
