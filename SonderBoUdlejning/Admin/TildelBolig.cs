@@ -196,6 +196,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUdskrivLejekontrakt_Click(object sender, EventArgs e)
         {
+            //TODO: sørg for at et medlem kun kan have en bolig.
             string pId = tbPID.Text;
             string bId = tbBID.Text;
             string lejePris = "";
@@ -220,7 +221,7 @@ namespace SonderBoUdlejning.Admin
                 {
                     lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
                     LejekontraktFacade lejekontrakt = new LejekontraktFacade();
-                    lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato);
+                    lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
 
                     PersonFacade pUpdate = new PersonFacade();
                     erBeboer = true;

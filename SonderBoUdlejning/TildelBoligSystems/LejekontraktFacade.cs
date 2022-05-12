@@ -11,7 +11,7 @@ namespace SonderBoUdlejning.TildelBoligSystems
 {
     internal class LejekontraktFacade
     {  
-        public void PrintKontrakt(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato)
+        public void PrintKontrakt(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string bId)
         {
             //Tildeler computerens navn en variabel, så print funktionen kan virke på de fleste computere.
             string userName = Environment.UserName;
@@ -20,18 +20,18 @@ namespace SonderBoUdlejning.TildelBoligSystems
 
             if (Directory.Exists(path))
             {
-                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato);
+                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
             }
             else
             {
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato);
+                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
             }
         }
 
         string kontraktParagraf = "Ved betaling af nedenstående depositum, samt leje for første måned, accepterer de tilbuddet om lejemålet og medfølgende vilkår.";
         
-        private void CreatePdf(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato)
+        private void CreatePdf(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string bId)
         {
             //Tildeler computerens navn en variabel, så print funktionen kan virke på de fleste computere.
             string userName = Environment.UserName;
@@ -42,7 +42,7 @@ namespace SonderBoUdlejning.TildelBoligSystems
             
             Document document = new Document(PageSize.A4, 20, 20, 30, 30);
             
-            using (PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path + $"\\{lejerNavn}_Lejekontrakt.pdf", FileMode.Create)))
+            using (PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path + $"\\{lejerNavn}_{bId}_Lejekontrakt.pdf", FileMode.Create)))
             {
                 document.Open();
 
