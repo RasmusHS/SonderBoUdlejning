@@ -13,6 +13,7 @@ namespace SonderBoUdlejning.InputCheck
     {
         private static Regex retal = new Regex(@"(^[0-9]*$)");
         private static Regex dato = new Regex(@"(^[0-9]{2}-[0-9]{2}-[0-9]{4}$)");
+        //private static Regex dato = new Regex(@"(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
         private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
 
@@ -89,7 +90,7 @@ namespace SonderBoUdlejning.InputCheck
                 }
             }
         }
-
+        public static string indDato;
         public static bool indflytDato(string indDato)
         {
             if (SQLInject.IsMatch(indDato))
@@ -134,6 +135,11 @@ namespace SonderBoUdlejning.InputCheck
                     if ((udDato.Length != 10) || (!dato.IsMatch(udDato)))
                     {
                         ErrorMessage.ErrorList.Add("Udflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
+                        return false;
+                    }
+                    else if ((Convert.ToDateTime(udDato) < Convert.ToDateTime(indDato)))
+                    {
+                        ErrorMessage.ErrorList.Add("Udflytningsdato skal være efter indflytningsdato");
                         return false;
                     }
                     else

@@ -19,7 +19,7 @@ namespace SonderBoUdlejning.Admin
     public partial class TildelBolig : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT * FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL)";
+        string sqlS1 = "SELECT * FROM Bolig WHERE (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
         string sqlS2 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
 
         public TildelBolig()
@@ -216,7 +216,7 @@ namespace SonderBoUdlejning.Admin
 
             if ((!string.IsNullOrEmpty(bId)) && (!string.IsNullOrEmpty(lejerNavn)) && (!string.IsNullOrEmpty(pId)))
             {
-                if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId)))
+                if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
                 {
                     lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
                     LejekontraktFacade lejekontrakt = new LejekontraktFacade();

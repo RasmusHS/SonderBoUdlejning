@@ -28,11 +28,6 @@ namespace SonderBoUdlejning
             this.Close();
         }
 
-        private void VenteListeButton_Click(object sender, EventArgs e)
-        {
-            openFormsLoader(new VenteListe());
-        }
-
         private Form activeForm = null;
         private void openFormsLoader(Form loadedForm)
         {
@@ -52,6 +47,16 @@ namespace SonderBoUdlejning
         private void btnTildelingBoligAdmin_Click(object sender, EventArgs e)
         {
             openFormsLoader(new TildelBolig()); 
+        }
+        
+        private void VenteListeButton_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new VenteListe());
+        }
+        
+        private void btnOpsigelse_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new OpsigelseAfBolig());
         }
     }
 }
