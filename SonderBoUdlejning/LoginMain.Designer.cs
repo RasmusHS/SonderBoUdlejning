@@ -75,6 +75,7 @@
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
             this.Name = "LoginMain";
+            this.Load += new System.EventHandler(this.LoginMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

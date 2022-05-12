@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DGVBolig = new System.Windows.Forms.DataGridView();
-            this.DGVPerson = new System.Windows.Forms.DataGridView();
             this.tbBiD = new System.Windows.Forms.TextBox();
             this.tbPiD = new System.Windows.Forms.TextBox();
             this.labelPiD = new System.Windows.Forms.Label();
@@ -37,59 +35,31 @@
             this.CBOpsig = new System.Windows.Forms.CheckBox();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxYear = new System.Windows.Forms.ComboBox();
             this.btnOpsigelse = new System.Windows.Forms.Button();
             this.labelÅrstalOpsig = new System.Windows.Forms.Label();
             this.labelMånedOpsig = new System.Windows.Forms.Label();
-            this.comboBoxYear = new System.Windows.Forms.ComboBox();
+            this.DGVBolig = new System.Windows.Forms.DataGridView();
+            this.DGVPerson = new System.Windows.Forms.DataGridView();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // DGVBolig
-            // 
-            this.DGVBolig.AllowUserToAddRows = false;
-            this.DGVBolig.AllowUserToDeleteRows = false;
-            this.DGVBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DGVBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVBolig.Location = new System.Drawing.Point(5, 6);
-            this.DGVBolig.Margin = new System.Windows.Forms.Padding(2);
-            this.DGVBolig.Name = "DGVBolig";
-            this.DGVBolig.ReadOnly = true;
-            this.DGVBolig.RowHeadersWidth = 92;
-            this.DGVBolig.RowTemplate.Height = 37;
-            this.DGVBolig.Size = new System.Drawing.Size(278, 180);
-            this.DGVBolig.TabIndex = 0;
-            // 
-            // DGVPerson
-            // 
-            this.DGVPerson.AllowUserToAddRows = false;
-            this.DGVPerson.AllowUserToDeleteRows = false;
-            this.DGVPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DGVPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVPerson.Location = new System.Drawing.Point(319, 6);
-            this.DGVPerson.Margin = new System.Windows.Forms.Padding(2);
-            this.DGVPerson.Name = "DGVPerson";
-            this.DGVPerson.ReadOnly = true;
-            this.DGVPerson.RowHeadersWidth = 92;
-            this.DGVPerson.RowTemplate.Height = 37;
-            this.DGVPerson.Size = new System.Drawing.Size(278, 180);
-            this.DGVPerson.TabIndex = 1;
             // 
             // tbBiD
             // 
-            this.tbBiD.Location = new System.Drawing.Point(16, 37);
+            this.tbBiD.Location = new System.Drawing.Point(137, 37);
             this.tbBiD.Margin = new System.Windows.Forms.Padding(2);
             this.tbBiD.Name = "tbBiD";
-            this.tbBiD.Size = new System.Drawing.Size(45, 20);
+            this.tbBiD.Size = new System.Drawing.Size(74, 20);
             this.tbBiD.TabIndex = 2;
             // 
             // tbPiD
             // 
-            this.tbPiD.Location = new System.Drawing.Point(137, 37);
+            this.tbPiD.Location = new System.Drawing.Point(16, 37);
             this.tbPiD.Margin = new System.Windows.Forms.Padding(2);
             this.tbPiD.Name = "tbPiD";
-            this.tbPiD.Size = new System.Drawing.Size(45, 20);
+            this.tbPiD.Size = new System.Drawing.Size(74, 20);
             this.tbPiD.TabIndex = 3;
             // 
             // labelPiD
@@ -146,11 +116,20 @@
             this.panel1.Controls.Add(this.labelPiD);
             this.panel1.Controls.Add(this.tbPiD);
             this.panel1.Controls.Add(this.tbBiD);
-            this.panel1.Location = new System.Drawing.Point(5, 204);
+            this.panel1.Location = new System.Drawing.Point(315, 209);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(591, 243);
+            this.panel1.Size = new System.Drawing.Size(518, 206);
             this.panel1.TabIndex = 9;
+            // 
+            // comboBoxYear
+            // 
+            this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxYear.FormattingEnabled = true;
+            this.comboBoxYear.Location = new System.Drawing.Point(157, 147);
+            this.comboBoxYear.Name = "comboBoxYear";
+            this.comboBoxYear.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxYear.TabIndex = 12;
             // 
             // btnOpsigelse
             // 
@@ -183,39 +162,51 @@
             this.labelMånedOpsig.TabIndex = 9;
             this.labelMånedOpsig.Text = "Måned";
             // 
-            // comboBoxYear
+            // DGVBolig
             // 
-            this.comboBoxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxYear.FormattingEnabled = true;
-            this.comboBoxYear.Location = new System.Drawing.Point(157, 147);
-            this.comboBoxYear.Name = "comboBoxYear";
-            this.comboBoxYear.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxYear.TabIndex = 12;
+            this.DGVBolig.AllowUserToAddRows = false;
+            this.DGVBolig.AllowUserToDeleteRows = false;
+            this.DGVBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVBolig.Location = new System.Drawing.Point(12, 6);
+            this.DGVBolig.Name = "DGVBolig";
+            this.DGVBolig.ReadOnly = true;
+            this.DGVBolig.Size = new System.Drawing.Size(553, 180);
+            this.DGVBolig.TabIndex = 10;
+            // 
+            // DGVPerson
+            // 
+            this.DGVPerson.AllowUserToAddRows = false;
+            this.DGVPerson.AllowUserToDeleteRows = false;
+            this.DGVPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DGVPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVPerson.Location = new System.Drawing.Point(595, 6);
+            this.DGVPerson.Name = "DGVPerson";
+            this.DGVPerson.ReadOnly = true;
+            this.DGVPerson.Size = new System.Drawing.Size(553, 180);
+            this.DGVPerson.TabIndex = 11;
             // 
             // OpsigelseAfBolig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 476);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1160, 549);
             this.Controls.Add(this.DGVPerson);
             this.Controls.Add(this.DGVBolig);
+            this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "OpsigelseAfBolig";
             this.Text = "OpsigelseAfBolig";
             this.Load += new System.EventHandler(this.OpsigelseAfBolig_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView DGVBolig;
-        private System.Windows.Forms.DataGridView DGVPerson;
         private System.Windows.Forms.TextBox tbBiD;
         private System.Windows.Forms.TextBox tbPiD;
         private System.Windows.Forms.Label labelPiD;
@@ -227,5 +218,7 @@
         private System.Windows.Forms.Label labelÅrstalOpsig;
         private System.Windows.Forms.Label labelMånedOpsig;
         private System.Windows.Forms.ComboBox comboBoxYear;
+        private System.Windows.Forms.DataGridView DGVBolig;
+        private System.Windows.Forms.DataGridView DGVPerson;
     }
 }

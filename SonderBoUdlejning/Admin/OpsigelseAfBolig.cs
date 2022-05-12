@@ -11,6 +11,7 @@ using SonderBoUdlejning.InputCheck;
 using SonderBoUdlejning.Opsigelse;
 using Microsoft.Data.SqlClient;
 using System.Globalization;
+using SonderBoUdlejning.BoligSystems;
 
 namespace SonderBoUdlejning.Admin
 {
@@ -22,25 +23,23 @@ namespace SonderBoUdlejning.Admin
         }
 
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT*FROM Bolig WHERE udflytDato IS NULL AND pId IS NOT NULL";
-        string sqlS2 = "SELECT*FROM Person P, Bolig B WHERE P.pId = (SELECT B.pId WHERE B.udflytDato IS NULL AND B.pId IS NOT NULL)";
+        //string sqlS1 = "SELECT * FROM Bolig WHERE udflytDato IS NULL AND pId IS NOT NULL";
+        string sqlS1 = "SELECT adresse, postNr, bId, Bolig.pId, indflytDato, udflytDato " +
+                       "FROM Bolig " +
+                       "INNER JOIN Person ON Bolig.pId=Person.pId " +
+                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+                       "ORDER BY pId ASC";
+        //string sqlS2 = "SELECT * FROM Person P, Bolig B WHERE P.pId = (SELECT B.pId WHERE B.udflytDato IS NULL AND B.pId IS NOT NULL)";
+        string sqlS2 = "SELECT Person.pId, fNavn, pMail, pTlf, erBeboer " +
+                       "FROM Person " +
+                       "INNER JOIN Bolig ON Person.pId=Bolig.pId " +
+                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+                       "ORDER BY pId ASC";
 
         private void OpsigelseAfBolig_Load(object sender, EventArgs e)
         {
             DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
-            /*comboBoxMonth.Items.Add("Januar");
-            comboBoxMonth.Items.Add("Februar");
-            comboBoxMonth.Items.Add("Marts");
-            comboBoxMonth.Items.Add("April");
-            comboBoxMonth.Items.Add("Maj");
-            comboBoxMonth.Items.Add("Juni");
-            comboBoxMonth.Items.Add("Juli");
-            comboBoxMonth.Items.Add("August");
-            comboBoxMonth.Items.Add("September");
-            comboBoxMonth.Items.Add("Oktober");
-            comboBoxMonth.Items.Add("November");
-            comboBoxMonth.Items.Add("December");*/
             
             comboBoxMonth.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
             comboBoxYear.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
@@ -49,88 +48,40 @@ namespace SonderBoUdlejning.Admin
 
         private void btnOpsigelse_Click(object sender, EventArgs e)
         {
-            //bool PersonIDValid = PersonInputCheck.PIdCheck(tbPiD.Text);
-            //bool BoligIDValid = BoligInputCheck.BIdCheck(tbBiD.Text);
-            //bool yearCheckValid = ventelisteInputCheck.YearCheck(TBYear.Text);
-            //bool monthCheckValid = ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex + 1);
+            string pId = tbPiD.Text;
+            string bId = tbBiD.Text;
+            string adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
+            string postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
+            string indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
+            bool erBeboer;
+            string udflytDato = "";
+            if ((comboBoxMonth.SelectedIndex + 1) < 10)
+                udflytDato = $"01-0{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
+            else
+                udflytDato = $"01-{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
+            //MessageBox.Show($"{adresse}\n{postNr}\n{bId}\n{pId}\n{indflytDato}\n{udflytDato}");
 
-            //MessageBox.Show(Convert.ToString(ventelisteInputCheck.MonthCheck(comboBoxMonth.SelectedIndex+1)));
-
-           
-            /*if (BoligIDValid && PersonIDValid)
+            if ((!string.IsNullOrEmpty(pId)) && (!string.IsNullOrEmpty(bId)))
             {
-                string year = TBYear.Text;
-                int comboBocMonthIndex = Convert.ToInt32(comboBoxMonth.SelectedIndex);
-                string sqlDateTimeBuilder = OpsigFunktioner.DateBuilder(comboBocMonthIndex, year);
-
-                //Finder ud af hvor mange PersonID'er som lige nu er beboer og kan opsige en lejlighed.
-                SqlConnection conn = new SqlConnection(UserIdentification.conString);
-                conn.Open();
-                string queryPID = "SELECT COUNT(P.pId) FROM Person P, Bolig B WHERE P.pId = (SELECT B.pId WHERE B.udflytDato IS NULL AND B.pId IS NOT NULL)";
-                SqlCommand cmdPID = new SqlCommand(queryPID, conn);
-                int numberOfCurrentBeboer = (int)cmdPID.ExecuteScalar();
-                conn.Close();
-
-                //Finder ud af Hvilket PersonID de nuværende beboer har
-                conn.Open();
-                List<int> listOfPersonID = new List<int>();
-                string queryPID2 = "SELECT P.pId FROM Person P, Bolig B WHERE P.pId = (SELECT B.pId WHERE B.udflytDato IS NULL AND B.pId IS NOT NULL)";
-                SqlCommand cmdPID2 = new SqlCommand(queryPID2, conn);
-                SqlDataReader readerPID = cmdPID2.ExecuteReader();
-                for (int i = 0; i < numberOfCurrentBeboer; i++)
+                if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true) && (BoligInputCheck.indflytDato(indflytDato) == true) && (BoligInputCheck.udflytDato(udflytDato) == true))
                 {
-                    while (readerPID.Read())
-                    {
-                        listOfPersonID.Add(readerPID.GetInt32(i));
-                    }
+                    BoligFacade opsigBolig = new BoligFacade();
+                    erBeboer = true;
+                    opsigBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato);
+                    DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
+                    DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
                 }
-                conn.Close();
-
-
-                //Finder ud af hvor mange BoligID'er som lige nu som kan opsiges.    
-                conn.Open();
-                string queryBID = "SELECT COUNT(bId) FROM Bolig WHERE pId IS NOT NULL AND udflytDato IS NULL";
-                SqlCommand cmdBID = new SqlCommand(queryBID, conn);
-                int numberOfCurrentBolig = (int)cmdBID.ExecuteScalar();
-                conn.Close();
-
-                //Finder ud af Hvilket BoligID de nuværende beboer har
-                conn.Open();
-                List<int> listOfBoligID = new List<int>();
-                string queryBID2 = "SELECT bId FROM Bolig WHERE pId IS NOT NULL AND udflytDato IS NULL";
-                SqlCommand cmdBID2 = new SqlCommand(queryBID2, conn);
-                SqlDataReader readerBID = cmdBID2.ExecuteReader();
-                for (int i = 0; i < numberOfCurrentBolig; i++)
+                else
                 {
-                    while (readerBID.Read())
-                    {
-                        listOfBoligID.Add(readerBID.GetInt32(i));
-                    }
+                    MessageBox.Show(ErrorMessage.errorMessage());
+                    ErrorMessage.ErrorList.Clear();
+                    ErrorMessage.resetInjectedSQL();
                 }
-                conn.Close();
-
-                //Kan bruges til at tjekke om Bolig er guldtigt til at opsige en lejlighed
-               
-
-
-                //Nu mangler der kun at få indsættet en udflytningsdato på boliger.
-                //Self efter man har tjekket om boligen og personen kan opsiges 
-
-                
-                    string queryUdflyt = $"UPDATE Bolig SET udflytDato = '{sqlDateTimeBuilder}' WHERE bId = {Convert.ToInt32(tbBiD.Text)} AND pId = {Convert.ToInt32(tbPiD.Text)}";
-                    SqlCommand cmdUdflyt = new SqlCommand(queryUdflyt, conn);
-                    conn.Open();
-                    cmdUdflyt.ExecuteNonQuery();
-                    conn.Close();
-                
-
-                DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
-
             }
-            else 
+            else
             {
-                MessageBox.Show("Ikke alle felter er udfyldt korrekt");
-            }*/
+                MessageBox.Show("Alle felter skal udfyldes");
+            }
         }
     }
 }
