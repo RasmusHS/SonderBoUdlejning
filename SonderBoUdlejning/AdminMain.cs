@@ -58,5 +58,10 @@ namespace SonderBoUdlejning
         {
             openFormsLoader(new OpsigelseAfBolig());
         }
+
+        private void btnBooking_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new Booking());
+        }
     }
 }
