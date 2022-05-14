@@ -79,7 +79,7 @@
             this.dgvBolig.ReadOnly = true;
             this.dgvBolig.RowHeadersWidth = 51;
             this.dgvBolig.RowTemplate.Height = 24;
-            this.dgvBolig.Size = new System.Drawing.Size(387, 165);
+            this.dgvBolig.Size = new System.Drawing.Size(596, 165);
             this.dgvBolig.TabIndex = 0;
             // 
             // dgvVenteliste
@@ -88,7 +88,7 @@
             this.dgvVenteliste.AllowUserToDeleteRows = false;
             this.dgvVenteliste.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenteliste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVenteliste.Location = new System.Drawing.Point(476, 54);
+            this.dgvVenteliste.Location = new System.Drawing.Point(682, 54);
             this.dgvVenteliste.Margin = new System.Windows.Forms.Padding(2);
             this.dgvVenteliste.Name = "dgvVenteliste";
             this.dgvVenteliste.ReadOnly = true;
@@ -110,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(474, 30);
+            this.label2.Location = new System.Drawing.Point(680, 30);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
@@ -124,7 +124,7 @@
             this.panelBaggrund.Controls.Add(this.tbBID);
             this.panelBaggrund.Controls.Add(this.panelPid);
             this.panelBaggrund.Controls.Add(this.panelBid);
-            this.panelBaggrund.Location = new System.Drawing.Point(44, 246);
+            this.panelBaggrund.Location = new System.Drawing.Point(139, 238);
             this.panelBaggrund.Margin = new System.Windows.Forms.Padding(2);
             this.panelBaggrund.Name = "panelBaggrund";
             this.panelBaggrund.Size = new System.Drawing.Size(761, 323);
@@ -390,7 +390,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 592);
+            this.ClientSize = new System.Drawing.Size(1063, 592);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvVenteliste);
