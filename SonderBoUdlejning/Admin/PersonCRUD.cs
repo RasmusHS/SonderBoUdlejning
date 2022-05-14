@@ -112,7 +112,7 @@ namespace SonderBoUdlejning.Secretary
                 if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true) && (PersonInputCheck.PIdCheck(pId) == true))
                 {
                     erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
-                    MessageBox.Show("" + erBeboer);
+                    //MessageBox.Show("" + erBeboer);
                     pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
