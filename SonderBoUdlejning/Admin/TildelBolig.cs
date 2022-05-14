@@ -196,7 +196,6 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUdskrivLejekontrakt_Click(object sender, EventArgs e)
         {
-            //TODO: sørg for at et medlem kun kan have en bolig.
             string pId = tbPID.Text;
             string bId = tbBID.Text;
             string lejePris = "";
@@ -214,35 +213,47 @@ namespace SonderBoUdlejning.Admin
                 startDato = $"01-{combIndflytMåned.SelectedIndex + 1}-{combIndflytÅr.SelectedItem}";
             string slutDato = null;
             //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
+            int checkForpId;
 
-            if ((!string.IsNullOrEmpty(bId)) && (!string.IsNullOrEmpty(lejerNavn)) && (!string.IsNullOrEmpty(pId)))
+            if ((string.IsNullOrEmpty(bId)) || (string.IsNullOrEmpty(lejerNavn)) || (string.IsNullOrEmpty(pId)))
             {
-                if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
-                {
-                    lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
-                    LejekontraktFacade lejekontrakt = new LejekontraktFacade();
-                    lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
-
-                    PersonFacade pUpdate = new PersonFacade();
-                    erBeboer = true;
-                    pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
-                    pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
-
-                    BoligFacade boligUpdate = new BoligFacade();
-                    boligUpdate.uBolig(adresse, postNr, bId, pId, startDato, slutDato);
-                    dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-
-                    vFacade vDelete = new vFacade();
-                    vDelete.RemoveFromList(pId, bId);
-                    dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
-                }
-                else
-                {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
-                }
+                MessageBox.Show("Indtast venligst både et bolig ID og et person ID!");
+                return;
             }
+            if ((BoligInputCheck.BIdCheck(bId) == false) || (PersonInputCheck.PIdCheck(pId) == false))
+            {
+                MessageBox.Show(ErrorMessage.errorMessage());
+                ErrorMessage.ErrorList.Clear();
+                ErrorMessage.resetInjectedSQL();
+                return;
+            }
+            
+            checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Bolig WHERE pId = {pId}"));
+
+            if (checkForpId > 0)
+            {
+                MessageBox.Show("Der er allerede en beboer med det pId i systemet");
+                return;
+            }
+
+            lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
+
+            LejekontraktFacade lejekontrakt = new LejekontraktFacade();
+            lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
+
+            PersonFacade pUpdate = new PersonFacade();
+            erBeboer = true;
+            pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
+            pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
+
+            BoligFacade boligUpdate = new BoligFacade();
+            boligUpdate.uBolig(adresse, postNr, bId, pId, startDato, slutDato);
+            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+
+            vFacade vDelete = new vFacade();
+            vDelete.RemoveFromList(pId, bId);
+            dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
+            
         }
     }
 }
