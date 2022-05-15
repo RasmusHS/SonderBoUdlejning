@@ -202,6 +202,7 @@
     <Compile Include="Admin\VenteListe.Designer.cs">
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bokking\OnLoadFuckions.cs" />
     <Compile Include="BoligSystems\BoligFacade.cs" />
     <Compile Include="BoligSystems\CreateBolig.cs" />
     <Compile Include="BoligSystems\DeleteBolig.cs" />
