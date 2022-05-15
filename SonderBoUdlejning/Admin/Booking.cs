@@ -16,7 +16,7 @@ namespace SonderBoUdlejning.Admin
         ConnString connString = ConnString.getConnInstance;
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         string sqlS1 = "SELECT resNr, rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
-        string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer)";
+        string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
 
         List<string> listBeboer = new List<string>();
         List<int> listBeboerID = new List<int>();
@@ -72,21 +72,6 @@ namespace SonderBoUdlejning.Admin
             {
                 CBMembers.Items.Add(item);
             }
-
-
-
-
-
-
-
-            /*
-            string getAvailableRes = "SELECT Count(rTypeNavn) FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer)";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            int antalBeboer = Convert.ToInt32(cmd.ExecuteScalar());
-            conn.Close();
-            husk og tjek for dato den sakl lejes!!!!! mvh jonas gay mertz!
-            */
         }
 
         
@@ -118,6 +103,12 @@ namespace SonderBoUdlejning.Admin
             conn.Open();
             TBMail.Text = Convert.ToString(cmd2.ExecuteScalar());
             conn.Close();
+        }
+        private void BtnCheckDato_Click(object sender, EventArgs e)
+        {
+            //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?
+            string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '"+TBDato.Text+"' BETWEEN rStartDato AND rSlutDato)";
+            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
         }
     }
 }
