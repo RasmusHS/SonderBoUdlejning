@@ -72,6 +72,21 @@ namespace SonderBoUdlejning.Admin
             {
                 CBMembers.Items.Add(item);
             }
+
+
+
+
+
+
+
+            /*
+            string getAvailableRes = "SELECT Count(rTypeNavn) FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer)";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            int antalBeboer = Convert.ToInt32(cmd.ExecuteScalar());
+            conn.Close();
+            husk og tjek for dato den sakl lejes!!!!! mvh jonas gay mertz!
+            */
         }
 
         
