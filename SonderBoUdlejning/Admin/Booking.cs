@@ -16,7 +16,10 @@ namespace SonderBoUdlejning.Admin
         ConnString connString = ConnString.getConnInstance;
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         string sqlS1 = "SELECT resNr, rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
-        string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer)";    
+        string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer)";
+
+        List<string> listBeboer = new List<string>();
+        List<int> listBeboerID = new List<int>();
 
         public Booking()
         {
@@ -28,7 +31,6 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
-            List<string> listBeboer = new List<string>();
 
             string query = "SELECT COUNT(fNavn) FROM Person WHERE erBeboer = 1";
             SqlConnection conn = new SqlConnection(connString.connStr);
@@ -37,20 +39,33 @@ namespace SonderBoUdlejning.Admin
             int antalBeboer = Convert.ToInt32(cmd.ExecuteScalar());
             conn.Close();
 
-            string query2 = "SELECT fNavn FROM Person WHERE erBeboer = 1";
-            SqlConnection conn2 = new SqlConnection(connString.connStr);
-            SqlCommand cmd2 = new SqlCommand(query2, conn2);
-            
-            conn2.Open();
-            SqlDataReader reader = cmd2.ExecuteReader();
-            for (int i = 0; i < antalBeboer; i++) 
+            string query2 = "SELECT pId FROM Person WHERE erBeboer = 1";
+            SqlCommand cmd2 = new SqlCommand(query2, conn);
+
+            conn.Open();
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            for (int i = 0; i < antalBeboer; i++)
             {
-                while (reader.Read()) 
+                while (reader2.Read())
                 {
-                    listBeboer.Add(reader.GetString(i));
+                    listBeboerID.Add(reader2.GetInt32(i));
                 }
             }
-            conn2.Close();
+            conn.Close();
+
+            string query3 = "SELECT fNavn FROM Person WHERE erBeboer = 1";
+            SqlCommand cmd3 = new SqlCommand(query3, conn);
+            
+            conn.Open();
+            SqlDataReader reader3 = cmd3.ExecuteReader();
+            for (int i = 0; i < antalBeboer; i++) 
+            {
+                while (reader3.Read()) 
+                {
+                    listBeboer.Add(reader3.GetString(i));
+                }
+            }
+            conn.Close();
 
 
             foreach (string item in listBeboer) 
@@ -70,7 +85,24 @@ namespace SonderBoUdlejning.Admin
 
         private void CBMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int[] arrayBeboerID = listBeboerID.ToArray(); 
             PanelPersonInfo.Visible = true;
+            int personID = arrayBeboerID[CBMembers.SelectedIndex];
+            TBPID.Text = personID.ToString();
+
+            string queryTlf = $"SELECT pTlf FROM Person WHERE pId = {personID}";
+            string queryMail = $"SELECT pMail FROM Person WHERE pId = {personID}";
+
+            SqlConnection conn = new SqlConnection(connString.connStr);
+            SqlCommand cmd = new SqlCommand(queryTlf, conn);
+            conn.Open();
+            TBTLF.Text = Convert.ToString(cmd.ExecuteScalar());
+            conn.Close();
+
+            SqlCommand cmd2 = new SqlCommand(queryMail, conn);
+            conn.Open();
+            TBMail.Text = Convert.ToString(cmd2.ExecuteScalar());
+            conn.Close();
         }
     }
 }

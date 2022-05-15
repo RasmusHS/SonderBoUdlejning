@@ -97,7 +97,7 @@
             this.TBPID.Location = new System.Drawing.Point(8, 22);
             this.TBPID.Name = "TBPID";
             this.TBPID.ReadOnly = true;
-            this.TBPID.Size = new System.Drawing.Size(100, 20);
+            this.TBPID.Size = new System.Drawing.Size(54, 20);
             this.TBPID.TabIndex = 5;
             // 
             // TBMail
@@ -105,7 +105,7 @@
             this.TBMail.Location = new System.Drawing.Point(8, 65);
             this.TBMail.Name = "TBMail";
             this.TBMail.ReadOnly = true;
-            this.TBMail.Size = new System.Drawing.Size(100, 20);
+            this.TBMail.Size = new System.Drawing.Size(120, 20);
             this.TBMail.TabIndex = 6;
             // 
             // TBTLF
@@ -113,7 +113,7 @@
             this.TBTLF.Location = new System.Drawing.Point(8, 113);
             this.TBTLF.Name = "TBTLF";
             this.TBTLF.ReadOnly = true;
-            this.TBTLF.Size = new System.Drawing.Size(100, 20);
+            this.TBTLF.Size = new System.Drawing.Size(83, 20);
             this.TBTLF.TabIndex = 7;
             // 
             // PersonID
