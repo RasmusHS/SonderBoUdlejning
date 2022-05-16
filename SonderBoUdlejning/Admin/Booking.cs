@@ -123,10 +123,13 @@ namespace SonderBoUdlejning.Admin
                 TBStartDato.Text = TBDato.Text;
                 TBSlutDato.Text = "";
                 TBDato.Text = "";
+
+                
             }
             else
             {
                 MessageBox.Show("indtast dato i formatet yyyy-mm-dd");
+                
             }
         }
 
@@ -167,5 +170,7 @@ namespace SonderBoUdlejning.Admin
 
             }
         }
+
+        
     }
 }

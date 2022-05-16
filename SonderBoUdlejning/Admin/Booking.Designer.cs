@@ -64,7 +64,7 @@
             // 
             this.DGVRessourcer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVRessourcer.Location = new System.Drawing.Point(93, 587);
-            this.DGVRessourcer.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.DGVRessourcer.Margin = new System.Windows.Forms.Padding(7);
             this.DGVRessourcer.Name = "DGVRessourcer";
             this.DGVRessourcer.RowHeadersWidth = 92;
             this.DGVRessourcer.Size = new System.Drawing.Size(854, 393);
@@ -74,7 +74,7 @@
             // 
             this.DGVReservationer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVReservationer.Location = new System.Drawing.Point(93, 80);
-            this.DGVReservationer.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.DGVReservationer.Margin = new System.Windows.Forms.Padding(7);
             this.DGVReservationer.Name = "DGVReservationer";
             this.DGVReservationer.RowHeadersWidth = 92;
             this.DGVReservationer.Size = new System.Drawing.Size(1738, 390);
@@ -108,7 +108,7 @@
             this.CBMembers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBMembers.FormattingEnabled = true;
             this.CBMembers.Location = new System.Drawing.Point(961, 622);
-            this.CBMembers.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.CBMembers.Margin = new System.Windows.Forms.Padding(7);
             this.CBMembers.Name = "CBMembers";
             this.CBMembers.Size = new System.Drawing.Size(277, 37);
             this.CBMembers.TabIndex = 4;
@@ -117,7 +117,7 @@
             // TBPID
             // 
             this.TBPID.Location = new System.Drawing.Point(19, 49);
-            this.TBPID.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBPID.Margin = new System.Windows.Forms.Padding(7);
             this.TBPID.Name = "TBPID";
             this.TBPID.ReadOnly = true;
             this.TBPID.Size = new System.Drawing.Size(121, 35);
@@ -126,7 +126,7 @@
             // TBMail
             // 
             this.TBMail.Location = new System.Drawing.Point(19, 145);
-            this.TBMail.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBMail.Margin = new System.Windows.Forms.Padding(7);
             this.TBMail.Name = "TBMail";
             this.TBMail.ReadOnly = true;
             this.TBMail.Size = new System.Drawing.Size(275, 35);
@@ -135,7 +135,7 @@
             // TBTLF
             // 
             this.TBTLF.Location = new System.Drawing.Point(19, 252);
-            this.TBTLF.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBTLF.Margin = new System.Windows.Forms.Padding(7);
             this.TBTLF.Name = "TBTLF";
             this.TBTLF.ReadOnly = true;
             this.TBTLF.Size = new System.Drawing.Size(188, 35);
@@ -180,7 +180,7 @@
             this.PanelPersonInfo.Controls.Add(this.TBMail);
             this.PanelPersonInfo.Controls.Add(this.TBPID);
             this.PanelPersonInfo.Location = new System.Drawing.Point(961, 683);
-            this.PanelPersonInfo.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.PanelPersonInfo.Margin = new System.Windows.Forms.Padding(7);
             this.PanelPersonInfo.Name = "PanelPersonInfo";
             this.PanelPersonInfo.Size = new System.Drawing.Size(306, 335);
             this.PanelPersonInfo.TabIndex = 11;
@@ -211,7 +211,7 @@
             this.CBResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBResource.FormattingEnabled = true;
             this.CBResource.Location = new System.Drawing.Point(1370, 622);
-            this.CBResource.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.CBResource.Margin = new System.Windows.Forms.Padding(7);
             this.CBResource.Name = "CBResource";
             this.CBResource.Size = new System.Drawing.Size(277, 37);
             this.CBResource.TabIndex = 14;
@@ -220,7 +220,7 @@
             // TBSlutDato
             // 
             this.TBSlutDato.Location = new System.Drawing.Point(12, 141);
-            this.TBSlutDato.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBSlutDato.Margin = new System.Windows.Forms.Padding(7);
             this.TBSlutDato.Name = "TBSlutDato";
             this.TBSlutDato.Size = new System.Drawing.Size(228, 35);
             this.TBSlutDato.TabIndex = 15;
@@ -228,7 +228,7 @@
             // TBStartDato
             // 
             this.TBStartDato.Location = new System.Drawing.Point(12, 45);
-            this.TBStartDato.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBStartDato.Margin = new System.Windows.Forms.Padding(7);
             this.TBStartDato.Name = "TBStartDato";
             this.TBStartDato.ReadOnly = true;
             this.TBStartDato.Size = new System.Drawing.Size(228, 35);
@@ -256,8 +256,8 @@
             // 
             // BtnCheckDato
             // 
-            this.BtnCheckDato.Location = new System.Drawing.Point(341, 1066);
-            this.BtnCheckDato.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.BtnCheckDato.Location = new System.Drawing.Point(429, 1081);
+            this.BtnCheckDato.Margin = new System.Windows.Forms.Padding(7);
             this.BtnCheckDato.Name = "BtnCheckDato";
             this.BtnCheckDato.Size = new System.Drawing.Size(175, 51);
             this.BtnCheckDato.TabIndex = 21;
@@ -267,8 +267,8 @@
             // 
             // TBDato
             // 
-            this.TBDato.Location = new System.Drawing.Point(93, 1066);
-            this.TBDato.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBDato.Location = new System.Drawing.Point(429, 1170);
+            this.TBDato.Margin = new System.Windows.Forms.Padding(7);
             this.TBDato.Name = "TBDato";
             this.TBDato.Size = new System.Drawing.Size(228, 35);
             this.TBDato.TabIndex = 22;
@@ -286,7 +286,7 @@
             // TBResourceID
             // 
             this.TBResourceID.Location = new System.Drawing.Point(12, 250);
-            this.TBResourceID.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TBResourceID.Margin = new System.Windows.Forms.Padding(7);
             this.TBResourceID.Name = "TBResourceID";
             this.TBResourceID.ReadOnly = true;
             this.TBResourceID.Size = new System.Drawing.Size(228, 35);
@@ -311,7 +311,7 @@
             this.PanelResource.Controls.Add(this.TBStartDato);
             this.PanelResource.Controls.Add(this.TBSlutDato);
             this.PanelResource.Location = new System.Drawing.Point(1358, 685);
-            this.PanelResource.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.PanelResource.Margin = new System.Windows.Forms.Padding(7);
             this.PanelResource.Name = "PanelResource";
             this.PanelResource.Size = new System.Drawing.Size(292, 330);
             this.PanelResource.TabIndex = 26;
@@ -320,7 +320,7 @@
             // btnConfirmBooking
             // 
             this.btnConfirmBooking.Location = new System.Drawing.Point(945, 1031);
-            this.btnConfirmBooking.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.btnConfirmBooking.Margin = new System.Windows.Forms.Padding(7);
             this.btnConfirmBooking.Name = "btnConfirmBooking";
             this.btnConfirmBooking.Size = new System.Drawing.Size(705, 80);
             this.btnConfirmBooking.TabIndex = 27;
@@ -348,7 +348,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DGVReservationer);
             this.Controls.Add(this.DGVRessourcer);
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "Booking";
             this.Text = "Booking";
             this.Load += new System.EventHandler(this.Booking_Load);
