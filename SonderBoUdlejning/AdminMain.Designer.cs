@@ -32,11 +32,12 @@
             this.logOutButton = new System.Windows.Forms.Button();
             this.VenteListeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBoligCRUD = new System.Windows.Forms.Button();
+            this.btnOpsigelse = new System.Windows.Forms.Button();
             this.btnTildelingBoligAdmin = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelAdminFormsLoader = new System.Windows.Forms.Panel();
-            this.btnOpsigelse = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +77,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel1.Controls.Add(this.btnBoligCRUD);
             this.panel1.Controls.Add(this.btnOpsigelse);
             this.panel1.Controls.Add(this.btnTildelingBoligAdmin);
             this.panel1.Controls.Add(this.panel2);
@@ -86,10 +88,30 @@
             this.panel1.Size = new System.Drawing.Size(200, 726);
             this.panel1.TabIndex = 2;
             // 
+            // btnBoligCRUD
+            // 
+            this.btnBoligCRUD.Location = new System.Drawing.Point(28, 466);
+            this.btnBoligCRUD.Name = "btnBoligCRUD";
+            this.btnBoligCRUD.Size = new System.Drawing.Size(149, 77);
+            this.btnBoligCRUD.TabIndex = 3;
+            this.btnBoligCRUD.Text = "Admin. Boliger";
+            this.btnBoligCRUD.UseVisualStyleBackColor = true;
+            this.btnBoligCRUD.Click += new System.EventHandler(this.btnBoligCRUD_Click);
+            // 
+            // btnOpsigelse
+            // 
+            this.btnOpsigelse.Location = new System.Drawing.Point(28, 352);
+            this.btnOpsigelse.Name = "btnOpsigelse";
+            this.btnOpsigelse.Size = new System.Drawing.Size(149, 77);
+            this.btnOpsigelse.TabIndex = 2;
+            this.btnOpsigelse.Text = "Opsigelse af Bolig";
+            this.btnOpsigelse.UseVisualStyleBackColor = true;
+            this.btnOpsigelse.Click += new System.EventHandler(this.btnOpsigelse_Click);
+            // 
             // btnTildelingBoligAdmin
             // 
             this.btnTildelingBoligAdmin.Location = new System.Drawing.Point(28, 234);
-            this.btnTildelingBoligAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTildelingBoligAdmin.Margin = new System.Windows.Forms.Padding(2);
             this.btnTildelingBoligAdmin.Name = "btnTildelingBoligAdmin";
             this.btnTildelingBoligAdmin.Size = new System.Drawing.Size(149, 77);
             this.btnTildelingBoligAdmin.TabIndex = 1;
@@ -126,16 +148,6 @@
             this.panelAdminFormsLoader.Size = new System.Drawing.Size(997, 626);
             this.panelAdminFormsLoader.TabIndex = 4;
             // 
-            // btnOpsigelse
-            // 
-            this.btnOpsigelse.Location = new System.Drawing.Point(28, 352);
-            this.btnOpsigelse.Name = "btnOpsigelse";
-            this.btnOpsigelse.Size = new System.Drawing.Size(149, 77);
-            this.btnOpsigelse.TabIndex = 2;
-            this.btnOpsigelse.Text = "Opsigelse af Bolig";
-            this.btnOpsigelse.UseVisualStyleBackColor = true;
-            this.btnOpsigelse.Click += new System.EventHandler(this.btnOpsigelse_Click);
-            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -146,6 +158,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "AdminMain";
             this.Text = "AdminMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -164,5 +177,6 @@
         private System.Windows.Forms.Panel panelAdminFormsLoader;
         private System.Windows.Forms.Button btnTildelingBoligAdmin;
         private System.Windows.Forms.Button btnOpsigelse;
+        private System.Windows.Forms.Button btnBoligCRUD;
     }
 }

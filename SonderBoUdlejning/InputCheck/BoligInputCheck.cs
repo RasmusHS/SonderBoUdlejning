@@ -11,7 +11,7 @@ namespace SonderBoUdlejning.InputCheck
 {
     public static class BoligInputCheck
     {
-        private static Regex retal = new Regex(@"(^[0-9]*$)");
+        private static Regex retal = new Regex(@"(^[0-9 ]*$)");
         private static Regex dato = new Regex(@"(^[0-9]{2}-[0-9]{2}-[0-9]{4}$)");
         //private static Regex dato = new Regex(@"(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
@@ -79,10 +79,17 @@ namespace SonderBoUdlejning.InputCheck
             }
             else
             {
-                if ((!retal.IsMatch(bId)))
+                if (!string.IsNullOrEmpty(bId))
                 {
-                    ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
-                    return false;
+                    if ((!retal.IsMatch(bId)))
+                    {
+                        ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
@@ -90,6 +97,7 @@ namespace SonderBoUdlejning.InputCheck
                 }
             }
         }
+
         public static string indDato;
         public static bool indflytDato(string indDato)
         {
@@ -116,10 +124,11 @@ namespace SonderBoUdlejning.InputCheck
                 else
                 {
                     return true;
-                }                
+                }
             }
         }
 
+        public static string udDato;
         public static bool udflytDato(string udDato)
         {
             if (SQLInject.IsMatch(udDato))
@@ -146,6 +155,94 @@ namespace SonderBoUdlejning.InputCheck
                     {
                         return true;
                     }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static bool bTypeCheck(string bType)
+        {
+            if (SQLInject.IsMatch(bType))
+            {
+                ErrorMessage.ErrorList.Add("bType indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!bogstaver.IsMatch(bType)))
+                {
+                    ErrorMessage.ErrorList.Add("bType må kun indeholde bogstaver");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static bool antalRumCheck(string antalRum)
+        {
+            if (SQLInject.IsMatch(antalRum))
+            {
+                ErrorMessage.ErrorList.Add("antalRum indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(antalRum)))
+                {
+                    ErrorMessage.ErrorList.Add("antalRum må kun indeholde tal");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static bool kvmCheck(string kvm)
+        {
+            if (SQLInject.IsMatch(kvm))
+            {
+                ErrorMessage.ErrorList.Add("kvm indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(kvm)))
+                {
+                    ErrorMessage.ErrorList.Add("kvm må kun indeholde tal");
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static bool lejePrisCheck(string lejePris)
+        {
+            if (SQLInject.IsMatch(lejePris))
+            {
+                ErrorMessage.ErrorList.Add("lejePris indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if ((!retal.IsMatch(lejePris)))
+                {
+                    ErrorMessage.ErrorList.Add("lejePris må kun indeholde tal");
+                    return false;
                 }
                 else
                 {

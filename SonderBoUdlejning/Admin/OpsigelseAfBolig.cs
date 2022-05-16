@@ -40,8 +40,12 @@ namespace SonderBoUdlejning.Admin
         {
             DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
-            
-            comboBoxMonth.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
+
+            string[] comboBoxListMonth;
+            comboBoxListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
+            comboBoxMonth.Items.AddRange(comboBoxListMonth);
+            //comboBoxMonth.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
+
             comboBoxYear.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
             comboBoxYear.SelectedItem = DateTime.Now.Year;
         }
@@ -73,9 +77,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
             else

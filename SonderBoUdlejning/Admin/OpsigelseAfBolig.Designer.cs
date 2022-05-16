@@ -41,6 +41,8 @@
             this.labelMånedOpsig = new System.Windows.Forms.Label();
             this.DGVBolig = new System.Windows.Forms.DataGridView();
             this.DGVPerson = new System.Windows.Forms.DataGridView();
+            this.lblBoligTabel = new System.Windows.Forms.Label();
+            this.lblPersonTabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).BeginInit();
@@ -116,7 +118,7 @@
             this.panel1.Controls.Add(this.labelPiD);
             this.panel1.Controls.Add(this.tbPiD);
             this.panel1.Controls.Add(this.tbBiD);
-            this.panel1.Location = new System.Drawing.Point(315, 209);
+            this.panel1.Location = new System.Drawing.Point(315, 241);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 206);
@@ -168,7 +170,7 @@
             this.DGVBolig.AllowUserToDeleteRows = false;
             this.DGVBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVBolig.Location = new System.Drawing.Point(12, 6);
+            this.DGVBolig.Location = new System.Drawing.Point(12, 38);
             this.DGVBolig.Name = "DGVBolig";
             this.DGVBolig.ReadOnly = true;
             this.DGVBolig.Size = new System.Drawing.Size(553, 180);
@@ -180,17 +182,39 @@
             this.DGVPerson.AllowUserToDeleteRows = false;
             this.DGVPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVPerson.Location = new System.Drawing.Point(595, 6);
+            this.DGVPerson.Location = new System.Drawing.Point(595, 38);
             this.DGVPerson.Name = "DGVPerson";
             this.DGVPerson.ReadOnly = true;
             this.DGVPerson.Size = new System.Drawing.Size(553, 180);
             this.DGVPerson.TabIndex = 11;
+            // 
+            // lblBoligTabel
+            // 
+            this.lblBoligTabel.AutoSize = true;
+            this.lblBoligTabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoligTabel.Location = new System.Drawing.Point(8, 11);
+            this.lblBoligTabel.Name = "lblBoligTabel";
+            this.lblBoligTabel.Size = new System.Drawing.Size(105, 24);
+            this.lblBoligTabel.TabIndex = 12;
+            this.lblBoligTabel.Text = "Bolig Tabel";
+            // 
+            // lblPersonTabel
+            // 
+            this.lblPersonTabel.AutoSize = true;
+            this.lblPersonTabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPersonTabel.Location = new System.Drawing.Point(591, 11);
+            this.lblPersonTabel.Name = "lblPersonTabel";
+            this.lblPersonTabel.Size = new System.Drawing.Size(136, 24);
+            this.lblPersonTabel.TabIndex = 13;
+            this.lblPersonTabel.Text = "MedlemsTabel";
             // 
             // OpsigelseAfBolig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 549);
+            this.Controls.Add(this.lblPersonTabel);
+            this.Controls.Add(this.lblBoligTabel);
             this.Controls.Add(this.DGVPerson);
             this.Controls.Add(this.DGVBolig);
             this.Controls.Add(this.panel1);
@@ -203,6 +227,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGVBolig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVPerson)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -220,5 +245,7 @@
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.DataGridView DGVBolig;
         private System.Windows.Forms.DataGridView DGVPerson;
+        private System.Windows.Forms.Label lblBoligTabel;
+        private System.Windows.Forms.Label lblPersonTabel;
     }
 }

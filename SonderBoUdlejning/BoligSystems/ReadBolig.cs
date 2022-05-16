@@ -48,7 +48,79 @@ namespace SonderBoUdlejning.BoligSystems
             else
                 sqlS += $"";
 
-            sqlS += $" AND (pId IS NULL OR udflytDato IS NOT NULL)";
+            sqlS += $" AND (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
+
+            try
+            {
+                conn.Open();
+                if ((ErrorMessage.injectedSQL == 1))
+                {
+                    sqlS = "";
+                    conn.Close();
+                }
+                else
+                {
+                    conn.Close();
+                    return sqlS;
+                }
+
+                return sqlS;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return ex.ToString();
+            }
+        }
+
+        public string readBoligTilLeje(string adresse, string postNr, string bId, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
+        {
+            string sqlS = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1 AND pId IS NULL AND indflytDato IS NULL"; ;
+
+            SqlConnection conn = new SqlConnection(connString.connStr);
+
+            if (!string.IsNullOrEmpty(adresse))
+                sqlS += $" AND adresse LIKE '%{adresse}%'";
+            else
+                sqlS += $"";
+
+            if (!string.IsNullOrEmpty(postNr))
+                sqlS += $" AND postNr = {postNr}";
+            else
+                sqlS += $"";
+
+            if (!string.IsNullOrEmpty(bId))
+                sqlS += $" AND Bolig.bId = {bId}";
+            else
+                sqlS += $"";
+
+            if (!string.IsNullOrEmpty(bType))
+                sqlS += $" AND bType = '{bType}'";
+            else
+                sqlS += $"";
+
+            /*if (!string.IsNullOrEmpty(antalRum))
+                sqlS += $" AND antalRum = {antalRum}";
+            else
+                sqlS += $"";*/
+
+            if ((!string.IsNullOrEmpty(minKvm)) && (string.IsNullOrEmpty(maxKvm)))
+                sqlS += $" AND kvm >= {minKvm}";
+            else if ((string.IsNullOrEmpty(minKvm)) && (!string.IsNullOrEmpty(maxKvm)))
+                sqlS += $" AND kvm <= {maxKvm}";
+            else if ((!string.IsNullOrEmpty(minKvm)) && (!string.IsNullOrEmpty(maxKvm)))
+                sqlS += $" AND (kvm BETWEEN {minKvm} AND {maxKvm})";
+            else
+                sqlS += $"";
+
+            if ((!string.IsNullOrEmpty(minLejePris)) && (string.IsNullOrEmpty(maxLejePris)))
+                sqlS += $" AND lejePris >= {minLejePris}";
+            else if ((string.IsNullOrEmpty(minLejePris)) && (!string.IsNullOrEmpty(maxLejePris)))
+                sqlS += $" AND lejePris <= {maxLejePris}";
+            else if ((!string.IsNullOrEmpty(minLejePris)) && (!string.IsNullOrEmpty(maxLejePris)))
+                sqlS += $" AND (lejePris BETWEEN {minLejePris} AND {maxLejePris})";
+            else
+                sqlS += $"";
 
             try
             {

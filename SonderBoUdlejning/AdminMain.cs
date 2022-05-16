@@ -58,5 +58,10 @@ namespace SonderBoUdlejning
         {
             openFormsLoader(new OpsigelseAfBolig());
         }
+
+        private void btnBoligCRUD_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new BoligCRUD());
+        }
     }
 }

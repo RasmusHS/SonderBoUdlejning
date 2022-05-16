@@ -37,9 +37,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return null;
             }
         }
@@ -81,9 +79,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return null;
             }
         }
@@ -106,9 +102,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 textBoxContent = "";
                 return textBoxContent;
             }

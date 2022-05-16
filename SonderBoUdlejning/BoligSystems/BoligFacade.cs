@@ -8,17 +8,24 @@ namespace SonderBoUdlejning.BoligSystems
 {
     internal class BoligFacade
     {
-        public void cBolig(string adresse, string postNr, string bId, string indflytDato)
+        public void cBolig(string adresse, string postNr, string bId)
         {
             CreateBolig createBolig = new CreateBolig();
-            createBolig.opretBolig(adresse, postNr, bId, indflytDato);
+            createBolig.opretBolig(adresse, postNr, bId);
         }
 
+        //public string readBoligTemplate = $"SELECT * FROM Bolig WHERE 1=1"; 
         public string rBoligQuery;
         public void rBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)
         {
             ReadBolig readBolig = new ReadBolig();
             rBoligQuery = readBolig.readBolig(adresse, postNr, bId, pId, indDato, udDato);
+        }
+
+        public void rBoligTilLeje(string adresse, string postNr, string bId, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
+        {
+            ReadBolig readBoligTilLeje = new ReadBolig();
+            rBoligQuery = readBoligTilLeje.readBoligTilLeje(adresse, postNr, bId, bType, minKvm, maxKvm, minLejePris, maxLejePris);
         }
 
         public void uBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)

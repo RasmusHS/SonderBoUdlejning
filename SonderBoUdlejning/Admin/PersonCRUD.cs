@@ -61,9 +61,7 @@ namespace SonderBoUdlejning.Secretary
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             } 
         }
@@ -90,8 +88,7 @@ namespace SonderBoUdlejning.Secretary
             {
                 pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
             }
             
             
@@ -112,15 +109,13 @@ namespace SonderBoUdlejning.Secretary
                 if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true) && (PersonInputCheck.PIdCheck(pId) == true))
                 {
                     erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
-                    MessageBox.Show("" + erBeboer);
+                    //MessageBox.Show("" + erBeboer);
                     pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
                     dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
 
@@ -141,9 +136,7 @@ namespace SonderBoUdlejning.Secretary
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SonderBoUdlejning
 {
@@ -17,10 +18,12 @@ namespace SonderBoUdlejning
             injectedSQL = 0;
         }
 
-        public static string errorMessage()
+        public static void errorMessage()
         {
             string displayError = string.Join(Environment.NewLine, ErrorList);
-            return displayError;
+            MessageBox.Show(displayError);
+            ErrorList.Clear();
+            resetInjectedSQL();
         }
     }
 }
