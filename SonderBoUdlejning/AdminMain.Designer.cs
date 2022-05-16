@@ -32,12 +32,12 @@
             this.logOutButton = new System.Windows.Forms.Button();
             this.VenteListeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBoligCRUD = new System.Windows.Forms.Button();
             this.btnOpsigelse = new System.Windows.Forms.Button();
             this.btnTildelingBoligAdmin = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelAdminFormsLoader = new System.Windows.Forms.Panel();
-            this.btnBoligCRUD = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +87,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 726);
             this.panel1.TabIndex = 2;
+            // 
+            // btnBoligCRUD
+            // 
+            this.btnBoligCRUD.Location = new System.Drawing.Point(28, 466);
+            this.btnBoligCRUD.Name = "btnBoligCRUD";
+            this.btnBoligCRUD.Size = new System.Drawing.Size(149, 77);
+            this.btnBoligCRUD.TabIndex = 3;
+            this.btnBoligCRUD.Text = "Admin. Boliger";
+            this.btnBoligCRUD.UseVisualStyleBackColor = true;
+            this.btnBoligCRUD.Click += new System.EventHandler(this.btnBoligCRUD_Click);
             // 
             // btnOpsigelse
             // 
@@ -138,16 +148,6 @@
             this.panelAdminFormsLoader.Size = new System.Drawing.Size(997, 626);
             this.panelAdminFormsLoader.TabIndex = 4;
             // 
-            // btnBoligCRUD
-            // 
-            this.btnBoligCRUD.Location = new System.Drawing.Point(28, 466);
-            this.btnBoligCRUD.Name = "btnBoligCRUD";
-            this.btnBoligCRUD.Size = new System.Drawing.Size(149, 77);
-            this.btnBoligCRUD.TabIndex = 3;
-            this.btnBoligCRUD.Text = "Admin. Boliger";
-            this.btnBoligCRUD.UseVisualStyleBackColor = true;
-            this.btnBoligCRUD.Click += new System.EventHandler(this.btnBoligCRUD_Click);
-            // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +158,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "AdminMain";
             this.Text = "AdminMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

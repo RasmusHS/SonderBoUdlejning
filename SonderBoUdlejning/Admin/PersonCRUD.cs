@@ -61,9 +61,7 @@ namespace SonderBoUdlejning.Secretary
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             } 
         }
@@ -90,8 +88,7 @@ namespace SonderBoUdlejning.Secretary
             {
                 pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
             }
             
             
@@ -118,9 +115,7 @@ namespace SonderBoUdlejning.Secretary
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
 
@@ -141,9 +136,7 @@ namespace SonderBoUdlejning.Secretary
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
 

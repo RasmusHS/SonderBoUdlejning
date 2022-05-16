@@ -16,6 +16,7 @@ namespace SonderBoUdlejning.Admin
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         string sqlS1 = "SELECT * FROM Bolig";
+        string sqlS2 = "SELECT * FROM BoligInfo";
         public BoligCRUD()
         {
             InitializeComponent();
@@ -24,6 +25,9 @@ namespace SonderBoUdlejning.Admin
         private void BoligCRUD_Load(object sender, EventArgs e)
         {
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+
+            comboBoxPostNr.Items.Add("");
 
             panelContainer.Visible = false;
 
@@ -56,39 +60,88 @@ namespace SonderBoUdlejning.Admin
             }
             if((BoligInputCheck.AdresseCheck(adresse) == false) || (BoligInputCheck.BIdCheck(bId) == false))
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return;
             }
 
             BoligFacade CreateBolig = new BoligFacade();
             CreateBolig.cBolig(adresse, postNr, bId);
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
         }
 
         private void btnReadB_Click(object sender, EventArgs e)
         {
-            string adresse = tbAdresse.Text;
-            string postNr = comboBoxPostNr.SelectedItem.ToString();
-            string bId = tbBoligID.Text;
-            string bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
-            string antalRum;
-            string minKvm;
-            string maksKvm;
-            string minLejePris;
-            string maksLejePris;
+            string adresse = tbAdresse.Text; //
+            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
 
-            string readBoligTemplate = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1 AND pId IS NULL AND indflytDato IS NULL";
+            string postNr = comboBoxPostNr.SelectedItem.ToString(); //
+            
+            string bId = tbBoligID.Text; //
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
+
+            string bType = "";
+            if (!string.IsNullOrEmpty(bId))
+                bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
+            string antalRum = "";
+            
+            string minKvm = tbMinKvm.Text; //
+            bool minKvmValid = BoligInputCheck.kvmCheck(minKvm);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
+
+            string maksKvm = tbMaksKvm.Text; //
+            bool maksKvmValid = BoligInputCheck.kvmCheck(maksKvm);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
+
+            string minLejePris = tbMinPris.Text; //
+            bool minLejePrisValid = BoligInputCheck.lejePrisCheck(minLejePris);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
+
+            string maksLejePris = tbMaksPris.Text; //
+            bool maksLejePrisValid = BoligInputCheck.lejePrisCheck(maksLejePris);
+            if (ErrorMessage.injectedSQL == 1)
+            {
+                ErrorMessage.errorMessage();
+                return;
+            }
+
+            //string readBoligTemplate = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1 AND pId IS NULL AND indflytDato IS NULL";
             tabControl1.SelectedTab = BoligPage;
 
-            if (() || ())
-            {
+            BoligFacade readTilLeje = new BoligFacade();
 
+            if ((adresseValid == true) && (bIdValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
+            {
+                readTilLeje.rBoligTilLeje(adresse, postNr, bId, bType, minKvm, maksKvm, minLejePris, maksLejePris);
+                dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery);
             }
-            if (() || ())
+            else
             {
-
+                dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+                ErrorMessage.errorMessage();
             }
 
         }
@@ -105,9 +158,7 @@ namespace SonderBoUdlejning.Admin
             }
             if ((BoligInputCheck.AdresseCheck(adresse) == false) || (BoligInputCheck.BIdCheck(bId) == false))
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return;
             }
 
@@ -119,6 +170,7 @@ namespace SonderBoUdlejning.Admin
             BoligFacade UpdateBolig = new BoligFacade();
             UpdateBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato);
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
         }
 
         private void btnDeleteB_Click(object sender, EventArgs e)
@@ -132,15 +184,14 @@ namespace SonderBoUdlejning.Admin
             }
             if ((BoligInputCheck.AdresseCheck(adresse) == false))
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return;
             }
 
             BoligFacade DeleteBolig = new BoligFacade();
             DeleteBolig.dBolig(adresse);
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
         }
 
         private void btnVisBCreate_Click(object sender, EventArgs e)
@@ -148,8 +199,11 @@ namespace SonderBoUdlejning.Admin
             panelContainer.Visible = true;
 
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
 
-            comboBoxPostNr.DataSource = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr");
+            string[] comboBoxList;
+            comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
+            comboBoxPostNr.Items.AddRange(comboBoxList);
 
             btnCreateB.Visible = true;
             btnReadB.Visible = false;
@@ -182,8 +236,11 @@ namespace SonderBoUdlejning.Admin
             panelContainer.Visible = true;
 
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
 
-            comboBoxPostNr.DataSource = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr");
+            string[] comboBoxList;
+            comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
+            comboBoxPostNr.Items.AddRange(comboBoxList);
 
             btnCreateB.Visible = false;
             btnReadB.Visible = true;
@@ -216,6 +273,7 @@ namespace SonderBoUdlejning.Admin
             panelContainer.Visible = true;
 
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
@@ -248,7 +306,8 @@ namespace SonderBoUdlejning.Admin
             panelContainer.Visible = true;
 
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-
+            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
             btnUpdateB.Visible = false;
@@ -268,7 +327,10 @@ namespace SonderBoUdlejning.Admin
         private void comboBoxPostNr_SelectedIndexChanged(object sender, EventArgs e)
         {
             string postNr = comboBoxPostNr.SelectedItem.ToString();
-            tbBy.Text = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = {postNr}");
+            
+            if (!string.IsNullOrEmpty(postNr))
+                tbBy.Text = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = {postNr}");
+
         }
 
         private void tbBoligID_TextChanged(object sender, EventArgs e)

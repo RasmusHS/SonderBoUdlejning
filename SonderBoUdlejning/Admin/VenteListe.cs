@@ -67,9 +67,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
             else
@@ -94,9 +92,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
             else
@@ -122,9 +118,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
             else
@@ -146,9 +140,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 else
                 {
-                    MessageBox.Show(ErrorMessage.errorMessage());
-                    ErrorMessage.ErrorList.Clear();
-                    ErrorMessage.resetInjectedSQL();
+                    ErrorMessage.errorMessage();
                 }
             }
             else

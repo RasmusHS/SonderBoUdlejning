@@ -73,7 +73,7 @@ namespace SonderBoUdlejning.BoligSystems
             }
         }
 
-        public string readBoligTilLeje(string adresse, string postNr, string bId, string pId, string indDato, string udDato, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
+        public string readBoligTilLeje(string adresse, string postNr, string bId, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
         {
             string sqlS = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1 AND pId IS NULL AND indflytDato IS NULL"; ;
 
@@ -91,20 +91,6 @@ namespace SonderBoUdlejning.BoligSystems
 
             if (!string.IsNullOrEmpty(bId))
                 sqlS += $" AND Bolig.bId = {bId}";
-            else
-                sqlS += $"";
-
-            if (!string.IsNullOrEmpty(pId))
-                sqlS += $" AND pId = {pId}";
-            else
-                sqlS += $"";
-
-            if ((!string.IsNullOrEmpty(indDato)) && (!string.IsNullOrEmpty(udDato)))
-                sqlS += $" AND adresse BETWEEN '{indDato}' AND '{udDato}'";
-            else if ((!string.IsNullOrEmpty(indDato)) && (string.IsNullOrEmpty(udDato)))
-                sqlS += $" AND indflytDato >= '{indDato}'";
-            else if ((string.IsNullOrEmpty(indDato)) && (!string.IsNullOrEmpty(udDato)))
-                sqlS += $" AND udflytDato <= '{udDato}'";
             else
                 sqlS += $"";
 

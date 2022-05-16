@@ -36,7 +36,9 @@ namespace SonderBoUdlejning.Admin
             dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
 
             //Indlæser liste over måneder
-            combIndflytMåned.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
+            string[] comboBoxListMonth;
+            comboBoxListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
+            combIndflytMåned.Items.AddRange(comboBoxListMonth);
 
             //Indlæser liste over de næste 22 år
             combIndflytÅr.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
@@ -68,9 +70,7 @@ namespace SonderBoUdlejning.Admin
                     }
                     else
                     {
-                        MessageBox.Show(ErrorMessage.errorMessage());
-                        ErrorMessage.ErrorList.Clear();
-                        ErrorMessage.resetInjectedSQL();
+                        ErrorMessage.errorMessage();
                     }
                     break;
                 }
@@ -142,9 +142,7 @@ namespace SonderBoUdlejning.Admin
                     }
                     else
                     {
-                        MessageBox.Show(ErrorMessage.errorMessage());
-                        ErrorMessage.ErrorList.Clear();
-                        ErrorMessage.resetInjectedSQL();
+                        ErrorMessage.errorMessage();
                     }
                 }
                 else
@@ -167,7 +165,8 @@ namespace SonderBoUdlejning.Admin
         private void ckbJaTilLejlighed_CheckedChanged(object sender, EventArgs e)
         {
             string bId = tbBID.Text;
-            
+            string[] comboBoxListAdresser;
+
             if (ckbJaTilLejlighed.Checked == true)
             {
                 panelUdskrivLejekontrakt.Visible = true;
@@ -177,13 +176,12 @@ namespace SonderBoUdlejning.Admin
                     if ((BoligInputCheck.BIdCheck(bId) == true))
                     {
                         bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE bId = {bId}");
-                        combAdresser.DataSource = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId}");
+                        comboBoxListAdresser = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId}").ToArray();
+                        combAdresser.Items.AddRange(comboBoxListAdresser);
                     }
                     else
                     {
-                        MessageBox.Show(ErrorMessage.errorMessage());
-                        ErrorMessage.ErrorList.Clear();
-                        ErrorMessage.resetInjectedSQL();
+                        ErrorMessage.errorMessage();
                     }
                 }
             }
@@ -222,9 +220,7 @@ namespace SonderBoUdlejning.Admin
             }
             if ((BoligInputCheck.BIdCheck(bId) == false) || (PersonInputCheck.PIdCheck(pId) == false))
             {
-                MessageBox.Show(ErrorMessage.errorMessage());
-                ErrorMessage.ErrorList.Clear();
-                ErrorMessage.resetInjectedSQL();
+                ErrorMessage.errorMessage();
                 return;
             }
             

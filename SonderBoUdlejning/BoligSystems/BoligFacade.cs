@@ -22,10 +22,10 @@ namespace SonderBoUdlejning.BoligSystems
             rBoligQuery = readBolig.readBolig(adresse, postNr, bId, pId, indDato, udDato);
         }
 
-        public void rBoligTilLeje(string adresse, string postNr, string bId, string pId, string indDato, string udDato, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tildelBolig)
+        public void rBoligTilLeje(string adresse, string postNr, string bId, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
         {
             ReadBolig readBoligTilLeje = new ReadBolig();
-            rBoligQuery = readBoligTilLeje.readBoligTilLeje(adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maxKvm, minLejePris, maxLejePris);
+            rBoligQuery = readBoligTilLeje.readBoligTilLeje(adresse, postNr, bId, bType, minKvm, maxKvm, minLejePris, maxLejePris);
         }
 
         public void uBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)

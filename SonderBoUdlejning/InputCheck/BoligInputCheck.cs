@@ -79,10 +79,17 @@ namespace SonderBoUdlejning.InputCheck
             }
             else
             {
-                if ((!retal.IsMatch(bId)))
+                if (!string.IsNullOrEmpty(bId))
                 {
-                    ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
-                    return false;
+                    if ((!retal.IsMatch(bId)))
+                    {
+                        ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
