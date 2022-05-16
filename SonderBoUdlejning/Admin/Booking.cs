@@ -53,9 +53,6 @@ namespace SonderBoUdlejning.Admin
             }
         }
 
-        
-
-        //Tag inspiration fra vAddToList linje 17
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -168,18 +165,6 @@ namespace SonderBoUdlejning.Admin
                     MessageBox.Show("Slut dato kan ikke være før start dato");
                 }
 
-
-                
-
-                /*Check om datoen kan skriver ind i startdato er i dag eller senere.
-                  
-                 hvis man har tjekket en anden dato til venstre, så skal startdato,
-                ikke kunne være før den dato man har tjekket.
-                
-                slutdato skal også tjekkes om den den er inde i en anden reservation
-                Denne sætning kan bruges. Hvis den returnere 0, så kan den godt reserveres til og med den dato, ellers kan den ikke.
-               SELECT COUNT(rId) FROM Ressourcer WHERE rId IN(SELECT rId FROM Reservationer WHERE *indsæt slutdato* BETWEEN rStartDato AND rSlutDato) AND rId = *indsæt rId*
-                 */
             }
         }
     }
