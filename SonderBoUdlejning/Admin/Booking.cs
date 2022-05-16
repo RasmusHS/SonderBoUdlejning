@@ -36,6 +36,7 @@ namespace SonderBoUdlejning.Admin
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
             string date = DateTime.Today.ToString("yyyy-MM-dd");
+            TBStartDato.Text = date;
 
             Bokking.OnLoadFuckions.GetPeronList(listBeboerID, listBeboer);
             Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, date);
@@ -122,7 +123,7 @@ namespace SonderBoUdlejning.Admin
                 }
 
                 TBResourceID.Text = "";
-                TBStartDato.Text = "";
+                TBStartDato.Text = TBDato.Text;
                 TBSlutDato.Text = "";
                 TBDato.Text = "";
             }
@@ -135,8 +136,41 @@ namespace SonderBoUdlejning.Admin
         private void btnConfirmBooking_Click(object sender, EventArgs e)
         {
             Regex regex = new Regex(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$");
-            if (regex.IsMatch(TBDato.Text) && regex.IsMatch(TBDato.Text)) 
+            if (regex.IsMatch(TBSlutDato.Text)) 
             {
+                DateTime dateToday = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd"));
+                DateTime dateSlutDato = Convert.ToDateTime(TBSlutDato.Text);
+                
+                if (dateSlutDato >= dateToday)
+                {
+                    int antalBookings = Bokking.CheckSlutDato.CheckSlutDate(TBSlutDato.Text, TBResourceID.Text);
+
+                    if (antalBookings == 0)
+                    {
+                        string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+TBSlutDato.Text+"')";
+                        SqlConnection conn = new SqlConnection(connString.connStr);
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+
+                        MessageBox.Show("Reservation operttet!");
+                        DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Ressource kan ikke bokkes til denne dato, da den allerede er optaget.");
+                    }
+
+                }
+                else 
+                {
+                    MessageBox.Show("Slut dato kan ikke være før start dato");
+                }
+
+
+                
+
                 /*Check om datoen kan skriver ind i startdato er i dag eller senere.
                   
                  hvis man har tjekket en anden dato til venstre, så skal startdato,
@@ -144,7 +178,7 @@ namespace SonderBoUdlejning.Admin
                 
                 slutdato skal også tjekkes om den den er inde i en anden reservation
                 Denne sætning kan bruges. Hvis den returnere 0, så kan den godt reserveres til og med den dato, ellers kan den ikke.
-               SELECT COUNT(rId) FROM Ressourcer WHERE rId IN(SELECT rId FROM Reservationer WHERE *indsæt slutdato* BETWEEN rStartDato AND rSlutDato)
+               SELECT COUNT(rId) FROM Ressourcer WHERE rId IN(SELECT rId FROM Reservationer WHERE *indsæt slutdato* BETWEEN rStartDato AND rSlutDato) AND rId = *indsæt rId*
                  */
             }
         }
