@@ -112,6 +112,7 @@ namespace SonderBoUdlejning.Admin
                 DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
                 listResource.Clear();
+                listResourceID.Clear();
                 CBResource.Items.Clear();
                 Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, TBDato.Text);
                 foreach (string item in listResource)
@@ -144,8 +145,10 @@ namespace SonderBoUdlejning.Admin
                 if (dateSlutDato >= dateToday)
                 {
                     int antalBookings = Bokking.CheckSlutDato.CheckSlutDate(TBSlutDato.Text, TBResourceID.Text);
+                    int antalBookingsBetweenDates = SonderBoUdlejning.Booking.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, TBSlutDato.Text, Convert.ToInt32(TBResourceID.Text));
 
-                    if (antalBookings == 0)
+
+                    if (antalBookings == 0 && antalBookingsBetweenDates == 0)
                     {
                         string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+TBSlutDato.Text+"')";
                         SqlConnection conn = new SqlConnection(connString.connStr);
@@ -171,6 +174,5 @@ namespace SonderBoUdlejning.Admin
             }
         }
 
-        
     }
 }

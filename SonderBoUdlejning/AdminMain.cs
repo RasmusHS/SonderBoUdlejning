@@ -61,7 +61,7 @@ namespace SonderBoUdlejning
 
         private void btnBooking_Click(object sender, EventArgs e)
         {
-            openFormsLoader(new Booking());
+            openFormsLoader(new Admin.Booking());
         }
     }
 }
