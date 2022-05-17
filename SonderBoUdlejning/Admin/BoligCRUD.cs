@@ -24,7 +24,7 @@ namespace SonderBoUdlejning.Admin
 
         private void BoligCRUD_Load(object sender, EventArgs e)
         {
-            //Forbinder dataGridViews med tabeller
+            //Forbinder dataGridViews til tabeller
             dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
             dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
 
@@ -67,17 +67,20 @@ namespace SonderBoUdlejning.Admin
             }
 
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((BoligInputCheck.AdresseCheck(adresse) == false) || (BoligInputCheck.BIdCheck(bId) == false))
+            if ((BoligInputCheck.AdresseCheck(adresse) == true) && (BoligInputCheck.BIdCheck(bId) == true))
             {
-                ErrorMessage.errorMessage();
-                return;
+                //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny bolig
+                BoligFacade CreateBolig = new BoligFacade();
+                CreateBolig.cBolig(adresse, postNr, bId); //opretter bolig
+                dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
+                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+            }
+            else
+            {
+                ErrorMessage.errorMessage(); //Viser fejlbesked
             }
 
-            //Hvis inputtene passerer begge tjel og er gyldige, så opretter vi en ny bolig
-            BoligFacade CreateBolig = new BoligFacade();
-            CreateBolig.cBolig(adresse, postNr, bId); //opretter bolig
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+            
         }
 
         private void btnReadB_Click(object sender, EventArgs e)
@@ -126,8 +129,11 @@ namespace SonderBoUdlejning.Admin
             //Hvis alle inputtet er gyldige, så kaldes metoden readTilLeje
             if ((adresseValid == true) && (bIdValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
             {
-                readTilLeje.rBoligTilLeje(adresse, postNr, bId, bType, minKvm, maksKvm, minLejePris, maksLejePris); //Kalder en speciel read metode for bolig til leje
-                dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); //Viser read metoden resultat i Bolig dataGridView
+                //Kalder en speciel read metode for bolig til leje
+                readTilLeje.rBoligTilLeje(adresse, postNr, bId, bType, minKvm, maksKvm, minLejePris, maksLejePris);
+
+                //Viser read metodens resultat i Bolig dataGridView
+                dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 
             }
             else //Ellers vises en fejlbesked, samt nulstilles dataGridViews
             {

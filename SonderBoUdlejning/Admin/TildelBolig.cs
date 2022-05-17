@@ -19,7 +19,11 @@ namespace SonderBoUdlejning.Admin
     public partial class TildelBolig : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
+
+        //Standard SQL Query, som henter alle boliger fra databasen, som er tilgængelige
         string sqlS1 = "SELECT * FROM Bolig WHERE (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
+
+        //Standard SQL Query, som henter ventelisten sorteret efter dato
         string sqlS2 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
 
         public TildelBolig()
@@ -44,114 +48,77 @@ namespace SonderBoUdlejning.Admin
             combIndflytÅr.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
             combIndflytÅr.SelectedItem = DateTime.Now.Year;
 
+            //Sætter bolig ID textboxen i fokus, så man kan skrive med det samme
             tbBID.Focus();
         }
 
         private void tbBID_TextChanged(object sender, EventArgs e)
         {
-            string adresse = "";
-            string postNr = "";
-            string bId = tbBID.Text;
-            string pId = "";
-            string indDato = "";
-            string udDato = "";
+            string adresse = ""; //Sætter adresse til at være tom
+            string postNr = ""; //Sætter postnummer til at være tom
+            string bId = tbBID.Text; //Tager input fra textboxen
+            string pId = ""; //Sætter person ID til at være tom
+            string indDato = ""; //Sætter indflytningsdato til at være tom
+            string udDato = ""; //Sætter udflytningsdato til at være tom
 
             BoligFacade readBolig = new BoligFacade();
 
+            //While loop der kører hver gang der ændres i textboxen
             while (true)
             {
-                if (!string.IsNullOrEmpty(bId))
-                {
-                    panelPid.Visible = true;
-                    if ((BoligInputCheck.BIdCheck(bId) == true))
-                    {
-                        readBolig.rBolig(adresse, postNr, bId, pId, indDato, udDato);
-                        dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
-                    }
-                    else
-                    {
-                        ErrorMessage.errorMessage();
-                    }
-                    break;
-                }
-                else if (string.IsNullOrEmpty(bId))
+                //Hvis der ikke er noget i textboxen, så skjules pId panelet og bolig dataGridViewet genstartes
+                if (string.IsNullOrEmpty(bId))
                 {
                     panelPid.Visible = false;
                     dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-                    break;
+                    break; //Stopper while loop, hvis der ikke er noget i textboxen
                 }
+                
+                //Hvis der er noget i textboxen, så tjekkes bolig ID for længde og karaktere
+                if ((BoligInputCheck.BIdCheck(bId) == true))
+                {
+                    panelPid.Visible = true; //Viser pId panelet
+                    readBolig.rBolig(adresse, postNr, bId, pId, indDato, udDato); //Indlæser bolig data
+                    dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery); //Indlæser bolig data i bolig dataGridView
+                }
+                else
+                {
+                    ErrorMessage.errorMessage(); //Viser fejlmeddelelse
+                }
+                break; //Stopper while loop
             }
             
         }
 
         private void btnFindMedlemsInfo_Click(object sender, EventArgs e)
         {
-            string adresse = "";
-            string postNr = "";
-            string bId = tbBID.Text;
-            string pId = tbPID.Text;
-            string dummyPId = "";
-            string indDato = "";
-            string udDato = "";
-            string signUpDato = "";
+            string adresse = ""; //Sætter adresse til at være tom
+            string postNr = ""; //Sætter postnummer til at være tom
+            string bId = tbBID.Text; //Tager input fra textboxen
+            string pId = tbPID.Text; //Tager input fra textboxen
+            string dummyPId = ""; //Sætter dummy person ID til at være tom
+            string indDato = ""; //Sætter indflytningsdato til at være tom
+            string udDato = ""; //Sætter udflytningsdato til at være tom
+            string signUpDato = ""; //Sætter signup dato til at være tom
 
-            string navnColumn = "fNavn";
+            //Sætter variabler til at holde på kolonne navne
+            string navnColumn = "fNavn"; 
             string mailColumn = "pMail";
             string tlfColumn = "pTlf";
-            
-            string navn = "";
-            string mail = "";
-            string tlf = "";
-            bool medlem = false;
-            bool erBeboer = false;
-            bool alt = false;
+
+            string navn = ""; //Sætter navn til at være tom
+            string mail = ""; //Sætter mail til at være tom
+            string tlf = ""; //Sætter tlf til at være tom
+            bool medlem = false; //Sætter medlem til at være false
+            bool erBeboer = false; //Sætter erBeboer til at være false
+            bool alt = false; //Sætter alt til at være false
 
             BoligFacade readBolig = new BoligFacade();
             vFacade readPVdgv = new vFacade();
             PersonFacade pRead = new PersonFacade();
 
-            if (!string.IsNullOrEmpty(pId))
-            {
-                panelMedlemsinfo.Visible = true;
-                panelØnskerLejlighed.Visible = true;
-                if ((!string.IsNullOrEmpty(bId)) && (!string.IsNullOrEmpty(pId)))
-                {
-                    if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
-                    {
-                        //sortere Bolig dgv
-                        readBolig.rBolig(adresse, postNr, bId, dummyPId, indDato, udDato);
-                        dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
-
-                        //sortere Venteliste dgv
-                        readPVdgv.ReadVenteListe(dummyPId, bId, signUpDato);
-                        dgvVenteliste.DataSource = tableConn.tableBinder(readPVdgv.ReadVente);
-
-                        //Fylder navn tekstboksen
-                        pRead.ReadPerson(navnColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                        tbMedlemsNavn.Text = tableConn.textBoxBinder(pRead.ReadQuery);
-
-                        //Fylder mail tekstboksen  
-                        pRead.ReadPerson(mailColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                        tbMedlemsEmail.Text = tableConn.textBoxBinder(pRead.ReadQuery);
-
-                        //Fylder tlf tekstboksen
-                        pRead.ReadPerson(tlfColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                        tbMedlemsTLF.Text = tableConn.textBoxBinder(pRead.ReadQuery);
-
-                        ckbJaTilLejlighed.Focus();
-                    }
-                    else
-                    {
-                        ErrorMessage.errorMessage();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Indtast venligst både et bolig ID og et person ID!");
-                }
-
-            }
-            else if (string.IsNullOrEmpty(pId))
+            //Tjekker om der er noget i textboxen
+            if (string.IsNullOrEmpty(pId))
             {
                 panelMedlemsinfo.Visible = false;
                 panelØnskerLejlighed.Visible = false;
@@ -159,32 +126,90 @@ namespace SonderBoUdlejning.Admin
                 tbMedlemsNavn.Text = "";
                 tbMedlemsEmail.Text = "";
                 tbMedlemsTLF.Text = "";
+                return;
+            }
+            else
+            {
+                panelMedlemsinfo.Visible = true;
+                panelØnskerLejlighed.Visible = true;
+            }
+
+            //Tjekker om bolig ID eller person ID er tom
+            if ((string.IsNullOrEmpty(bId)) || (string.IsNullOrEmpty(pId)))
+            {
+                MessageBox.Show("Indtast venligst både et bolig ID og et person ID!");
+                return;
+            }
+
+            //Tjekker bolig ID og person ID for længde og ugyldige karaktere
+            if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
+            {
+                //sortere Bolig dgv
+                readBolig.rBolig(adresse, postNr, bId, dummyPId, indDato, udDato);
+                dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
+
+                //sortere Venteliste dgv
+                readPVdgv.ReadVenteListe(dummyPId, bId, signUpDato);
+                dgvVenteliste.DataSource = tableConn.tableBinder(readPVdgv.ReadVente);
+
+                //Fylder navn tekstboksen
+                pRead.ReadPerson(navnColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                tbMedlemsNavn.Text = tableConn.textBoxBinder(pRead.ReadQuery);
+
+                //Fylder mail tekstboksen  
+                pRead.ReadPerson(mailColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                tbMedlemsEmail.Text = tableConn.textBoxBinder(pRead.ReadQuery);
+
+                //Fylder tlf tekstboksen
+                pRead.ReadPerson(tlfColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                tbMedlemsTLF.Text = tableConn.textBoxBinder(pRead.ReadQuery);
+
+                //Sætter checkboxen i fokus
+                ckbJaTilLejlighed.Focus();
+            }
+            else
+            {
+                ErrorMessage.errorMessage(); //Viser fejlmeddelelse
             }
         }
 
+        //Event metode som kører når der trykkes på checkboxen
         private void ckbJaTilLejlighed_CheckedChanged(object sender, EventArgs e)
         {
-            string bId = tbBID.Text;
-            string[] comboBoxListAdresser;
+            string bId = tbBID.Text; //Tager input fra textboxen
+            string[] comboBoxListAdresser; //Laver et string array til at holde på alle adresser
 
+            //Hvis checkboxen er markeret
             if (ckbJaTilLejlighed.Checked == true)
             {
+                //Vis det sidste panel og adresse comboboxen
                 panelUdskrivLejekontrakt.Visible = true;
                 combAdresser.Visible = true;
-                if (!string.IsNullOrEmpty(bId))
+
+                //Tjekker om bolig ID er tom
+                if (string.IsNullOrEmpty(bId))
                 {
-                    if ((BoligInputCheck.BIdCheck(bId) == true))
-                    {
-                        bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE bId = {bId}");
-                        comboBoxListAdresser = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId}").ToArray();
-                        combAdresser.Items.AddRange(comboBoxListAdresser);
-                    }
-                    else
-                    {
-                        ErrorMessage.errorMessage();
-                    }
+                    MessageBox.Show("Indtast venligst et bolig ID!");
+                    return;
+                }
+
+                //Tjekker bolig ID for længde og ugyldige karaktere
+                if ((BoligInputCheck.BIdCheck(bId) == true))
+                {
+                    //Sikre bolig ID forbliver det samme
+                    bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE bId = {bId}");
+
+                    //Fylder comboboxen med alle tilgængelige adresser
+                    comboBoxListAdresser = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId}").ToArray();
+                    combAdresser.Items.AddRange(comboBoxListAdresser);
+                }
+                else
+                {
+                    ErrorMessage.errorMessage(); //Viser fejlmeddelelse
                 }
             }
+
+            //Hvis checkboxen ikke er markeret
             else if (ckbJaTilLejlighed.Checked == false)
             {
                 panelUdskrivLejekontrakt.Visible = false;
@@ -194,23 +219,28 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUdskrivLejekontrakt_Click(object sender, EventArgs e)
         {
-            string pId = tbPID.Text;
-            string bId = tbBID.Text;
-            string lejePris = "";
-            string lejerNavn = tbMedlemsNavn.Text;
-            string lejerMail = tbMedlemsEmail.Text;
-            string lejerTlf = tbMedlemsTLF.Text;
-            bool erBeboer; 
-            string adresse = combAdresser.SelectedItem.ToString();
-            string postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
-            string by = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = '{postNr}'");
-            string startDato = "";
-            if ((combIndflytMåned.SelectedIndex + 1) < 10)
+            string pId = tbPID.Text; //Tager input fra person ID textboxen
+            string bId = tbBID.Text; //Tager input fra bolig ID textboxen
+            string lejePris = ""; //Pladsholder variabel for lejePris
+            string lejerNavn = tbMedlemsNavn.Text; //Tager input fra navn textboxen
+            string lejerMail = tbMedlemsEmail.Text; //Tager input fra mail textboxen
+            string lejerTlf = tbMedlemsTLF.Text; //Tager input fra tlf textboxen
+            bool erBeboer; //Pladsholder variabel for erBeboer
+            string adresse = combAdresser.SelectedItem.ToString(); //Tager den valgte adresse fra comboboxen
+
+            string postNr = ""; //Pladsholder variabel for postNr
+            string by = ""; //Pladsholder variabel for by
+
+            string startDato = ""; //Pladsholder variabel for startDato
+
+            //Hvis månedstalet er mindre en 10, så sættes et 0 foran
+            if ((combIndflytMåned.SelectedIndex + 1) < 10)  
                 startDato = $"01-0{combIndflytMåned.SelectedIndex + 1}-{combIndflytÅr.SelectedItem}";
-            else 
+            else //Collections starter fra index 0, så +1 for at få det rigtige månedstal 
                 startDato = $"01-{combIndflytMåned.SelectedIndex + 1}-{combIndflytÅr.SelectedItem}";
+
             string slutDato = null;
-            //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
+
             int checkForpId;
 
             if ((string.IsNullOrEmpty(bId)) || (string.IsNullOrEmpty(lejerNavn)) || (string.IsNullOrEmpty(pId)))
@@ -218,38 +248,54 @@ namespace SonderBoUdlejning.Admin
                 MessageBox.Show("Indtast venligst både et bolig ID og et person ID!");
                 return;
             }
-            if ((BoligInputCheck.BIdCheck(bId) == false) || (PersonInputCheck.PIdCheck(pId) == false))
+            if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
             {
-                ErrorMessage.errorMessage();
-                return;
-            }
-            
-            checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Bolig WHERE pId = {pId}"));
+                checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Bolig WHERE pId = {pId}"));
 
-            if (checkForpId > 0)
+                if (checkForpId > 0)
+                {
+                    MessageBox.Show("Der er allerede en beboer med det pId i systemet");
+                    return;
+                }
+                else
+                {
+                    //Finder postNr ved hjælp af adresse
+                    postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
+                    
+                    //Finder by ved hjælp af postNr
+                    by = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = '{postNr}'");
+
+                    //Finder lejePris ved hjælp af bolig ID
+                    lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
+
+                    //Nedenstående MessageBox bruges til debugging
+                    //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
+                    
+                    //Lejekontrakt printes
+                    LejekontraktFacade lejekontrakt = new LejekontraktFacade();
+                    lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
+
+                    //Personen opdateres i Person tabellen
+                    PersonFacade pUpdate = new PersonFacade();
+                    erBeboer = true;
+                    pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
+                    pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
+
+                    //Boligen opdateres i Bolig tabellen
+                    BoligFacade boligUpdate = new BoligFacade();
+                    boligUpdate.uBolig(adresse, postNr, bId, pId, startDato, slutDato);
+                    dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
+
+                    //Sletter personen fra ventelisten
+                    vFacade vDelete = new vFacade();
+                    vDelete.RemoveFromList(pId, bId);
+                    dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
+                }
+            }
+            else
             {
-                MessageBox.Show("Der er allerede en beboer med det pId i systemet");
-                return;
+                ErrorMessage.errorMessage(); //Viser fejlmeddelelse
             }
-
-            lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
-
-            LejekontraktFacade lejekontrakt = new LejekontraktFacade();
-            lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
-
-            PersonFacade pUpdate = new PersonFacade();
-            erBeboer = true;
-            pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
-            pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
-
-            BoligFacade boligUpdate = new BoligFacade();
-            boligUpdate.uBolig(adresse, postNr, bId, pId, startDato, slutDato);
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-
-            vFacade vDelete = new vFacade();
-            vDelete.RemoveFromList(pId, bId);
-            dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
-            
         }
     }
 }
