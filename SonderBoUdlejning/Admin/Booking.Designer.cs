@@ -256,7 +256,7 @@
             // 
             // BtnCheckDato
             // 
-            this.BtnCheckDato.Location = new System.Drawing.Point(429, 1081);
+            this.BtnCheckDato.Location = new System.Drawing.Point(327, 1081);
             this.BtnCheckDato.Margin = new System.Windows.Forms.Padding(7);
             this.BtnCheckDato.Name = "BtnCheckDato";
             this.BtnCheckDato.Size = new System.Drawing.Size(175, 51);
@@ -267,7 +267,7 @@
             // 
             // TBDato
             // 
-            this.TBDato.Location = new System.Drawing.Point(429, 1170);
+            this.TBDato.Location = new System.Drawing.Point(91, 1097);
             this.TBDato.Margin = new System.Windows.Forms.Padding(7);
             this.TBDato.Name = "TBDato";
             this.TBDato.Size = new System.Drawing.Size(228, 35);
