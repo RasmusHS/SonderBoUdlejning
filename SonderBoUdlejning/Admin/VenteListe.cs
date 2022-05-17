@@ -168,7 +168,8 @@ namespace SonderBoUdlejning.Admin
                 ErrorMessage.errorMessage(); //Viser fejlmeddelelse
             }
         }
-        
+
+        //Knap som viser felter relevant for at tilføje en person til en venteliste
         private void btnAddToList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
@@ -192,6 +193,7 @@ namespace SonderBoUdlejning.Admin
             GetPosition.Visible = false;
         }
 
+        //Knap som viser felter relevant for at fjerne en person fra en venteliste
         private void btnDeleteFromList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
@@ -215,6 +217,7 @@ namespace SonderBoUdlejning.Admin
             GetPosition.Visible = false;
         }
 
+        //Knap som viser felter relevant for at finde en persons position på en venteliste
         private void btnGetPosition_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
@@ -238,6 +241,7 @@ namespace SonderBoUdlejning.Admin
             GetPosition.Visible = true;
         }
 
+        //Knap som viser felter relevant for at se en venteliste
         private void btnShowList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;

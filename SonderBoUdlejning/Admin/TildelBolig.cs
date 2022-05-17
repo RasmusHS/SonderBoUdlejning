@@ -60,6 +60,13 @@ namespace SonderBoUdlejning.Admin
             string pId = ""; //Sætter person ID til at være tom
             string indDato = ""; //Sætter indflytningsdato til at være tom
             string udDato = ""; //Sætter udflytningsdato til at være tom
+            string sqlTemplate = $"SELECT * FROM Bolig WHERE 1=1"; //Definere standard SQL Query
+            string bType = "";
+            string minKvm = "";
+            string maksKvm = "";
+            string minLejePris = "";
+            string maksLejePris = "";
+            bool tilLeje = true;
 
             BoligFacade readBolig = new BoligFacade();
 
@@ -78,7 +85,7 @@ namespace SonderBoUdlejning.Admin
                 if ((BoligInputCheck.BIdCheck(bId) == true))
                 {
                     panelPid.Visible = true; //Viser pId panelet
-                    readBolig.rBolig(adresse, postNr, bId, pId, indDato, udDato); //Indlæser bolig data
+                    readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser bolig data
                     dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery); //Indlæser bolig data i bolig dataGridView
                 }
                 else
@@ -100,6 +107,13 @@ namespace SonderBoUdlejning.Admin
             string indDato = ""; //Sætter indflytningsdato til at være tom
             string udDato = ""; //Sætter udflytningsdato til at være tom
             string signUpDato = ""; //Sætter signup dato til at være tom
+            string sqlTemplate = $"SELECT * FROM Bolig WHERE 1=1"; //Definere standard SQL Query
+            string bType = ""; //Sætter bolig type til at være tom
+            string minKvm = ""; //Sætter minimum kvadratmeter til at være tom
+            string maksKvm = ""; //Sætter maksimum kvadratmeter til at være tom
+            string minLejePris = ""; //Sætter minimum lejepris til at være tom
+            string maksLejePris = ""; //Sætter maksimum lejepris til at være tom
+            bool tilLeje = true; //Sætter til leje til at være true
 
             //Sætter variabler til at holde på kolonne navne
             string navnColumn = "fNavn"; 
@@ -145,7 +159,7 @@ namespace SonderBoUdlejning.Admin
             if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
             {
                 //sortere Bolig dgv
-                readBolig.rBolig(adresse, postNr, bId, dummyPId, indDato, udDato);
+                readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, dummyPId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
                 dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
 
                 //sortere Venteliste dgv

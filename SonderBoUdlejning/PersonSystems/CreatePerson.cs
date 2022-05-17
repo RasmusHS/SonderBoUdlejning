@@ -10,16 +10,18 @@ namespace SonderBoUdlejning
 {
     public class CreatePerson
     {
+        //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
 
+        //Metode der opretter en ny person i databasen
         public void pSQLC(string fNavn, string pMail, string pTlf)
         {
-            string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf, @ErBeboer)";
-            SqlConnection conn = new SqlConnection(connString.connStr);
-            SqlCommand cmd = new SqlCommand(sqlS, conn);
+            string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf, @ErBeboer)"; //Definere SQL string
+            SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
+            SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
+            cmd.Parameters.Clear(); //Rydder parametre fra SQL kommandoen
 
-            cmd.Parameters.Clear();
-
+            //Tilføjer parametre til kommandoen
             cmd.Parameters.Add("@Navn", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@Navn"].Value = Convert.ToString(fNavn);
 
@@ -32,21 +34,22 @@ namespace SonderBoUdlejning
             cmd.Parameters.Add("@ErBeboer", System.Data.SqlDbType.Bit);
             cmd.Parameters["@ErBeboer"].Value = Convert.ToBoolean(false);
 
+            //try-catch løkke
             try
             {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
+                conn.Open(); //Åbner forbindelsen til databasen
+                cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
+                conn.Close(); //Lukker forbindelsen til databasen
+                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
                                     cmd.Parameters["@Tlf"].Value + ", " +
                                     cmd.Parameters["@ErBeboer"].Value +
                                     ")");
             }
-            catch (Exception ex)
+            catch (Exception ex) //Hvis der er fejl
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message); //Vis beskedboks med fejlbesked
             }
         }
     }

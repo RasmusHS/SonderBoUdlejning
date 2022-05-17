@@ -8,10 +8,8 @@ using System.Data.SqlClient;
 
 namespace SonderBoUdlejning.VentelisteSystems
 {
-    public class vFacade
+    public class vFacade //Facade til venteliste systemet
     {
-        //Facade til venteliste systemet
-
         //Opretter et medlem på en venteliste
         public void AddToList(string pId, string bId)
         {
@@ -34,6 +32,7 @@ namespace SonderBoUdlejning.VentelisteSystems
             Position = vGet.vGetPosition(pId, bId);
         }
 
+        //Metode der kalder read-metoden, som returnerer en liste af medlemmer på en venteliste
         public string ReadVente;
         public void ReadVenteListe(string pId, string bId, string signUpDato)
         {

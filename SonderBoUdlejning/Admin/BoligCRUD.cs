@@ -85,6 +85,8 @@ namespace SonderBoUdlejning.Admin
 
         private void btnReadB_Click(object sender, EventArgs e)
         {
+            string sqlTemplate = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1";
+
             //Tager adresse input checker det for tegn og længde
             string adresse = tbAdresse.Text;
             bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
@@ -95,6 +97,13 @@ namespace SonderBoUdlejning.Admin
             //Tager bId input og tjekker det for ugyldige tegn
             string bId = tbBoligID.Text; //
             bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
+            //Ikke muligt at søge baseret på person ID. Input felt findes ikke i formen
+            string pId = ""; //
+
+            //Ikke muligt at søge baseret på indflytningsDato eller udflytningsDato. Input felter findes ikke i formen
+            string indDato = ""; //Sætter indflytningsdato til at være tom
+            string udDato = ""; //Sætter udflytningsdato til at være tom
 
             //Hvis bId inputtet ikke er tomt, så bruges bId til at finde dens bType
             string bType = "";
@@ -120,6 +129,8 @@ namespace SonderBoUdlejning.Admin
             string maksLejePris = tbMaksPris.Text; //
             bool maksLejePrisValid = BoligInputCheck.lejePrisCheck(maksLejePris);
 
+            bool tilLeje = true;
+
             //Sætter tabControl fokus til Bolig tabellen
             tabControl1.SelectedTab = BoligPage;
 
@@ -130,7 +141,7 @@ namespace SonderBoUdlejning.Admin
             if ((adresseValid == true) && (bIdValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
             {
                 //Kalder en speciel read metode for bolig til leje
-                readTilLeje.rBoligTilLeje(adresse, postNr, bId, bType, minKvm, maksKvm, minLejePris, maksLejePris);
+                readTilLeje.tempRBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
 
                 //Viser read metodens resultat i Bolig dataGridView
                 dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 

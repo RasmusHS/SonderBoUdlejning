@@ -11,13 +11,15 @@ using System.Net.Mail;
 
 namespace SonderBoUdlejning.InputCheck
 {
-    public static class PersonInputCheck
+    public static class PersonInputCheck //Klasse der tjekker brugerinput som skal interagere person tabellen
     {
+        //Definere Regex
         private static Regex retal = new Regex(@"(^[0-9]*$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
         private static Regex email = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
         private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
 
+        //Metode der tjekker om person ID input er gyldig
         public static bool PIdCheck(string pId)
         {
             if (SQLInject.IsMatch(pId))
@@ -40,6 +42,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om navn input er gyldig
         public static bool NavnCheck(string navn)
         {
             if (SQLInject.IsMatch(navn))
@@ -62,6 +65,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om mail input er gyldig
         public static bool MailCheck(string mail)
         {
             if (SQLInject.IsMatch(mail))
@@ -91,6 +95,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om telefon input er gyldig
         public static bool TlfCheck(string tlf)
         {
             if (SQLInject.IsMatch(tlf))
