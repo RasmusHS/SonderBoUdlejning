@@ -50,19 +50,23 @@ namespace SonderBoUdlejning.Admin
             comboBoxMonth.Items.AddRange(comboBoxListMonth);
 
             //Indlæser år comboboxen med alle år fra 2022 til 2044
-            comboBoxYear.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
-            comboBoxYear.SelectedItem = DateTime.Now.Year;
+            comboBoxYear.Items.Add("");
+            for (int year = DateTime.Now.Year; year < DateTime.Now.Year + 50; year++)
+            {
+                comboBoxYear.Items.Add(year);
+            }
         }
 
         private void btnOpsigelse_Click(object sender, EventArgs e)
         {
             string pId = tbPiD.Text; //Tager inputtet fra person ID textboxen
+
             string bId = tbBiD.Text; //Tager inputtet fra bolig ID textboxen
-            
+
             //Bruger inputtene fra person ID og bolig ID textboxene til finde adresse, postNr og hvornår personen flyttede ind
-            string adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
-            string postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
-            string indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
+            string adresse = "";
+            string postNr = "";
+            string indflytDato = "";
             
             bool erBeboer; //Bruges ikke i øjeblikket
 
@@ -71,7 +75,8 @@ namespace SonderBoUdlejning.Admin
                 udflytDato = $"01-0{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
             else
                 udflytDato = $"01-{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
-
+            bool udflytDatoValid = true;//
+            
             //Messageboxen bruges til debugging
             //MessageBox.Show($"{adresse}\n{postNr}\n{bId}\n{pId}\n{indflytDato}\n{udflytDato}");
 
@@ -82,10 +87,26 @@ namespace SonderBoUdlejning.Admin
                 MessageBox.Show("Alle felter skal udfyldes");
                 return; //Stopper koden
             }
-            
-            //Checker inputtene for længde og karakterer
-            if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true) && (BoligInputCheck.indflytDato(indflytDato) == true) && (BoligInputCheck.udflytDato(udflytDato) == true))
+
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
+            try
             {
+                udflytDatoValid = BoligInputCheck.udflytDato(udflytDato);
+            }
+            catch
+            {
+                udflytDatoValid = false;
+            }
+
+            //Checker inputtene for længde og karakterer
+            if ((pIdValid == true) && (bIdValid == true) && (udflytDatoValid == true))
+            {
+                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
+
                 BoligFacade opsigBolig = new BoligFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
                 opsigBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen

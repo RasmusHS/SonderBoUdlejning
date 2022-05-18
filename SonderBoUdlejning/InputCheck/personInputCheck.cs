@@ -30,10 +30,17 @@ namespace SonderBoUdlejning.InputCheck
             }
             else
             {
-                if ((!retal.IsMatch(pId)))
+                if (!string.IsNullOrEmpty(pId))
                 {
-                    ErrorMessage.ErrorList.Add("Person ID må kun indeholde tal");
-                    return false;
+                    if ((!retal.IsMatch(pId)))
+                    {
+                        ErrorMessage.ErrorList.Add("Person ID må kun indeholde tal");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {

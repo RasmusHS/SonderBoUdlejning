@@ -45,8 +45,11 @@ namespace SonderBoUdlejning.Admin
             combIndflytMåned.Items.AddRange(comboBoxListMonth);
 
             //Indlæser liste over de næste 22 år
-            combIndflytÅr.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
-            combIndflytÅr.SelectedItem = DateTime.Now.Year;
+            combIndflytÅr.Items.Add("");
+            for (int year = DateTime.Now.Year; year < DateTime.Now.Year + 50; year++)
+            {
+                combIndflytÅr.Items.Add(year);
+            }
 
             //Sætter bolig ID textboxen i fokus, så man kan skrive med det samme
             tbBID.Focus();
@@ -68,7 +71,12 @@ namespace SonderBoUdlejning.Admin
             string maksLejePris = "";
             bool tilLeje = true;
 
+            bool bIdValid = true;
+
+            string signUpDato = "";
+
             BoligFacade readBolig = new BoligFacade();
+            vFacade venteListeFor = new vFacade();
 
             //While loop der kører hver gang der ændres i textboxen
             while (true)
@@ -80,13 +88,18 @@ namespace SonderBoUdlejning.Admin
                     dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
                     break; //Stopper while loop, hvis der ikke er noget i textboxen
                 }
-                
+
+                bIdValid = BoligInputCheck.BIdCheck(bId);
+
                 //Hvis der er noget i textboxen, så tjekkes bolig ID for længde og karaktere
-                if ((BoligInputCheck.BIdCheck(bId) == true))
+                if ((bIdValid == true))
                 {
                     panelPid.Visible = true; //Viser pId panelet
                     readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser bolig data
                     dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery); //Indlæser bolig data i bolig dataGridView
+
+                    venteListeFor.ReadVenteListe(pId, bId, signUpDato); //Indlæser venteliste
+                    dgvVenteliste.DataSource = tableConn.tableBinder(venteListeFor.ReadVente);
                 }
                 else
                 {
@@ -155,8 +168,11 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
             //Tjekker bolig ID og person ID for længde og ugyldige karaktere
-            if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
+            if ((bIdValid == true) && (pIdValid == true))
             {
                 //sortere Bolig dgv
                 readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, dummyPId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
@@ -192,6 +208,7 @@ namespace SonderBoUdlejning.Admin
         {
             string bId = tbBID.Text; //Tager input fra textboxen
             string[] comboBoxListAdresser; //Laver et string array til at holde på alle adresser
+            bool bIdValid = true;
 
             //Hvis checkboxen er markeret
             if (ckbJaTilLejlighed.Checked == true)
@@ -207,8 +224,10 @@ namespace SonderBoUdlejning.Admin
                     return;
                 }
 
+                bIdValid = BoligInputCheck.BIdCheck(bId);
+
                 //Tjekker bolig ID for længde og ugyldige karaktere
-                if ((BoligInputCheck.BIdCheck(bId) == true))
+                if ((bIdValid == true))
                 {
                     //Sikre bolig ID forbliver det samme
                     bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE bId = {bId}");
@@ -252,6 +271,7 @@ namespace SonderBoUdlejning.Admin
                 startDato = $"01-0{combIndflytMåned.SelectedIndex + 1}-{combIndflytÅr.SelectedItem}";
             else //Collections starter fra index 0, så +1 for at få det rigtige månedstal 
                 startDato = $"01-{combIndflytMåned.SelectedIndex + 1}-{combIndflytÅr.SelectedItem}";
+            bool indflytDatoValid = true;//
 
             string slutDato = null;
 
@@ -262,7 +282,20 @@ namespace SonderBoUdlejning.Admin
                 MessageBox.Show("Indtast venligst både et bolig ID og et person ID!");
                 return;
             }
-            if ((BoligInputCheck.BIdCheck(bId) == true) && (PersonInputCheck.PIdCheck(pId) == true))
+
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
+            try
+            {
+                indflytDatoValid = BoligInputCheck.indflytDato(startDato);
+            }
+            catch
+            {
+                indflytDatoValid = false;
+            }
+
+            if ((bIdValid == true) && (pIdValid == true) && (indflytDatoValid == true))
             {
                 checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Bolig WHERE pId = {pId}"));
 

@@ -63,9 +63,13 @@ namespace SonderBoUdlejning.Secretary
                 MessageBox.Show("Du skal udfylde alle felter");
                 return;
             }
-            
+
+            bool navnValid = PersonInputCheck.NavnCheck(navn);
+            bool mailValid = PersonInputCheck.MailCheck(mail);
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
             {
                 pCreate.CreatePerson(navn, mail, tlf); //Opretter person
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
@@ -87,10 +91,27 @@ namespace SonderBoUdlejning.Secretary
             bool erBeboer = radioBtnBeboer.Checked; //Tjekker om erBeboer er checked
             bool alt = radioBtnAlt.Checked; //Tjekker om alt er checked
 
+            bool navnValid = true;
+            bool mailValid = true;
+            bool tlfValid = true;
+
+            try
+            {
+                navnValid = PersonInputCheck.NavnCheck(navn);
+                mailValid = PersonInputCheck.MailCheck(mail);
+                tlfValid = PersonInputCheck.TlfCheck(tlf);
+            }
+            catch
+            {
+                navnValid = false;
+                mailValid = false;
+                tlfValid = false;
+            }
+            
             PersonFacade pRead = new PersonFacade();
 
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
             {
                 //Hvis inputtene passerer alle tjek og er gyldige, så opretter vi en ny bolig
                 //Fortæller en facade at den skal kalde en read metode
@@ -102,8 +123,7 @@ namespace SonderBoUdlejning.Secretary
             else
             {
                 //Person dataGridView er vil se tomt ud hvis fejl eller SQL injection spottes
-                pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
                 ErrorMessage.errorMessage(); //Fejlbesked hvis input er ugyldig
             }
             
@@ -127,8 +147,13 @@ namespace SonderBoUdlejning.Secretary
                 return;
             }
 
+            bool navnValid = PersonInputCheck.NavnCheck(navn);
+            bool mailValid = PersonInputCheck.MailCheck(mail);
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true) && (PersonInputCheck.PIdCheck(pId) == true))
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true) && (pIdValid == true))
             {
                 //Finder hvad personens status er
                 erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
@@ -157,8 +182,10 @@ namespace SonderBoUdlejning.Secretary
                 return;
             }
 
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+
             //Tjekker inputtet for længde og ugyldige tegn
-            if ((PersonInputCheck.TlfCheck(tlf) == true))
+            if ((tlfValid == true))
             {
                 pDelete.DeletePerson(tlf); //Sletter personen
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView

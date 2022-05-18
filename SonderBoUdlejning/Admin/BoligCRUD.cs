@@ -56,18 +56,35 @@ namespace SonderBoUdlejning.Admin
         private void btnCreateB_Click(object sender, EventArgs e)
         {
             string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
-            string postNr = comboBoxPostNr.SelectedItem.ToString(); //Tager inputtet fra postNr comboboxen
+            string postNr = "";
+            //string postNr = comboBoxPostNr.SelectedItem.ToString(); //Tager inputtet fra postNr comboboxen
             string bId = tbBoligID.Text; //Tager inputtet fra boligID textboxen
 
-            //Tjekker om en af felterne er tomme
-            if ((string.IsNullOrEmpty(adresse)) || (string.IsNullOrEmpty(bId)))
+            try
             {
-                MessageBox.Show("Indtast venligst både en adresse og et bolig ID!");
+                if ((comboBoxPostNr.SelectedItem == null))
+                    postNr = "";
+                else
+                    postNr = comboBoxPostNr.SelectedItem.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Vælg venligst et postnummer!");
+            }
+
+            //Tjekker om en af felterne er tomme
+            if ((string.IsNullOrEmpty(adresse)) || (string.IsNullOrEmpty(bId)) || (string.IsNullOrEmpty(postNr)))
+            {
+                MessageBox.Show("Indtast venligst både en adresse, et bolig ID og vælg et postNr!");
                 return;
             }
 
+            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            bool postNrValid = BoligInputCheck.PostNrCheck(postNr);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((BoligInputCheck.AdresseCheck(adresse) == true) && (BoligInputCheck.BIdCheck(bId) == true))
+            if ((adresseValid == true) && (postNrValid == true) && (bIdValid == true))
             {
                 //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny bolig
                 BoligFacade CreateBolig = new BoligFacade();
@@ -92,7 +109,18 @@ namespace SonderBoUdlejning.Admin
             bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
 
             //Tager det valgte postNr fra comboboxen og tildeler det en string variable
-            string postNr = comboBoxPostNr.SelectedItem.ToString();
+            string postNr = "";
+            try
+            {
+                if ((comboBoxPostNr.SelectedItem == null))
+                    postNr = "";
+                else
+                    postNr = comboBoxPostNr.SelectedItem.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Vælg venligst et postnummer!");
+            }
 
             //Tager bId input og tjekker det for ugyldige tegn
             string bId = tbBoligID.Text; //
@@ -172,8 +200,11 @@ namespace SonderBoUdlejning.Admin
             string indflytDato = "";
             string udflytDato = "";
 
+            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((BoligInputCheck.AdresseCheck(adresse) == true) && (BoligInputCheck.BIdCheck(bId) == true))
+            if ((adresseValid == true) && (bIdValid == true))
             {
                 //Finder postNr, pId, indflytDato og udflytDato fra Bolig tabellen ved hjælp af adressen
                 postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
@@ -195,11 +226,6 @@ namespace SonderBoUdlejning.Admin
 
         private void btnDeleteB_Click(object sender, EventArgs e)
         {
-            //ADVARSEL: Hvis man ikke skriver hele adressen og kun skriver dele af den, så slettes alle boliger som har den tekstdel et sted i sin adresse
-            //For eks. så hedder alle adresser "Fakevej" efterfulgt af et tal og hvis man skrev "Fake" og trykkede slet, så ville Bolig tabellen blive tømt
-            //Hvorfor sker det? Fordi SQL Querien ser såden her ud: sqlS += $" AND adresse LIKE '%{adresse}%'"; Dog vil denne del kun blive tilføjet til Querien hvis
-            //adresse inputtet er hverken tom eller null, men der vil være noget i denne delete funktion.
-
             string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
 
             //Tjekker om adresse feltet er tomt
@@ -209,8 +235,10 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
+            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((BoligInputCheck.AdresseCheck(adresse) == true))
+            if ((adresseValid == true))
             {
                 //Sletter bolig fra Bolig tabellen
                 BoligFacade DeleteBolig = new BoligFacade();
@@ -269,23 +297,23 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
-            lblAdresse.Visible = true;
-            lblPostNr.Visible = true;
-            lblBy.Visible = true;
-            lblBoligID.Visible = true;
+            lblAdresse.Visible = true; //
+            lblPostNr.Visible = true; //
+            lblBy.Visible = true; //
+            lblBoligID.Visible = true; //
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblBoligType.Visible = true;
+            lblBoligType.Visible = true; //
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbAdresse.Visible = true;
-            comboBoxPostNr.Visible = true;
-            tbBy.Visible = true;
-            tbBoligID.Visible = true;
+            tbAdresse.Visible = true; //
+            comboBoxPostNr.Visible = true; //
+            tbBy.Visible = true; //
+            tbBoligID.Visible = true; //
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbBoligType.Visible = true;
+            tbBoligType.Visible = true; //
             tbMinPris.Visible = false;
             tbMaksPris.Visible= false;
         }
@@ -307,25 +335,25 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
-            lblAdresse.Visible = true;
-            lblPostNr.Visible = true;
+            lblAdresse.Visible = true; //
+            lblPostNr.Visible = true; //
             lblBy.Visible = false;
-            lblBoligID.Visible = true;
-            lblMinKvm.Visible = true;
-            lblMaksKvm.Visible = true;
+            lblBoligID.Visible = true; //
+            lblMinKvm.Visible = true; //
+            lblMaksKvm.Visible = true; //
             lblBoligType.Visible = false;
-            lblMinPris.Visible = true;
-            lblMaksPris.Visible = true;
+            lblMinPris.Visible = true; //
+            lblMaksPris.Visible = true; //
 
-            tbAdresse.Visible = true;
-            comboBoxPostNr.Visible = true;
+            tbAdresse.Visible = true; //
+            comboBoxPostNr.Visible = true; //
             tbBy.Visible = false;
-            tbBoligID.Visible = true;
-            tbMinKvm.Visible = true;
-            tbMaksKvm.Visible = true;
-            tbBoligType.Visible = false;
-            tbMinPris.Visible = true;
-            tbMaksPris.Visible = true;
+            tbBoligID.Visible = true; //
+            tbMinKvm.Visible = true; //
+            tbMaksKvm.Visible = true; //
+            tbBoligType.Visible = false; //
+            tbMinPris.Visible = true; //
+            tbMaksPris.Visible = true; //
         }
 
         //Knap som viser felter relevant for at opdatere en eksisterende bolig
@@ -341,20 +369,20 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = true;
             btnDeleteB.Visible = false;
 
-            lblAdresse.Visible = true;
+            lblAdresse.Visible = true; //
             lblPostNr.Visible = false;
             lblBy.Visible = false;
-            lblBoligID.Visible = true;
+            lblBoligID.Visible = true; //
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
             lblBoligType.Visible = false;
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbAdresse.Visible = true;
+            tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
-            tbBoligID.Visible = true;
+            tbBoligID.Visible = true; //
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
             tbBoligType.Visible = false;
@@ -375,17 +403,25 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = true;
 
-            lblAdresse.Visible = true;
+            lblAdresse.Visible = true; //
             lblPostNr.Visible = false;
             lblBy.Visible = false;
             lblBoligID.Visible = false;
+            lblMinKvm.Visible = false;
+            lblMaksKvm.Visible = false;
+            lblBoligType.Visible = false;
+            lblMinPris.Visible = false;
+            lblMaksPris.Visible = false;
 
-            tbAdresse.Visible = true;
+            tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
             tbBoligID.Visible = false;
+            tbMinKvm.Visible = false;
+            tbMaksKvm.Visible = false;
+            tbBoligType.Visible = false;
+            tbMinPris.Visible = false;
+            tbMaksPris.Visible = false;
         }
-
-        
     }
 }

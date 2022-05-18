@@ -38,7 +38,7 @@ namespace SonderBoUdlejning.VentelisteSystems
                 if (dialogResult == DialogResult.Yes) //Hvis ja
                 {
                     cmd.ExecuteNonQuery(); //Udfører kommandoen
-                    MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
+                    MessageBox.Show("SUCCESS :\nEntry blev fjernet med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@pId"].Value + ", " +
                                     cmd.Parameters["@bId"].Value +
                                     ")");

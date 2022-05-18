@@ -77,8 +77,11 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             //Tjekker om person ID og bolig ID er gyldige
-            if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true))
+            if ((pIdValid == true) && (bIdValid == true))
             {
                 vAddToList.AddToList(pId, bId); //Tilføjer person til venteliste for en bolig
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
@@ -103,8 +106,11 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             //Tjekker om person ID og bolig ID er gyldige
-            if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true))
+            if ((pIdValid == true) && (bIdValid == true))
             {
                 vDeleteFromList.RemoveFromList(pId, bId); //Sletter en person fra en venteliste
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
@@ -131,8 +137,11 @@ namespace SonderBoUdlejning.Admin
                 
             }
 
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             //Tjekker om person ID og bolig ID er gyldige
-            if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true))
+            if ((pIdValid == true) && (bIdValid == true))
             {
                 vGetListPos.GetListPosition(pId, bId); //Finder en persons position på en venteliste
                 positionTextBox.Text = vGetListPos.Position; //Viser resultatet i position textboxen
@@ -158,8 +167,10 @@ namespace SonderBoUdlejning.Admin
                 
             }
 
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             //Tjekker om bolig ID er gyldig
-            if (BoligInputCheck.BIdCheck(bId) == true)
+            if (bIdValid == true)
             {
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt bolig
             }

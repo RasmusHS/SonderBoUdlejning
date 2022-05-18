@@ -43,11 +43,10 @@ namespace SonderBoUdlejning.personCRUD
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
+                MessageBox.Show($"SUCCESS :\nMedlem med person ID {pId} opdateret til værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
                                     cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@pId"].Value + ", " +
                                     cmd.Parameters["@erBeboer"].Value +
                                     ")");
             }

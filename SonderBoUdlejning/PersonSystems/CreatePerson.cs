@@ -40,7 +40,7 @@ namespace SonderBoUdlejning
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
+                MessageBox.Show("SUCCESS :\nNyt medlem oprettet med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
                                     cmd.Parameters["@Tlf"].Value + ", " +
