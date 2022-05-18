@@ -7,23 +7,24 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning
 {
-    internal static class ErrorMessage
+    public static class ErrorMessage //Klasse der håndterer fejlbeskeder
     {
-        //ErrorMessage.ErrorList.Add
+        //Liste bruges til at holde fejlbeskeder
         public static List<string> ErrorList = new List<string>();
 
-        public static int injectedSQL { get; set; }
-        public static void resetInjectedSQL()
+        public static int injectedSQL { get; set; } //Property som bliver sat til 1 hvis der er injected SQL
+        public static void resetInjectedSQL() //Metode der nulstiller injectedSQL
         {
             injectedSQL = 0;
         }
 
-        public static void errorMessage()
+        //Metode der viser fejlbeskederne i en MessageBox
+        public static void errorMessage() 
         {
             string displayError = string.Join(Environment.NewLine, ErrorList);
-            MessageBox.Show(displayError);
-            ErrorList.Clear();
-            resetInjectedSQL();
+            MessageBox.Show(displayError); //Viser fejlbeskederne i en MessageBox
+            ErrorList.Clear(); //Tømmer listen med fejlbeskeder
+            resetInjectedSQL(); //Nulstiller injectedSQL
         }
     }
 }

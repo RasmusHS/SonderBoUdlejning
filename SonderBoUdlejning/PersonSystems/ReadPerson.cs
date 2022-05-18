@@ -62,15 +62,12 @@ namespace SonderBoUdlejning.personCRUD
             //try-catch løkke
             try
             {
-                conn.Open(); //Åbner forbindelsen til databasen
                 if (ErrorMessage.injectedSQL == 1) //Tjekker for SQL injection
                 {
                     sqlS = ""; //Skyller SQL Querien ud
-                    conn.Close(); //Lukker forbindelsen til databasen
                 }
                 else
                 {
-                    conn.Close(); //Lukker forbindelsen til databasen
                     return sqlS; //Returnerer den færdige SQL Query
                 }
 

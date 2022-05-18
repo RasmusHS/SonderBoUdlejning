@@ -13,6 +13,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
     {
         ConnString connString = ConnString.getConnInstance;
 
+        //Metode som binder data fra en SELECT Query til et dataGridView
         public object tableBinder(string sqlStatement)
         {
             try
@@ -37,8 +38,8 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                ErrorMessage.errorMessage();
-                return null;
+                ErrorMessage.errorMessage(); //Kalder errorMessage metoden
+                return null; //Returnerer null hvis der er en fejl
             }
         }
 
@@ -56,6 +57,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
          }
          */
 
+        //Metode som binder data fra en kolonne fra en tabel til en combobox
         public List<string> comboBoxBinder(string sqlStatement)
         {
             try
@@ -79,14 +81,15 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
             }
             catch
             {
-                ErrorMessage.errorMessage();
-                return null;
+                ErrorMessage.errorMessage(); //Kalder errorMessage metoden
+                return null; //Returnerer null hvis der er en fejl
             }
         }
 
+        //Metode som binder et enkelt stykke data fra en SELECT Query til en textbox eller string variabel
         public string textBoxBinder(string sqlStatement)
         {
-            string textBoxContent = "";
+            string textBoxContent = ""; //Pladsholder
             try
             {
                 SqlConnection conn = new SqlConnection(connString.connStr); //Encapsulates conn string in an object
@@ -98,12 +101,12 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
                 textBoxContent = cmd.ExecuteScalar().ToString(); //Executes the SQL statement and returns the first column of the first row of the result set
 
                 conn.Close(); //Closes the connection to the database
-                return textBoxContent;
+                return textBoxContent; //Returnerer textBoxContent til formen som kaldte metoden
             }
             catch
             {
-                ErrorMessage.errorMessage();
-                textBoxContent = "";
+                ErrorMessage.errorMessage(); //Kalder errorMessage metoden
+                textBoxContent = ""; //Returnerer null hvis der er en fejl
                 return textBoxContent;
             }
         }
