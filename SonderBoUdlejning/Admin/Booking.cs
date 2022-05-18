@@ -32,6 +32,8 @@ namespace SonderBoUdlejning.Admin
 
         private void Booking_Load(object sender, EventArgs e)
         {
+
+
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
@@ -50,6 +52,8 @@ namespace SonderBoUdlejning.Admin
             foreach (string item in listBeboer) 
             {
                 CBMembers.Items.Add(item);
+                cbMembersRes.Items.Add(item);
+
             }
         }
 
@@ -104,53 +108,40 @@ namespace SonderBoUdlejning.Admin
         private void BtnCheckDato_Click(object sender, EventArgs e)
         {
             //Tjekker om den dato man vil leje fra, allerede er i en anden udlejning. 
-            //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format? 
-            Regex regex = new Regex(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"); //Input kan kun være YYYY-MM-DD
-            if (regex.IsMatch(TBDato.Text))
-            {
-                string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + TBDato.Text + "' BETWEEN rStartDato AND rSlutDato)";
+            //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?   
+            dtpStart.CustomFormat = "yyyy-MM-dd";
+            string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
                 DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
                 listResource.Clear();
                 listResourceID.Clear();
                 CBResource.Items.Clear();
-                Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, TBDato.Text);
+                Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, dtpStart.Text);
                 foreach (string item in listResource)
                 {
                     CBResource.Items.Add(item);
                 }
 
                 TBResourceID.Text = "";
-                TBStartDato.Text = TBDato.Text;
-                TBSlutDato.Text = "";
-                TBDato.Text = "";
-
+                TBStartDato.Text = dtpStart.Text;
                 
-            }
-            else
-            {
-                MessageBox.Show("indtast dato i formatet yyyy-mm-dd");
-                
-            }
         }
 
         private void btnConfirmBooking_Click(object sender, EventArgs e)
         {
-            Regex regex = new Regex(@"^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$");
-            if (regex.IsMatch(TBSlutDato.Text)) 
-            {
-                DateTime dateToday = Convert.ToDateTime(DateTime.Today.ToString("yyyy-MM-dd"));
-                DateTime dateSlutDato = Convert.ToDateTime(TBSlutDato.Text);
+           dtpSlut.CustomFormat = "yyyy-MM-dd";
+            DateTime dateToday = Convert.ToDateTime(TBStartDato.Text); //DateTime.Today.ToString("yyyy-MM-dd")
+            DateTime dateSlutDato = Convert.ToDateTime(dtpSlut.Text);
                 
                 if (dateSlutDato >= dateToday)
                 {
-                    int antalBookings = Bokking.CheckSlutDato.CheckSlutDate(TBSlutDato.Text, TBResourceID.Text);
-                    int antalBookingsBetweenDates = SonderBoUdlejning.Booking.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, TBSlutDato.Text, Convert.ToInt32(TBResourceID.Text));
+                    int antalBookings = Bokking.CheckSlutDato.CheckSlutDate(dtpSlut.Text, TBResourceID.Text);
+                    int antalBookingsBetweenDates = SonderBoUdlejning.Booking.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
 
 
                     if (antalBookings == 0 && antalBookingsBetweenDates == 0)
                     {
-                        string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+TBSlutDato.Text+"')";
+                        string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+ dtpSlut.Text+"')";
                         SqlConnection conn = new SqlConnection(connString.connStr);
                         SqlCommand cmd = new SqlCommand(query, conn);
                         conn.Open();
@@ -162,7 +153,7 @@ namespace SonderBoUdlejning.Admin
                     }
                     else 
                     {
-                        MessageBox.Show("Ressource kan ikke bokkes til denne dato, da den allerede er optaget.");
+                        MessageBox.Show("Ressource kan ikke bookes til denne dato, da den allerede er optaget.");
                     }
 
                 }
@@ -170,9 +161,43 @@ namespace SonderBoUdlejning.Admin
                 {
                     MessageBox.Show("Slut dato kan ikke være før start dato");
                 }
-
-            }
         }
 
+        private void btnResource_Click(object sender, EventArgs e)
+        {
+            panelReservationer.Visible = false;
+            panelResourcer.Visible = true;
+        }
+
+        private void btnReservationer_Click(object sender, EventArgs e)
+        {
+            panelReservationer.Visible = true;
+            panelResourcer.Visible = false;
+        }
+
+        private void btnAntalRes_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT Person.pId AS PersonID, fNavn AS FuldeNavn, COUNT(resNr) AS AntalReservationer FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
+            DGVReservationer.DataSource = tableConn.tableBinder(query);
+        }
+
+        private void cbMembersRes_SelectedIndexChanged(object sender, EventArgs e)
+        { 
+        }
+
+        private void btnSePersonRes_Click(object sender, EventArgs e)
+        {
+            try{
+                int[] arrayBeboerID = listBeboerID.ToArray();
+                int personID = arrayBeboerID[cbMembersRes.SelectedIndex];
+
+                string query = $"SELECT fNavn, resNr, rTypeNavn, rStartDato, rSlutDato FROM Reservationer INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE Person.pId = {personID};";
+                DGVReservationer.DataSource = tableConn.tableBinder(query);
+            }
+            catch
+            {
+                MessageBox.Show("Du skal vælge person for at deres reservationer");
+            }
+        }
     }
 }
