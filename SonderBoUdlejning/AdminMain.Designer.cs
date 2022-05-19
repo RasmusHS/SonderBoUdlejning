@@ -38,7 +38,9 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelAdminFormsLoader = new System.Windows.Forms.Panel();
+            this.labelSlogan = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,18 +48,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(321, 9);
+            this.label1.Location = new System.Drawing.Point(428, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 76);
+            this.label1.Size = new System.Drawing.Size(334, 95);
             this.label1.TabIndex = 0;
             this.label1.Text = "ADMIN!";
             // 
             // logOutButton
             // 
             this.logOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logOutButton.Location = new System.Drawing.Point(864, 12);
+            this.logOutButton.Location = new System.Drawing.Point(1152, 15);
+            this.logOutButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logOutButton.Name = "logOutButton";
-            this.logOutButton.Size = new System.Drawing.Size(121, 59);
+            this.logOutButton.Size = new System.Drawing.Size(161, 73);
             this.logOutButton.TabIndex = 1;
             this.logOutButton.Text = "Log ud!";
             this.logOutButton.UseVisualStyleBackColor = true;
@@ -65,10 +69,10 @@
             // 
             // VenteListeButton
             // 
-            this.VenteListeButton.Location = new System.Drawing.Point(28, 117);
+            this.VenteListeButton.Location = new System.Drawing.Point(37, 144);
             this.VenteListeButton.Margin = new System.Windows.Forms.Padding(1);
             this.VenteListeButton.Name = "VenteListeButton";
-            this.VenteListeButton.Size = new System.Drawing.Size(149, 75);
+            this.VenteListeButton.Size = new System.Drawing.Size(199, 92);
             this.VenteListeButton.TabIndex = 0;
             this.VenteListeButton.Text = "Venteliste";
             this.VenteListeButton.UseVisualStyleBackColor = true;
@@ -84,15 +88,17 @@
             this.panel1.Controls.Add(this.VenteListeButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 726);
+            this.panel1.Size = new System.Drawing.Size(267, 894);
             this.panel1.TabIndex = 2;
             // 
             // btnBoligCRUD
             // 
-            this.btnBoligCRUD.Location = new System.Drawing.Point(28, 466);
+            this.btnBoligCRUD.Location = new System.Drawing.Point(37, 574);
+            this.btnBoligCRUD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBoligCRUD.Name = "btnBoligCRUD";
-            this.btnBoligCRUD.Size = new System.Drawing.Size(149, 77);
+            this.btnBoligCRUD.Size = new System.Drawing.Size(199, 95);
             this.btnBoligCRUD.TabIndex = 3;
             this.btnBoligCRUD.Text = "Admin. Boliger";
             this.btnBoligCRUD.UseVisualStyleBackColor = true;
@@ -100,9 +106,10 @@
             // 
             // btnOpsigelse
             // 
-            this.btnOpsigelse.Location = new System.Drawing.Point(28, 352);
+            this.btnOpsigelse.Location = new System.Drawing.Point(37, 433);
+            this.btnOpsigelse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOpsigelse.Name = "btnOpsigelse";
-            this.btnOpsigelse.Size = new System.Drawing.Size(149, 77);
+            this.btnOpsigelse.Size = new System.Drawing.Size(199, 95);
             this.btnOpsigelse.TabIndex = 2;
             this.btnOpsigelse.Text = "Opsigelse af Bolig";
             this.btnOpsigelse.UseVisualStyleBackColor = true;
@@ -110,10 +117,10 @@
             // 
             // btnTildelingBoligAdmin
             // 
-            this.btnTildelingBoligAdmin.Location = new System.Drawing.Point(28, 234);
-            this.btnTildelingBoligAdmin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTildelingBoligAdmin.Location = new System.Drawing.Point(37, 288);
+            this.btnTildelingBoligAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTildelingBoligAdmin.Name = "btnTildelingBoligAdmin";
-            this.btnTildelingBoligAdmin.Size = new System.Drawing.Size(149, 77);
+            this.btnTildelingBoligAdmin.Size = new System.Drawing.Size(199, 95);
             this.btnTildelingBoligAdmin.TabIndex = 1;
             this.btnTildelingBoligAdmin.Text = "Tildeling af Bolig";
             this.btnTildelingBoligAdmin.UseVisualStyleBackColor = true;
@@ -122,10 +129,12 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel2.Controls.Add(this.labelSlogan);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 100);
+            this.panel2.Size = new System.Drawing.Size(267, 123);
             this.panel2.TabIndex = 0;
             // 
             // panel3
@@ -134,32 +143,48 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.logOutButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(200, 0);
+            this.panel3.Location = new System.Drawing.Point(267, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(997, 100);
+            this.panel3.Size = new System.Drawing.Size(1329, 123);
             this.panel3.TabIndex = 3;
             // 
             // panelAdminFormsLoader
             // 
             this.panelAdminFormsLoader.BackColor = System.Drawing.Color.White;
             this.panelAdminFormsLoader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAdminFormsLoader.Location = new System.Drawing.Point(200, 100);
+            this.panelAdminFormsLoader.Location = new System.Drawing.Point(267, 123);
+            this.panelAdminFormsLoader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelAdminFormsLoader.Name = "panelAdminFormsLoader";
-            this.panelAdminFormsLoader.Size = new System.Drawing.Size(997, 626);
+            this.panelAdminFormsLoader.Size = new System.Drawing.Size(1329, 771);
             this.panelAdminFormsLoader.TabIndex = 4;
+            // 
+            // labelSlogan
+            // 
+            this.labelSlogan.AutoSize = true;
+            this.labelSlogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSlogan.Location = new System.Drawing.Point(60, 71);
+            this.labelSlogan.Name = "labelSlogan";
+            this.labelSlogan.Size = new System.Drawing.Size(108, 29);
+            this.labelSlogan.TabIndex = 0;
+            this.labelSlogan.Text = "Slogan 1";
             // 
             // AdminMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 726);
+            this.ClientSize = new System.Drawing.Size(1596, 894);
             this.Controls.Add(this.panelAdminFormsLoader);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AdminMain";
             this.Text = "AdminMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.AdminMain_Load);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -178,5 +203,6 @@
         private System.Windows.Forms.Button btnTildelingBoligAdmin;
         private System.Windows.Forms.Button btnOpsigelse;
         private System.Windows.Forms.Button btnBoligCRUD;
+        private System.Windows.Forms.Label labelSlogan;
     }
 }

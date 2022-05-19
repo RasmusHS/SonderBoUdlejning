@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SonderBoUdlejning.Admin;
+using System.Threading;
 
 namespace SonderBoUdlejning
 {
@@ -62,6 +63,13 @@ namespace SonderBoUdlejning
         private void btnBoligCRUD_Click(object sender, EventArgs e)
         {
             openFormsLoader(new BoligCRUD());
+        }
+
+        private void AdminMain_Load(object sender, EventArgs e)
+        {
+            SloganThread slogan = new SloganThread(labelSlogan);
+            Thread sloganThread = new Thread(new ThreadStart(slogan.ShowSlogan));
+            sloganThread.Start();
         }
     }
 }

@@ -20,6 +20,8 @@ namespace SonderBoUdlejning
         }
         private void LoginMain_Load(object sender, EventArgs e)
         {
+            
+
             string sqlS1 = "SELECT udflytDato FROM Bolig INNER JOIN Person ON Bolig.pId=Person.pId WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
             string sqlS2 = "SELECT Person.pId FROM Person INNER JOIN Bolig ON Person.pId=Bolig.pId WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SonderBoUdlejning.Secretary;
+using System.Threading;
 
 namespace SonderBoUdlejning
 {
@@ -46,6 +47,14 @@ namespace SonderBoUdlejning
             panelSecFormsLoader.Tag = loadedForm; // Vi forbinder Formen til Formloader Panelet
             loadedForm.BringToFront(); // Bringes til front så den ikke kommer i konflikt med logo
             loadedForm.Show(); // Formens vises.
+        }
+
+        private void SecretaryMain_Load(object sender, EventArgs e)
+        {
+            
+            SloganThread slogan = new SloganThread(labelSlogan);
+            Thread sloganThread = new Thread(new ThreadStart(slogan.ShowSlogan));
+            sloganThread.Start();
         }
     }
 }
