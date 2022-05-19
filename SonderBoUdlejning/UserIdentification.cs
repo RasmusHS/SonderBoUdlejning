@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SonderBoUdlejning
 {
-    internal static class UserIdentification
+    internal static class UserIdentification //Klasse som bruges til at identificere hvem der er logget på
     {
         //MSSQL server oplysninger
         public static string serverHost = "mssql13.unoeuro.com";

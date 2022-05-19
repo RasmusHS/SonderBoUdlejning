@@ -10,26 +10,29 @@ namespace SonderBoUdlejning.personCRUD
 {
     public class PersonFacade
     {
-        
+        //Metode der kalder create-metoden, som opretter en ny person i databasen
         public void CreatePerson(string navn, string mail, string tlf)
         {
             CreatePerson Pcreate = new CreatePerson();
             Pcreate.pSQLC(navn, mail, tlf);
         }
 
-        public string ReadQuery;
+        //Metode der kalder read-metoden, som returnerer en liste af alle personer fra person tabellen ud fra de givne parametre
+        public string ReadQuery; //string der indeholder SQL-query
         public void ReadPerson(string columns, string pId, string navn, string mail, string tlf, bool medlem, bool erBeboer, bool alt)
         {
             ReadPerson pRead = new ReadPerson();
             ReadQuery = pRead.pSQLR(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
         }
 
+        //Metode der kalder update-metoden, som opdaterer en person i databasen
         public void UpdatePerson(string navn, string mail, string tlf, string pId, bool erBeboer)
         {
             UpdatePerson pUpdate = new UpdatePerson();
             pUpdate.pSQLU(navn, mail, tlf, pId, erBeboer);
         }
 
+        //Metode der kalder delete-metoden, som sletter en person fra databasen
         public void DeletePerson(string tlf)
         {
             DeletePerson pDelete = new DeletePerson();

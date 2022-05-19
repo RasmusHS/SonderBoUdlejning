@@ -178,23 +178,23 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Booking.cs">
+    <Compile Include="Admin\LejemaalCRUD.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\Booking.Designer.cs">
-      <DependentUpon>Booking.cs</DependentUpon>
+    <Compile Include="Admin\LejemaalCRUD.Designer.cs">
+      <DependentUpon>LejemaalCRUD.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\OpsigelseAfBolig.cs">
+    <Compile Include="Admin\OpsigelseAfLejemaal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\OpsigelseAfBolig.Designer.cs">
-      <DependentUpon>OpsigelseAfBolig.cs</DependentUpon>
+    <Compile Include="Admin\OpsigelseAfLejemaal.Designer.cs">
+      <DependentUpon>OpsigelseAfLejemaal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\TildelBolig.cs">
+    <Compile Include="Admin\TildelLejemaal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\TildelBolig.Designer.cs">
-      <DependentUpon>TildelBolig.cs</DependentUpon>
+    <Compile Include="Admin\TildelLejemaal.Designer.cs">
+      <DependentUpon>TildelLejemaal.cs</DependentUpon>
     </Compile>
     <Compile Include="Admin\VenteListe.cs">
       <SubType>Form</SubType>
@@ -202,16 +202,13 @@
     <Compile Include="Admin\VenteListe.Designer.cs">
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Booking\CheckMellemDatoer.cs" />
-    <Compile Include="Booking\CheckSlutDato.cs" />
-    <Compile Include="Booking\OnLoadFuckions.cs" />
-    <Compile Include="BoligSystems\BoligFacade.cs" />
-    <Compile Include="BoligSystems\CreateBolig.cs" />
-    <Compile Include="BoligSystems\DeleteBolig.cs" />
-    <Compile Include="BoligSystems\UpdateBolig.cs" />
+    <Compile Include="BoligSystems\LejemaalFacade.cs" />
+    <Compile Include="BoligSystems\CreateLejemaal.cs" />
+    <Compile Include="BoligSystems\DeleteLejemaal.cs" />
+    <Compile Include="BoligSystems\UpdateLejemaal.cs" />
     <Compile Include="ConnString.cs" />
     <Compile Include="ErrorMessage.cs" />
-    <Compile Include="InputCheck\BoligInputCheck.cs" />
+    <Compile Include="InputCheck\LejemaalInputCheck.cs" />
     <Compile Include="InputCheck\PersonInputCheck.cs" />
     <Compile Include="LoginMain.cs">
       <SubType>Form</SubType>
@@ -240,9 +237,10 @@
     <Compile Include="Admin\PersonCRUD.Designer.cs">
       <DependentUpon>PersonCRUD.cs</DependentUpon>
     </Compile>
+    <Compile Include="SloganThread.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
-    <Compile Include="TildelBoligSystems\LejekontraktFacade.cs" />
-    <Compile Include="BoligSystems\ReadBolig.cs" />
+    <Compile Include="TildelLejemaalSystems\LejekontraktFacade.cs" />
+    <Compile Include="BoligSystems\ReadLejemaal.cs" />
     <Compile Include="UserIdentification.cs" />
     <Compile Include="VentelisteSystems\ReadVenteliste.cs" />
     <Compile Include="VentelisteSystems\vAddToList.cs" />
@@ -252,14 +250,14 @@
     <EmbeddedResource Include="AdminMain.resx">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\Booking.resx">
-      <DependentUpon>Booking.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\LejemaalCRUD.resx">
+      <DependentUpon>LejemaalCRUD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\OpsigelseAfBolig.resx">
-      <DependentUpon>OpsigelseAfBolig.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\OpsigelseAfLejemaal.resx">
+      <DependentUpon>OpsigelseAfLejemaal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\TildelBolig.resx">
-      <DependentUpon>TildelBolig.cs</DependentUpon>
+    <EmbeddedResource Include="Admin\TildelLejemaal.resx">
+      <DependentUpon>TildelLejemaal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\VenteListe.resx">
       <DependentUpon>VenteListe.cs</DependentUpon>

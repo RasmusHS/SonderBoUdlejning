@@ -32,13 +32,15 @@
             this.logOutButton = new System.Windows.Forms.Button();
             this.VenteListeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnBooking = new System.Windows.Forms.Button();
+            this.btnLejemaalCRUD = new System.Windows.Forms.Button();
             this.btnOpsigelse = new System.Windows.Forms.Button();
-            this.btnTildelingBoligAdmin = new System.Windows.Forms.Button();
+            this.btnTildelingLejemaalAdmin = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelSlogan = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelAdminFormsLoader = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,9 +81,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel1.Controls.Add(this.btnBooking);
+            this.panel1.Controls.Add(this.btnLejemaalCRUD);
             this.panel1.Controls.Add(this.btnOpsigelse);
-            this.panel1.Controls.Add(this.btnTildelingBoligAdmin);
+            this.panel1.Controls.Add(this.btnTildelingLejemaalAdmin);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.VenteListeButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -91,48 +93,58 @@
             this.panel1.Size = new System.Drawing.Size(467, 1620);
             this.panel1.TabIndex = 2;
             // 
-            // btnBooking
+            // btnLejemaalCRUD
             // 
-            this.btnBooking.Location = new System.Drawing.Point(46, 1272);
-            this.btnBooking.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.btnBooking.Name = "btnBooking";
-            this.btnBooking.Size = new System.Drawing.Size(348, 172);
-            this.btnBooking.TabIndex = 3;
-            this.btnBooking.Text = "Resource Reservation";
-            this.btnBooking.UseVisualStyleBackColor = true;
-            this.btnBooking.Click += new System.EventHandler(this.btnBooking_Click);
+            this.btnLejemaalCRUD.Location = new System.Drawing.Point(28, 466);
+            this.btnLejemaalCRUD.Name = "btnLejemaalCRUD";
+            this.btnLejemaalCRUD.Size = new System.Drawing.Size(149, 77);
+            this.btnLejemaalCRUD.TabIndex = 3;
+            this.btnLejemaalCRUD.Text = "Admin. Lejemål";
+            this.btnLejemaalCRUD.UseVisualStyleBackColor = true;
+            this.btnLejemaalCRUD.Click += new System.EventHandler(this.btnBoligCRUD_Click);
             // 
             // btnOpsigelse
             // 
-            this.btnOpsigelse.Location = new System.Drawing.Point(65, 785);
-            this.btnOpsigelse.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.btnOpsigelse.Location = new System.Drawing.Point(28, 352);
             this.btnOpsigelse.Name = "btnOpsigelse";
-            this.btnOpsigelse.Size = new System.Drawing.Size(348, 172);
+            this.btnOpsigelse.Size = new System.Drawing.Size(149, 77);
             this.btnOpsigelse.TabIndex = 2;
-            this.btnOpsigelse.Text = "Opsigelse af Bolig";
+            this.btnOpsigelse.Text = "Opsigelse af Lejemål";
             this.btnOpsigelse.UseVisualStyleBackColor = true;
             this.btnOpsigelse.Click += new System.EventHandler(this.btnOpsigelse_Click);
             // 
-            // btnTildelingBoligAdmin
+            // btnTildelingLejemaalAdmin
             // 
-            this.btnTildelingBoligAdmin.Location = new System.Drawing.Point(65, 522);
-            this.btnTildelingBoligAdmin.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnTildelingBoligAdmin.Name = "btnTildelingBoligAdmin";
-            this.btnTildelingBoligAdmin.Size = new System.Drawing.Size(348, 172);
-            this.btnTildelingBoligAdmin.TabIndex = 1;
-            this.btnTildelingBoligAdmin.Text = "Tildeling af Bolig";
-            this.btnTildelingBoligAdmin.UseVisualStyleBackColor = true;
-            this.btnTildelingBoligAdmin.Click += new System.EventHandler(this.btnTildelingBoligAdmin_Click);
+            this.btnTildelingLejemaalAdmin.Location = new System.Drawing.Point(28, 234);
+            this.btnTildelingLejemaalAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTildelingLejemaalAdmin.Name = "btnTildelingLejemaalAdmin";
+            this.btnTildelingLejemaalAdmin.Size = new System.Drawing.Size(149, 77);
+            this.btnTildelingLejemaalAdmin.TabIndex = 1;
+            this.btnTildelingLejemaalAdmin.Text = "Tildeling af Lejemål";
+            this.btnTildelingLejemaalAdmin.UseVisualStyleBackColor = true;
+            this.btnTildelingLejemaalAdmin.Click += new System.EventHandler(this.btnTildelingBoligAdmin_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel2.Controls.Add(this.labelSlogan);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(467, 223);
             this.panel2.TabIndex = 0;
+            // 
+            // labelSlogan
+            // 
+            this.labelSlogan.AutoSize = true;
+            this.labelSlogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSlogan.Location = new System.Drawing.Point(45, 58);
+            this.labelSlogan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSlogan.Name = "labelSlogan";
+            this.labelSlogan.Size = new System.Drawing.Size(84, 24);
+            this.labelSlogan.TabIndex = 0;
+            this.labelSlogan.Text = "Slogan 1";
             // 
             // panel3
             // 
@@ -167,7 +179,12 @@
             this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "AdminMain";
             this.Text = "AdminMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminMain_FormClosing);
+            this.Load += new System.EventHandler(this.AdminMain_Load);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -183,8 +200,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panelAdminFormsLoader;
-        private System.Windows.Forms.Button btnTildelingBoligAdmin;
+        private System.Windows.Forms.Button btnTildelingLejemaalAdmin;
         private System.Windows.Forms.Button btnOpsigelse;
-        private System.Windows.Forms.Button btnBooking;
+        private System.Windows.Forms.Button btnLejemaalCRUD;
+        private System.Windows.Forms.Label labelSlogan;
     }
 }
