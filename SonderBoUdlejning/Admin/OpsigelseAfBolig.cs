@@ -24,24 +24,24 @@ namespace SonderBoUdlejning.Admin
 
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         
-        //Standard Query for bolig dataGridView
-        string sqlS1 = "SELECT adresse, postNr, bId, Bolig.pId, indflytDato, udflytDato " +
-                       "FROM Bolig " +
-                       "INNER JOIN Person ON Bolig.pId=Person.pId " +
-                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+        //Standard Query for lejemål dataGridView
+        string sqlS1 = "SELECT lejemaalNr, adresse, postNr, Lid, Lejemaal.pId, indflytDato, udflytDato " +
+                       "FROM Lejemaal " +
+                       "INNER JOIN Person ON Lejemaal.pId=Person.pId " +
+                       "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
 
         //Standard Query for person dataGridView
         string sqlS2 = "SELECT Person.pId, fNavn, pMail, pTlf, erBeboer " +
                        "FROM Person " +
-                       "INNER JOIN Bolig ON Person.pId=Bolig.pId " +
-                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+                       "INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId " +
+                       "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
 
         private void OpsigelseAfBolig_Load(object sender, EventArgs e)
         {
             //Indlæser dataGridViews med standard queries
-            DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
+            DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
 
             //Indlæser måned comboboxen med alle månederne
@@ -61,10 +61,10 @@ namespace SonderBoUdlejning.Admin
         {
             string pId = tbPiD.Text; //Tager inputtet fra person ID textboxen
 
-            string bId = tbBiD.Text; //Tager inputtet fra bolig ID textboxen
+            string Lid = tbBiD.Text; //Tager inputtet fra lejemål Nr textboxen
 
-            //Bruger inputtene fra person ID og bolig ID textboxene til finde adresse, postNr og hvornår personen flyttede ind
-            string lejemaal = "";
+            //Bruger inputtene fra person ID og lejemål Nr textboxene til finde adresse, postNr og hvornår personen flyttede ind
+            string lejemaalNr = "";
             string adresse = "";
             string postNr = "";
             string indflytDato = "";
@@ -79,18 +79,18 @@ namespace SonderBoUdlejning.Admin
             bool udflytDatoValid = true;//
             
             //Messageboxen bruges til debugging
-            //MessageBox.Show($"{adresse}\n{postNr}\n{bId}\n{pId}\n{indflytDato}\n{udflytDato}");
+            //MessageBox.Show($"{adresse}\n{postNr}\n{Lid}\n{pId}\n{indflytDato}\n{udflytDato}");
 
-            //Checker om person ID eller bolig ID er tomt
-            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(bId)))
+            //Checker om person ID eller lejemål Nr. er tomt
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                //Viser fejlbesked hvis person ID eller bolig ID er tomt
+                //Viser fejlbesked hvis person ID eller lejemål Nr er tomt
                 MessageBox.Show("Alle felter skal udfyldes");
                 return; //Stopper koden
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
             try
             {
@@ -104,15 +104,15 @@ namespace SonderBoUdlejning.Admin
             //Checker inputtene for længde og karakterer
             if ((pIdValid == true) && (bIdValid == true) && (udflytDatoValid == true))
             {
-                lejemaal = tableConn.textBoxBinder($"SELECT lejemaal FROM Bolig WHERE pId = {pId} AND bId = {bId}");
-                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
-                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE lejemaal = {lejemaal}");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
+                lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
+                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
                 BoligFacade opsigBolig = new BoligFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
-                opsigBolig.uBolig(lejemaal, adresse, postNr, bId, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
-                DGVBolig.DataSource = tableConn.tableBinder(sqlS1); //refresher bolig dataGridview
+                opsigBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
+                DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
                 DGVPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
             }
             else

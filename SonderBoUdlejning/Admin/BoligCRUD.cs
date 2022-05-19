@@ -15,8 +15,8 @@ namespace SonderBoUdlejning.Admin
     public partial class BoligCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT * FROM Bolig"; //Standard SQL Query, som bruges til at vise Bolig tabellen i dens dataGridView
-        string sqlS2 = "SELECT * FROM BoligInfo"; //Standard SQL Query, som bruges til at vise BoligInfo tabellen i dens dataGridView
+        string sqlS1 = "SELECT * FROM Lejemaal"; //Standard SQL Query, som bruges til at vise Lejemaal tabellen i dens dataGridView
+        string sqlS2 = "SELECT * FROM LejemaalsInfo"; //Standard SQL Query, som bruges til at vise LejemaalsInfo tabellen i dens dataGridView
         public BoligCRUD()
         {
             InitializeComponent();
@@ -25,8 +25,8 @@ namespace SonderBoUdlejning.Admin
         private void BoligCRUD_Load(object sender, EventArgs e)
         {
             //Forbinder dataGridViews til tabeller
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+            dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             //tilføjer et tomt felt til postNr comboboxen
             comboBoxPostNr.Items.Add("");
@@ -58,7 +58,7 @@ namespace SonderBoUdlejning.Admin
             string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
             string postNr = "";
             //string postNr = comboBoxPostNr.SelectedItem.ToString(); //Tager inputtet fra postNr comboboxen
-            string bId = tbBoligID.Text; //Tager inputtet fra boligID textboxen
+            string Lid = tbBoligID.Text; //Tager inputtet fra boligID textboxen
 
             try
             {
@@ -73,24 +73,24 @@ namespace SonderBoUdlejning.Admin
             }
 
             //Tjekker om en af felterne er tomme
-            if ((string.IsNullOrEmpty(adresse)) || (string.IsNullOrEmpty(bId)) || (string.IsNullOrEmpty(postNr)))
+            if ((string.IsNullOrEmpty(adresse)) || (string.IsNullOrEmpty(Lid)) || (string.IsNullOrEmpty(postNr)))
             {
-                MessageBox.Show("Indtast venligst både en adresse, et bolig ID og vælg et postNr!");
+                MessageBox.Show("Indtast venligst både en adresse, et lejemål Nr og vælg et postNr!");
                 return;
             }
 
             bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
             bool postNrValid = BoligInputCheck.PostNrCheck(postNr);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
             
             //Tjekker inputtene for længde og ugyldige tegn
             if ((adresseValid == true) && (postNrValid == true) && (bIdValid == true))
             {
-                //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny bolig
+                //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny lejemål
                 BoligFacade CreateBolig = new BoligFacade();
-                CreateBolig.cBolig(adresse, postNr, bId); //opretter bolig
-                dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
-                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                CreateBolig.cBolig(adresse, postNr, Lid); //opretter lejemål
+                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
+                dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
             else
             {
@@ -102,7 +102,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnReadB_Click(object sender, EventArgs e)
         {
-            string sqlTemplate = $"SELECT adresse, postNr, Bolig.bId, bType, antalRum, kvm, lejePris FROM Bolig INNER JOIN BoligInfo ON Bolig.bId=BoligInfo.bId WHERE 1=1";
+            string sqlTemplate = $"SELECT lejemaalNr, adresse, postNr, Lejemaal.Lid, lType, antalRum, kvm, lejePris FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1";
 
             //Tager adresse input checker det for tegn og længde
             string adresse = tbAdresse.Text;
@@ -122,9 +122,9 @@ namespace SonderBoUdlejning.Admin
                 MessageBox.Show("Vælg venligst et postnummer!");
             }
 
-            //Tager bId input og tjekker det for ugyldige tegn
-            string bId = tbBoligID.Text; //
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            //Tager Lid input og tjekker det for ugyldige tegn
+            string Lid = tbBoligID.Text; //
+            bool LidValid = BoligInputCheck.LidCheck(Lid);
 
             //Ikke muligt at søge baseret på person ID. Input felt findes ikke i formen
             string pId = ""; //
@@ -133,20 +133,20 @@ namespace SonderBoUdlejning.Admin
             string indDato = ""; //Sætter indflytningsdato til at være tom
             string udDato = ""; //Sætter udflytningsdato til at være tom
 
-            //Hvis bId inputtet ikke er tomt, så bruges bId til at finde dens bType
-            string bType = "";
+            //Hvis Lid inputtet ikke er tomt, så bruges Lid til at finde dens lType
+            string lType = "";
 
-            if (bIdValid == false)
+            if ((LidValid == false) || (string.IsNullOrEmpty(tbBoligID.Text)))
             {
-                bType = "";
+                lType = "";
             }
             else
             {
-                bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
+                lType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
             }
 
-            /*if (!string.IsNullOrEmpty(bId)) 
-                bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");*/
+            /*if (!string.IsNullOrEmpty(Lid)) 
+                lType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");*/
             
             //antalRum bruges ikke endnu og har heller ikke noget input felt at tage fra
             string antalRum = "";
@@ -169,25 +169,25 @@ namespace SonderBoUdlejning.Admin
 
             bool tilLeje = true;
 
-            //Sætter tabControl fokus til Bolig tabellen
-            tabControl1.SelectedTab = BoligPage;
+            //Sætter tabControl fokus til Lejemaal tabellen
+            tabControl1.SelectedTab = LejemaalPage;
 
             //Laver et objekt af BoligFacade klassen
             BoligFacade readTilLeje = new BoligFacade();
 
             //Hvis alle inputtet er gyldige, så kaldes metoden readTilLeje
-            if ((adresseValid == true) && (bIdValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
+            if ((adresseValid == true) && (LidValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
             {
-                //Kalder en speciel read metode for bolig til leje
-                readTilLeje.rBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
+                //Kalder en speciel read metode for lejemål til leje
+                readTilLeje.rBolig(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
 
-                //Viser read metodens resultat i Bolig dataGridView
-                dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 
+                //Viser read metodens resultat i Lejemaal dataGridView
+                dgvLejemaal.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 
             }
             else //Ellers vises en fejlbesked, samt nulstilles dataGridViews
             {
-                dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
-                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
+                dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
                 ErrorMessage.errorMessage(); //Vis fejlbesked
             }
 
@@ -195,33 +195,33 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUpdateB_Click(object sender, EventArgs e)
         {
-            string lejemaal = tbLejemaal.Text;
+            string lejemaalNr = tbLejemaal.Text;
             string adresse = ""; //Tager inputtet fra adresse textboxen
-            string bId = ""; //Tager inputtet fra boligID textboxen
+            string Lid = ""; //Tager inputtet fra boligID textboxen
 
             //Tjekker om lejemåls feltet er tomt
-            if ((string.IsNullOrEmpty(lejemaal)))
+            if ((string.IsNullOrEmpty(lejemaalNr)))
             {
                 MessageBox.Show("Indtast venligst et lejemåls nr.!");
                 return;
             }
 
-            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaal);
+            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaalNr);
 
             if ((string.IsNullOrEmpty(tbAdresse.Text)) && (lejemaalValid == true))
-                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE lejemaal = {lejemaal}");
+                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
             else
                 adresse = tbAdresse.Text;
             
             if ((string.IsNullOrEmpty(tbBoligID.Text)) && (lejemaalValid == true))
-                bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE lejemaal = {lejemaal}");
+                Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
             else
-                bId = tbBoligID.Text;
+                Lid = tbBoligID.Text;
 
             //Tjekker om der er der er skrevet noget i et af felterne
             if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbBoligID.Text)))
             {
-                MessageBox.Show("Indtast venligst enten en adresse eller et bolig ID!");
+                MessageBox.Show("Indtast venligst enten en adresse eller et lejemål Nr!");
                 return;
             }
 
@@ -231,22 +231,22 @@ namespace SonderBoUdlejning.Admin
             string udflytDato = "";
 
             bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
             //Tjekker inputtene for længde og ugyldige tegn
             if ((lejemaalValid == true) && (adresseValid == true) && (bIdValid == true))
             {
-                //Finder postNr, pId, indflytDato og udflytDato fra Bolig tabellen ved hjælp af adressen
-                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE lejemaal = {lejemaal}");
-                pId = tableConn.textBoxBinder($"SELECT pId FROM Bolig WHERE lejemaal = {lejemaal}");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
-                udflytDato = BoligInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
+                //Finder postNr, pId, indflytDato og udflytDato fra Lejemaal tabellen ved hjælp af adressen
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                pId = tableConn.textBoxBinder($"SELECT pId FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                udflytDato = BoligInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
-                //Opdaterer bolig ID'et i Bolig tabellen
+                //Opdaterer lejemål Nr'et i Lejemaal tabellen
                 BoligFacade UpdateBolig = new BoligFacade();
-                UpdateBolig.uBolig(lejemaal, adresse, postNr, bId, pId, indflytDato, udflytDato);
-                dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
-                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                UpdateBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato);
+                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
+                dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
             else
             {
@@ -256,25 +256,25 @@ namespace SonderBoUdlejning.Admin
 
         private void btnDeleteB_Click(object sender, EventArgs e)
         {
-            string lejemaal = tbLejemaal.Text; //Tager inputtet fra Lejemål textboxen
+            string lejemaalNr = tbLejemaal.Text; //Tager inputtet fra Lejemål textboxen
 
             //Tjekker om adresse feltet er tomt
-            if ((string.IsNullOrEmpty(lejemaal)))
+            if ((string.IsNullOrEmpty(lejemaalNr)))
             {
                 MessageBox.Show("Indtast venligst et lejemåls nr.!");
                 return;
             }
 
-            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaal);
+            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaalNr);
             
             //Tjekker inputtene for længde og ugyldige tegn
             if ((lejemaalValid == true))
             {
-                //Sletter bolig fra Bolig tabellen
+                //Sletter lejemål fra Lejemaal tabellen
                 BoligFacade DeleteBolig = new BoligFacade();
-                DeleteBolig.dBolig(lejemaal);
-                dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
-                dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                DeleteBolig.dBolig(lejemaalNr);
+                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
+                dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
             else
             {
@@ -294,11 +294,11 @@ namespace SonderBoUdlejning.Admin
                 tbBy.Text = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = {postNr}");
         }
 
-        //Event metode som aktiveres hver gang bolig ID tekstboxen bliver ændret
+        //Event metode som aktiveres hver gang lejemål Nr tekstboxen bliver ændret
         private void tbBoligID_TextChanged(object sender, EventArgs e)
         {
-            string bId = tbBoligID.Text; //Sætter bolig ID'et i en string variabel
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            string Lid = tbBoligID.Text; //Sætter lejemål Nr'et i en string variabel
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
             try
             {
@@ -307,23 +307,23 @@ namespace SonderBoUdlejning.Admin
                     ErrorMessage.errorMessage(); //Viser fejlbesked
                     return;
                 }
-                //Hvis bolig ID'et ikke er tomt, så kaldes metoden textBoxBinder og resultatet vises i bolig type tekstboxen
-                if (!string.IsNullOrEmpty(bId))
-                    tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
+                //Hvis lejemål Nr'et ikke er tomt, så kaldes metoden textBoxBinder og resultatet vises i lejemål type tekstboxen
+                if (!string.IsNullOrEmpty(Lid))
+                    tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
             }
-            catch //hvis bolig ID'et ikke er et tal, så vises en fejlbesked
+            catch //hvis lejemål Nr'et ikke er et tal, så vises en fejlbesked
             {
-                MessageBox.Show("Indtast kun tal i bolig ID feltet");
+                MessageBox.Show("Indtast kun tal i lejemål Nr feltet");
             }
         }
 
-        //Knap som viser felter relevant for at oprette en ny bolig
+        //Knap som viser felter relevant for at oprette en ny lejemål
         private void btnVisBCreate_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+            dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             string[] comboBoxList;
             comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
@@ -338,10 +338,10 @@ namespace SonderBoUdlejning.Admin
             lblAdresse.Visible = true; //
             lblPostNr.Visible = true; //
             lblBy.Visible = true; //
-            lblBoligID.Visible = true; //
+            lblLejemaalNr.Visible = true; //
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblBoligType.Visible = true; //
+            lblLejemaalType.Visible = true; //
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
@@ -362,8 +362,10 @@ namespace SonderBoUdlejning.Admin
         {
             panelContainer.Visible = true;
 
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            string sqlTemplate = $"SELECT lejemaalNr, adresse, postNr, Lejemaal.Lid, lType, antalRum, kvm, lejePris FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1 AND (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
+
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlTemplate);
+            dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             string[] comboBoxList;
             comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
@@ -378,10 +380,10 @@ namespace SonderBoUdlejning.Admin
             lblAdresse.Visible = true; //
             lblPostNr.Visible = true; //
             lblBy.Visible = false;
-            lblBoligID.Visible = true; //
+            lblLejemaalNr.Visible = true; //
             lblMinKvm.Visible = true; //
             lblMaksKvm.Visible = true; //
-            lblBoligType.Visible = false;
+            lblLejemaalType.Visible = false;
             lblMinPris.Visible = true; //
             lblMaksPris.Visible = true; //
 
@@ -397,13 +399,13 @@ namespace SonderBoUdlejning.Admin
             tbMaksPris.Visible = true; //
         }
 
-        //Knap som viser felter relevant for at opdatere en eksisterende bolig
+        //Knap som viser felter relevant for at opdatere en eksisterende lejemål
         private void btnVisBUpdate_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+            dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
@@ -414,10 +416,10 @@ namespace SonderBoUdlejning.Admin
             lblAdresse.Visible = true; //
             lblPostNr.Visible = false;
             lblBy.Visible = false;
-            lblBoligID.Visible = true; //
+            lblLejemaalNr.Visible = true; //
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblBoligType.Visible = false;
+            lblLejemaalType.Visible = false;
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
@@ -433,13 +435,13 @@ namespace SonderBoUdlejning.Admin
             tbMaksPris.Visible = false;
         }
 
-        //Knap som viser felter relevant for at slette en eksisterende bolig
+        //Knap som viser felter relevant for at slette en eksisterende lejemål
         private void btnVisDBolig_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
-            dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
-            dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+            dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
             
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
@@ -450,10 +452,10 @@ namespace SonderBoUdlejning.Admin
             lblAdresse.Visible = false;
             lblPostNr.Visible = false;
             lblBy.Visible = false;
-            lblBoligID.Visible = false;
+            lblLejemaalNr.Visible = false;
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblBoligType.Visible = false;
+            lblLejemaalType.Visible = false;
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 

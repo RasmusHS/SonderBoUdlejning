@@ -49,7 +49,7 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
         
          private void Form1_Load(object sender, EventArgs e)
          {   
-             string sqlS1 = "SELECT * FROM Bolig";
+             string sqlS1 = "SELECT * FROM Lejemaal";
              dataGridView1.DataSource = tableConn.tableBinder(sqlS1);
 
              string sqlS2 = "SELECT * FROM Kunde";

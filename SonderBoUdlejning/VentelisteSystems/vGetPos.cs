@@ -14,14 +14,14 @@ namespace SonderBoUdlejning.VentelisteSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der finder en person position på en venteliste
-        public string vGetPosition(string pId, string bId)
+        public string vGetPosition(string pId, string Lid)
         {
             string position; //Variabel der indeholder positionen på ventelisten
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             conn.Open(); //Åbner forbindelsen
 
             //SQL-query der finder positionen på ventelisten
-            string sqlS = $"SELECT ROW_NUMBER() OVER(ORDER BY signUpDato ASC) AS row_num, signUpDato, bId, pId FROM Venteliste WHERE bId = {bId}";
+            string sqlS = $"SELECT ROW_NUMBER() OVER(ORDER BY signUpDato ASC) AS row_num, signUpDato, Lid, pId FROM Venteliste WHERE Lid = {Lid}";
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL-kommandoen
 
             SqlDataReader reader = cmd.ExecuteReader(); //Læser resultatet af SQL-kommandoen

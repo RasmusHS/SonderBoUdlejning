@@ -14,9 +14,9 @@ namespace SonderBoUdlejning.VentelisteSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der fjerner en person fra en venteliste
-        public void vRemoveFrList(string pId, string bId)
+        public void vRemoveFrList(string pId, string Lid)
         {
-            string sqlS = "DELETE FROM Venteliste WHERE pId = @pId AND bId = @bId"; //Standard SQL Query
+            string sqlS = "DELETE FROM Venteliste WHERE pId = @pId AND Lid = @Lid"; //Standard SQL Query
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
             cmd.Parameters.Clear(); //Rydder parametre fra kommandoen
@@ -25,8 +25,8 @@ namespace SonderBoUdlejning.VentelisteSystems
             cmd.Parameters.Add("@pId", System.Data.SqlDbType.Int);
             cmd.Parameters["@pId"].Value = Convert.ToInt32(pId);
 
-            cmd.Parameters.Add("@bId", System.Data.SqlDbType.Int);
-            cmd.Parameters["@bId"].Value = Convert.ToInt32(bId);
+            cmd.Parameters.Add("@Lid", System.Data.SqlDbType.Int);
+            cmd.Parameters["@Lid"].Value = Convert.ToInt32(Lid);
 
             //try-catch løkke
             try
@@ -40,7 +40,7 @@ namespace SonderBoUdlejning.VentelisteSystems
                     cmd.ExecuteNonQuery(); //Udfører kommandoen
                     MessageBox.Show("SUCCESS :\nEntry blev fjernet med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@pId"].Value + ", " +
-                                    cmd.Parameters["@bId"].Value +
+                                    cmd.Parameters["@Lid"].Value +
                                     ")");
                 }
                 else if (dialogResult == DialogResult.No) //Hvis nej

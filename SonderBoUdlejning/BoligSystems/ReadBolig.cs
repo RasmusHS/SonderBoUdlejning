@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der indlæser boliger fra databasen ud fra de givne parametre
-        public string readBolig(string sqlTemplate, string adresse, string postNr, string bId, string pId, string indDato, string udDato, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
+        public string readBolig(string sqlTemplate, string adresse, string postNr, string Lid, string pId, string indDato, string udDato, string lType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
         {
             string sqlS = $"{sqlTemplate}"; //Skabelon for SQL-sætning
 
@@ -31,9 +31,9 @@ namespace SonderBoUdlejning.BoligSystems
             else
                 sqlS += $"";
 
-            //Tjekker om bolig ID er udfyldt
-            if (!string.IsNullOrEmpty(bId))
-                sqlS += $" AND bId = {bId}";
+            //Tjekker om lejemål ID er udfyldt
+            if (!string.IsNullOrEmpty(Lid))
+                sqlS += $" AND Lejemaal.Lid = {Lid}";
             else
                 sqlS += $"";
 
@@ -54,8 +54,8 @@ namespace SonderBoUdlejning.BoligSystems
                 sqlS += $"";
 
             //Tjekker om boligtype er udfyldt
-            if (!string.IsNullOrEmpty(bType))
-                sqlS += $" AND bType = '{bType}'";
+            if (!string.IsNullOrEmpty(lType))
+                sqlS += $" AND lType = '{lType}'";
             else
                 sqlS += $"";
 

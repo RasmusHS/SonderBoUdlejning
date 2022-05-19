@@ -23,8 +23,8 @@ namespace SonderBoUdlejning.Admin
         //Standard SQL Query, som henter Person tabellen
         string sqlS2 = "SELECT * FROM Person";
 
-        //Standard SQL Query, som henter BoligInfo tabellen
-        string sqlS3 = "SELECT * FROM BoligInfo";
+        //Standard SQL Query, som henter LejemaalsInfo tabellen
+        string sqlS3 = "SELECT * FROM LejemaalsInfo";
         public VenteListe()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace SonderBoUdlejning.Admin
             DGVPersoner.DataSource = tableConn.tableBinder(sqlS2);
 
             //Indlæser boligInfo dataGridView
-            DGVBoliger.DataSource = tableConn.tableBinder(sqlS3);
+            DGVLejemaal.DataSource = tableConn.tableBinder(sqlS3);
 
             //Skjuler input panel
             panelInputs.Visible = false;
@@ -66,24 +66,24 @@ namespace SonderBoUdlejning.Admin
         private void InsertToList_Click(object sender, EventArgs e)
         {
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string bId = bIdTextbox.Text; //Tager input fra bolig ID textboxen
+            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vAddToList = new vFacade();
 
-            //Tjekker om person ID eller bolig ID er tomme
-            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(bId)))
+            //Tjekker om person ID eller lejemål Nr er tomme
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
+                MessageBox.Show("Indtast venligst både et person ID og et lejemål Nr!");
                 return;
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
-            //Tjekker om person ID og bolig ID er gyldige
+            //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
             {
-                vAddToList.AddToList(pId, bId); //Tilføjer person til venteliste for en bolig
+                vAddToList.AddToList(pId, Lid); //Tilføjer person til venteliste for en lejemål
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
             }
             else
@@ -95,24 +95,24 @@ namespace SonderBoUdlejning.Admin
         private void DeleteFromListButton_Click(object sender, EventArgs e)
         {
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string bId = bIdTextbox.Text; //Tager input fra bolig ID textboxen
+            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vDeleteFromList = new vFacade();
 
-            //Tjekker om person ID eller bolig ID er tomme
-            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(bId)))
+            //Tjekker om person ID eller lejemål Nr er tomme
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                MessageBox.Show("Indtast venligst et pId og et bId!");
+                MessageBox.Show("Indtast venligst et pId og et Lid!");
                 return;
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
-            //Tjekker om person ID og bolig ID er gyldige
+            //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
             {
-                vDeleteFromList.RemoveFromList(pId, bId); //Sletter en person fra en venteliste
+                vDeleteFromList.RemoveFromList(pId, Lid); //Sletter en person fra en venteliste
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
             }
             else
@@ -125,25 +125,25 @@ namespace SonderBoUdlejning.Admin
         {
 
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string bId = bIdTextbox.Text; //Tager input fra bolig ID textboxen
+            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vGetListPos = new vFacade();
 
-            //Tjekker om person ID eller bolig ID er tomme
-            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(bId)))
+            //Tjekker om person ID eller lejemål Nr er tomme
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                MessageBox.Show("Indtast venligst både et person ID og et bolig ID!");
+                MessageBox.Show("Indtast venligst både et person ID og et lejemål Nr!");
                 return;
                 
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
-            //Tjekker om person ID og bolig ID er gyldige
+            //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
             {
-                vGetListPos.GetListPosition(pId, bId); //Finder en persons position på en venteliste
+                vGetListPos.GetListPosition(pId, Lid); //Finder en persons position på en venteliste
                 positionTextBox.Text = vGetListPos.Position; //Viser resultatet i position textboxen
             }
             else
@@ -154,25 +154,25 @@ namespace SonderBoUdlejning.Admin
 
         private void btnVisVentelisteFor_Click(object sender, EventArgs e)
         {
-            string bId = bIdTextbox.Text; //Tager input fra bolig ID textboxen
+            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
 
-            //SQL Query, som henter ventelisten for en bestemt bolig
-            string sqlS1 = $"SELECT * FROM Venteliste WHERE bId = {bId} ORDER BY signUpDato ASC";
+            //SQL Query, som henter ventelisten for en bestemt lejemål
+            string sqlS1 = $"SELECT * FROM Venteliste WHERE Lid = {Lid} ORDER BY signUpDato ASC";
 
-            //Tjekker om bolig ID er tom
-            if (string.IsNullOrEmpty(bId))
+            //Tjekker om lejemål Nr er tom
+            if (string.IsNullOrEmpty(Lid))
             {
-                MessageBox.Show("Indtast venligst et bolig ID!");
+                MessageBox.Show("Indtast venligst et lejemål Nr!");
                 return;
                 
             }
 
-            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
 
-            //Tjekker om bolig ID er gyldig
+            //Tjekker om lejemål Nr er gyldig
             if (bIdValid == true)
             {
-                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt bolig
+                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt lejemål
             }
             else
             {

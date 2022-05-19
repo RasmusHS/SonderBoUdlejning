@@ -14,18 +14,18 @@ namespace SonderBoUdlejning.BoligSystems
         //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
 
-        //Metode der opdaterer en bolig
-        public void updateBolig(string lejemaal, string adresse, string postNr, string bId, string pId, string indDato, string udDato)
+        //Metode der opdaterer en lejemål
+        public void updateBolig(string lejemaalNr, string adresse, string postNr, string Lid, string pId, string indDato, string udDato)
         {
             //Definere SQL Query med parametrenavne
-            string sqlS = "UPDATE Bolig SET adresse = @adresse, postNr = @postNr, bId = @bId, pId = @pId, indflytDato = @indflytDato, udflytDato = @udflytDato WHERE lejemaal = @lejemaal";
+            string sqlS = "UPDATE Lejemaal SET adresse = @adresse, postNr = @postNr, Lid = @Lid, pId = @pId, indflytDato = @indflytDato, udflytDato = @udflytDato WHERE lejemaalNr = @lejemaalNr";
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
             cmd.Parameters.Clear(); //Rydder parametre fra kommandoen
 
             //Tilføjer parametre til kommandoen
-            cmd.Parameters.Add("@lejemaal", System.Data.SqlDbType.Int);
-            cmd.Parameters["@lejemaal"].Value = Convert.ToString(lejemaal);
+            cmd.Parameters.Add("@lejemaalNr", System.Data.SqlDbType.Int);
+            cmd.Parameters["@lejemaalNr"].Value = Convert.ToString(lejemaalNr);
             
             cmd.Parameters.Add("@adresse", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@adresse"].Value = Convert.ToString(adresse);
@@ -33,8 +33,8 @@ namespace SonderBoUdlejning.BoligSystems
             cmd.Parameters.Add("@postNr", System.Data.SqlDbType.Int);
             cmd.Parameters["@postNr"].Value = Convert.ToInt32(postNr);
 
-            cmd.Parameters.Add("@bId", System.Data.SqlDbType.Int);
-            cmd.Parameters["@bId"].Value = Convert.ToInt32(bId);
+            cmd.Parameters.Add("@Lid", System.Data.SqlDbType.Int);
+            cmd.Parameters["@Lid"].Value = Convert.ToInt32(Lid);
 
             
             cmd.Parameters.Add("@pId", System.Data.SqlDbType.Int); 
@@ -61,10 +61,10 @@ namespace SonderBoUdlejning.BoligSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Forsøger at udføre kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                MessageBox.Show($"SUCCESS :\nOpdaterede bolig {lejemaal} med værdierne:\n(" + //Vis beskedboks med besked om succes
+                MessageBox.Show($"SUCCESS :\nOpdaterede lejemål {lejemaalNr} med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@adresse"].Value + ", " +
                                     cmd.Parameters["@postNr"].Value + ", " +
-                                    cmd.Parameters["@bId"].Value + ", " +
+                                    cmd.Parameters["@Lid"].Value + ", " +
                                     cmd.Parameters["@pId"].Value + ", " +
                                     cmd.Parameters["@indflytDato"].Value + ", " +
                                     cmd.Parameters["@udflytDato"].Value +

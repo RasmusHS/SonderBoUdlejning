@@ -14,24 +14,24 @@ namespace SonderBoUdlejning.BoligSystems
         //Finder connectionstring til databasen frem fra ConnString klassen        
         ConnString connString = ConnString.getConnInstance;
 
-        //Metode der sletter en bolig fra databasen
-        public void deleteBolig(string lejemaal)
+        //Metode der sletter en lejemål fra databasen
+        public void deleteBolig(string lejemaalNr)
         {
-            string sqlS = "IF EXISTS (SELECT adresse FROM Bolig WHERE adresse = @adresse) BEGIN DELETE FROM Bolig WHERE adresse = @adresse END"; //Definere DELETE Querien
+            string sqlS = "IF EXISTS (SELECT lejemaalNr FROM Lejemaal WHERE lejemaalNr = @lejemaalNr) BEGIN DELETE FROM Lejemaal WHERE lejemaalNr = @lejemaalNr END"; //Definere DELETE Querien
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
             cmd.Parameters.Clear(); //Rydder parametre
 
             //Tilføjer parametre til kommandoen
-            cmd.Parameters.Add("@adresse", System.Data.SqlDbType.VarChar);
-            cmd.Parameters["@adresse"].Value = Convert.ToString(lejemaal);
+            cmd.Parameters.Add("@lejemaalNr", System.Data.SqlDbType.Int);
+            cmd.Parameters["@lejemaalNr"].Value = Convert.ToInt32(lejemaalNr);
 
             //try-catch løkke
             try
             {
                 conn.Open(); //Åbner forbindelsen
                 
-                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette lejemål {lejemaal} fra bolig tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette lejemål {lejemaalNr} fra lejemål tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     if (cmd.ExecuteNonQuery() == -1)
@@ -40,8 +40,8 @@ namespace SonderBoUdlejning.BoligSystems
                     }
                     else
                     {
-                        MessageBox.Show($"Lejemål {lejemaal} blev slettet");
-                        //MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + cmd.Parameters["@adresse"].Value + ")"); //Vis besked om at kommandoen er udført
+                        MessageBox.Show($"Lejemål {lejemaalNr} blev slettet");
+                        //MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + cmd.Parameters["@lejemaalNr"].Value + ")"); //Vis besked om at kommandoen er udført
                     }
                 }
                 else if (dialogResult == DialogResult.No) //Hvis nej

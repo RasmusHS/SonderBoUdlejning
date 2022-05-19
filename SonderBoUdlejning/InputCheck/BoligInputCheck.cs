@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.InputCheck
 {
-    public static class BoligInputCheck //Klasse der tjekker brugerinput som skal interagere bolig tabellen
+    public static class BoligInputCheck //Klasse der tjekker brugerinput som skal interagere lejemål tabellen
     {
         //Definere Regex
         private static Regex retal = new Regex(@"(^[0-9 ]*$)");
@@ -21,9 +21,9 @@ namespace SonderBoUdlejning.InputCheck
 
         //Ikke alle metoder er kommenteret, da metoderne er meget ens
 
-        public static bool LejemaalCheck(string lejemaal)
+        public static bool LejemaalCheck(string lejemaalNr)
         {
-            if (SQLInject.IsMatch(lejemaal))
+            if (SQLInject.IsMatch(lejemaalNr))
             {
                 ErrorMessage.ErrorList.Add("Lejemåls nr. indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
@@ -31,9 +31,9 @@ namespace SonderBoUdlejning.InputCheck
             }
             else
             {
-                if (!string.IsNullOrEmpty(lejemaal))
+                if (!string.IsNullOrEmpty(lejemaalNr))
                 {
-                    if ((!retal.IsMatch(lejemaal)))
+                    if ((!retal.IsMatch(lejemaalNr)))
                     {
                         ErrorMessage.ErrorList.Add("Lejemåls nr. må kun indeholde tal");
                         return false;
@@ -110,22 +110,22 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-        //Metode der tjekker om bolig ID input er gyldig
-        public static bool BIdCheck(string bId)
+        //Metode der tjekker om lejemål Nr input er gyldig
+        public static bool LidCheck(string Lid)
         {
-            if (SQLInject.IsMatch(bId))
+            if (SQLInject.IsMatch(Lid))
             {
-                ErrorMessage.ErrorList.Add("Bolig ID indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("Lejemaal Nr indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if (!string.IsNullOrEmpty(bId))
+                if (!string.IsNullOrEmpty(Lid))
                 {
-                    if ((!retal.IsMatch(bId)))
+                    if ((!retal.IsMatch(Lid)))
                     {
-                        ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("Lejemaal Nr må kun indeholde tal");
                         return false;
                     }
                     else
@@ -208,20 +208,20 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-        //Metode der tjekker om bolig type input er gyldig. Bruges ikke i øjeblikket
-        public static bool bTypeCheck(string bType)
+        //Metode der tjekker om lejemål type input er gyldig. Bruges ikke i øjeblikket
+        public static bool lTypeCheck(string lType)
         {
-            if (SQLInject.IsMatch(bType))
+            if (SQLInject.IsMatch(lType))
             {
-                ErrorMessage.ErrorList.Add("bType indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("lType indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if ((!bogstaver.IsMatch(bType)))
+                if ((!bogstaver.IsMatch(lType)))
                 {
-                    ErrorMessage.ErrorList.Add("bType må kun indeholde bogstaver");
+                    ErrorMessage.ErrorList.Add("lType må kun indeholde bogstaver");
                     return false;
                 }
                 else

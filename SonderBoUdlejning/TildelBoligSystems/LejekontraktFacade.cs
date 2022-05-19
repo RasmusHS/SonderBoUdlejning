@@ -11,7 +11,7 @@ namespace SonderBoUdlejning.TildelBoligSystems
 {
     internal class LejekontraktFacade //Facade til kreation og udprintning af lejekontrakt
     {  
-        public void PrintKontrakt(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string bId)
+        public void PrintKontrakt(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string Lid)
         {
             //Tildeler computerens navn en variabel, så print funktionen kan virke på de fleste computere.
             string userName = Environment.UserName;
@@ -20,19 +20,19 @@ namespace SonderBoUdlejning.TildelBoligSystems
 
             if (Directory.Exists(path))
             {
-                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
+                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, Lid);
             }
             else
             {
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, bId);
+                CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, Lid);
             }
         }
 
         //Definerer brødtekst indhold
         string kontraktParagraf = "Ved betaling af nedenstående depositum, samt leje for første måned, accepterer de tilbuddet om lejemålet og medfølgende vilkår.";
         
-        private void CreatePdf(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string bId)
+        private void CreatePdf(string lejerNavn, string lejePris, string adresse, string postNr, string by, string startDato, string Lid)
         {
             //Tildeler computerens navn en variabel, så print funktionen kan virke på de fleste computere.
             string userName = Environment.UserName;
@@ -47,7 +47,7 @@ namespace SonderBoUdlejning.TildelBoligSystems
             Document document = new Document(PageSize.A4, 20, 20, 30, 30);
 
             //Definere pdf filens navn, placering og indhold
-            using (PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path + $"\\{lejerNavn}_{bId}_Lejekontrakt.pdf", FileMode.Create)))
+            using (PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(path + $"\\{lejerNavn}_{Lid}_Lejekontrakt.pdf", FileMode.Create)))
             {
                 document.Open(); //Åbner pdf filen
 

@@ -14,8 +14,8 @@ namespace SonderBoUdlejning.VentelisteSystems
         //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
 
-        //Metode der returner en SQL Query, der finder ventelisten for en bolig type
-        public string rVente(string pId, string bId, string signUpDato)
+        //Metode der returner en SQL Query, der finder ventelisten for en lejemål type
+        public string rVente(string pId, string Lid, string signUpDato)
         {
             string sqlS = $"SELECT * FROM Venteliste WHERE 1=1"; //Standard SQL Query
 
@@ -27,9 +27,9 @@ namespace SonderBoUdlejning.VentelisteSystems
             else
                 sqlS += $"";
 
-            //Hvis der er specificeret et bolig ID, så tilføjes dette til SQL Query
-            if (!string.IsNullOrEmpty(bId))
-                sqlS += $" AND bId = {bId}";
+            //Hvis der er specificeret et lejemål Nr, så tilføjes dette til SQL Query
+            if (!string.IsNullOrEmpty(Lid))
+                sqlS += $" AND Lid = {Lid}";
             else
                 sqlS += $"";
 

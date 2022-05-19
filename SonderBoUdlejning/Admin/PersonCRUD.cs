@@ -113,7 +113,7 @@ namespace SonderBoUdlejning.Secretary
             //Tjekker inputtene for længde og ugyldige tegn
             if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
             {
-                //Hvis inputtene passerer alle tjek og er gyldige, så opretter vi en ny bolig
+                //Hvis inputtene passerer alle tjek og er gyldige, så opretter vi en ny lejemål
                 //Fortæller en facade at den skal kalde en read metode
                 pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
 
