@@ -135,8 +135,8 @@ namespace SonderBoUdlejning.Admin
                 
                 if (dateSlutDato >= dateToday)
                 {
-                    int antalBookings = Bokking.CheckSlutDato.CheckSlutDate(dtpSlut.Text, TBResourceID.Text);
-                    int antalBookingsBetweenDates = SonderBoUdlejning.Booking.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
+                    int antalBookings = BookingSystems.CheckSlutDato.CheckSlutDate(dtpSlut.Text, TBResourceID.Text);
+                    int antalBookingsBetweenDates = BookingSystems.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
 
 
                     if (antalBookings == 0 && antalBookingsBetweenDates == 0)
