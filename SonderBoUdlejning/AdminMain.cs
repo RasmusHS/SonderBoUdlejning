@@ -8,14 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SonderBoUdlejning.Admin;
+using System.Threading;
 
 namespace SonderBoUdlejning
 {
     public partial class AdminMain : Form
     {
+        private readonly Thread sloganThread;
         public AdminMain()
         {
             InitializeComponent();
+            SloganThread slogan = new SloganThread(labelSlogan);
+            sloganThread = new Thread(new ThreadStart(slogan.ShowSlogan));
+            sloganThread.Start();
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
@@ -62,6 +67,16 @@ namespace SonderBoUdlejning
         private void btnBoligCRUD_Click(object sender, EventArgs e)
         {
             openFormsLoader(new BoligCRUD());
+        }
+
+        private void AdminMain_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void AdminMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sloganThread.Abort();
         }
     }
 }

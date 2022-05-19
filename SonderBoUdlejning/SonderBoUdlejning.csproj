@@ -237,6 +237,7 @@
     <Compile Include="Admin\PersonCRUD.Designer.cs">
       <DependentUpon>PersonCRUD.cs</DependentUpon>
     </Compile>
+    <Compile Include="SloganThread.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
     <Compile Include="TildelBoligSystems\LejekontraktFacade.cs" />
     <Compile Include="BoligSystems\ReadBolig.cs" />
