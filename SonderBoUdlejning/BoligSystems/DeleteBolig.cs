@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der sletter en bolig fra databasen
-        public void deleteBolig(string adresse)
+        public void deleteBolig(string lejemaal)
         {
             string sqlS = "IF EXISTS (SELECT adresse FROM Bolig WHERE adresse = @adresse) BEGIN DELETE FROM Bolig WHERE adresse = @adresse END"; //Definere DELETE Querien
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
@@ -24,23 +24,23 @@ namespace SonderBoUdlejning.BoligSystems
 
             //Tilføjer parametre til kommandoen
             cmd.Parameters.Add("@adresse", System.Data.SqlDbType.VarChar);
-            cmd.Parameters["@adresse"].Value = Convert.ToString(adresse);
+            cmd.Parameters["@adresse"].Value = Convert.ToString(lejemaal);
 
             //try-catch løkke
             try
             {
                 conn.Open(); //Åbner forbindelsen
                 
-                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette {adresse} fra bolig tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette lejemål {lejemaal} fra bolig tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     if (cmd.ExecuteNonQuery() == -1)
                     {
-                        MessageBox.Show("Bolig blev ikke slettet, da den ikke eksisterede i forvejen"); //Besked om at boligen er slettet
+                        MessageBox.Show("Lejemålet blev ikke slettet, da den ikke eksisterede i forvejen"); //Besked om at boligen er slettet
                     }
                     else
                     {
-                        MessageBox.Show($"Bolig {adresse} blev slettet");
+                        MessageBox.Show($"Lejemål {lejemaal} blev slettet");
                         //MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + cmd.Parameters["@adresse"].Value + ")"); //Vis besked om at kommandoen er udført
                     }
                 }

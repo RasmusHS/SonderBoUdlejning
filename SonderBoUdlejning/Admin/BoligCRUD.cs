@@ -135,8 +135,18 @@ namespace SonderBoUdlejning.Admin
 
             //Hvis bId inputtet ikke er tomt, så bruges bId til at finde dens bType
             string bType = "";
-            if (!string.IsNullOrEmpty(bId))
+
+            if (bIdValid == false)
+            {
+                bType = "";
+            }
+            else
+            {
                 bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
+            }
+
+            /*if (!string.IsNullOrEmpty(bId)) 
+                bType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");*/
             
             //antalRum bruges ikke endnu og har heller ikke noget input felt at tage fra
             string antalRum = "";
@@ -169,7 +179,7 @@ namespace SonderBoUdlejning.Admin
             if ((adresseValid == true) && (bIdValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
             {
                 //Kalder en speciel read metode for bolig til leje
-                readTilLeje.tempRBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
+                readTilLeje.rBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
 
                 //Viser read metodens resultat i Bolig dataGridView
                 dgvBolig.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 
@@ -185,13 +195,33 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUpdateB_Click(object sender, EventArgs e)
         {
-            string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
-            string bId = tbBoligID.Text; //Tager inputtet fra boligID textboxen
+            string lejemaal = tbLejemaal.Text;
+            string adresse = ""; //Tager inputtet fra adresse textboxen
+            string bId = ""; //Tager inputtet fra boligID textboxen
 
-            //Tjekker om en af felterne er tomme
-            if ((string.IsNullOrEmpty(adresse)) || (string.IsNullOrEmpty(bId)))
+            //Tjekker om lejemåls feltet er tomt
+            if ((string.IsNullOrEmpty(lejemaal)))
             {
-                MessageBox.Show("Indtast venligst både en adresse og et bolig ID!");
+                MessageBox.Show("Indtast venligst et lejemåls nr.!");
+                return;
+            }
+
+            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaal);
+
+            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (lejemaalValid == true))
+                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE lejemaal = {lejemaal}");
+            else
+                adresse = tbAdresse.Text;
+            
+            if ((string.IsNullOrEmpty(tbBoligID.Text)) && (lejemaalValid == true))
+                bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE lejemaal = {lejemaal}");
+            else
+                bId = tbBoligID.Text;
+
+            //Tjekker om der er der er skrevet noget i et af felterne
+            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbBoligID.Text)))
+            {
+                MessageBox.Show("Indtast venligst enten en adresse eller et bolig ID!");
                 return;
             }
 
@@ -204,17 +234,17 @@ namespace SonderBoUdlejning.Admin
             bool bIdValid = BoligInputCheck.BIdCheck(bId);
 
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((adresseValid == true) && (bIdValid == true))
+            if ((lejemaalValid == true) && (adresseValid == true) && (bIdValid == true))
             {
                 //Finder postNr, pId, indflytDato og udflytDato fra Bolig tabellen ved hjælp af adressen
-                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
-                pId = tableConn.textBoxBinder($"SELECT pId FROM Bolig WHERE adresse = '{adresse}'");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
-                udflytDato = BoligInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE lejemaal = {lejemaal}");
+                pId = tableConn.textBoxBinder($"SELECT pId FROM Bolig WHERE lejemaal = {lejemaal}");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
+                udflytDato = BoligInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
 
                 //Opdaterer bolig ID'et i Bolig tabellen
                 BoligFacade UpdateBolig = new BoligFacade();
-                UpdateBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato);
+                UpdateBolig.uBolig(lejemaal, adresse, postNr, bId, pId, indflytDato, udflytDato);
                 dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
                 dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
@@ -226,23 +256,23 @@ namespace SonderBoUdlejning.Admin
 
         private void btnDeleteB_Click(object sender, EventArgs e)
         {
-            string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
+            string lejemaal = tbLejemaal.Text; //Tager inputtet fra Lejemål textboxen
 
             //Tjekker om adresse feltet er tomt
-            if ((string.IsNullOrEmpty(adresse)))
+            if ((string.IsNullOrEmpty(lejemaal)))
             {
-                MessageBox.Show("Indtast venligst både en adresse og et bolig ID!");
+                MessageBox.Show("Indtast venligst et lejemåls nr.!");
                 return;
             }
 
-            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaal);
             
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((adresseValid == true))
+            if ((lejemaalValid == true))
             {
                 //Sletter bolig fra Bolig tabellen
                 BoligFacade DeleteBolig = new BoligFacade();
-                DeleteBolig.dBolig(adresse);
+                DeleteBolig.dBolig(lejemaal);
                 dgvBolig.DataSource = tableConn.tableBinder(sqlS1); //Refresher bolig dataGridView
                 dgvBoligInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
@@ -268,10 +298,17 @@ namespace SonderBoUdlejning.Admin
         private void tbBoligID_TextChanged(object sender, EventArgs e)
         {
             string bId = tbBoligID.Text; //Sætter bolig ID'et i en string variabel
+            bool bIdValid = BoligInputCheck.BIdCheck(bId);
+
             try
             {
+                if (bIdValid == false)
+                {
+                    ErrorMessage.errorMessage(); //Viser fejlbesked
+                    return;
+                }
                 //Hvis bolig ID'et ikke er tomt, så kaldes metoden textBoxBinder og resultatet vises i bolig type tekstboxen
-                if (!string.IsNullOrEmpty(tbBoligID.Text))
+                if (!string.IsNullOrEmpty(bId))
                     tbBoligType.Text = tableConn.textBoxBinder($"SELECT bType FROM BoligInfo WHERE bId = {bId}");
             }
             catch //hvis bolig ID'et ikke er et tal, så vises en fejlbesked
@@ -297,6 +334,7 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
+            lblLejemaal.Visible = false;
             lblAdresse.Visible = true; //
             lblPostNr.Visible = true; //
             lblBy.Visible = true; //
@@ -307,6 +345,7 @@ namespace SonderBoUdlejning.Admin
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
+            tbLejemaal.Visible = false;
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = true; //
             tbBy.Visible = true; //
@@ -335,6 +374,7 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
+            lblLejemaal.Visible = false;
             lblAdresse.Visible = true; //
             lblPostNr.Visible = true; //
             lblBy.Visible = false;
@@ -345,6 +385,7 @@ namespace SonderBoUdlejning.Admin
             lblMinPris.Visible = true; //
             lblMaksPris.Visible = true; //
 
+            tbLejemaal.Visible = false;
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = true; //
             tbBy.Visible = false;
@@ -369,6 +410,7 @@ namespace SonderBoUdlejning.Admin
             btnUpdateB.Visible = true;
             btnDeleteB.Visible = false;
 
+            lblLejemaal.Visible = true;
             lblAdresse.Visible = true; //
             lblPostNr.Visible = false;
             lblBy.Visible = false;
@@ -379,6 +421,7 @@ namespace SonderBoUdlejning.Admin
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
+            tbLejemaal.Visible = true;
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
@@ -402,8 +445,9 @@ namespace SonderBoUdlejning.Admin
             btnReadB.Visible = false;
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = true;
-
-            lblAdresse.Visible = true; //
+            
+            lblLejemaal.Visible = true; //
+            lblAdresse.Visible = false;
             lblPostNr.Visible = false;
             lblBy.Visible = false;
             lblBoligID.Visible = false;
@@ -413,7 +457,8 @@ namespace SonderBoUdlejning.Admin
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbAdresse.Visible = true; //
+            tbLejemaal.Visible = true; //
+            tbAdresse.Visible = false;
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
             tbBoligID.Visible = false;

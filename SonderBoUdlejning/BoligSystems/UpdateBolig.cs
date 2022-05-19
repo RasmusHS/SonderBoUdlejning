@@ -15,15 +15,18 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opdaterer en bolig
-        public void updateBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)
+        public void updateBolig(string lejemaal, string adresse, string postNr, string bId, string pId, string indDato, string udDato)
         {
             //Definere SQL Query med parametrenavne
-            string sqlS = "UPDATE Bolig SET postNr = @postNr, bId = @bId, pId = @pId, indflytDato = @indflytDato, udflytDato = @udflytDato WHERE adresse = @adresse";
+            string sqlS = "UPDATE Bolig SET adresse = @adresse, postNr = @postNr, bId = @bId, pId = @pId, indflytDato = @indflytDato, udflytDato = @udflytDato WHERE lejemaal = @lejemaal";
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
             cmd.Parameters.Clear(); //Rydder parametre fra kommandoen
 
             //Tilføjer parametre til kommandoen
+            cmd.Parameters.Add("@lejemaal", System.Data.SqlDbType.Int);
+            cmd.Parameters["@lejemaal"].Value = Convert.ToString(lejemaal);
+            
             cmd.Parameters.Add("@adresse", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@adresse"].Value = Convert.ToString(adresse);
 
@@ -58,13 +61,13 @@ namespace SonderBoUdlejning.BoligSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Forsøger at udføre kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
+                MessageBox.Show($"SUCCESS :\nOpdaterede bolig {lejemaal} med værdierne:\n(" + //Vis beskedboks med besked om succes
+                                    cmd.Parameters["@adresse"].Value + ", " +
                                     cmd.Parameters["@postNr"].Value + ", " +
                                     cmd.Parameters["@bId"].Value + ", " +
                                     cmd.Parameters["@pId"].Value + ", " +
                                     cmd.Parameters["@indflytDato"].Value + ", " +
-                                    cmd.Parameters["@udflytDato"].Value + ", " +
-                                    cmd.Parameters["@adresse"].Value +
+                                    cmd.Parameters["@udflytDato"].Value +
                                     ")");
             }
             catch (Exception ex) //Hvis der er fejl

@@ -75,6 +75,8 @@ namespace SonderBoUdlejning.Admin
 
             string signUpDato = "";
 
+            string[] comboBoxListPostNr;
+
             BoligFacade readBolig = new BoligFacade();
             vFacade venteListeFor = new vFacade();
 
@@ -95,7 +97,23 @@ namespace SonderBoUdlejning.Admin
                 if ((bIdValid == true))
                 {
                     panelPid.Visible = true; //Viser pId panelet
-                    readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser bolig data
+
+                    comboBoxListPostNr = tableConn.comboBoxBinder($"SELECT postNr FROM Bolig WHERE bId = {bId}").ToArray();
+                    comboBoxPostNr.Items.AddRange(comboBoxListPostNr);
+
+                    try
+                    {
+                        if ((comboBoxPostNr.SelectedItem == null))
+                            postNr = "";
+                        else
+                            postNr = comboBoxPostNr.SelectedItem.ToString();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Vælg venligst et postnummer!");
+                    }
+
+                    readBolig.rBolig(sqlTemplate, adresse, postNr, bId, pId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser bolig data
                     dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery); //Indlæser bolig data i bolig dataGridView
 
                     venteListeFor.ReadVenteListe(pId, bId, signUpDato); //Indlæser venteliste
@@ -175,7 +193,7 @@ namespace SonderBoUdlejning.Admin
             if ((bIdValid == true) && (pIdValid == true))
             {
                 //sortere Bolig dgv
-                readBolig.tempRBolig(sqlTemplate, adresse, postNr, bId, dummyPId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
+                readBolig.rBolig(sqlTemplate, adresse, postNr, bId, dummyPId, indDato, udDato, bType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
                 dgvBolig.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
 
                 //sortere Venteliste dgv
@@ -207,6 +225,7 @@ namespace SonderBoUdlejning.Admin
         private void ckbJaTilLejlighed_CheckedChanged(object sender, EventArgs e)
         {
             string bId = tbBID.Text; //Tager input fra textboxen
+            string postNr = "";
             string[] comboBoxListAdresser; //Laver et string array til at holde på alle adresser
             bool bIdValid = true;
 
@@ -232,9 +251,26 @@ namespace SonderBoUdlejning.Admin
                     //Sikre bolig ID forbliver det samme
                     bId = tableConn.textBoxBinder($"SELECT bId FROM Bolig WHERE bId = {bId}");
 
+                    try
+                    {
+                        if ((comboBoxPostNr.SelectedItem == null))
+                            postNr = "";
+                        else
+                            postNr = comboBoxPostNr.SelectedItem.ToString();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Vælg venligst et postnummer!");
+                    }
+
                     //Fylder comboboxen med alle tilgængelige adresser
-                    comboBoxListAdresser = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId}").ToArray();
-                    combAdresser.Items.AddRange(comboBoxListAdresser);
+                    if (comboBoxPostNr.SelectedItem == null)
+                        MessageBox.Show("Vælg venligst et postnummer!");
+                    else
+                    {
+                        comboBoxListAdresser = tableConn.comboBoxBinder($"SELECT adresse FROM Bolig WHERE (pId IS NULL OR udflytDato IS NOT NULL) AND bId = {bId} AND postNr = {postNr}").ToArray();
+                        combAdresser.Items.AddRange(comboBoxListAdresser);
+                    }
                 }
                 else
                 {
@@ -260,6 +296,7 @@ namespace SonderBoUdlejning.Admin
             string lejerTlf = tbMedlemsTLF.Text; //Tager input fra tlf textboxen
             bool erBeboer; //Pladsholder variabel for erBeboer
             string adresse = combAdresser.SelectedItem.ToString(); //Tager den valgte adresse fra comboboxen
+            string lejemaal = "";
 
             string postNr = ""; //Pladsholder variabel for postNr
             string by = ""; //Pladsholder variabel for by
@@ -315,6 +352,8 @@ namespace SonderBoUdlejning.Admin
                     //Finder lejePris ved hjælp af bolig ID
                     lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM BoligInfo WHERE bId = {bId}");
 
+                    lejemaal = tableConn.textBoxBinder($"SELECT lejemaal FROM Bolig WHERE adresse = '{adresse}' AND postNr = '{postNr}' AND bId = {bId}");
+                    
                     //Nedenstående MessageBox bruges til debugging
                     //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
                     
@@ -330,7 +369,7 @@ namespace SonderBoUdlejning.Admin
 
                     //Boligen opdateres i Bolig tabellen
                     BoligFacade boligUpdate = new BoligFacade();
-                    boligUpdate.uBolig(adresse, postNr, bId, pId, startDato, slutDato);
+                    boligUpdate.uBolig(lejemaal, adresse, postNr, bId, pId, startDato, slutDato);
                     dgvBolig.DataSource = tableConn.tableBinder(sqlS1);
 
                     //Sletter personen fra ventelisten

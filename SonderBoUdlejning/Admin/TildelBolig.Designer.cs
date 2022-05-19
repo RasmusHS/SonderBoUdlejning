@@ -57,6 +57,8 @@
             this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
             this.panelBid = new System.Windows.Forms.Panel();
             this.lblBID = new System.Windows.Forms.Label();
+            this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
+            this.lblPostNr = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).BeginInit();
             this.panelBaggrund.SuspendLayout();
@@ -123,7 +125,6 @@
             // 
             this.panelBaggrund.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelBaggrund.Controls.Add(this.panelØnskerLejlighed);
-            this.panelBaggrund.Controls.Add(this.tbBID);
             this.panelBaggrund.Controls.Add(this.panelPid);
             this.panelBaggrund.Controls.Add(this.panelBid);
             this.panelBaggrund.Location = new System.Drawing.Point(139, 238);
@@ -244,7 +245,7 @@
             // 
             // tbBID
             // 
-            this.tbBID.Location = new System.Drawing.Point(43, 77);
+            this.tbBID.Location = new System.Drawing.Point(22, 35);
             this.tbBID.Margin = new System.Windows.Forms.Padding(2);
             this.tbBID.Name = "tbBID";
             this.tbBID.Size = new System.Drawing.Size(76, 20);
@@ -371,7 +372,10 @@
             // panelBid
             // 
             this.panelBid.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelBid.Controls.Add(this.lblPostNr);
+            this.panelBid.Controls.Add(this.comboBoxPostNr);
             this.panelBid.Controls.Add(this.lblBID);
+            this.panelBid.Controls.Add(this.tbBID);
             this.panelBid.Location = new System.Drawing.Point(20, 16);
             this.panelBid.Margin = new System.Windows.Forms.Padding(2);
             this.panelBid.Name = "panelBid";
@@ -381,12 +385,30 @@
             // lblBID
             // 
             this.lblBID.AutoSize = true;
-            this.lblBID.Location = new System.Drawing.Point(21, 37);
+            this.lblBID.Location = new System.Drawing.Point(19, 15);
             this.lblBID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBID.Name = "lblBID";
             this.lblBID.Size = new System.Drawing.Size(57, 13);
             this.lblBID.TabIndex = 5;
             this.lblBID.Text = "Indtast bId";
+            // 
+            // comboBoxPostNr
+            // 
+            this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPostNr.FormattingEnabled = true;
+            this.comboBoxPostNr.Location = new System.Drawing.Point(22, 89);
+            this.comboBoxPostNr.Name = "comboBoxPostNr";
+            this.comboBoxPostNr.Size = new System.Drawing.Size(98, 21);
+            this.comboBoxPostNr.TabIndex = 6;
+            // 
+            // lblPostNr
+            // 
+            this.lblPostNr.AutoSize = true;
+            this.lblPostNr.Location = new System.Drawing.Point(19, 73);
+            this.lblPostNr.Name = "lblPostNr";
+            this.lblPostNr.Size = new System.Drawing.Size(42, 13);
+            this.lblPostNr.TabIndex = 7;
+            this.lblPostNr.Text = "Post Nr";
             // 
             // TildelBolig
             // 
@@ -405,7 +427,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).EndInit();
             this.panelBaggrund.ResumeLayout(false);
-            this.panelBaggrund.PerformLayout();
             this.panelØnskerLejlighed.ResumeLayout(false);
             this.panelØnskerLejlighed.PerformLayout();
             this.panelUdskrivLejekontrakt.ResumeLayout(false);
@@ -452,5 +473,7 @@
         private System.Windows.Forms.Panel panelUdskrivLejekontrakt;
         private System.Windows.Forms.ComboBox combIndflytÅr;
         private System.Windows.Forms.ComboBox combAdresser;
+        private System.Windows.Forms.Label lblPostNr;
+        private System.Windows.Forms.ComboBox comboBoxPostNr;
     }
 }

@@ -34,6 +34,18 @@
             this.btnVisBUpdate = new System.Windows.Forms.Button();
             this.btnVisBDelete = new System.Windows.Forms.Button();
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.tbMaksPris = new System.Windows.Forms.TextBox();
+            this.lblMaksPris = new System.Windows.Forms.Label();
+            this.tbMinPris = new System.Windows.Forms.TextBox();
+            this.lblMinPris = new System.Windows.Forms.Label();
+            this.tbMaksKvm = new System.Windows.Forms.TextBox();
+            this.lblMaksKvm = new System.Windows.Forms.Label();
+            this.tbBoligType = new System.Windows.Forms.TextBox();
+            this.lblBoligType = new System.Windows.Forms.Label();
+            this.tbMinKvm = new System.Windows.Forms.TextBox();
+            this.lblMinKvm = new System.Windows.Forms.Label();
+            this.tbBy = new System.Windows.Forms.TextBox();
+            this.lblBy = new System.Windows.Forms.Label();
             this.tbBoligID = new System.Windows.Forms.TextBox();
             this.lblBoligID = new System.Windows.Forms.Label();
             this.lblPostNr = new System.Windows.Forms.Label();
@@ -44,22 +56,12 @@
             this.btnUpdateB = new System.Windows.Forms.Button();
             this.btnReadB = new System.Windows.Forms.Button();
             this.btnCreateB = new System.Windows.Forms.Button();
-            this.tbBy = new System.Windows.Forms.TextBox();
-            this.lblBy = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.BoligPage = new System.Windows.Forms.TabPage();
             this.BoligInfoPage = new System.Windows.Forms.TabPage();
             this.dgvBoligInfo = new System.Windows.Forms.DataGridView();
-            this.tbMinKvm = new System.Windows.Forms.TextBox();
-            this.lblMinKvm = new System.Windows.Forms.Label();
-            this.tbBoligType = new System.Windows.Forms.TextBox();
-            this.lblBoligType = new System.Windows.Forms.Label();
-            this.tbMaksKvm = new System.Windows.Forms.TextBox();
-            this.lblMaksKvm = new System.Windows.Forms.Label();
-            this.tbMaksPris = new System.Windows.Forms.TextBox();
-            this.lblMaksPris = new System.Windows.Forms.Label();
-            this.tbMinPris = new System.Windows.Forms.TextBox();
-            this.lblMinPris = new System.Windows.Forms.Label();
+            this.tbLejemaal = new System.Windows.Forms.TextBox();
+            this.lblLejemaal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).BeginInit();
             this.panelContainer.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -128,6 +130,8 @@
             // panelContainer
             // 
             this.panelContainer.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelContainer.Controls.Add(this.lblLejemaal);
+            this.panelContainer.Controls.Add(this.tbLejemaal);
             this.panelContainer.Controls.Add(this.tbMaksPris);
             this.panelContainer.Controls.Add(this.lblMaksPris);
             this.panelContainer.Controls.Add(this.tbMinPris);
@@ -155,10 +159,120 @@
             this.panelContainer.Size = new System.Drawing.Size(676, 328);
             this.panelContainer.TabIndex = 5;
             // 
+            // tbMaksPris
+            // 
+            this.tbMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMaksPris.Location = new System.Drawing.Point(145, 268);
+            this.tbMaksPris.Name = "tbMaksPris";
+            this.tbMaksPris.Size = new System.Drawing.Size(100, 23);
+            this.tbMaksPris.TabIndex = 21;
+            // 
+            // lblMaksPris
+            // 
+            this.lblMaksPris.AutoSize = true;
+            this.lblMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaksPris.Location = new System.Drawing.Point(142, 248);
+            this.lblMaksPris.Name = "lblMaksPris";
+            this.lblMaksPris.Size = new System.Drawing.Size(102, 17);
+            this.lblMaksPris.TabIndex = 20;
+            this.lblMaksPris.Text = "Maksimum Pris";
+            // 
+            // tbMinPris
+            // 
+            this.tbMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMinPris.Location = new System.Drawing.Point(22, 268);
+            this.tbMinPris.Name = "tbMinPris";
+            this.tbMinPris.Size = new System.Drawing.Size(100, 23);
+            this.tbMinPris.TabIndex = 19;
+            // 
+            // lblMinPris
+            // 
+            this.lblMinPris.AutoSize = true;
+            this.lblMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinPris.Location = new System.Drawing.Point(19, 248);
+            this.lblMinPris.Name = "lblMinPris";
+            this.lblMinPris.Size = new System.Drawing.Size(91, 17);
+            this.lblMinPris.TabIndex = 18;
+            this.lblMinPris.Text = "Minimum Pris";
+            // 
+            // tbMaksKvm
+            // 
+            this.tbMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMaksKvm.Location = new System.Drawing.Point(145, 192);
+            this.tbMaksKvm.Name = "tbMaksKvm";
+            this.tbMaksKvm.Size = new System.Drawing.Size(100, 23);
+            this.tbMaksKvm.TabIndex = 17;
+            // 
+            // lblMaksKvm
+            // 
+            this.lblMaksKvm.AutoSize = true;
+            this.lblMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaksKvm.Location = new System.Drawing.Point(142, 172);
+            this.lblMaksKvm.Name = "lblMaksKvm";
+            this.lblMaksKvm.Size = new System.Drawing.Size(105, 17);
+            this.lblMaksKvm.TabIndex = 16;
+            this.lblMaksKvm.Text = "Maksimum Kvm";
+            // 
+            // tbBoligType
+            // 
+            this.tbBoligType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBoligType.Location = new System.Drawing.Point(144, 116);
+            this.tbBoligType.Name = "tbBoligType";
+            this.tbBoligType.ReadOnly = true;
+            this.tbBoligType.Size = new System.Drawing.Size(100, 23);
+            this.tbBoligType.TabIndex = 15;
+            // 
+            // lblBoligType
+            // 
+            this.lblBoligType.AutoSize = true;
+            this.lblBoligType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBoligType.Location = new System.Drawing.Point(141, 96);
+            this.lblBoligType.Name = "lblBoligType";
+            this.lblBoligType.Size = new System.Drawing.Size(75, 17);
+            this.lblBoligType.TabIndex = 14;
+            this.lblBoligType.Text = "Bolig Type";
+            // 
+            // tbMinKvm
+            // 
+            this.tbMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMinKvm.Location = new System.Drawing.Point(22, 192);
+            this.tbMinKvm.Name = "tbMinKvm";
+            this.tbMinKvm.Size = new System.Drawing.Size(100, 23);
+            this.tbMinKvm.TabIndex = 13;
+            // 
+            // lblMinKvm
+            // 
+            this.lblMinKvm.AutoSize = true;
+            this.lblMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinKvm.Location = new System.Drawing.Point(19, 172);
+            this.lblMinKvm.Name = "lblMinKvm";
+            this.lblMinKvm.Size = new System.Drawing.Size(94, 17);
+            this.lblMinKvm.TabIndex = 12;
+            this.lblMinKvm.Text = "Minimum Kvm";
+            // 
+            // tbBy
+            // 
+            this.tbBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBy.Location = new System.Drawing.Point(413, 38);
+            this.tbBy.Name = "tbBy";
+            this.tbBy.ReadOnly = true;
+            this.tbBy.Size = new System.Drawing.Size(100, 23);
+            this.tbBy.TabIndex = 11;
+            // 
+            // lblBy
+            // 
+            this.lblBy.AutoSize = true;
+            this.lblBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBy.Location = new System.Drawing.Point(410, 18);
+            this.lblBy.Name = "lblBy";
+            this.lblBy.Size = new System.Drawing.Size(24, 17);
+            this.lblBy.TabIndex = 10;
+            this.lblBy.Text = "By";
+            // 
             // tbBoligID
             // 
             this.tbBoligID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBoligID.Location = new System.Drawing.Point(412, 38);
+            this.tbBoligID.Location = new System.Drawing.Point(22, 116);
             this.tbBoligID.Name = "tbBoligID";
             this.tbBoligID.Size = new System.Drawing.Size(100, 23);
             this.tbBoligID.TabIndex = 9;
@@ -168,7 +282,7 @@
             // 
             this.lblBoligID.AutoSize = true;
             this.lblBoligID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoligID.Location = new System.Drawing.Point(409, 18);
+            this.lblBoligID.Location = new System.Drawing.Point(19, 96);
             this.lblBoligID.Name = "lblBoligID";
             this.lblBoligID.Size = new System.Drawing.Size(56, 17);
             this.lblBoligID.TabIndex = 8;
@@ -178,7 +292,7 @@
             // 
             this.lblPostNr.AutoSize = true;
             this.lblPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPostNr.Location = new System.Drawing.Point(142, 18);
+            this.lblPostNr.Location = new System.Drawing.Point(265, 18);
             this.lblPostNr.Name = "lblPostNr";
             this.lblPostNr.Size = new System.Drawing.Size(59, 17);
             this.lblPostNr.TabIndex = 7;
@@ -189,7 +303,7 @@
             this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxPostNr.FormattingEnabled = true;
-            this.comboBoxPostNr.Location = new System.Drawing.Point(145, 37);
+            this.comboBoxPostNr.Location = new System.Drawing.Point(268, 37);
             this.comboBoxPostNr.Name = "comboBoxPostNr";
             this.comboBoxPostNr.Size = new System.Drawing.Size(121, 24);
             this.comboBoxPostNr.TabIndex = 6;
@@ -198,7 +312,7 @@
             // tbAdresse
             // 
             this.tbAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbAdresse.Location = new System.Drawing.Point(22, 38);
+            this.tbAdresse.Location = new System.Drawing.Point(145, 38);
             this.tbAdresse.Name = "tbAdresse";
             this.tbAdresse.Size = new System.Drawing.Size(100, 23);
             this.tbAdresse.TabIndex = 5;
@@ -207,7 +321,7 @@
             // 
             this.lblAdresse.AutoSize = true;
             this.lblAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdresse.Location = new System.Drawing.Point(19, 18);
+            this.lblAdresse.Location = new System.Drawing.Point(142, 18);
             this.lblAdresse.Name = "lblAdresse";
             this.lblAdresse.Size = new System.Drawing.Size(60, 17);
             this.lblAdresse.TabIndex = 4;
@@ -257,25 +371,6 @@
             this.btnCreateB.UseVisualStyleBackColor = true;
             this.btnCreateB.Click += new System.EventHandler(this.btnCreateB_Click);
             // 
-            // tbBy
-            // 
-            this.tbBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBy.Location = new System.Drawing.Point(290, 38);
-            this.tbBy.Name = "tbBy";
-            this.tbBy.ReadOnly = true;
-            this.tbBy.Size = new System.Drawing.Size(100, 23);
-            this.tbBy.TabIndex = 11;
-            // 
-            // lblBy
-            // 
-            this.lblBy.AutoSize = true;
-            this.lblBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBy.Location = new System.Drawing.Point(287, 18);
-            this.lblBy.Name = "lblBy";
-            this.lblBy.Size = new System.Drawing.Size(24, 17);
-            this.lblBy.TabIndex = 10;
-            this.lblBy.Text = "By";
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.BoligPage);
@@ -321,96 +416,23 @@
             this.dgvBoligInfo.Size = new System.Drawing.Size(662, 268);
             this.dgvBoligInfo.TabIndex = 0;
             // 
-            // tbMinKvm
+            // tbLejemaal
             // 
-            this.tbMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMinKvm.Location = new System.Drawing.Point(22, 116);
-            this.tbMinKvm.Name = "tbMinKvm";
-            this.tbMinKvm.Size = new System.Drawing.Size(100, 23);
-            this.tbMinKvm.TabIndex = 13;
+            this.tbLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaal.Location = new System.Drawing.Point(22, 38);
+            this.tbLejemaal.Name = "tbLejemaal";
+            this.tbLejemaal.Size = new System.Drawing.Size(100, 23);
+            this.tbLejemaal.TabIndex = 22;
             // 
-            // lblMinKvm
+            // lblLejemaal
             // 
-            this.lblMinKvm.AutoSize = true;
-            this.lblMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinKvm.Location = new System.Drawing.Point(19, 96);
-            this.lblMinKvm.Name = "lblMinKvm";
-            this.lblMinKvm.Size = new System.Drawing.Size(94, 17);
-            this.lblMinKvm.TabIndex = 12;
-            this.lblMinKvm.Text = "Minimum Kvm";
-            // 
-            // tbBoligType
-            // 
-            this.tbBoligType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBoligType.Location = new System.Drawing.Point(412, 116);
-            this.tbBoligType.Name = "tbBoligType";
-            this.tbBoligType.ReadOnly = true;
-            this.tbBoligType.Size = new System.Drawing.Size(100, 23);
-            this.tbBoligType.TabIndex = 15;
-            // 
-            // lblBoligType
-            // 
-            this.lblBoligType.AutoSize = true;
-            this.lblBoligType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoligType.Location = new System.Drawing.Point(409, 96);
-            this.lblBoligType.Name = "lblBoligType";
-            this.lblBoligType.Size = new System.Drawing.Size(75, 17);
-            this.lblBoligType.TabIndex = 14;
-            this.lblBoligType.Text = "Bolig Type";
-            // 
-            // tbMaksKvm
-            // 
-            this.tbMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMaksKvm.Location = new System.Drawing.Point(145, 116);
-            this.tbMaksKvm.Name = "tbMaksKvm";
-            this.tbMaksKvm.Size = new System.Drawing.Size(100, 23);
-            this.tbMaksKvm.TabIndex = 17;
-            // 
-            // lblMaksKvm
-            // 
-            this.lblMaksKvm.AutoSize = true;
-            this.lblMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaksKvm.Location = new System.Drawing.Point(142, 96);
-            this.lblMaksKvm.Name = "lblMaksKvm";
-            this.lblMaksKvm.Size = new System.Drawing.Size(105, 17);
-            this.lblMaksKvm.TabIndex = 16;
-            this.lblMaksKvm.Text = "Maksimum Kvm";
-            // 
-            // tbMaksPris
-            // 
-            this.tbMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMaksPris.Location = new System.Drawing.Point(145, 192);
-            this.tbMaksPris.Name = "tbMaksPris";
-            this.tbMaksPris.Size = new System.Drawing.Size(100, 23);
-            this.tbMaksPris.TabIndex = 21;
-            // 
-            // lblMaksPris
-            // 
-            this.lblMaksPris.AutoSize = true;
-            this.lblMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaksPris.Location = new System.Drawing.Point(142, 172);
-            this.lblMaksPris.Name = "lblMaksPris";
-            this.lblMaksPris.Size = new System.Drawing.Size(102, 17);
-            this.lblMaksPris.TabIndex = 20;
-            this.lblMaksPris.Text = "Maksimum Pris";
-            // 
-            // tbMinPris
-            // 
-            this.tbMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMinPris.Location = new System.Drawing.Point(22, 192);
-            this.tbMinPris.Name = "tbMinPris";
-            this.tbMinPris.Size = new System.Drawing.Size(100, 23);
-            this.tbMinPris.TabIndex = 19;
-            // 
-            // lblMinPris
-            // 
-            this.lblMinPris.AutoSize = true;
-            this.lblMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinPris.Location = new System.Drawing.Point(19, 172);
-            this.lblMinPris.Name = "lblMinPris";
-            this.lblMinPris.Size = new System.Drawing.Size(91, 17);
-            this.lblMinPris.TabIndex = 18;
-            this.lblMinPris.Text = "Minimum Pris";
+            this.lblLejemaal.AutoSize = true;
+            this.lblLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaal.Location = new System.Drawing.Point(19, 18);
+            this.lblLejemaal.Name = "lblLejemaal";
+            this.lblLejemaal.Size = new System.Drawing.Size(57, 17);
+            this.lblLejemaal.TabIndex = 23;
+            this.lblLejemaal.Text = "Lejemål";
             // 
             // BoligCRUD
             // 
@@ -471,5 +493,7 @@
         private System.Windows.Forms.Label lblMaksPris;
         private System.Windows.Forms.TextBox tbMinPris;
         private System.Windows.Forms.Label lblMinPris;
+        private System.Windows.Forms.Label lblLejemaal;
+        private System.Windows.Forms.TextBox tbLejemaal;
     }
 }

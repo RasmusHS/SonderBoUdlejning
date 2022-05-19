@@ -21,6 +21,35 @@ namespace SonderBoUdlejning.InputCheck
 
         //Ikke alle metoder er kommenteret, da metoderne er meget ens
 
+        public static bool LejemaalCheck(string lejemaal)
+        {
+            if (SQLInject.IsMatch(lejemaal))
+            {
+                ErrorMessage.ErrorList.Add("Lejemåls nr. indeholder ugyldige tegn");
+                ErrorMessage.injectedSQL = 1;
+                return false;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(lejemaal))
+                {
+                    if ((!retal.IsMatch(lejemaal)))
+                    {
+                        ErrorMessage.ErrorList.Add("Lejemåls nr. må kun indeholde tal");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
         //Metode der tjekker om adresse input er gyldig
         public static bool AdresseCheck(string adresse)
         {

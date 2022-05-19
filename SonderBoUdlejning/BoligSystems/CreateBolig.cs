@@ -38,7 +38,7 @@ namespace SonderBoUdlejning.BoligSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + //Vis beskedboks med besked om succes
+                MessageBox.Show("SUCCESS :\nOprettede ny bolig med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@adresse"].Value + ", " +
                                     cmd.Parameters["@postNr"].Value + ", " +
                                     cmd.Parameters["@bId"].Value +

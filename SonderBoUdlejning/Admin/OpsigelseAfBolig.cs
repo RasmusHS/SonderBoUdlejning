@@ -64,6 +64,7 @@ namespace SonderBoUdlejning.Admin
             string bId = tbBiD.Text; //Tager inputtet fra bolig ID textboxen
 
             //Bruger inputtene fra person ID og bolig ID textboxene til finde adresse, postNr og hvornår personen flyttede ind
+            string lejemaal = "";
             string adresse = "";
             string postNr = "";
             string indflytDato = "";
@@ -103,13 +104,14 @@ namespace SonderBoUdlejning.Admin
             //Checker inputtene for længde og karakterer
             if ((pIdValid == true) && (bIdValid == true) && (udflytDatoValid == true))
             {
+                lejemaal = tableConn.textBoxBinder($"SELECT lejemaal FROM Bolig WHERE pId = {pId} AND bId = {bId}");
                 adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
-                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE lejemaal = {lejemaal}");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE lejemaal = {lejemaal}");
 
                 BoligFacade opsigBolig = new BoligFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
-                opsigBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
+                opsigBolig.uBolig(lejemaal, adresse, postNr, bId, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
                 DGVBolig.DataSource = tableConn.tableBinder(sqlS1); //refresher bolig dataGridview
                 DGVPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
             }
