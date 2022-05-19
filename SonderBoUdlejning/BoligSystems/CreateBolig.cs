@@ -11,39 +11,42 @@ namespace SonderBoUdlejning.BoligSystems
 {
     internal class CreateBolig
     {
+        //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
-        
-        public void opretBolig(string adresse, string postNr, string bId)
+
+        //Metode der opretter en lejemål
+        public void opretBolig(string adresse, string postNr, string Lid)
         {
-            string sqlS = "INSERT INTO Bolig VALUES (@adresse, @postNr, @bId, NULL, NULL, NULL)";
-            SqlConnection conn = new SqlConnection(connString.connStr);
-            SqlCommand cmd = new SqlCommand(sqlS, conn);
+            string sqlS = "INSERT INTO Lejemaal VALUES (@adresse, @postNr, @Lid, NULL, NULL, NULL)"; //Definere SQL Query med parametrenavne
+            SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
+            SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
+            cmd.Parameters.Clear(); //Rydder parametre fra kommandoen
 
-            cmd.Parameters.Clear();
-
+            //Tilføjer parametre til kommandoen
             cmd.Parameters.Add("@adresse", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@adresse"].Value = Convert.ToString(adresse);
 
             cmd.Parameters.Add("@postNr", System.Data.SqlDbType.Int);
             cmd.Parameters["@postNr"].Value = Convert.ToInt32(postNr);
             
-            cmd.Parameters.Add("@bId", System.Data.SqlDbType.Int);
-            cmd.Parameters["@bId"].Value = Convert.ToInt32(bId);
+            cmd.Parameters.Add("@Lid", System.Data.SqlDbType.Int);
+            cmd.Parameters["@Lid"].Value = Convert.ToInt32(Lid);
 
+            //try-catch løkke
             try
             {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
+                conn.Open(); //Åbner forbindelsen til databasen
+                cmd.ExecuteNonQuery(); //Udfører kommandoen
+                conn.Close(); //Lukker forbindelsen til databasen
+                MessageBox.Show("SUCCESS :\nOprettede ny lejemål med værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@adresse"].Value + ", " +
                                     cmd.Parameters["@postNr"].Value + ", " +
-                                    cmd.Parameters["@bId"].Value +
+                                    cmd.Parameters["@Lid"].Value +
                                     ")");
             }
-            catch (Exception ex)
+            catch (Exception ex) //Hvis der er fejl
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message); //Vis beskedboks med fejlbesked
             }
         }
     }

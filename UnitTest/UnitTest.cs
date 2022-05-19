@@ -73,15 +73,15 @@ namespace UnitTest
         [TestMethod]
         public void bIdCheck_Valid()
         {
-            Assert.IsTrue(SonderBoUdlejning.InputCheck.BoligInputCheck.BIdCheck("1"));
-            Assert.IsTrue(SonderBoUdlejning.InputCheck.BoligInputCheck.BIdCheck("10000000000000000000000000000"));
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.BoligInputCheck.LidCheck("1"));
+            Assert.IsTrue(SonderBoUdlejning.InputCheck.BoligInputCheck.LidCheck("10000000000000000000000000000"));
         }
 
         [TestMethod]
         public void bIdCheck_InValid()
         {
-            Assert.IsFalse(SonderBoUdlejning.InputCheck.BoligInputCheck.BIdCheck("et"));
-            Assert.IsFalse(SonderBoUdlejning.InputCheck.BoligInputCheck.BIdCheck("100002d"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.BoligInputCheck.LidCheck("et"));
+            Assert.IsFalse(SonderBoUdlejning.InputCheck.BoligInputCheck.LidCheck("100002d"));
         }
 
         [TestMethod]

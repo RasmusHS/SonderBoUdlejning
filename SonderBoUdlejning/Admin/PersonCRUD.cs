@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.Secretary
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT * FROM Person";
+        string sqlS1 = "SELECT * FROM Person"; //Standard SQL Query, som bruges til at vise Person tabellen i dens dataGridView
 
         public PersonCRUD()
         {
@@ -24,12 +24,16 @@ namespace SonderBoUdlejning.Secretary
 
         private void PersonCRUD_Load(object sender, EventArgs e)
         {
+            //Forbinder dataGridView til tabel
             dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
 
+            //gemmer input panelet indtil en knap er trykket
             panelContainer.Visible = false;
 
+            //Tjekker hvilken slags bruger er logget ind
             if (UserIdentification.UserAccess == 1) //admin
             {
+                //Admin har adgang til det hele
                 btnOpret.Visible = true;
                 btnOpdater.Visible = true;
                 btnRead.Visible = true;
@@ -37,6 +41,7 @@ namespace SonderBoUdlejning.Secretary
             }
             else if (UserIdentification.UserAccess == 2) //secretary
             {
+                //Sekretæren har kun adgang til at læse
                 btnOpret.Visible = true;
                 btnRead.Visible = true;
                 btnOpdater.Visible = false;
@@ -46,49 +51,80 @@ namespace SonderBoUdlejning.Secretary
 
         private void btnPersonC_Click(object sender, EventArgs e)
         {
-            string navn = tbNavn.Text;
-            string mail = tbMail.Text;
-            string tlf = tbTlf.Text;
+            string navn = tbNavn.Text; //Tager input fra navn textbox
+            string mail = tbMail.Text.ToLower(); //Tager input fra mail textbox og sætter store bogstaver til at være små
+            string tlf = tbTlf.Text; //Tager input fra tlf textbox
 
             PersonFacade pCreate = new PersonFacade();
 
-            if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)))
+            //Tjekker om en af felterne er tomme
+            if ((string.IsNullOrEmpty(navn)) || (string.IsNullOrEmpty(mail)) || (string.IsNullOrEmpty(tlf)))
             {
-                if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
-                {
-                    pCreate.CreatePerson(navn, mail, tlf);
-                    dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
-                }
-                else
-                {
-                    ErrorMessage.errorMessage();
-                }
-            } 
+                MessageBox.Show("Du skal udfylde alle felter");
+                return;
+            }
+
+            bool navnValid = PersonInputCheck.NavnCheck(navn);
+            bool mailValid = PersonInputCheck.MailCheck(mail);
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+
+            //Tjekker inputtene for længde og ugyldige tegn
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
+            {
+                pCreate.CreatePerson(navn, mail, tlf); //Opretter person
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+            }
+            else
+            {
+                ErrorMessage.errorMessage(); //Viser fejlbesked
+            }
         }
 
         private void btnPersonR_Click(object sender, EventArgs e)
         {
-            string columns = "*";
-            string pId = "";
-            string navn = tbNavn.Text;
-            string mail = tbMail.Text;
-            string tlf = tbTlf.Text;
-            bool medlem = radioBtnMedlem.Checked;
-            bool erBeboer = radioBtnBeboer.Checked;
-            bool alt = radioBtnAlt.Checked;
+            string columns = "*"; //Sætter hvilke kolonner der skal vises
+            string pId = ""; //Sætter pId til tomt
+            string navn = tbNavn.Text; //Tager input fra navn textbox
+            string mail = tbMail.Text.ToLower(); //Tager input fra mail textbox og sætter store bogstaver til at være små
+            string tlf = tbTlf.Text; //Tager input fra tlf textbox
+            bool medlem = radioBtnMedlem.Checked; //Tjekker om medlem er checked
+            bool erBeboer = radioBtnBeboer.Checked; //Tjekker om erBeboer er checked
+            bool alt = radioBtnAlt.Checked; //Tjekker om alt er checked
 
+            bool navnValid = true;
+            bool mailValid = true;
+            bool tlfValid = true;
+
+            try
+            {
+                navnValid = PersonInputCheck.NavnCheck(navn);
+                mailValid = PersonInputCheck.MailCheck(mail);
+                tlfValid = PersonInputCheck.TlfCheck(tlf);
+            }
+            catch
+            {
+                navnValid = false;
+                mailValid = false;
+                tlfValid = false;
+            }
+            
             PersonFacade pRead = new PersonFacade();
 
-            if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true))
+            //Tjekker inputtene for længde og ugyldige tegn
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
             {
+                //Hvis inputtene passerer alle tjek og er gyldige, så opretter vi en ny lejemål
+                //Fortæller en facade at den skal kalde en read metode
                 pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
+
+                //Viser read metodens resultat i Person dataGridView
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
             }
             else
             {
-                pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
-                ErrorMessage.errorMessage();
+                //Person dataGridView er vil se tomt ud hvis fejl eller SQL injection spottes
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+                ErrorMessage.errorMessage(); //Fejlbesked hvis input er ugyldig
             }
             
             
@@ -96,27 +132,39 @@ namespace SonderBoUdlejning.Secretary
 
         private void btnPersonU_Click(object sender, EventArgs e)
         {
-            string navn = tbNavn.Text;
-            string mail = tbMail.Text.ToLower();
-            string tlf = tbTlf.Text;
-            string pId = tbPId.Text;
-            bool erBeboer = false;
+            string navn = tbNavn.Text; //Tager input fra navn textbox
+            string mail = tbMail.Text.ToLower(); //Tager input fra mail textbox og sætter store bogstaver til at være små
+            string tlf = tbTlf.Text; //Tager input fra tlf textbox
+            string pId = tbPId.Text; //Tager input fra pId textbox
+            bool erBeboer = false; //Sætter erBeboer til false
 
             PersonFacade pUpdate = new PersonFacade();
 
-            if ((!string.IsNullOrEmpty(navn)) && (!string.IsNullOrEmpty(mail)) && (!string.IsNullOrEmpty(tlf)) && (!string.IsNullOrEmpty(pId)))
+            //Tjekker om en af felterne er tomme
+            if ((string.IsNullOrEmpty(navn)) || (string.IsNullOrEmpty(mail)) || (string.IsNullOrEmpty(tlf)) || (string.IsNullOrEmpty(pId)))
             {
-                if ((PersonInputCheck.NavnCheck(navn) == true) && (PersonInputCheck.MailCheck(mail) == true) && (PersonInputCheck.TlfCheck(tlf) == true) && (PersonInputCheck.PIdCheck(pId) == true))
-                {
-                    erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
-                    //MessageBox.Show("" + erBeboer);
-                    pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
-                    dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
-                }
-                else
-                {
-                    ErrorMessage.errorMessage();
-                }
+                MessageBox.Show("Du skal udfylde alle felter");
+                return;
+            }
+
+            bool navnValid = PersonInputCheck.NavnCheck(navn);
+            bool mailValid = PersonInputCheck.MailCheck(mail);
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
+            //Tjekker inputtene for længde og ugyldige tegn
+            if ((navnValid == true) && (mailValid == true) && (tlfValid == true) && (pIdValid == true))
+            {
+                //Finder hvad personens status er
+                erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
+
+                //Opdaterer personen
+                pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+            }
+            else
+            {
+                ErrorMessage.errorMessage(); //Vis fejlbesked
             }
 
         }
@@ -127,21 +175,29 @@ namespace SonderBoUdlejning.Secretary
             
             PersonFacade pDelete = new PersonFacade();
 
-            if ((!string.IsNullOrEmpty(tlf)))
+            //Tjekker om tlf er tom
+            if ((string.IsNullOrEmpty(tlf)))
             {
-                if ((PersonInputCheck.TlfCheck(tlf) == true))
-                {
-                    pDelete.DeletePerson(tlf);
-                    dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
-                }
-                else
-                {
-                    ErrorMessage.errorMessage();
-                }
+                MessageBox.Show("Du skal udfylde tlf feltet");
+                return;
+            }
+
+            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+
+            //Tjekker inputtet for længde og ugyldige tegn
+            if ((tlfValid == true))
+            {
+                pDelete.DeletePerson(tlf); //Sletter personen
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+            }
+            else
+            {
+                ErrorMessage.errorMessage(); //Vis fejlbesked
             }
 
         }
 
+        //Knap som viser felter relevant for oprettelse af en ny person
         private void btnOpretShow_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
@@ -164,6 +220,7 @@ namespace SonderBoUdlejning.Secretary
             tbTlf.Visible = true;
         }
 
+        //Knap som viser felter relevant for indlæsning af personer
         private void btnReadShow_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
@@ -186,6 +243,7 @@ namespace SonderBoUdlejning.Secretary
             tbTlf.Visible = true;
         }
 
+        //Knap som viser felter relevant for opdatering af en person
         private void btnOpdaterShow_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
@@ -209,6 +267,7 @@ namespace SonderBoUdlejning.Secretary
             tbTlf.Visible = true;
         }
 
+        //Knap som viser felter relevant for sletning af en person
         private void btnSletShow_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;

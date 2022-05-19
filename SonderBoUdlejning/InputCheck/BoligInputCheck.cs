@@ -9,28 +9,39 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.InputCheck
 {
-    public static class BoligInputCheck
+    public static class BoligInputCheck //Klasse der tjekker brugerinput som skal interagere lejemål tabellen
     {
+        //Definere Regex
         private static Regex retal = new Regex(@"(^[0-9 ]*$)");
         private static Regex dato = new Regex(@"(^[0-9]{2}-[0-9]{2}-[0-9]{4}$)");
         //private static Regex dato = new Regex(@"(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
+        private static Regex adresseReg = new Regex(@"(^[a-zA-ZæøåÆØÅ0-9 ]*$)");
         private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
 
-        public static bool AdresseCheck(string adresse)
+        //Ikke alle metoder er kommenteret, da metoderne er meget ens
+
+        public static bool LejemaalCheck(string lejemaalNr)
         {
-            if (SQLInject.IsMatch(adresse))
+            if (SQLInject.IsMatch(lejemaalNr))
             {
-                ErrorMessage.ErrorList.Add("Adresse indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("Lejemåls nr. indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if ((adresse.Length > 50))
+                if (!string.IsNullOrEmpty(lejemaalNr))
                 {
-                    ErrorMessage.ErrorList.Add("Adresse må ikke være længere end 50 tegn");
-                    return false;
+                    if ((!retal.IsMatch(lejemaalNr)))
+                    {
+                        ErrorMessage.ErrorList.Add("Lejemåls nr. må kun indeholde tal");
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
@@ -39,6 +50,37 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om adresse input er gyldig
+        public static bool AdresseCheck(string adresse)
+        {
+            if (SQLInject.IsMatch(adresse)) //Tjekker efter SQL injection
+            {
+                ErrorMessage.ErrorList.Add("Adresse indeholder ugyldige tegn"); //Tilføjer fejlbesked til errorlist
+                ErrorMessage.injectedSQL = 1; //Sætter injectedSQL til 1
+                return false; //Returnerer false
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(adresse)) //Tjekker om adresse er tom
+                {
+                    if ((!adresseReg.IsMatch(adresse)) || (adresse.Length > 50)) //Tjekker om adresse indeholder ugyldige tegn og at adressen ikke er længere end 50 tegn
+                    {
+                        ErrorMessage.ErrorList.Add("Adresse må ikke indeholde ugyldige tegne eller være længere end 50 tegn"); //Tilføjer fejlbesked til errorlist
+                        return false; //Returnerer false
+                    }
+                    else //Hvis adresse er gyldig
+                    {
+                        return true; //Returnerer true
+                    }
+                }
+                else //Hvis adresse er tom
+                {
+                    return true; //Returnerer true
+                }
+            }
+        }
+
+        //Metode der tjekker om postnr input er gyldig
         public static bool PostNrCheck(string postNr)
         {
             if (SQLInject.IsMatch(postNr))
@@ -68,22 +110,22 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-
-        public static bool BIdCheck(string bId)
+        //Metode der tjekker om lejemål Nr input er gyldig
+        public static bool LidCheck(string Lid)
         {
-            if (SQLInject.IsMatch(bId))
+            if (SQLInject.IsMatch(Lid))
             {
-                ErrorMessage.ErrorList.Add("Bolig ID indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("Lejemaal Nr indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if (!string.IsNullOrEmpty(bId))
+                if (!string.IsNullOrEmpty(Lid))
                 {
-                    if ((!retal.IsMatch(bId)))
+                    if ((!retal.IsMatch(Lid)))
                     {
-                        ErrorMessage.ErrorList.Add("Bolig ID må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("Lejemaal Nr må kun indeholde tal");
                         return false;
                     }
                     else
@@ -98,7 +140,8 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-        public static string indDato;
+        //Metode der tjekker om indflytningsDato input er gyldig
+        public static string indDato; //String field så udflytningsDato kan sammenlignes med indflytningsDato
         public static bool indflytDato(string indDato)
         {
             if (SQLInject.IsMatch(indDato))
@@ -128,7 +171,8 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-        public static string udDato;
+        //Metode der tjekker om udflytningsDato input er gyldig
+        public static string udDato; //String field som holder fast på en udflytningsDato for en form
         public static bool udflytDato(string udDato)
         {
             if (SQLInject.IsMatch(udDato))
@@ -146,10 +190,11 @@ namespace SonderBoUdlejning.InputCheck
                         ErrorMessage.ErrorList.Add("Udflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
                         return false;
                     }
-                    else if ((Convert.ToDateTime(udDato) < Convert.ToDateTime(indDato)))
+                    else if ((Convert.ToDateTime(udDato) < Convert.ToDateTime(indDato))) //Hvis udflytningsDato input er før indflytningsDato input
                     {
-                        ErrorMessage.ErrorList.Add("Udflytningsdato skal være efter indflytningsdato");
-                        return false;
+                        //Denne del bruges primært til opsigelse af boliger
+                        ErrorMessage.ErrorList.Add("Udflytningsdato skal være efter indflytningsdato"); //Tilføjer fejlbesked til errorlist
+                        return false; //Returnerer false
                     }
                     else
                     {
@@ -163,19 +208,20 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
-        public static bool bTypeCheck(string bType)
+        //Metode der tjekker om lejemål type input er gyldig. Bruges ikke i øjeblikket
+        public static bool lTypeCheck(string lType)
         {
-            if (SQLInject.IsMatch(bType))
+            if (SQLInject.IsMatch(lType))
             {
-                ErrorMessage.ErrorList.Add("bType indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("lType indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
             else
             {
-                if ((!bogstaver.IsMatch(bType)))
+                if ((!bogstaver.IsMatch(lType)))
                 {
-                    ErrorMessage.ErrorList.Add("bType må kun indeholde bogstaver");
+                    ErrorMessage.ErrorList.Add("lType må kun indeholde bogstaver");
                     return false;
                 }
                 else
@@ -185,6 +231,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker antalRum input er gyldig. Bruges ikke i øjeblikket
         public static bool antalRumCheck(string antalRum)
         {
             if (SQLInject.IsMatch(antalRum))
@@ -207,6 +254,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om kvm input er gyldig
         public static bool kvmCheck(string kvm)
         {
             if (SQLInject.IsMatch(kvm))
@@ -229,6 +277,7 @@ namespace SonderBoUdlejning.InputCheck
             }
         }
 
+        //Metode der tjekker om lejePris input er gyldig
         public static bool lejePrisCheck(string lejePris)
         {
             if (SQLInject.IsMatch(lejePris))

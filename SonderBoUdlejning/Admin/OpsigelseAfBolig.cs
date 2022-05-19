@@ -23,66 +23,102 @@ namespace SonderBoUdlejning.Admin
         }
 
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        //string sqlS1 = "SELECT * FROM Bolig WHERE udflytDato IS NULL AND pId IS NOT NULL";
-        string sqlS1 = "SELECT adresse, postNr, bId, Bolig.pId, indflytDato, udflytDato " +
-                       "FROM Bolig " +
-                       "INNER JOIN Person ON Bolig.pId=Person.pId " +
-                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+        
+        //Standard Query for lejemål dataGridView
+        string sqlS1 = "SELECT lejemaalNr, adresse, postNr, Lid, Lejemaal.pId, indflytDato, udflytDato " +
+                       "FROM Lejemaal " +
+                       "INNER JOIN Person ON Lejemaal.pId=Person.pId " +
+                       "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
-        //string sqlS2 = "SELECT * FROM Person P, Bolig B WHERE P.pId = (SELECT B.pId WHERE B.udflytDato IS NULL AND B.pId IS NOT NULL)";
+
+        //Standard Query for person dataGridView
         string sqlS2 = "SELECT Person.pId, fNavn, pMail, pTlf, erBeboer " +
                        "FROM Person " +
-                       "INNER JOIN Bolig ON Person.pId=Bolig.pId " +
-                       "WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
+                       "INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId " +
+                       "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
 
         private void OpsigelseAfBolig_Load(object sender, EventArgs e)
         {
-            DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
+            //Indlæser dataGridViews med standard queries
+            DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
 
+            //Indlæser måned comboboxen med alle månederne
             string[] comboBoxListMonth;
             comboBoxListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
             comboBoxMonth.Items.AddRange(comboBoxListMonth);
-            //comboBoxMonth.DataSource = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToList();
 
-            comboBoxYear.DataSource = Enumerable.Range(DateTime.Now.Year, DateTime.Now.Year - 2000 + 1).ToList();
-            comboBoxYear.SelectedItem = DateTime.Now.Year;
+            //Indlæser år comboboxen med alle år fra 2022 til 2044
+            comboBoxYear.Items.Add("");
+            for (int year = DateTime.Now.Year; year < DateTime.Now.Year + 50; year++)
+            {
+                comboBoxYear.Items.Add(year);
+            }
         }
 
         private void btnOpsigelse_Click(object sender, EventArgs e)
         {
-            string pId = tbPiD.Text;
-            string bId = tbBiD.Text;
-            string adresse = tableConn.textBoxBinder($"SELECT adresse FROM Bolig WHERE pId = {pId} AND bId = {bId}");
-            string postNr = tableConn.textBoxBinder($"SELECT postNr FROM Bolig WHERE adresse = '{adresse}'");
-            string indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Bolig WHERE adresse = '{adresse}'");
-            bool erBeboer;
-            string udflytDato = "";
+            string pId = tbPiD.Text; //Tager inputtet fra person ID textboxen
+
+            string Lid = tbBiD.Text; //Tager inputtet fra lejemål Nr textboxen
+
+            //Bruger inputtene fra person ID og lejemål Nr textboxene til finde adresse, postNr og hvornår personen flyttede ind
+            string lejemaalNr = "";
+            string adresse = "";
+            string postNr = "";
+            string indflytDato = "";
+            
+            bool erBeboer; //Bruges ikke i øjeblikket
+
+            string udflytDato = ""; //Pladsholder for udflytningsdato
             if ((comboBoxMonth.SelectedIndex + 1) < 10)
                 udflytDato = $"01-0{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
             else
                 udflytDato = $"01-{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
-            //MessageBox.Show($"{adresse}\n{postNr}\n{bId}\n{pId}\n{indflytDato}\n{udflytDato}");
+            bool udflytDatoValid = true;//
+            
+            //Messageboxen bruges til debugging
+            //MessageBox.Show($"{adresse}\n{postNr}\n{Lid}\n{pId}\n{indflytDato}\n{udflytDato}");
 
-            if ((!string.IsNullOrEmpty(pId)) && (!string.IsNullOrEmpty(bId)))
+            //Checker om person ID eller lejemål Nr. er tomt
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                if ((PersonInputCheck.PIdCheck(pId) == true) && (BoligInputCheck.BIdCheck(bId) == true) && (BoligInputCheck.indflytDato(indflytDato) == true) && (BoligInputCheck.udflytDato(udflytDato) == true))
-                {
-                    BoligFacade opsigBolig = new BoligFacade();
-                    erBeboer = true;
-                    opsigBolig.uBolig(adresse, postNr, bId, pId, indflytDato, udflytDato);
-                    DGVBolig.DataSource = tableConn.tableBinder(sqlS1);
-                    DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
-                }
-                else
-                {
-                    ErrorMessage.errorMessage();
-                }
+                //Viser fejlbesked hvis person ID eller lejemål Nr er tomt
+                MessageBox.Show("Alle felter skal udfyldes");
+                return; //Stopper koden
+            }
+
+            bool pIdValid = PersonInputCheck.PIdCheck(pId);
+            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+
+            try
+            {
+                udflytDatoValid = BoligInputCheck.udflytDato(udflytDato);
+            }
+            catch
+            {
+                udflytDatoValid = false;
+            }
+
+            //Checker inputtene for længde og karakterer
+            if ((pIdValid == true) && (bIdValid == true) && (udflytDatoValid == true))
+            {
+                lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
+                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
+                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+
+                BoligFacade opsigBolig = new BoligFacade();
+                erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
+                opsigBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
+                DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
+                DGVPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
             }
             else
             {
-                MessageBox.Show("Alle felter skal udfyldes");
+                //Viser fejlbesked hvis et af inputtene ikke er korrekt
+                ErrorMessage.errorMessage();
             }
         }
     }

@@ -111,7 +111,7 @@
             this.btnOpsigelse.Name = "btnOpsigelse";
             this.btnOpsigelse.Size = new System.Drawing.Size(199, 95);
             this.btnOpsigelse.TabIndex = 2;
-            this.btnOpsigelse.Text = "Opsigelse af Bolig";
+            this.btnOpsigelse.Text = "Opsigelse af Lejemaal";
             this.btnOpsigelse.UseVisualStyleBackColor = true;
             this.btnOpsigelse.Click += new System.EventHandler(this.btnOpsigelse_Click);
             // 
@@ -122,7 +122,7 @@
             this.btnTildelingBoligAdmin.Name = "btnTildelingBoligAdmin";
             this.btnTildelingBoligAdmin.Size = new System.Drawing.Size(199, 95);
             this.btnTildelingBoligAdmin.TabIndex = 1;
-            this.btnTildelingBoligAdmin.Text = "Tildeling af Bolig";
+            this.btnTildelingBoligAdmin.Text = "Tildeling af Lejemaal";
             this.btnTildelingBoligAdmin.UseVisualStyleBackColor = true;
             this.btnTildelingBoligAdmin.Click += new System.EventHandler(this.btnTildelingBoligAdmin_Click);
             // 

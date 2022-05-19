@@ -6,38 +6,36 @@ using System.Threading.Tasks;
 
 namespace SonderBoUdlejning.BoligSystems
 {
-    internal class BoligFacade
+    public class BoligFacade //Facade til metoder der interagere med lejemål tabellen
     {
-        public void cBolig(string adresse, string postNr, string bId)
+        //Metode som kalder create-metoden, som opretter en ny lejemål i databasen
+        public void cBolig(string adresse, string postNr, string Lid)
         {
             CreateBolig createBolig = new CreateBolig();
-            createBolig.opretBolig(adresse, postNr, bId);
+            createBolig.opretBolig(adresse, postNr, Lid);
         }
 
-        //public string readBoligTemplate = $"SELECT * FROM Bolig WHERE 1=1"; 
-        public string rBoligQuery;
-        public void rBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)
+        //Metode som kalder metoden, som indlæser boliger ud fra givne parametre
+        public string rBoligQuery; //String field til at holde på SELECT Querien, så formen der kaldte facaden kan sende Querien videre til SQLExecutionHandler klassen
+        //Metode som kalder read-metoden, som indlæser boliger ud fra givne parametre
+        public void rBolig(string sqlTemplate, string adresse, string postNr, string Lid, string pId, string indDato, string udDato, string lType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
         {
-            ReadBolig readBolig = new ReadBolig();
-            rBoligQuery = readBolig.readBolig(adresse, postNr, bId, pId, indDato, udDato);
+            ReadBolig rBolig = new ReadBolig();
+            rBoligQuery = rBolig.readBolig(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maxKvm, minLejePris, maxLejePris, tilLeje);
         }
 
-        public void rBoligTilLeje(string adresse, string postNr, string bId, string bType, string minKvm, string maxKvm, string minLejePris, string maxLejePris)
-        {
-            ReadBolig readBoligTilLeje = new ReadBolig();
-            rBoligQuery = readBoligTilLeje.readBoligTilLeje(adresse, postNr, bId, bType, minKvm, maxKvm, minLejePris, maxLejePris);
-        }
-
-        public void uBolig(string adresse, string postNr, string bId, string pId, string indDato, string udDato)
+        //Metode som kalder update-metoden, som opdaterer en lejemål i databasen
+        public void uBolig(string lejemaalNr, string adresse, string postNr, string Lid, string pId, string indDato, string udDato)
         {
             UpdateBolig updateBolig = new UpdateBolig();
-            updateBolig.updateBolig(adresse, postNr, bId, pId, indDato, udDato);
+            updateBolig.updateBolig(lejemaalNr, adresse, postNr, Lid, pId, indDato, udDato);
         }
 
-        public void dBolig(string adresse)
+        //Metode som kalder delete-metoden, som sletter en lejemål i databasen
+        public void dBolig(string lejemaalNr)
         {
             DeleteBolig deleteBolig = new DeleteBolig();
-            deleteBolig.deleteBolig(adresse);
+            deleteBolig.deleteBolig(lejemaalNr);
         }
     }
 }

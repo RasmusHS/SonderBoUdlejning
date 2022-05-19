@@ -10,15 +10,18 @@ namespace SonderBoUdlejning.personCRUD
 {
     public class UpdatePerson
     {
+        //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
-        
+
+        //Metode der opdaterer en person i databasen
         public void pSQLU(string fNavn, string pMail, string pTlf, string pId, bool erBeboer)
         {
-            string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = @erBeboer WHERE pId = @pId";
-            SqlConnection conn = new SqlConnection(connString.connStr);
-            SqlCommand cmd = new SqlCommand(sqlS, conn);
-            cmd.Parameters.Clear();
+            string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = @erBeboer WHERE pId = @pId"; //Definere SQL string
+            SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
+            SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
+            cmd.Parameters.Clear(); //Rydder parametre fra SQL kommandoen
 
+            //Tilføjer parametre til SQL kommandoen
             cmd.Parameters.Add("@Navn", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@Navn"].Value = Convert.ToString(fNavn);
 
@@ -34,22 +37,22 @@ namespace SonderBoUdlejning.personCRUD
             cmd.Parameters.Add("@erBeboer", System.Data.SqlDbType.Bit);
             cmd.Parameters["@erBeboer"].Value = Convert.ToBoolean(erBeboer);
 
+            //try-catch løkke
             try
             {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" +
+                conn.Open(); //Åbner forbindelsen til databasen
+                cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
+                conn.Close(); //Lukker forbindelsen til databasen
+                MessageBox.Show($"SUCCESS :\nMedlem med person ID {pId} opdateret til værdierne:\n(" + //Vis beskedboks med besked om succes
                                     cmd.Parameters["@Navn"].Value + ", " +
                                     cmd.Parameters["@Mail"].Value + ", " +
                                     cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@pId"].Value + ", " +
                                     cmd.Parameters["@erBeboer"].Value +
                                     ")");
             }
-            catch (Exception ex)
+            catch (Exception ex) //Hvis der er fejl i SQL kommandoen
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message); //Vis beskedboks med fejlbesked
             }
         }
     }

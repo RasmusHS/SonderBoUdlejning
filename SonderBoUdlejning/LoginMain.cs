@@ -20,10 +20,8 @@ namespace SonderBoUdlejning
         }
         private void LoginMain_Load(object sender, EventArgs e)
         {
-            
-
-            string sqlS1 = "SELECT udflytDato FROM Bolig INNER JOIN Person ON Bolig.pId=Person.pId WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
-            string sqlS2 = "SELECT Person.pId FROM Person INNER JOIN Bolig ON Person.pId=Bolig.pId WHERE Bolig.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
+            string sqlS1 = "SELECT udflytDato FROM Lejemaal INNER JOIN Person ON Lejemaal.pId=Person.pId WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
+            string sqlS2 = "SELECT Person.pId FROM Person INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NOT NULL AND udflytDato < GETDATE()";
 
             SqlConnection conn1 = new SqlConnection(connString.connStr);
             SqlConnection conn2 = new SqlConnection(connString.connStr);
@@ -36,7 +34,7 @@ namespace SonderBoUdlejning
             while (reader1.Read() && reader2.Read())
             {
                 SqlConnection conn3 = new SqlConnection(connString.connStr);
-                SqlCommand cmd3 = new SqlCommand("SELECT adresse FROM Bolig WHERE pId = " + reader2.GetInt32(0), conn3);
+                SqlCommand cmd3 = new SqlCommand("SELECT adresse FROM Lejemaal WHERE pId = " + reader2.GetInt32(0), conn3);
                 conn3.Open();
                 SqlDataReader reader3 = cmd3.ExecuteReader();
                 while (reader3.Read())
@@ -46,7 +44,7 @@ namespace SonderBoUdlejning
                     conn4.Open();
                     conn5.Open();
                     string sqlUpdatePerson = $"UPDATE Person SET erBeboer = 0 WHERE pId = {reader2.GetInt32(0)}";
-                    string sqlUpdateBolig = $"UPDATE Bolig SET pId = NULL, indflytDato = NULL, udflytDato = NULL WHERE adresse = '{reader3.GetString(0)}'";
+                    string sqlUpdateBolig = $"UPDATE Lejemaal SET pId = NULL, indflytDato = NULL, udflytDato = NULL WHERE adresse = '{reader3.GetString(0)}'";
                     SqlCommand cmd4 = new SqlCommand(sqlUpdatePerson, conn4);
                     SqlCommand cmd5 = new SqlCommand(sqlUpdateBolig, conn5);
                     cmd4.ExecuteNonQuery();

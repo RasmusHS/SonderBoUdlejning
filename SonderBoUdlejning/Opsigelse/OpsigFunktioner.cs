@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SonderBoUdlejning.Opsigelse
 {
-    public static class OpsigFunktioner
+    public static class OpsigFunktioner //Ikke i brug. Slet?
     {
         public static string DateBuilder(int cBMonthIndex, string year) 
         {

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvBolig = new System.Windows.Forms.DataGridView();
+            this.dgvLejemaal = new System.Windows.Forms.DataGridView();
             this.dgvVenteliste = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,7 +43,6 @@
             this.btnUdskrivLejekontrakt = new System.Windows.Forms.Button();
             this.ckbJaTilLejlighed = new System.Windows.Forms.CheckBox();
             this.lblØnskerLejlighed = new System.Windows.Forms.Label();
-            this.tbBID = new System.Windows.Forms.TextBox();
             this.panelPid = new System.Windows.Forms.Panel();
             this.panelMedlemsinfo = new System.Windows.Forms.Panel();
             this.lblMedlemsNavn = new System.Windows.Forms.Label();
@@ -56,8 +55,11 @@
             this.tbPID = new System.Windows.Forms.TextBox();
             this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
             this.panelBid = new System.Windows.Forms.Panel();
+            this.lblPostNr = new System.Windows.Forms.Label();
+            this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
             this.lblBID = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).BeginInit();
+            this.tbBID = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).BeginInit();
             this.panelBaggrund.SuspendLayout();
             this.panelØnskerLejlighed.SuspendLayout();
@@ -67,20 +69,20 @@
             this.panelBid.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvBolig
+            // dgvLejemaal
             // 
-            this.dgvBolig.AllowUserToAddRows = false;
-            this.dgvBolig.AllowUserToDeleteRows = false;
-            this.dgvBolig.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBolig.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBolig.Location = new System.Drawing.Point(44, 54);
-            this.dgvBolig.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvBolig.Name = "dgvBolig";
-            this.dgvBolig.ReadOnly = true;
-            this.dgvBolig.RowHeadersWidth = 51;
-            this.dgvBolig.RowTemplate.Height = 24;
-            this.dgvBolig.Size = new System.Drawing.Size(596, 165);
-            this.dgvBolig.TabIndex = 0;
+            this.dgvLejemaal.AllowUserToAddRows = false;
+            this.dgvLejemaal.AllowUserToDeleteRows = false;
+            this.dgvLejemaal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvLejemaal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLejemaal.Location = new System.Drawing.Point(44, 54);
+            this.dgvLejemaal.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvLejemaal.Name = "dgvLejemaal";
+            this.dgvLejemaal.ReadOnly = true;
+            this.dgvLejemaal.RowHeadersWidth = 51;
+            this.dgvLejemaal.RowTemplate.Height = 24;
+            this.dgvLejemaal.Size = new System.Drawing.Size(596, 165);
+            this.dgvLejemaal.TabIndex = 0;
             // 
             // dgvVenteliste
             // 
@@ -104,9 +106,9 @@
             this.label1.Location = new System.Drawing.Point(40, 28);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 24);
+            this.label1.Size = new System.Drawing.Size(121, 24);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Bolig tabel";
+            this.label1.Text = "Lejemål tabel";
             // 
             // label2
             // 
@@ -123,7 +125,6 @@
             // 
             this.panelBaggrund.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panelBaggrund.Controls.Add(this.panelØnskerLejlighed);
-            this.panelBaggrund.Controls.Add(this.tbBID);
             this.panelBaggrund.Controls.Add(this.panelPid);
             this.panelBaggrund.Controls.Add(this.panelBid);
             this.panelBaggrund.Location = new System.Drawing.Point(139, 238);
@@ -241,15 +242,6 @@
             this.lblØnskerLejlighed.Size = new System.Drawing.Size(161, 13);
             this.lblØnskerLejlighed.TabIndex = 16;
             this.lblØnskerLejlighed.Text = "Ønsker Medlemmet Lejligheden?";
-            // 
-            // tbBID
-            // 
-            this.tbBID.Location = new System.Drawing.Point(43, 77);
-            this.tbBID.Margin = new System.Windows.Forms.Padding(2);
-            this.tbBID.Name = "tbBID";
-            this.tbBID.Size = new System.Drawing.Size(76, 20);
-            this.tbBID.TabIndex = 0;
-            this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
             // 
             // panelPid
             // 
@@ -371,22 +363,52 @@
             // panelBid
             // 
             this.panelBid.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelBid.Controls.Add(this.lblPostNr);
+            this.panelBid.Controls.Add(this.comboBoxPostNr);
             this.panelBid.Controls.Add(this.lblBID);
+            this.panelBid.Controls.Add(this.tbBID);
             this.panelBid.Location = new System.Drawing.Point(20, 16);
             this.panelBid.Margin = new System.Windows.Forms.Padding(2);
             this.panelBid.Name = "panelBid";
             this.panelBid.Size = new System.Drawing.Size(153, 125);
             this.panelBid.TabIndex = 16;
             // 
+            // lblPostNr
+            // 
+            this.lblPostNr.AutoSize = true;
+            this.lblPostNr.Location = new System.Drawing.Point(19, 73);
+            this.lblPostNr.Name = "lblPostNr";
+            this.lblPostNr.Size = new System.Drawing.Size(42, 13);
+            this.lblPostNr.TabIndex = 7;
+            this.lblPostNr.Text = "Post Nr";
+            // 
+            // comboBoxPostNr
+            // 
+            this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPostNr.FormattingEnabled = true;
+            this.comboBoxPostNr.Location = new System.Drawing.Point(22, 89);
+            this.comboBoxPostNr.Name = "comboBoxPostNr";
+            this.comboBoxPostNr.Size = new System.Drawing.Size(98, 21);
+            this.comboBoxPostNr.TabIndex = 6;
+            // 
             // lblBID
             // 
             this.lblBID.AutoSize = true;
-            this.lblBID.Location = new System.Drawing.Point(21, 37);
+            this.lblBID.Location = new System.Drawing.Point(19, 15);
             this.lblBID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBID.Name = "lblBID";
-            this.lblBID.Size = new System.Drawing.Size(57, 13);
+            this.lblBID.Size = new System.Drawing.Size(56, 13);
             this.lblBID.TabIndex = 5;
-            this.lblBID.Text = "Indtast bId";
+            this.lblBID.Text = "Indtast Lid";
+            // 
+            // tbBID
+            // 
+            this.tbBID.Location = new System.Drawing.Point(22, 35);
+            this.tbBID.Margin = new System.Windows.Forms.Padding(2);
+            this.tbBID.Name = "tbBID";
+            this.tbBID.Size = new System.Drawing.Size(76, 20);
+            this.tbBID.TabIndex = 0;
+            this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
             // 
             // TildelBolig
             // 
@@ -396,16 +418,15 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvVenteliste);
-            this.Controls.Add(this.dgvBolig);
+            this.Controls.Add(this.dgvLejemaal);
             this.Controls.Add(this.panelBaggrund);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "TildelBolig";
             this.Text = "TildelBolig";
             this.Load += new System.EventHandler(this.TildelBolig_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBolig)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).EndInit();
             this.panelBaggrund.ResumeLayout(false);
-            this.panelBaggrund.PerformLayout();
             this.panelØnskerLejlighed.ResumeLayout(false);
             this.panelØnskerLejlighed.PerformLayout();
             this.panelUdskrivLejekontrakt.ResumeLayout(false);
@@ -423,7 +444,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvBolig;
+        private System.Windows.Forms.DataGridView dgvLejemaal;
         private System.Windows.Forms.DataGridView dgvVenteliste;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -452,5 +473,7 @@
         private System.Windows.Forms.Panel panelUdskrivLejekontrakt;
         private System.Windows.Forms.ComboBox combIndflytÅr;
         private System.Windows.Forms.ComboBox combAdresser;
+        private System.Windows.Forms.Label lblPostNr;
+        private System.Windows.Forms.ComboBox comboBoxPostNr;
     }
 }
