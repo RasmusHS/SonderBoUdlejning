@@ -14,9 +14,13 @@ namespace SonderBoUdlejning
 {
     public partial class SecretaryMain : Form
     {
+        private readonly Thread sloganThread;
         public SecretaryMain()
         {
             InitializeComponent();
+            SloganThread slogan = new SloganThread(labelSlogan);
+            sloganThread = new Thread(new ThreadStart(slogan.ShowSlogan));
+            sloganThread.Start();
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
@@ -49,12 +53,16 @@ namespace SonderBoUdlejning
             loadedForm.Show(); // Formens vises.
         }
 
-        private void SecretaryMain_Load(object sender, EventArgs e)
+        public void SecretaryMain_Load(object sender, EventArgs e)
         {
             
-            SloganThread slogan = new SloganThread(labelSlogan);
-            Thread sloganThread = new Thread(new ThreadStart(slogan.ShowSlogan));
-            sloganThread.Start();
+           
+            
+        }
+
+        public void SecretaryMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sloganThread.Abort();
         }
     }
 }
