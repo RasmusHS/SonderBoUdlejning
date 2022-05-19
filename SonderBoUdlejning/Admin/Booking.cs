@@ -17,7 +17,7 @@ namespace SonderBoUdlejning.Admin
         ConnString connString = ConnString.getConnInstance;
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         string sqlS1 = "SELECT resNr, rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
-        string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
+        string sqlS2 = "SELECT * FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
 
         List<string> listBeboer = new List<string>();
         List<int> listBeboerID = new List<int>();
@@ -40,8 +40,8 @@ namespace SonderBoUdlejning.Admin
             string date = DateTime.Today.ToString("yyyy-MM-dd");
             TBStartDato.Text = date;
 
-            Bokking.OnLoadFuckions.GetPeronList(listBeboerID, listBeboer);
-            Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, date);
+            BookingSystems.OnLoadFuckions.GetPeronList(listBeboerID, listBeboer);
+            BookingSystems.OnLoadFuckions.GetResourceList(listResourceID, listResource, date);
 
 
             foreach (string item in listResource)
@@ -116,7 +116,7 @@ namespace SonderBoUdlejning.Admin
                 listResource.Clear();
                 listResourceID.Clear();
                 CBResource.Items.Clear();
-                Bokking.OnLoadFuckions.GetResourceList(listResourceID, listResource, dtpStart.Text);
+                BookingSystems.OnLoadFuckions.GetResourceList(listResourceID, listResource, dtpStart.Text);
                 foreach (string item in listResource)
                 {
                     CBResource.Items.Add(item);

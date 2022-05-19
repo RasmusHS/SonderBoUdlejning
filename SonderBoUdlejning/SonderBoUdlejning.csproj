@@ -178,6 +178,12 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Booking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin\Booking.Designer.cs">
+      <DependentUpon>Booking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\LejemaalCRUD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     <Compile Include="BoligSystems\CreateLejemaal.cs" />
     <Compile Include="BoligSystems\DeleteLejemaal.cs" />
     <Compile Include="BoligSystems\UpdateLejemaal.cs" />
+    <Compile Include="BookingSystems\CheckMellemDatoer.cs" />
+    <Compile Include="BookingSystems\CheckSlutDato.cs" />
+    <Compile Include="BookingSystems\OnLoadFuckions.cs" />
     <Compile Include="ConnString.cs" />
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="InputCheck\LejemaalInputCheck.cs" />
@@ -249,6 +258,9 @@
     <Compile Include="VentelisteSystems\vRemoveFromList.cs" />
     <EmbeddedResource Include="AdminMain.resx">
       <DependentUpon>AdminMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\Booking.resx">
+      <DependentUpon>Booking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\LejemaalCRUD.resx">
       <DependentUpon>LejemaalCRUD.cs</DependentUpon>

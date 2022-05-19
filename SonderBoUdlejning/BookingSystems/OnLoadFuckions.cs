@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Microsoft.Data.SqlClient;
 
-namespace SonderBoUdlejning.Bokking
+namespace SonderBoUdlejning.BookingSystems
 {
     internal class OnLoadFuckions
     {
