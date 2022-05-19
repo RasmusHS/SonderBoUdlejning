@@ -16,7 +16,7 @@ using SonderBoUdlejning.BoligSystems;
 
 namespace SonderBoUdlejning.Admin
 {
-    public partial class TildelBolig : Form
+    public partial class TildelLejemaal : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
 
@@ -26,7 +26,7 @@ namespace SonderBoUdlejning.Admin
         //Standard SQL Query, som henter ventelisten sorteret efter dato
         string sqlS2 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
 
-        public TildelBolig()
+        public TildelLejemaal()
         {
             InitializeComponent();
         }
@@ -77,7 +77,7 @@ namespace SonderBoUdlejning.Admin
 
             string[] comboBoxListPostNr;
 
-            BoligFacade readBolig = new BoligFacade();
+            LejemaalFacade readBolig = new LejemaalFacade();
             vFacade venteListeFor = new vFacade();
 
             //While loop der kører hver gang der ændres i textboxen
@@ -91,7 +91,7 @@ namespace SonderBoUdlejning.Admin
                     break; //Stopper while loop, hvis der ikke er noget i textboxen
                 }
 
-                bIdValid = BoligInputCheck.LidCheck(Lid);
+                bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
                 //Hvis der er noget i textboxen, så tjekkes lejemål Nr for længde og karaktere
                 if ((bIdValid == true))
@@ -158,7 +158,7 @@ namespace SonderBoUdlejning.Admin
             bool erBeboer = false; //Sætter erBeboer til at være false
             bool alt = false; //Sætter alt til at være false
 
-            BoligFacade readBolig = new BoligFacade();
+            LejemaalFacade readBolig = new LejemaalFacade();
             vFacade readPVdgv = new vFacade();
             PersonFacade pRead = new PersonFacade();
 
@@ -186,7 +186,7 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
 
             //Tjekker lejemål Nr og person ID for længde og ugyldige karaktere
@@ -243,7 +243,7 @@ namespace SonderBoUdlejning.Admin
                     return;
                 }
 
-                bIdValid = BoligInputCheck.LidCheck(Lid);
+                bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
                 //Tjekker lejemål Nr for længde og ugyldige karaktere
                 if ((bIdValid == true))
@@ -320,12 +320,12 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
 
             try
             {
-                indflytDatoValid = BoligInputCheck.indflytDato(startDato);
+                indflytDatoValid = LejemaalInputCheck.indflytDato(startDato);
             }
             catch
             {
@@ -368,7 +368,7 @@ namespace SonderBoUdlejning.Admin
                     pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
 
                     //Boligen opdateres i Lejemaal tabellen
-                    BoligFacade boligUpdate = new BoligFacade();
+                    LejemaalFacade boligUpdate = new LejemaalFacade();
                     boligUpdate.uBolig(lejemaalNr, adresse, postNr, Lid, pId, startDato, slutDato);
                     dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
 

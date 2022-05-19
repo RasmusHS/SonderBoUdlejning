@@ -78,7 +78,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
@@ -107,7 +107,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
@@ -138,7 +138,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (bIdValid == true))
@@ -167,7 +167,7 @@ namespace SonderBoUdlejning.Admin
                 
             }
 
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om lejemål Nr er gyldig
             if (bIdValid == true)

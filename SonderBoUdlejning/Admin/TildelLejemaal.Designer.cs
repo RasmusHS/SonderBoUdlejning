@@ -1,6 +1,6 @@
 ﻿namespace SonderBoUdlejning.Admin
 {
-    partial class TildelBolig
+    partial class TildelLejemaal
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿namespace SonderBoUdlejning.Admin
 {
-    partial class OpsigelseAfBolig
+    partial class OpsigelseAfLejemaal
     {
         /// <summary>
         /// Required designer variable.

@@ -15,9 +15,9 @@ using SonderBoUdlejning.BoligSystems;
 
 namespace SonderBoUdlejning.Admin
 {
-    public partial class OpsigelseAfBolig : Form
+    public partial class OpsigelseAfLejemaal : Form
     {
-        public OpsigelseAfBolig()
+        public OpsigelseAfLejemaal()
         {
             InitializeComponent();
         }
@@ -90,11 +90,11 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
             {
-                udflytDatoValid = BoligInputCheck.udflytDato(udflytDato);
+                udflytDatoValid = LejemaalInputCheck.udflytDato(udflytDato);
             }
             catch
             {
@@ -107,9 +107,9 @@ namespace SonderBoUdlejning.Admin
                 lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
                 adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
                 postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                indflytDato = LejemaalInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
-                BoligFacade opsigBolig = new BoligFacade();
+                LejemaalFacade opsigBolig = new LejemaalFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
                 opsigBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
                 DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning.InputCheck
 {
-    public static class BoligInputCheck //Klasse der tjekker brugerinput som skal interagere lejemål tabellen
+    public static class LejemaalInputCheck //Klasse der tjekker brugerinput som skal interagere lejemål tabellen
     {
         //Definere Regex
         private static Regex retal = new Regex(@"(^[0-9 ]*$)");

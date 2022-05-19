@@ -12,12 +12,12 @@ using SonderBoUdlejning.InputCheck;
 
 namespace SonderBoUdlejning.Admin
 {
-    public partial class BoligCRUD : Form
+    public partial class LejemaalCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         string sqlS1 = "SELECT * FROM Lejemaal"; //Standard SQL Query, som bruges til at vise Lejemaal tabellen i dens dataGridView
         string sqlS2 = "SELECT * FROM LejemaalsInfo"; //Standard SQL Query, som bruges til at vise LejemaalsInfo tabellen i dens dataGridView
-        public BoligCRUD()
+        public LejemaalCRUD()
         {
             InitializeComponent();
         }
@@ -79,15 +79,15 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
-            bool postNrValid = BoligInputCheck.PostNrCheck(postNr);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool adresseValid = LejemaalInputCheck.AdresseCheck(adresse);
+            bool postNrValid = LejemaalInputCheck.PostNrCheck(postNr);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
             
             //Tjekker inputtene for længde og ugyldige tegn
             if ((adresseValid == true) && (postNrValid == true) && (bIdValid == true))
             {
                 //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny lejemål
-                BoligFacade CreateBolig = new BoligFacade();
+                LejemaalFacade CreateBolig = new LejemaalFacade();
                 CreateBolig.cBolig(adresse, postNr, Lid); //opretter lejemål
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
@@ -106,7 +106,7 @@ namespace SonderBoUdlejning.Admin
 
             //Tager adresse input checker det for tegn og længde
             string adresse = tbAdresse.Text;
-            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
+            bool adresseValid = LejemaalInputCheck.AdresseCheck(adresse);
 
             //Tager det valgte postNr fra comboboxen og tildeler det en string variable
             string postNr = "";
@@ -124,7 +124,7 @@ namespace SonderBoUdlejning.Admin
 
             //Tager Lid input og tjekker det for ugyldige tegn
             string Lid = tbBoligID.Text; //
-            bool LidValid = BoligInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Ikke muligt at søge baseret på person ID. Input felt findes ikke i formen
             string pId = ""; //
@@ -153,19 +153,19 @@ namespace SonderBoUdlejning.Admin
 
             //Tager inputtet fra tbMinKvm tekstboksen og tjekker det for ugyldige tegn
             string minKvm = tbMinKvm.Text; //
-            bool minKvmValid = BoligInputCheck.kvmCheck(minKvm);
+            bool minKvmValid = LejemaalInputCheck.kvmCheck(minKvm);
 
             //Tager inputtet fra tbMaksKvm tekstboksen og tjekker det for ugyldige tegn
             string maksKvm = tbMaksKvm.Text; //
-            bool maksKvmValid = BoligInputCheck.kvmCheck(maksKvm);
+            bool maksKvmValid = LejemaalInputCheck.kvmCheck(maksKvm);
 
             //Tager inputtet fra tbMinPris tekstboksen og tjekker det for ugyldige tegn
             string minLejePris = tbMinPris.Text; //
-            bool minLejePrisValid = BoligInputCheck.lejePrisCheck(minLejePris);
+            bool minLejePrisValid = LejemaalInputCheck.lejePrisCheck(minLejePris);
 
             //Tager inputtet fra tbMaksPris tekstboksen og tjekker det for ugyldige tegn
             string maksLejePris = tbMaksPris.Text; //
-            bool maksLejePrisValid = BoligInputCheck.lejePrisCheck(maksLejePris);
+            bool maksLejePrisValid = LejemaalInputCheck.lejePrisCheck(maksLejePris);
 
             bool tilLeje = true;
 
@@ -173,7 +173,7 @@ namespace SonderBoUdlejning.Admin
             tabControl1.SelectedTab = LejemaalPage;
 
             //Laver et objekt af BoligFacade klassen
-            BoligFacade readTilLeje = new BoligFacade();
+            LejemaalFacade readTilLeje = new LejemaalFacade();
 
             //Hvis alle inputtet er gyldige, så kaldes metoden readTilLeje
             if ((adresseValid == true) && (LidValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
@@ -206,7 +206,7 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaalNr);
+            bool lejemaalValid = LejemaalInputCheck.LejemaalCheck(lejemaalNr);
 
             if ((string.IsNullOrEmpty(tbAdresse.Text)) && (lejemaalValid == true))
                 adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
@@ -230,8 +230,8 @@ namespace SonderBoUdlejning.Admin
             string indflytDato = "";
             string udflytDato = "";
 
-            bool adresseValid = BoligInputCheck.AdresseCheck(adresse);
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool adresseValid = LejemaalInputCheck.AdresseCheck(adresse);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker inputtene for længde og ugyldige tegn
             if ((lejemaalValid == true) && (adresseValid == true) && (bIdValid == true))
@@ -239,11 +239,11 @@ namespace SonderBoUdlejning.Admin
                 //Finder postNr, pId, indflytDato og udflytDato fra Lejemaal tabellen ved hjælp af adressen
                 postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
                 pId = tableConn.textBoxBinder($"SELECT pId FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
-                indflytDato = BoligInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
-                udflytDato = BoligInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                indflytDato = LejemaalInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                udflytDato = LejemaalInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
                 //Opdaterer lejemål Nr'et i Lejemaal tabellen
-                BoligFacade UpdateBolig = new BoligFacade();
+                LejemaalFacade UpdateBolig = new LejemaalFacade();
                 UpdateBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
@@ -265,13 +265,13 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool lejemaalValid = BoligInputCheck.LejemaalCheck(lejemaalNr);
+            bool lejemaalValid = LejemaalInputCheck.LejemaalCheck(lejemaalNr);
             
             //Tjekker inputtene for længde og ugyldige tegn
             if ((lejemaalValid == true))
             {
                 //Sletter lejemål fra Lejemaal tabellen
-                BoligFacade DeleteBolig = new BoligFacade();
+                LejemaalFacade DeleteBolig = new LejemaalFacade();
                 DeleteBolig.dBolig(lejemaalNr);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
@@ -298,7 +298,7 @@ namespace SonderBoUdlejning.Admin
         private void tbBoligID_TextChanged(object sender, EventArgs e)
         {
             string Lid = tbBoligID.Text; //Sætter lejemål Nr'et i en string variabel
-            bool bIdValid = BoligInputCheck.LidCheck(Lid);
+            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
             {

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SonderBoUdlejning.BoligSystems
 {
-    public class BoligFacade //Facade til metoder der interagere med lejemål tabellen
+    public class LejemaalFacade //Facade til metoder der interagere med lejemål tabellen
     {
         //Metode som kalder create-metoden, som opretter en ny lejemål i databasen
         public void cBolig(string adresse, string postNr, string Lid)
         {
-            CreateBolig createBolig = new CreateBolig();
+            CreateLejemaal createBolig = new CreateLejemaal();
             createBolig.opretBolig(adresse, postNr, Lid);
         }
 
@@ -20,21 +20,21 @@ namespace SonderBoUdlejning.BoligSystems
         //Metode som kalder read-metoden, som indlæser boliger ud fra givne parametre
         public void rBolig(string sqlTemplate, string adresse, string postNr, string Lid, string pId, string indDato, string udDato, string lType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
         {
-            ReadBolig rBolig = new ReadBolig();
+            ReadLejemaal rBolig = new ReadLejemaal();
             rBoligQuery = rBolig.readBolig(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maxKvm, minLejePris, maxLejePris, tilLeje);
         }
 
         //Metode som kalder update-metoden, som opdaterer en lejemål i databasen
         public void uBolig(string lejemaalNr, string adresse, string postNr, string Lid, string pId, string indDato, string udDato)
         {
-            UpdateBolig updateBolig = new UpdateBolig();
+            UpdateLejemaal updateBolig = new UpdateLejemaal();
             updateBolig.updateBolig(lejemaalNr, adresse, postNr, Lid, pId, indDato, udDato);
         }
 
         //Metode som kalder delete-metoden, som sletter en lejemål i databasen
         public void dBolig(string lejemaalNr)
         {
-            DeleteBolig deleteBolig = new DeleteBolig();
+            DeleteLejemaal deleteBolig = new DeleteLejemaal();
             deleteBolig.deleteBolig(lejemaalNr);
         }
     }

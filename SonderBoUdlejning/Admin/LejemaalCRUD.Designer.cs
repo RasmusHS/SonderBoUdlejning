@@ -1,6 +1,6 @@
 ﻿namespace SonderBoUdlejning.Admin
 {
-    partial class BoligCRUD
+    partial class LejemaalCRUD
     {
         /// <summary>
         /// Required designer variable.

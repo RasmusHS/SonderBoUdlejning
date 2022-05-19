@@ -9,7 +9,7 @@ using SonderBoUdlejning.InputCheck;
 
 namespace SonderBoUdlejning.BoligSystems
 {
-    internal class CreateBolig
+    internal class CreateLejemaal
     {
         //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
