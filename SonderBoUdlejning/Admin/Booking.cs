@@ -124,7 +124,7 @@ namespace SonderBoUdlejning.Admin
 
                 TBResourceID.Text = "";
                 TBStartDato.Text = dtpStart.Text;
-                
+            dtpStart.CustomFormat = "dd-MM-yyyy";
         }
 
         private void btnConfirmBooking_Click(object sender, EventArgs e)
@@ -161,6 +161,7 @@ namespace SonderBoUdlejning.Admin
                 {
                     MessageBox.Show("Slut dato kan ikke være før start dato");
                 }
+            dtpSlut.CustomFormat = "dd-MM-yyyy";
         }
 
         private void btnResource_Click(object sender, EventArgs e)
