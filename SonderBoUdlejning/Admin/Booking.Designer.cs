@@ -52,25 +52,32 @@
             this.dtpSlut = new System.Windows.Forms.DateTimePicker();
             this.btnConfirmBooking = new System.Windows.Forms.Button();
             this.panelReservationer = new System.Windows.Forms.Panel();
+            this.DGVReservationer = new System.Windows.Forms.DataGridView();
             this.btnSePersonRes = new System.Windows.Forms.Button();
             this.cbMembersRes = new System.Windows.Forms.ComboBox();
             this.btnAntalRes = new System.Windows.Forms.Button();
             this.panelResourcer = new System.Windows.Forms.Panel();
+            this.cbDeleteBeboerResource = new System.Windows.Forms.ComboBox();
+            this.cbDeleteResFromBeboer = new System.Windows.Forms.ComboBox();
+            this.btnDeleteRes = new System.Windows.Forms.Button();
+            this.DGVRessourcer = new System.Windows.Forms.DataGridView();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageReservationer = new System.Windows.Forms.TabPage();
             this.tabPageRessourcer = new System.Windows.Forms.TabPage();
-            this.DGVRessourcer = new System.Windows.Forms.DataGridView();
-            this.DGVReservationer = new System.Windows.Forms.DataGridView();
+            this.tbresResNr = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.PanelPersonInfo.SuspendLayout();
             this.PanelResource.SuspendLayout();
             this.panelReservationer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVReservationer)).BeginInit();
             this.panelResourcer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVRessourcer)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageReservationer.SuspendLayout();
             this.tabPageRessourcer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVRessourcer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVReservationer)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,7 +107,7 @@
             this.CBMembers.FormattingEnabled = true;
             this.CBMembers.Location = new System.Drawing.Point(373, 28);
             this.CBMembers.Name = "CBMembers";
-            this.CBMembers.Size = new System.Drawing.Size(121, 28);
+            this.CBMembers.Size = new System.Drawing.Size(149, 28);
             this.CBMembers.TabIndex = 4;
             this.CBMembers.SelectedIndexChanged += new System.EventHandler(this.CBMembers_SelectedIndexChanged);
             // 
@@ -193,7 +200,7 @@
             this.CBResource.FormattingEnabled = true;
             this.CBResource.Location = new System.Drawing.Point(543, 28);
             this.CBResource.Name = "CBResource";
-            this.CBResource.Size = new System.Drawing.Size(121, 28);
+            this.CBResource.Size = new System.Drawing.Size(154, 28);
             this.CBResource.TabIndex = 14;
             this.CBResource.SelectedIndexChanged += new System.EventHandler(this.CBResource_SelectedIndexChanged);
             // 
@@ -202,7 +209,7 @@
             this.TBStartDato.Location = new System.Drawing.Point(3, 36);
             this.TBStartDato.Name = "TBStartDato";
             this.TBStartDato.ReadOnly = true;
-            this.TBStartDato.Size = new System.Drawing.Size(100, 26);
+            this.TBStartDato.Size = new System.Drawing.Size(118, 26);
             this.TBStartDato.TabIndex = 16;
             // 
             // label7
@@ -305,6 +312,18 @@
             this.panelReservationer.Size = new System.Drawing.Size(1049, 408);
             this.panelReservationer.TabIndex = 28;
             // 
+            // DGVReservationer
+            // 
+            this.DGVReservationer.AllowUserToAddRows = false;
+            this.DGVReservationer.AllowUserToDeleteRows = false;
+            this.DGVReservationer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGVReservationer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVReservationer.Location = new System.Drawing.Point(19, 26);
+            this.DGVReservationer.Name = "DGVReservationer";
+            this.DGVReservationer.ReadOnly = true;
+            this.DGVReservationer.Size = new System.Drawing.Size(662, 186);
+            this.DGVReservationer.TabIndex = 7;
+            // 
             // btnSePersonRes
             // 
             this.btnSePersonRes.Location = new System.Drawing.Point(533, 263);
@@ -317,6 +336,7 @@
             // 
             // cbMembersRes
             // 
+            this.cbMembersRes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMembersRes.FormattingEnabled = true;
             this.cbMembersRes.Location = new System.Drawing.Point(533, 227);
             this.cbMembersRes.Name = "cbMembersRes";
@@ -336,6 +356,13 @@
             // 
             // panelResourcer
             // 
+            this.panelResourcer.Controls.Add(this.label13);
+            this.panelResourcer.Controls.Add(this.label12);
+            this.panelResourcer.Controls.Add(this.label11);
+            this.panelResourcer.Controls.Add(this.tbresResNr);
+            this.panelResourcer.Controls.Add(this.cbDeleteBeboerResource);
+            this.panelResourcer.Controls.Add(this.cbDeleteResFromBeboer);
+            this.panelResourcer.Controls.Add(this.btnDeleteRes);
             this.panelResourcer.Controls.Add(this.DGVRessourcer);
             this.panelResourcer.Controls.Add(this.dtpStart);
             this.panelResourcer.Controls.Add(this.btnConfirmBooking);
@@ -353,6 +380,49 @@
             this.panelResourcer.Name = "panelResourcer";
             this.panelResourcer.Size = new System.Drawing.Size(1049, 408);
             this.panelResourcer.TabIndex = 29;
+            // 
+            // cbDeleteBeboerResource
+            // 
+            this.cbDeleteBeboerResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDeleteBeboerResource.FormattingEnabled = true;
+            this.cbDeleteBeboerResource.Location = new System.Drawing.Point(869, 309);
+            this.cbDeleteBeboerResource.Name = "cbDeleteBeboerResource";
+            this.cbDeleteBeboerResource.Size = new System.Drawing.Size(177, 28);
+            this.cbDeleteBeboerResource.TabIndex = 32;
+            this.cbDeleteBeboerResource.Visible = false;
+            this.cbDeleteBeboerResource.SelectedIndexChanged += new System.EventHandler(this.cbDeleteBeboerResource_SelectedIndexChanged);
+            // 
+            // cbDeleteResFromBeboer
+            // 
+            this.cbDeleteResFromBeboer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDeleteResFromBeboer.FormattingEnabled = true;
+            this.cbDeleteResFromBeboer.Location = new System.Drawing.Point(869, 239);
+            this.cbDeleteResFromBeboer.Name = "cbDeleteResFromBeboer";
+            this.cbDeleteResFromBeboer.Size = new System.Drawing.Size(177, 28);
+            this.cbDeleteResFromBeboer.TabIndex = 31;
+            this.cbDeleteResFromBeboer.SelectedIndexChanged += new System.EventHandler(this.cbDeleteResFromBeboer_SelectedIndexChanged);
+            // 
+            // btnDeleteRes
+            // 
+            this.btnDeleteRes.Location = new System.Drawing.Point(869, 370);
+            this.btnDeleteRes.Name = "btnDeleteRes";
+            this.btnDeleteRes.Size = new System.Drawing.Size(177, 35);
+            this.btnDeleteRes.TabIndex = 30;
+            this.btnDeleteRes.Text = "Slet reservation";
+            this.btnDeleteRes.UseVisualStyleBackColor = true;
+            this.btnDeleteRes.Click += new System.EventHandler(this.btnDeleteRes_Click);
+            // 
+            // DGVRessourcer
+            // 
+            this.DGVRessourcer.AllowUserToAddRows = false;
+            this.DGVRessourcer.AllowUserToDeleteRows = false;
+            this.DGVRessourcer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DGVRessourcer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVRessourcer.Location = new System.Drawing.Point(16, 28);
+            this.DGVRessourcer.Name = "DGVRessourcer";
+            this.DGVRessourcer.ReadOnly = true;
+            this.DGVRessourcer.Size = new System.Drawing.Size(332, 183);
+            this.DGVRessourcer.TabIndex = 29;
             // 
             // dtpStart
             // 
@@ -396,29 +466,41 @@
             this.tabPageRessourcer.Text = "Ressourcer";
             this.tabPageRessourcer.UseVisualStyleBackColor = true;
             // 
-            // DGVRessourcer
+            // tbresResNr
             // 
-            this.DGVRessourcer.AllowUserToAddRows = false;
-            this.DGVRessourcer.AllowUserToDeleteRows = false;
-            this.DGVRessourcer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DGVRessourcer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVRessourcer.Location = new System.Drawing.Point(16, 28);
-            this.DGVRessourcer.Name = "DGVRessourcer";
-            this.DGVRessourcer.ReadOnly = true;
-            this.DGVRessourcer.Size = new System.Drawing.Size(332, 183);
-            this.DGVRessourcer.TabIndex = 29;
+            this.tbresResNr.Location = new System.Drawing.Point(750, 374);
+            this.tbresResNr.Name = "tbresResNr";
+            this.tbresResNr.ReadOnly = true;
+            this.tbresResNr.Size = new System.Drawing.Size(100, 26);
+            this.tbresResNr.TabIndex = 33;
             // 
-            // DGVReservationer
+            // label11
             // 
-            this.DGVReservationer.AllowUserToAddRows = false;
-            this.DGVReservationer.AllowUserToDeleteRows = false;
-            this.DGVReservationer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DGVReservationer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVReservationer.Location = new System.Drawing.Point(19, 26);
-            this.DGVReservationer.Name = "DGVReservationer";
-            this.DGVReservationer.ReadOnly = true;
-            this.DGVReservationer.Size = new System.Drawing.Size(662, 186);
-            this.DGVReservationer.TabIndex = 7;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(576, 377);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(168, 20);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Reservations nummer:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(865, 215);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(103, 20);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Vælg Beboer";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(855, 286);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(191, 20);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Vælg beboers reservation";
+            this.label13.Visible = false;
             // 
             // Booking
             // 
@@ -435,13 +517,13 @@
             this.PanelResource.PerformLayout();
             this.panelReservationer.ResumeLayout(false);
             this.panelReservationer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVReservationer)).EndInit();
             this.panelResourcer.ResumeLayout(false);
             this.panelResourcer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVRessourcer)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageReservationer.ResumeLayout(false);
             this.tabPageRessourcer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DGVRessourcer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVReservationer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -481,5 +563,12 @@
         private System.Windows.Forms.TabPage tabPageRessourcer;
         private System.Windows.Forms.DataGridView DGVRessourcer;
         private System.Windows.Forms.DataGridView DGVReservationer;
+        private System.Windows.Forms.ComboBox cbDeleteBeboerResource;
+        private System.Windows.Forms.Button btnDeleteRes;
+        private System.Windows.Forms.TextBox tbresResNr;
+        private System.Windows.Forms.ComboBox cbDeleteResFromBeboer;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }

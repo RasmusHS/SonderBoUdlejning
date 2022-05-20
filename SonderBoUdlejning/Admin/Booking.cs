@@ -37,9 +37,6 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
-            /*panelReservationer.Visible = true;
-            panelResourcer.Visible = true;*/
-
             string date = DateTime.Today.ToString("yyyy-MM-dd");
             TBStartDato.Text = date;
 
@@ -56,6 +53,7 @@ namespace SonderBoUdlejning.Admin
             {
                 CBMembers.Items.Add(item);
                 cbMembersRes.Items.Add(item);
+                cbDeleteResFromBeboer.Items.Add(item);
 
             }
         }
@@ -167,18 +165,6 @@ namespace SonderBoUdlejning.Admin
             dtpSlut.CustomFormat = "dd-MM-yyyy";
         }
 
-        /*private void btnResource_Click(object sender, EventArgs e)
-        {
-            panelReservationer.Visible = false;
-            panelResourcer.Visible = true;
-        }
-
-        private void btnReservationer_Click(object sender, EventArgs e)
-        {
-            panelReservationer.Visible = true;
-            panelResourcer.Visible = false;
-        }*/
-
         private void btnAntalRes_Click(object sender, EventArgs e)
         {
             string query = "SELECT Person.pId AS PersonID, fNavn AS FuldeNavn, COUNT(resNr) AS AntalReservationer FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
@@ -202,6 +188,62 @@ namespace SonderBoUdlejning.Admin
             {
                 MessageBox.Show("Du skal vælge person for at deres reservationer");
             }
+        }
+
+        List<int> beboerResID = new List<int>();
+        private void cbDeleteResFromBeboer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            beboerResID.Clear();
+            tbresResNr.Text = "";
+            cbDeleteBeboerResource.Items.Clear();
+            cbDeleteBeboerResource.Visible = true;
+            label13.Visible = true;
+            string query = $"SELECT COUNT(rTypeNavn) FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1;";
+            SqlConnection conn = new SqlConnection(connString.connStr);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            int antalReservationerPRBeboer = Convert.ToInt32(cmd.ExecuteScalar());
+            conn.Close();
+
+            string query2 = $"SELECT rTypeNavn FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
+            SqlCommand cmd2 = new SqlCommand(query2, conn);
+            conn.Open();
+            SqlDataReader reader = cmd2.ExecuteReader();
+            for (int i = 0; i < antalReservationerPRBeboer; i++)
+            {
+                while (reader.Read())
+                {
+                    cbDeleteBeboerResource.Items.Add(reader.GetString(i));
+                }
+            }
+            conn.Close();
+
+
+            
+            string query3 = $"SELECT resNr FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
+            SqlCommand cmd3 = new SqlCommand(query3, conn);
+            conn.Open();
+            SqlDataReader reader2 = cmd3.ExecuteReader();
+            for (int i = 0; i < antalReservationerPRBeboer; i++)
+            {
+                while (reader2.Read())
+                {
+                    beboerResID.Add(reader2.GetInt32(i));
+                }
+            }
+            conn.Close();
+        }
+
+        private void btnDeleteRes_Click(object sender, EventArgs e)
+        {
+            int[] listBeboerIDArray = listBeboerID.ToArray();
+            //Skal bare have lavet slette funktion (Se table plus) 
+        }
+
+        private void cbDeleteBeboerResource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int[] beboerResIDArray = beboerResID.ToArray();
+            tbresResNr.Text = Convert.ToString(beboerResIDArray[cbDeleteBeboerResource.SelectedIndex]);
         }
     }
 }
