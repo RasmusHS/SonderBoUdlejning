@@ -37,6 +37,9 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
+            /*panelReservationer.Visible = true;
+            panelResourcer.Visible = true;*/
+
             string date = DateTime.Today.ToString("yyyy-MM-dd");
             TBStartDato.Text = date;
 
@@ -164,7 +167,7 @@ namespace SonderBoUdlejning.Admin
             dtpSlut.CustomFormat = "dd-MM-yyyy";
         }
 
-        private void btnResource_Click(object sender, EventArgs e)
+        /*private void btnResource_Click(object sender, EventArgs e)
         {
             panelReservationer.Visible = false;
             panelResourcer.Visible = true;
@@ -174,7 +177,7 @@ namespace SonderBoUdlejning.Admin
         {
             panelReservationer.Visible = true;
             panelResourcer.Visible = false;
-        }
+        }*/
 
         private void btnAntalRes_Click(object sender, EventArgs e)
         {
