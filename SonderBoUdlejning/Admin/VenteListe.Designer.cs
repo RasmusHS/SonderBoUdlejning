@@ -67,9 +67,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(28, 41);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(1);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(6, 6);
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(552, 192);
             this.tabControl1.TabIndex = 1;
@@ -77,11 +79,11 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.DGVVenteListe);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 35);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPage1.Size = new System.Drawing.Size(544, 166);
+            this.tabPage1.Size = new System.Drawing.Size(544, 153);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Venteliste";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -96,17 +98,17 @@
             this.DGVVenteListe.Location = new System.Drawing.Point(1, 1);
             this.DGVVenteListe.Name = "DGVVenteListe";
             this.DGVVenteListe.ReadOnly = true;
-            this.DGVVenteListe.Size = new System.Drawing.Size(542, 164);
+            this.DGVVenteListe.Size = new System.Drawing.Size(542, 151);
             this.DGVVenteListe.TabIndex = 0;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.DGVPersoner);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 35);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPage2.Size = new System.Drawing.Size(544, 166);
+            this.tabPage2.Size = new System.Drawing.Size(544, 153);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Personer";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -121,17 +123,17 @@
             this.DGVPersoner.Location = new System.Drawing.Point(1, 1);
             this.DGVPersoner.Name = "DGVPersoner";
             this.DGVPersoner.ReadOnly = true;
-            this.DGVPersoner.Size = new System.Drawing.Size(542, 164);
+            this.DGVPersoner.Size = new System.Drawing.Size(542, 151);
             this.DGVPersoner.TabIndex = 0;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.DGVLejemaal);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 35);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(1);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(1);
-            this.tabPage3.Size = new System.Drawing.Size(544, 166);
+            this.tabPage3.Size = new System.Drawing.Size(544, 153);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Lejemål";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -146,7 +148,7 @@
             this.DGVLejemaal.Location = new System.Drawing.Point(1, 1);
             this.DGVLejemaal.Name = "DGVLejemaal";
             this.DGVLejemaal.ReadOnly = true;
-            this.DGVLejemaal.Size = new System.Drawing.Size(542, 164);
+            this.DGVLejemaal.Size = new System.Drawing.Size(542, 151);
             this.DGVLejemaal.TabIndex = 0;
             // 
             // InsertToList
