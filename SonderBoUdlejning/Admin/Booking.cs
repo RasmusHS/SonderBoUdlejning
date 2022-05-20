@@ -40,8 +40,8 @@ namespace SonderBoUdlejning.Admin
             string date = DateTime.Today.ToString("yyyy-MM-dd");
             TBStartDato.Text = date;
 
-            BookingSystems.OnLoadFuckions.GetPeronList(listBeboerID, listBeboer);
-            BookingSystems.OnLoadFuckions.GetResourceList(listResourceID, listResource, date);
+            BookingSystems.OnLoadFunctions.GetPeronList(listBeboerID, listBeboer);
+            BookingSystems.OnLoadFunctions.GetResourceList(listResourceID, listResource, date);
 
 
             foreach (string item in listResource)
@@ -56,12 +56,6 @@ namespace SonderBoUdlejning.Admin
                 cbDeleteResFromBeboer.Items.Add(item);
 
             }
-        }
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void CBMembers_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,7 +111,7 @@ namespace SonderBoUdlejning.Admin
                 listResource.Clear();
                 listResourceID.Clear();
                 CBResource.Items.Clear();
-                BookingSystems.OnLoadFuckions.GetResourceList(listResourceID, listResource, dtpStart.Text);
+                BookingSystems.OnLoadFunctions.GetResourceList(listResourceID, listResource, dtpStart.Text);
                 foreach (string item in listResource)
                 {
                     CBResource.Items.Add(item);
@@ -131,7 +125,7 @@ namespace SonderBoUdlejning.Admin
         private void btnConfirmBooking_Click(object sender, EventArgs e)
         {
            dtpSlut.CustomFormat = "yyyy-MM-dd";
-            DateTime dateToday = Convert.ToDateTime(TBStartDato.Text); //DateTime.Today.ToString("yyyy-MM-dd")
+            DateTime dateToday = Convert.ToDateTime(TBStartDato.Text);
             DateTime dateSlutDato = Convert.ToDateTime(dtpSlut.Text);
                 
                 if (dateSlutDato >= dateToday)
@@ -142,7 +136,11 @@ namespace SonderBoUdlejning.Admin
 
                     if (antalBookings == 0 && antalBookingsBetweenDates == 0)
                     {
-                        string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+ dtpSlut.Text+"')";
+
+                    //Tjek om kunde allerede har en reservation af den resource type, dere r SQL i tableplus der finder ud af det!
+                    //if (0) {udfør booking}
+                    //else {"kunde har allerede en booking på denne resource type"}
+                    string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+ dtpSlut.Text+"')";
                         SqlConnection conn = new SqlConnection(connString.connStr);
                         SqlCommand cmd = new SqlCommand(query, conn);
                         conn.Open();
@@ -237,7 +235,28 @@ namespace SonderBoUdlejning.Admin
         private void btnDeleteRes_Click(object sender, EventArgs e)
         {
             int[] listBeboerIDArray = listBeboerID.ToArray();
-            //Skal bare have lavet slette funktion (Se table plus) 
+            if (string.IsNullOrEmpty(tbresResNr.Text))
+            {
+                MessageBox.Show("Vælg venligst en beboer og en af deres reservationer");
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Er du sikker på du vil slette denne reservation?", "Sikker?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    int resNr = Convert.ToInt32(tbresResNr.Text);
+                    string query = $"DELETE FROM Reservationer WHERE resNr = {resNr};";
+                    SqlConnection conn = new SqlConnection(connString.connStr);
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    conn.Open();
+                    int antalReservationerPRBeboer = Convert.ToInt32(cmd.ExecuteScalar());
+                    conn.Close();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+ 
+                }
+            }
         }
 
         private void cbDeleteBeboerResource_SelectedIndexChanged(object sender, EventArgs e)

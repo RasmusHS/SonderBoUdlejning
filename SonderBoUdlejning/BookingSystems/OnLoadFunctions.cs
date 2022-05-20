@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SonderBoUdlejning.BookingSystems
 {
-    internal class OnLoadFuckions
+    internal class OnLoadFunctions
     {
         
         public static void GetPeronList(List<int> beboerID, List<string> beboer)

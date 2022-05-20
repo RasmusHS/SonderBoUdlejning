@@ -214,7 +214,7 @@
     <Compile Include="BoligSystems\UpdateLejemaal.cs" />
     <Compile Include="BookingSystems\CheckMellemDatoer.cs" />
     <Compile Include="BookingSystems\CheckSlutDato.cs" />
-    <Compile Include="BookingSystems\OnLoadFuckions.cs" />
+    <Compile Include="BookingSystems\OnLoadFunctions.cs" />
     <Compile Include="ConnString.cs" />
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="InputCheck\LejemaalInputCheck.cs" />

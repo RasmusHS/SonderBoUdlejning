@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.CBMembers = new System.Windows.Forms.ComboBox();
             this.TBPID = new System.Windows.Forms.TextBox();
             this.TBMail = new System.Windows.Forms.TextBox();
@@ -57,6 +56,10 @@
             this.cbMembersRes = new System.Windows.Forms.ComboBox();
             this.btnAntalRes = new System.Windows.Forms.Button();
             this.panelResourcer = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbresResNr = new System.Windows.Forms.TextBox();
             this.cbDeleteBeboerResource = new System.Windows.Forms.ComboBox();
             this.cbDeleteResFromBeboer = new System.Windows.Forms.ComboBox();
             this.btnDeleteRes = new System.Windows.Forms.Button();
@@ -65,10 +68,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageReservationer = new System.Windows.Forms.TabPage();
             this.tabPageRessourcer = new System.Windows.Forms.TabPage();
-            this.tbresResNr = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.PanelPersonInfo.SuspendLayout();
             this.PanelResource.SuspendLayout();
             this.panelReservationer.SuspendLayout();
@@ -89,17 +89,6 @@
             this.label1.Size = new System.Drawing.Size(136, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Ledige ressourcer";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Reservationer";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // CBMembers
             // 
@@ -301,11 +290,11 @@
             // 
             // panelReservationer
             // 
+            this.panelReservationer.Controls.Add(this.label2);
             this.panelReservationer.Controls.Add(this.DGVReservationer);
             this.panelReservationer.Controls.Add(this.btnSePersonRes);
             this.panelReservationer.Controls.Add(this.cbMembersRes);
             this.panelReservationer.Controls.Add(this.btnAntalRes);
-            this.panelReservationer.Controls.Add(this.label2);
             this.panelReservationer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelReservationer.Location = new System.Drawing.Point(3, 3);
             this.panelReservationer.Name = "panelReservationer";
@@ -380,6 +369,42 @@
             this.panelResourcer.Name = "panelResourcer";
             this.panelResourcer.Size = new System.Drawing.Size(1049, 408);
             this.panelResourcer.TabIndex = 29;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(855, 286);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(191, 20);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Vælg beboers reservation";
+            this.label13.Visible = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(865, 215);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(103, 20);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Vælg Beboer";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(576, 377);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(168, 20);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Reservations nummer:";
+            // 
+            // tbresResNr
+            // 
+            this.tbresResNr.Location = new System.Drawing.Point(750, 374);
+            this.tbresResNr.Name = "tbresResNr";
+            this.tbresResNr.ReadOnly = true;
+            this.tbresResNr.Size = new System.Drawing.Size(100, 26);
+            this.tbresResNr.TabIndex = 33;
             // 
             // cbDeleteBeboerResource
             // 
@@ -466,41 +491,14 @@
             this.tabPageRessourcer.Text = "Ressourcer";
             this.tabPageRessourcer.UseVisualStyleBackColor = true;
             // 
-            // tbresResNr
+            // label2
             // 
-            this.tbresResNr.Location = new System.Drawing.Point(750, 374);
-            this.tbresResNr.Name = "tbresResNr";
-            this.tbresResNr.ReadOnly = true;
-            this.tbresResNr.Size = new System.Drawing.Size(100, 26);
-            this.tbresResNr.TabIndex = 33;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(576, 377);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(168, 20);
-            this.label11.TabIndex = 34;
-            this.label11.Text = "Reservations nummer:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(865, 215);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(103, 20);
-            this.label12.TabIndex = 35;
-            this.label12.Text = "Vælg Beboer";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(855, 286);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(191, 20);
-            this.label13.TabIndex = 36;
-            this.label13.Text = "Vælg beboers reservation";
-            this.label13.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 20);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Reservationer";
             // 
             // Booking
             // 
@@ -530,7 +528,6 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TBPID;
         private System.Windows.Forms.TextBox TBMail;
         private System.Windows.Forms.TextBox TBTLF;
@@ -570,5 +567,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label2;
     }
 }
