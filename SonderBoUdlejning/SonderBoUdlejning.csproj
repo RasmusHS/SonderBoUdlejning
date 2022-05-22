@@ -213,6 +213,7 @@
     <Compile Include="BoligSystems\DeleteLejemaal.cs" />
     <Compile Include="BoligSystems\UpdateLejemaal.cs" />
     <Compile Include="BookingSystems\CheckMellemDatoer.cs" />
+    <Compile Include="BookingSystems\CheckResourceIdType.cs" />
     <Compile Include="BookingSystems\CheckSlutDato.cs" />
     <Compile Include="BookingSystems\OnLoadFunctions.cs" />
     <Compile Include="ConnString.cs" />

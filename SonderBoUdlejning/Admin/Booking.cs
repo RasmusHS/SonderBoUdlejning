@@ -124,7 +124,8 @@ namespace SonderBoUdlejning.Admin
 
         private void btnConfirmBooking_Click(object sender, EventArgs e)
         {
-           dtpSlut.CustomFormat = "yyyy-MM-dd";
+            SqlConnection conn = new SqlConnection(connString.connStr);
+            dtpSlut.CustomFormat = "yyyy-MM-dd";
             DateTime dateToday = Convert.ToDateTime(TBStartDato.Text);
             DateTime dateSlutDato = Convert.ToDateTime(dtpSlut.Text);
                 
@@ -134,26 +135,46 @@ namespace SonderBoUdlejning.Admin
                     int antalBookingsBetweenDates = BookingSystems.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
 
 
-                    if (antalBookings == 0 && antalBookingsBetweenDates == 0)
-                    {
+                if (antalBookings == 0 && antalBookingsBetweenDates == 0)
+                {
+                    BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text);
 
-                    //Tjek om kunde allerede har en reservation af den resource type, dere r SQL i tableplus der finder ud af det!
-                    //if (0) {udfør booking}
-                    //else {"kunde har allerede en booking på denne resource type"}
-                    string query = "INSERT INTO Reservationer VALUES("+Convert.ToInt32(TBResourceID.Text)+", "+Convert.ToInt32(TBPID.Text)+",'"+TBStartDato.Text+"','"+ dtpSlut.Text+"')";
-                        SqlConnection conn = new SqlConnection(connString.connStr);
+                    string checkAlreadyBookedQuery = $"SELECT COUNT(resNr) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = {Convert.ToInt32(TBPID.Text)} AND rType = {BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text)} AND rSlutDato >= GETDATE();";
+                    SqlCommand cmdAlreadyBooked = new SqlCommand(checkAlreadyBookedQuery, conn);
+                    conn.Open();
+                    int AlreadyBookedQuery = Convert.ToInt32(cmdAlreadyBooked.ExecuteScalar());
+                    conn.Close();
+                    if (AlreadyBookedQuery == 0)
+                    {
+                        string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(TBResourceID.Text) + ", " + Convert.ToInt32(TBPID.Text) + ",'" + TBStartDato.Text + "','" + dtpSlut.Text + "')";
+
                         SqlCommand cmd = new SqlCommand(query, conn);
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
 
-                        MessageBox.Show("Reservation operttet!");
+                        MessageBox.Show("Reservation oprettet!");
                         DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
                     }
-                    else 
+                    else
                     {
-                        MessageBox.Show("Ressource kan ikke bookes til denne dato, da den allerede er optaget.");
+                        string input = CBResource.Text;
+                        int index = input.LastIndexOf(" ");
+                        if (index > 0)
+                            input = input.Substring(0, index);
+                        MessageBox.Show($"Denne beboer har allerede en booking på en {input}");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Ressource kan ikke bookes da en anden beboer har el reservation i det tidsrum..");
+                }
+
+
+                    //Tjek om kunde allerede har en reservation af den resource type, dere r SQL i tableplus der finder ud af det!
+                    //if (0) {udfør booking}
+                    //else {"kunde har allerede en booking på denne resource type"}
+                    
 
                 }
                 else 
