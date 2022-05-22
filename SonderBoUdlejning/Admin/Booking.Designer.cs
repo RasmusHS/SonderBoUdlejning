@@ -51,6 +51,7 @@
             this.dtpSlut = new System.Windows.Forms.DateTimePicker();
             this.btnConfirmBooking = new System.Windows.Forms.Button();
             this.panelReservationer = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.DGVReservationer = new System.Windows.Forms.DataGridView();
             this.btnSePersonRes = new System.Windows.Forms.Button();
             this.cbMembersRes = new System.Windows.Forms.ComboBox();
@@ -68,7 +69,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageReservationer = new System.Windows.Forms.TabPage();
             this.tabPageRessourcer = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnGetReservations = new System.Windows.Forms.Button();
             this.PanelPersonInfo.SuspendLayout();
             this.PanelResource.SuspendLayout();
             this.panelReservationer.SuspendLayout();
@@ -290,6 +291,7 @@
             // 
             // panelReservationer
             // 
+            this.panelReservationer.Controls.Add(this.btnGetReservations);
             this.panelReservationer.Controls.Add(this.label2);
             this.panelReservationer.Controls.Add(this.DGVReservationer);
             this.panelReservationer.Controls.Add(this.btnSePersonRes);
@@ -300,6 +302,15 @@
             this.panelReservationer.Name = "panelReservationer";
             this.panelReservationer.Size = new System.Drawing.Size(1049, 408);
             this.panelReservationer.TabIndex = 28;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 20);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Reservationer";
             // 
             // DGVReservationer
             // 
@@ -491,14 +502,15 @@
             this.tabPageRessourcer.Text = "Ressourcer";
             this.tabPageRessourcer.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // btnGetReservations
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 20);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Reservationer";
+            this.btnGetReservations.Location = new System.Drawing.Point(18, 335);
+            this.btnGetReservations.Name = "btnGetReservations";
+            this.btnGetReservations.Size = new System.Drawing.Size(126, 52);
+            this.btnGetReservations.TabIndex = 9;
+            this.btnGetReservations.Text = "Udtræk alle reservationer";
+            this.btnGetReservations.UseVisualStyleBackColor = true;
+            this.btnGetReservations.Click += new System.EventHandler(this.btnGetReservations_Click);
             // 
             // Booking
             // 
@@ -568,5 +580,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnGetReservations;
     }
 }

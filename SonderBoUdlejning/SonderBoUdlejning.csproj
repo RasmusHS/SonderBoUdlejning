@@ -216,6 +216,7 @@
     <Compile Include="BookingSystems\CheckResourceIdType.cs" />
     <Compile Include="BookingSystems\CheckSlutDato.cs" />
     <Compile Include="BookingSystems\OnLoadFunctions.cs" />
+    <Compile Include="BookingSystems\SetArrayInfo.cs" />
     <Compile Include="ConnString.cs" />
     <Compile Include="ErrorMessage.cs" />
     <Compile Include="InputCheck\LejemaalInputCheck.cs" />

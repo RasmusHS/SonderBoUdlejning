@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -284,6 +285,39 @@ namespace SonderBoUdlejning.Admin
         {
             int[] beboerResIDArray = beboerResID.ToArray();
             tbresResNr.Text = Convert.ToString(beboerResIDArray[cbDeleteBeboerResource.SelectedIndex]);
+        }
+
+        private void btnGetReservations_Click(object sender, EventArgs e)
+        {
+            string[] rTypeNavnArray = new string[30];
+            string[] antalReservationerArray = new string[30];
+            SqlConnection conn = new SqlConnection(connString.connStr);
+            BookingSystems.SetArrayInfo.FillArrays(rTypeNavnArray, antalReservationerArray, conn);
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Type Resource:");
+            sb.Append("\t"); //Add tabulation
+            sb.Append("\t"); //Add tabulation
+            sb.Append("Antal Reservationer:");
+            sb.Append(Environment.NewLine); //Change line
+
+            for (int i = 0; i < rTypeNavnArray.Length; i++) {
+                sb.Append(rTypeNavnArray[i]);
+                sb.Append("\t"); //Add tabulation
+                if (i < 20) 
+                {
+                    sb.Append("\t"); //Add tabulation
+                }
+                sb.Append(antalReservationerArray[i]);
+                sb.Append(Environment.NewLine); //Change line
+                
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\Test.txt")) 
+            {
+                sw.WriteLine(sb.ToString());
+            }
+            
         }
     }
 }
