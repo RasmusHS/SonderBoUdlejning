@@ -21,7 +21,7 @@ namespace SonderBoUdlejning.BookingSystems
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    rTypeNavnArray[i] = (reader["rTypeNavn"].ToString());
+                    rTypeNavnArray[i] = reader["rTypeNavn"].ToString();
                 }
                 reader.Close();
             }

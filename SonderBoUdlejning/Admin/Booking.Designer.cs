@@ -51,6 +51,7 @@
             this.dtpSlut = new System.Windows.Forms.DateTimePicker();
             this.btnConfirmBooking = new System.Windows.Forms.Button();
             this.panelReservationer = new System.Windows.Forms.Panel();
+            this.btnGetReservations = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.DGVReservationer = new System.Windows.Forms.DataGridView();
             this.btnSePersonRes = new System.Windows.Forms.Button();
@@ -69,7 +70,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageReservationer = new System.Windows.Forms.TabPage();
             this.tabPageRessourcer = new System.Windows.Forms.TabPage();
-            this.btnGetReservations = new System.Windows.Forms.Button();
+            this.btnGetDateReservationer = new System.Windows.Forms.Button();
+            this.dtpStatistik = new System.Windows.Forms.DateTimePicker();
             this.PanelPersonInfo.SuspendLayout();
             this.PanelResource.SuspendLayout();
             this.panelReservationer.SuspendLayout();
@@ -291,6 +293,8 @@
             // 
             // panelReservationer
             // 
+            this.panelReservationer.Controls.Add(this.dtpStatistik);
+            this.panelReservationer.Controls.Add(this.btnGetDateReservationer);
             this.panelReservationer.Controls.Add(this.btnGetReservations);
             this.panelReservationer.Controls.Add(this.label2);
             this.panelReservationer.Controls.Add(this.DGVReservationer);
@@ -302,6 +306,16 @@
             this.panelReservationer.Name = "panelReservationer";
             this.panelReservationer.Size = new System.Drawing.Size(1049, 408);
             this.panelReservationer.TabIndex = 28;
+            // 
+            // btnGetReservations
+            // 
+            this.btnGetReservations.Location = new System.Drawing.Point(18, 335);
+            this.btnGetReservations.Name = "btnGetReservations";
+            this.btnGetReservations.Size = new System.Drawing.Size(126, 52);
+            this.btnGetReservations.TabIndex = 9;
+            this.btnGetReservations.Text = "Udtræk alle reservationer";
+            this.btnGetReservations.UseVisualStyleBackColor = true;
+            this.btnGetReservations.Click += new System.EventHandler(this.btnGetReservations_Click);
             // 
             // label2
             // 
@@ -346,7 +360,7 @@
             // 
             // btnAntalRes
             // 
-            this.btnAntalRes.Location = new System.Drawing.Point(18, 227);
+            this.btnAntalRes.Location = new System.Drawing.Point(23, 227);
             this.btnAntalRes.Name = "btnAntalRes";
             this.btnAntalRes.Size = new System.Drawing.Size(192, 59);
             this.btnAntalRes.TabIndex = 4;
@@ -502,15 +516,23 @@
             this.tabPageRessourcer.Text = "Ressourcer";
             this.tabPageRessourcer.UseVisualStyleBackColor = true;
             // 
-            // btnGetReservations
+            // btnGetDateReservationer
             // 
-            this.btnGetReservations.Location = new System.Drawing.Point(18, 335);
-            this.btnGetReservations.Name = "btnGetReservations";
-            this.btnGetReservations.Size = new System.Drawing.Size(126, 52);
-            this.btnGetReservations.TabIndex = 9;
-            this.btnGetReservations.Text = "Udtræk alle reservationer";
-            this.btnGetReservations.UseVisualStyleBackColor = true;
-            this.btnGetReservations.Click += new System.EventHandler(this.btnGetReservations_Click);
+            this.btnGetDateReservationer.Location = new System.Drawing.Point(292, 335);
+            this.btnGetDateReservationer.Name = "btnGetDateReservationer";
+            this.btnGetDateReservationer.Size = new System.Drawing.Size(156, 52);
+            this.btnGetDateReservationer.TabIndex = 10;
+            this.btnGetDateReservationer.Text = "Udtræk statistik på dato";
+            this.btnGetDateReservationer.UseVisualStyleBackColor = true;
+            this.btnGetDateReservationer.Click += new System.EventHandler(this.btnGetDateReservationer_Click);
+            // 
+            // dtpStatistik
+            // 
+            this.dtpStatistik.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStatistik.Location = new System.Drawing.Point(292, 303);
+            this.dtpStatistik.Name = "dtpStatistik";
+            this.dtpStatistik.Size = new System.Drawing.Size(156, 26);
+            this.dtpStatistik.TabIndex = 11;
             // 
             // Booking
             // 
@@ -581,5 +603,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGetReservations;
+        private System.Windows.Forms.DateTimePicker dtpStatistik;
+        private System.Windows.Forms.Button btnGetDateReservationer;
     }
 }

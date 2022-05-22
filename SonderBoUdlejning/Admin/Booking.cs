@@ -313,11 +313,81 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
                 
             }
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\Test.txt")) 
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\AntalReservationerForResourcer.txt")) 
             {
                 sw.WriteLine(sb.ToString());
             }
             
+        }
+
+        private void btnGetDateReservationer_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(connString.connStr);
+            dtpStatistik.CustomFormat = "yyyy-MM-dd";
+            string query = $"SELECT COUNT(DISTINCT Person.pId) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            int arrayLenth = Convert.ToInt32(cmd.ExecuteScalar());
+            conn.Close();
+            int[] personIdArray = new int[arrayLenth];
+            string[] fuldeNavnArray = new string[arrayLenth];
+            string[] reservationerArray = new string[arrayLenth];
+
+            //Get personIdArray list
+            conn.Open();
+            int i = 0;
+            query = $"SELECT DISTINCT Person.pId, fNavn AS FuldeNavn, ( SELECT', '+ CAST(rTypeNavn AS VARCHAR(MAX)) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = Person.pId AND '{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato FOR XML PATH('') ) AS Reservationer FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
+                cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    personIdArray[i] = reader.GetInt32(0);
+                    fuldeNavnArray[i] = reader.GetString(1);
+                    reservationerArray[i] = reader.GetString(2);
+                    i++;
+                }                
+            conn.Close();
+
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"Dato: {dtpStatistik.Text}");
+            sb.Append(Environment.NewLine); //Change line
+            sb.Append("Person ID:");
+            sb.Append("\t"); //Add tabulation       
+            sb.Append("Fulde Navn:");
+            sb.Append("\t"); //Add tabulation
+            sb.Append("Reserverede resourcer:");
+            sb.Append(Environment.NewLine); //Change line
+            
+
+            for (int l = 0; l < arrayLenth; l++)
+            {
+                sb.Append(personIdArray[l]);
+                sb.Append("\t"); //Add tabulation 
+                sb.Append("\t"); //Add tabulation 
+                sb.Append(fuldeNavnArray[l]);
+                sb.Append("\t"); //Add tabulation
+                if (fuldeNavnArray[l].Length < 8) 
+                {
+                    sb.Append("\t"); //Add tabulation
+                }
+                
+                if (fuldeNavnArray[l].Length > 12) 
+                {
+                    sb.Append("\t"); //Add tabulation
+                } 
+                sb.Append(reservationerArray[l]);
+                sb.Append(Environment.NewLine); //Change line
+
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\UdtrækAfIndividuelleReservationer.txt"))
+            {
+                sw.WriteLine(sb.ToString());
+            }
+
+
+            dtpStatistik.CustomFormat = "dd-MM-yyyy";
         }
     }
 }
