@@ -314,7 +314,7 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
                 
             }
-            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Desktop\AntalReservationerForResourcer.txt")) 
+            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Resourcer.txt")) 
             {
                 sw.WriteLine(sb.ToString());
             }
@@ -333,23 +333,27 @@ namespace SonderBoUdlejning.Admin
             conn.Close();
             int[] personIdArray = new int[arrayLenth];
             string[] fuldeNavnArray = new string[arrayLenth];
+            string[] adresseArray = new string[arrayLenth];
             string[] reservationerArray = new string[arrayLenth];
+            
 
             //Get personIdArray list
             conn.Open();
             int i = 0;
-            query = $"SELECT DISTINCT Person.pId, fNavn AS FuldeNavn, ( SELECT', '+ CAST(rTypeNavn AS VARCHAR(MAX)) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = Person.pId AND '{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato FOR XML PATH('') ) AS Reservationer FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
+            query = $"SELECT DISTINCT Person.pId, fNavn AS FuldeNavn, Lejemaal.adresse, ( SELECT', '+ CAST(rTypeNavn AS VARCHAR(MAX)) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = Person.pId AND'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato FOR XML PATH('') ) AS Reservationer FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Lejemaal ON Person.pId = Lejemaal.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
                 cmd = new SqlCommand(query, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
                     personIdArray[i] = reader.GetInt32(0);
                     fuldeNavnArray[i] = reader.GetString(1);
-                    reservationerArray[i] = reader.GetString(2);
-                    i++;
+                    adresseArray[i] = reader.GetString(2);
+                    reservationerArray[i] = reader.GetString(3);
+                    reservationerArray[i] = reservationerArray[i].Remove(0, 2);
+                i++;
                 }                
             conn.Close();
-
+            dtpStatistik.CustomFormat = "dd-MM-yyyy";
 
             StringBuilder sb = new StringBuilder();
 
@@ -358,6 +362,9 @@ namespace SonderBoUdlejning.Admin
             sb.Append("Person ID:");
             sb.Append("\t"); //Add tabulation       
             sb.Append("Fulde Navn:");
+            sb.Append("\t"); //Add tabulation
+            sb.Append("Adresse");
+            sb.Append("\t"); //Add tabulation
             sb.Append("\t"); //Add tabulation
             sb.Append("Reserverede resourcer:");
             sb.Append(Environment.NewLine); //Change line
@@ -378,18 +385,20 @@ namespace SonderBoUdlejning.Admin
                 if (fuldeNavnArray[l].Length > 12) 
                 {
                     sb.Append("\t"); //Add tabulation
-                } 
+                }
+                sb.Append(adresseArray[l]);
+                sb.Append("\t");
                 sb.Append(reservationerArray[l]);
                 sb.Append(Environment.NewLine); //Change line
 
             }
-            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Desktop\IndividuelleReservationer"))
+            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt"))
             {
                 sw.WriteLine(sb.ToString());
             }
 
 
-            dtpStatistik.CustomFormat = "dd-MM-yyyy";
+            
         }
     }
 }
