@@ -256,6 +256,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnDeleteRes_Click(object sender, EventArgs e)
         {
+            
             int[] listBeboerIDArray = listBeboerID.ToArray();
             if (string.IsNullOrEmpty(tbresResNr.Text))
             {
@@ -289,6 +290,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetReservations_Click(object sender, EventArgs e)
         {
+            BookingSystems.Create.CreateDir();
             string username = Environment.UserName;
             string[] rTypeNavnArray = new string[30];
             string[] antalReservationerArray = new string[30];
@@ -323,6 +325,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetDateReservationer_Click(object sender, EventArgs e)
         {
+            BookingSystems.Create.CreateDir();
             string username = Environment.UserName;
             SqlConnection conn = new SqlConnection(connString.connStr);
             dtpStatistik.CustomFormat = "yyyy-MM-dd";
