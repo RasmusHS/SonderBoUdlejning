@@ -299,6 +299,11 @@ namespace SonderBoUdlejning.Admin
 
             StringBuilder sb = new StringBuilder();
 
+            string time = DateTime.Now.ToString("dd-MM-yyyy");
+
+            sb.Append($"Datointerval: 01-01-2022 - {time}");
+            sb.Append(Environment.NewLine); //Change line
+            sb.Append(Environment.NewLine); //Change line
             sb.Append("Type Resource:");
             sb.Append("\t"); //Add tabulation
             sb.Append("\t"); //Add tabulation
