@@ -321,7 +321,7 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
                 
             }
-            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Resourcer.txt")) 
+            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Ressourcer.txt")) 
             {
                 sw.WriteLine(sb.ToString());
             }
