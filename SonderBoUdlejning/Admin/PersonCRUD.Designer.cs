@@ -1,4 +1,4 @@
-﻿namespace SonderBoUdlejning.Secretary
+﻿namespace SonderBoUdlejning.Admin
 {
     partial class PersonCRUD
     {

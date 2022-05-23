@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SonderBoUdlejning.InputCheck;
 using SonderBoUdlejning.personCRUD;
 
-namespace SonderBoUdlejning.Secretary
+namespace SonderBoUdlejning.Admin
 {
     public partial class PersonCRUD : Form
     {
@@ -44,7 +44,7 @@ namespace SonderBoUdlejning.Secretary
                 //Sekretæren har kun adgang til at læse
                 btnOpret.Visible = true;
                 btnRead.Visible = true;
-                btnOpdater.Visible = false;
+                btnOpdater.Visible = true;
                 btnSlet.Visible = false;
             }
         }
@@ -132,25 +132,70 @@ namespace SonderBoUdlejning.Secretary
 
         private void btnPersonU_Click(object sender, EventArgs e)
         {
-            string navn = tbNavn.Text; //Tager input fra navn textbox
-            string mail = tbMail.Text.ToLower(); //Tager input fra mail textbox og sætter store bogstaver til at være små
-            string tlf = tbTlf.Text; //Tager input fra tlf textbox
+            string navn = ""; //Tager input fra navn textbox
+            string mail = ""; //Tager input fra mail textbox og sætter store bogstaver til at være små
+            string tlf = ""; //Tager input fra tlf textbox
             string pId = tbPId.Text; //Tager input fra pId textbox
             bool erBeboer = false; //Sætter erBeboer til false
 
             PersonFacade pUpdate = new PersonFacade();
 
             //Tjekker om en af felterne er tomme
-            if ((string.IsNullOrEmpty(navn)) || (string.IsNullOrEmpty(mail)) || (string.IsNullOrEmpty(tlf)) || (string.IsNullOrEmpty(pId)))
+            if ((string.IsNullOrEmpty(pId)))
             {
-                MessageBox.Show("Du skal udfylde alle felter");
+                MessageBox.Show("Du skal udfylde person ID feltet");
                 return;
             }
 
-            bool navnValid = PersonInputCheck.NavnCheck(navn);
-            bool mailValid = PersonInputCheck.MailCheck(mail);
-            bool tlfValid = PersonInputCheck.TlfCheck(tlf);
+            bool navnValid = true;
+            bool mailValid = true;
+            bool tlfValid = true;
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
+            if (pIdValid == false)
+            {
+                ErrorMessage.errorMessage(); //Fejlbesked hvis input er ugyldig
+                return;
+            }
+
+            //Tjekker om der skrevet noget i navn textbox
+            if ((string.IsNullOrEmpty(tbNavn.Text)) && (pIdValid == true))
+            {
+                //Finder hvad der er allerede er i db hvis der ikke er indtastet noget i navn textbox
+                navn = tableConn.textBoxBinder($"SELECT fNavn FROM Person WHERE pId = {pId}");
+                navnValid = true;
+            }
+            else //Ellers tager vi det indtastede navn og tjekker det
+            {
+                navn = tbNavn.Text;
+                navnValid = PersonInputCheck.NavnCheck(navn);
+            }
+
+            //Tjekker om der skrevet noget i mail textbox
+            if ((string.IsNullOrEmpty(tbMail.Text.ToLower())) && (pIdValid == true))
+            {
+                //Finder hvad der er allerede er i db hvis der ikke er indtastet noget i mail textbox
+                mail = tableConn.textBoxBinder($"SELECT pMail FROM Person WHERE pId = {pId}");
+                mailValid = true;
+            }
+            else //Ellers tager vi det indtastede mail og tjekker det
+            {
+                mail = tbMail.Text.ToLower();
+                mailValid = PersonInputCheck.MailCheck(mail);
+            }
+
+            //Tjekker om der skrevet noget i tlf textbox
+            if ((string.IsNullOrEmpty(tbTlf.Text)) && (pIdValid == true))
+            {
+                //Finder hvad der er allerede er i db hvis der ikke er indtastet noget i tlf textbox
+                tlf = tableConn.textBoxBinder($"SELECT pTlf FROM Person WHERE pId = {pId}");
+                tlfValid = true;
+            }
+            else //Ellers tager vi det indtastede tlf nr. og tjekker det
+            {
+                tlf = tbTlf.Text;
+                tlfValid = PersonInputCheck.TlfCheck(tlf);
+            }
 
             //Tjekker inputtene for længde og ugyldige tegn
             if ((navnValid == true) && (mailValid == true) && (tlfValid == true) && (pIdValid == true))

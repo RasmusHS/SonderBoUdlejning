@@ -83,5 +83,10 @@ namespace SonderBoUdlejning
         {
             openFormsLoader(new Admin.Booking());
         }
+
+        private void btnAdminBorger_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new PersonCRUD());
+        }
     }
 }

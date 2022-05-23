@@ -395,6 +395,7 @@ namespace SonderBoUdlejning.Admin
             using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt"))
             {
                 sw.WriteLine(sb.ToString());
+                MessageBox.Show($@"Statistik blev genereret og ligger i C:\Brugere\{username}\Dokumenter\SønderBoUdlejning\Statistik");
             }
 
 

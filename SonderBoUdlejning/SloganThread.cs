@@ -11,7 +11,7 @@ namespace SonderBoUdlejning
     {
         Label lblSlogan;
 
-        string[] slogans = {"Slogan 1", "Slogan 2", "Slogan 3", "Slogan 4", "Slogan 5", "Slogan 6", "Slogan 7" };
+        string[] slogans = { "Bo godt – bo hos SønderBo (1)", "Bo bedre blodigt (2)", "SønderBo - Aldrig hjemve (3)", "Ude godt, SønderBo bedst (4)", "StudieBo = SønderBo (5)", "Lev livet hos SønderBo (6)", "Sønderbo – Herfra din verden går (7)" };
         Random rnd  = new Random();
 
         public SloganThread (Label lblSlogan)

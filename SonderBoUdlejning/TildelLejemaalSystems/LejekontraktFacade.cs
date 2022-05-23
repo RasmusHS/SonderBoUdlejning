@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using iTextSharp.text; //Der gøres brug af iTextSharp NuGet pakken
 using iTextSharp.text.pdf;
+using System.Windows.Forms;
 
 namespace SonderBoUdlejning.TildelBoligSystems
 {
@@ -118,6 +119,7 @@ namespace SonderBoUdlejning.TildelBoligSystems
                 document.Close(); //Lukker pdf dokumentet
                 writer.Close(); //Lukker pdf dokumentets writer
             }
+            MessageBox.Show($@"Lejekontrakt blev genereret og ligger i C:\Brugere\{userName}\Dokumenter\SønderBoUdlejning\Kontrakter\Aktive_Lejekontrakter");
         }
     }
 }

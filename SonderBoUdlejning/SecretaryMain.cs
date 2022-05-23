@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SonderBoUdlejning.Secretary;
 using System.Threading;
+using SonderBoUdlejning.Admin;
 
 namespace SonderBoUdlejning
 {
@@ -23,6 +23,11 @@ namespace SonderBoUdlejning
             sloganThread.Start();
         }
 
+        public void SecretaryMain_Load(object sender, EventArgs e)
+        {
+
+        }
+        
         private void logOutButton_Click(object sender, EventArgs e)
         {
             UserIdentification.UserAccess = 0;
@@ -31,11 +36,6 @@ namespace SonderBoUdlejning
             LoginMain loginMain = new LoginMain();
             loginMain.ShowDialog();
             this.Close();
-        }
-
-        private void btnOpretBorger_Click(object sender, EventArgs e)
-        {
-            openFormsLoader(new PersonCRUD());
         }
 
         private Form activeForm = null;
@@ -53,16 +53,39 @@ namespace SonderBoUdlejning
             loadedForm.Show(); // Formens vises.
         }
 
-        public void SecretaryMain_Load(object sender, EventArgs e)
-        {
-            
-           
-            
-        }
-
         public void SecretaryMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             sloganThread.Abort();
+        }
+
+        private void btnOpretBorger_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new PersonCRUD());
+        }
+        
+        private void btnTildelLejemaal_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new TildelLejemaal());
+        }
+
+        private void btnOpsigLejemaal_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new OpsigelseAfLejemaal());
+        }
+
+        private void btnLejemaalCRUD_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new LejemaalCRUD());
+        }
+
+        private void btnReservationer_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new Booking());
+        }
+
+        private void btnVenteliste_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new VenteListe());
         }
     }
 }
