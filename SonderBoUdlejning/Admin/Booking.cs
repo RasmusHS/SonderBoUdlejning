@@ -289,6 +289,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetReservations_Click(object sender, EventArgs e)
         {
+            string username = Environment.UserName;
             string[] rTypeNavnArray = new string[30];
             string[] antalReservationerArray = new string[30];
             SqlConnection conn = new SqlConnection(connString.connStr);
@@ -313,7 +314,7 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
                 
             }
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\AntalReservationerForResourcer.txt")) 
+            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Desktop\AntalReservationerForResourcer.txt")) 
             {
                 sw.WriteLine(sb.ToString());
             }
@@ -322,6 +323,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetDateReservationer_Click(object sender, EventArgs e)
         {
+            string username = Environment.UserName;
             SqlConnection conn = new SqlConnection(connString.connStr);
             dtpStatistik.CustomFormat = "yyyy-MM-dd";
             string query = $"SELECT COUNT(DISTINCT Person.pId) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
@@ -381,7 +383,7 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
 
             }
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\KasperMark\Desktop\SonderBoUdlejning\SonderBoUdlejning\UdtrækAfIndividuelleReservationer.txt"))
+            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Desktop\IndividuelleReservationer"))
             {
                 sw.WriteLine(sb.ToString());
             }
