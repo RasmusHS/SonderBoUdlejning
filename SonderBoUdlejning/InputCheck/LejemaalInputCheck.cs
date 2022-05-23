@@ -115,7 +115,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(Lid))
             {
-                ErrorMessage.ErrorList.Add("Lejemaal Nr indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("Lejemål ID indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -125,7 +125,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(Lid)))
                     {
-                        ErrorMessage.ErrorList.Add("Lejemaal Nr må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("Lejemål ID må kun indeholde tal");
                         return false;
                     }
                     else

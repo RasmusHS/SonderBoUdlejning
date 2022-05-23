@@ -39,6 +39,7 @@
             this.labelSlogan = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelAdminFormsLoader = new System.Windows.Forms.Panel();
+            this.btnBooking = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -68,7 +69,7 @@
             // VenteListeButton
             // 
             this.VenteListeButton.Location = new System.Drawing.Point(28, 117);
-            this.VenteListeButton.Margin = new System.Windows.Forms.Padding(1);
+            this.VenteListeButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.VenteListeButton.Name = "VenteListeButton";
             this.VenteListeButton.Size = new System.Drawing.Size(149, 75);
             this.VenteListeButton.TabIndex = 0;
@@ -79,6 +80,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel1.Controls.Add(this.btnBooking);
             this.panel1.Controls.Add(this.btnLejemaalCRUD);
             this.panel1.Controls.Add(this.btnOpsigelse);
             this.panel1.Controls.Add(this.btnTildelingLejemaalAdmin);
@@ -92,9 +94,10 @@
             // 
             // btnLejemaalCRUD
             // 
-            this.btnLejemaalCRUD.Location = new System.Drawing.Point(28, 466);
+            this.btnLejemaalCRUD.Location = new System.Drawing.Point(28, 408);
+            this.btnLejemaalCRUD.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnLejemaalCRUD.Name = "btnLejemaalCRUD";
-            this.btnLejemaalCRUD.Size = new System.Drawing.Size(149, 77);
+            this.btnLejemaalCRUD.Size = new System.Drawing.Size(149, 75);
             this.btnLejemaalCRUD.TabIndex = 3;
             this.btnLejemaalCRUD.Text = "Admin. Lejemål";
             this.btnLejemaalCRUD.UseVisualStyleBackColor = true;
@@ -102,9 +105,10 @@
             // 
             // btnOpsigelse
             // 
-            this.btnOpsigelse.Location = new System.Drawing.Point(28, 352);
+            this.btnOpsigelse.Location = new System.Drawing.Point(28, 311);
+            this.btnOpsigelse.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnOpsigelse.Name = "btnOpsigelse";
-            this.btnOpsigelse.Size = new System.Drawing.Size(149, 77);
+            this.btnOpsigelse.Size = new System.Drawing.Size(149, 75);
             this.btnOpsigelse.TabIndex = 2;
             this.btnOpsigelse.Text = "Opsigelse af Lejemål";
             this.btnOpsigelse.UseVisualStyleBackColor = true;
@@ -112,10 +116,10 @@
             // 
             // btnTildelingLejemaalAdmin
             // 
-            this.btnTildelingLejemaalAdmin.Location = new System.Drawing.Point(28, 234);
-            this.btnTildelingLejemaalAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTildelingLejemaalAdmin.Location = new System.Drawing.Point(28, 215);
+            this.btnTildelingLejemaalAdmin.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnTildelingLejemaalAdmin.Name = "btnTildelingLejemaalAdmin";
-            this.btnTildelingLejemaalAdmin.Size = new System.Drawing.Size(149, 77);
+            this.btnTildelingLejemaalAdmin.Size = new System.Drawing.Size(149, 75);
             this.btnTildelingLejemaalAdmin.TabIndex = 1;
             this.btnTildelingLejemaalAdmin.Text = "Tildeling af Lejemål";
             this.btnTildelingLejemaalAdmin.UseVisualStyleBackColor = true;
@@ -135,8 +139,8 @@
             // 
             this.labelSlogan.AutoSize = true;
             this.labelSlogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSlogan.Location = new System.Drawing.Point(45, 58);
-            this.labelSlogan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSlogan.Location = new System.Drawing.Point(19, 26);
+            this.labelSlogan.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.labelSlogan.Name = "labelSlogan";
             this.labelSlogan.Size = new System.Drawing.Size(84, 24);
             this.labelSlogan.TabIndex = 0;
@@ -150,7 +154,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(200, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(997, 100);
+            this.panel3.Size = new System.Drawing.Size(899, 100);
             this.panel3.TabIndex = 3;
             // 
             // panelAdminFormsLoader
@@ -159,14 +163,24 @@
             this.panelAdminFormsLoader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAdminFormsLoader.Location = new System.Drawing.Point(200, 100);
             this.panelAdminFormsLoader.Name = "panelAdminFormsLoader";
-            this.panelAdminFormsLoader.Size = new System.Drawing.Size(997, 626);
+            this.panelAdminFormsLoader.Size = new System.Drawing.Size(899, 626);
             this.panelAdminFormsLoader.TabIndex = 4;
+            // 
+            // btnBooking
+            // 
+            this.btnBooking.Location = new System.Drawing.Point(28, 500);
+            this.btnBooking.Name = "btnBooking";
+            this.btnBooking.Size = new System.Drawing.Size(149, 75);
+            this.btnBooking.TabIndex = 4;
+            this.btnBooking.Text = "Booking af Ressourcer";
+            this.btnBooking.UseVisualStyleBackColor = true;
+            this.btnBooking.Click += new System.EventHandler(this.btnBooking_Click);
             // 
             // AdminMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 726);
+            this.ClientSize = new System.Drawing.Size(1099, 726);
             this.Controls.Add(this.panelAdminFormsLoader);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -197,5 +211,6 @@
         private System.Windows.Forms.Button btnOpsigelse;
         private System.Windows.Forms.Button btnLejemaalCRUD;
         private System.Windows.Forms.Label labelSlogan;
+        private System.Windows.Forms.Button btnBooking;
     }
 }

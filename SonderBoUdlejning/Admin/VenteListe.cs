@@ -102,7 +102,7 @@ namespace SonderBoUdlejning.Admin
             //Tjekker om person ID eller lejemål Nr er tomme
             if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
             {
-                MessageBox.Show("Indtast venligst et pId og et Lid!");
+                MessageBox.Show("Indtast venligst et person ID og et lejemål Nr.!");
                 return;
             }
 

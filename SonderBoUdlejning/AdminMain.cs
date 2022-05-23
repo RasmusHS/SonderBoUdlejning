@@ -78,5 +78,10 @@ namespace SonderBoUdlejning
         {
             sloganThread.Abort();
         }
+
+        private void btnBooking_Click(object sender, EventArgs e)
+        {
+            openFormsLoader(new Admin.Booking());
+        }
     }
 }
