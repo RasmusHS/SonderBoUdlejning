@@ -38,9 +38,9 @@
             this.DGVLejemaal = new System.Windows.Forms.DataGridView();
             this.InsertToList = new System.Windows.Forms.Button();
             this.pIdTextbox = new System.Windows.Forms.TextBox();
-            this.bIdTextbox = new System.Windows.Forms.TextBox();
+            this.LidTextbox = new System.Windows.Forms.TextBox();
             this.labelpId = new System.Windows.Forms.Label();
-            this.labelbId = new System.Windows.Forms.Label();
+            this.labelLid = new System.Windows.Forms.Label();
             this.DeleteFromListButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.GetPosition = new System.Windows.Forms.Button();
@@ -173,13 +173,13 @@
             this.pIdTextbox.Size = new System.Drawing.Size(45, 20);
             this.pIdTextbox.TabIndex = 3;
             // 
-            // bIdTextbox
+            // LidTextbox
             // 
-            this.bIdTextbox.Location = new System.Drawing.Point(10, 94);
-            this.bIdTextbox.Margin = new System.Windows.Forms.Padding(1);
-            this.bIdTextbox.Name = "bIdTextbox";
-            this.bIdTextbox.Size = new System.Drawing.Size(45, 20);
-            this.bIdTextbox.TabIndex = 4;
+            this.LidTextbox.Location = new System.Drawing.Point(10, 94);
+            this.LidTextbox.Margin = new System.Windows.Forms.Padding(1);
+            this.LidTextbox.Name = "LidTextbox";
+            this.LidTextbox.Size = new System.Drawing.Size(45, 20);
+            this.LidTextbox.TabIndex = 4;
             // 
             // labelpId
             // 
@@ -191,15 +191,15 @@
             this.labelpId.TabIndex = 5;
             this.labelpId.Text = "pId";
             // 
-            // labelbId
+            // labelLid
             // 
-            this.labelbId.AutoSize = true;
-            this.labelbId.Location = new System.Drawing.Point(8, 80);
-            this.labelbId.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.labelbId.Name = "labelbId";
-            this.labelbId.Size = new System.Drawing.Size(21, 13);
-            this.labelbId.TabIndex = 6;
-            this.labelbId.Text = "Lid";
+            this.labelLid.AutoSize = true;
+            this.labelLid.Location = new System.Drawing.Point(8, 80);
+            this.labelLid.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.labelLid.Name = "labelLid";
+            this.labelLid.Size = new System.Drawing.Size(21, 13);
+            this.labelLid.TabIndex = 6;
+            this.labelLid.Text = "Lid";
             // 
             // DeleteFromListButton
             // 
@@ -253,10 +253,10 @@
             this.panelInputs.Controls.Add(this.pIdTextbox);
             this.panelInputs.Controls.Add(this.labelpId);
             this.panelInputs.Controls.Add(this.labelPosition);
-            this.panelInputs.Controls.Add(this.labelbId);
+            this.panelInputs.Controls.Add(this.labelLid);
             this.panelInputs.Controls.Add(this.positionTextBox);
             this.panelInputs.Controls.Add(this.GetPosition);
-            this.panelInputs.Controls.Add(this.bIdTextbox);
+            this.panelInputs.Controls.Add(this.LidTextbox);
             this.panelInputs.Location = new System.Drawing.Point(33, 315);
             this.panelInputs.Margin = new System.Windows.Forms.Padding(2);
             this.panelInputs.Name = "panelInputs";
@@ -359,9 +359,9 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button InsertToList;
         private System.Windows.Forms.TextBox pIdTextbox;
-        private System.Windows.Forms.TextBox bIdTextbox;
+        private System.Windows.Forms.TextBox LidTextbox;
         private System.Windows.Forms.Label labelpId;
-        private System.Windows.Forms.Label labelbId;
+        private System.Windows.Forms.Label labelLid;
         private System.Windows.Forms.Button DeleteFromListButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button GetPosition;

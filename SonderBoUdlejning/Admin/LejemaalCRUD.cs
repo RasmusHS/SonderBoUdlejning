@@ -81,10 +81,10 @@ namespace SonderBoUdlejning.Admin
 
             bool adresseValid = LejemaalInputCheck.AdresseCheck(adresse);
             bool postNrValid = LejemaalInputCheck.PostNrCheck(postNr);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
             
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((adresseValid == true) && (postNrValid == true) && (bIdValid == true))
+            if ((adresseValid == true) && (postNrValid == true) && (LidValid == true))
             {
                 //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny lejemål
                 LejemaalFacade CreateLejemaal = new LejemaalFacade();
@@ -231,10 +231,10 @@ namespace SonderBoUdlejning.Admin
             string udflytDato = "";
 
             bool adresseValid = LejemaalInputCheck.AdresseCheck(adresse);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker inputtene for længde og ugyldige tegn
-            if ((lejemaalValid == true) && (adresseValid == true) && (bIdValid == true))
+            if ((lejemaalValid == true) && (adresseValid == true) && (LidValid == true))
             {
                 //Finder postNr, pId, indflytDato og udflytDato fra Lejemaal tabellen ved hjælp af adressen
                 postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
@@ -298,11 +298,11 @@ namespace SonderBoUdlejning.Admin
         private void tbLejemaalID_TextChanged(object sender, EventArgs e)
         {
             string Lid = tbLejemaalID.Text; //Sætter lejemål Nr'et i en string variabel
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
             {
-                if (bIdValid == false)
+                if (LidValid == false)
                 {
                     ErrorMessage.errorMessage(); //Viser fejlbesked
                     return;

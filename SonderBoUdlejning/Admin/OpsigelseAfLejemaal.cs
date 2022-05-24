@@ -89,7 +89,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
             {
@@ -101,7 +101,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             //Checker inputtene for længde og karakterer
-            if ((pIdValid == true) && (bIdValid == true) && (udflytDatoValid == true))
+            if ((pIdValid == true) && (LidValid == true) && (udflytDatoValid == true))
             {
                 lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
                 adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");

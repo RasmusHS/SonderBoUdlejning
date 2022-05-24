@@ -71,14 +71,14 @@ namespace UnitTest
 
         //LejemaalInputCheck.cs
         [TestMethod]
-        public void bIdCheck_Valid()
+        public void LidCheck_Valid()
         {
             Assert.IsTrue(SonderBoUdlejning.InputCheck.LejemaalInputCheck.LidCheck("1"));
             Assert.IsTrue(SonderBoUdlejning.InputCheck.LejemaalInputCheck.LidCheck("10000000000000000000000000000"));
         }
 
         [TestMethod]
-        public void bIdCheck_InValid()
+        public void LidCheck_InValid()
         {
             Assert.IsFalse(SonderBoUdlejning.InputCheck.LejemaalInputCheck.LidCheck("et"));
             Assert.IsFalse(SonderBoUdlejning.InputCheck.LejemaalInputCheck.LidCheck("100002d"));

@@ -71,7 +71,7 @@ namespace SonderBoUdlejning.Admin
             string maksLejePris = "";
             bool tilLeje = true;
 
-            bool bIdValid = true;
+            bool LidValid = true;
 
             string signUpDato = "";
 
@@ -91,10 +91,10 @@ namespace SonderBoUdlejning.Admin
                     break; //Stopper while loop, hvis der ikke er noget i textboxen
                 }
 
-                bIdValid = LejemaalInputCheck.LidCheck(Lid);
+                LidValid = LejemaalInputCheck.LidCheck(Lid);
 
                 //Hvis der er noget i textboxen, så tjekkes lejemål Nr for længde og karaktere
-                if ((bIdValid == true))
+                if ((LidValid == true))
                 {
                     panelPid.Visible = true; //Viser pId panelet
 
@@ -186,11 +186,11 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
 
             //Tjekker lejemål Nr og person ID for længde og ugyldige karaktere
-            if ((bIdValid == true) && (pIdValid == true))
+            if ((LidValid == true) && (pIdValid == true))
             {
                 //sortere Lejemaal dgv
                 readLejemaal.rLejemaal(sqlTemplate, adresse, postNr, Lid, dummyPId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
@@ -236,7 +236,7 @@ namespace SonderBoUdlejning.Admin
             string Lid = tbBID.Text; //Tager input fra textboxen
             string postNr = "";
             string[] comboBoxListAdresser; //Laver et string array til at holde på alle adresser
-            bool bIdValid = true;
+            bool LidValid = true;
 
             //Hvis checkboxen er markeret
             if (ckbJaTilLejlighed.Checked == true)
@@ -252,10 +252,10 @@ namespace SonderBoUdlejning.Admin
                     return;
                 }
 
-                bIdValid = LejemaalInputCheck.LidCheck(Lid);
+                LidValid = LejemaalInputCheck.LidCheck(Lid);
 
                 //Tjekker lejemål Nr for længde og ugyldige karaktere
-                if ((bIdValid == true))
+                if ((LidValid == true))
                 {
                     //Sikre lejemål Nr forbliver det samme
                     Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE Lid = {Lid}");
@@ -329,7 +329,7 @@ namespace SonderBoUdlejning.Admin
                 return;
             }
 
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
 
             try
@@ -341,7 +341,7 @@ namespace SonderBoUdlejning.Admin
                 indflytDatoValid = false;
             }
 
-            if ((bIdValid == true) && (pIdValid == true) && (indflytDatoValid == true))
+            if ((LidValid == true) && (pIdValid == true) && (indflytDatoValid == true))
             {
                 checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Lejemaal WHERE pId = {pId}"));
 

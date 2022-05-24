@@ -66,7 +66,7 @@ namespace SonderBoUdlejning.Admin
         private void InsertToList_Click(object sender, EventArgs e)
         {
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vAddToList = new vFacade();
 
@@ -78,10 +78,10 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
-            if ((pIdValid == true) && (bIdValid == true))
+            if ((pIdValid == true) && (LidValid == true))
             {
                 vAddToList.AddToList(pId, Lid); //Tilføjer person til venteliste for en lejemål
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
@@ -95,7 +95,7 @@ namespace SonderBoUdlejning.Admin
         private void DeleteFromListButton_Click(object sender, EventArgs e)
         {
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vDeleteFromList = new vFacade();
 
@@ -107,10 +107,10 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
-            if ((pIdValid == true) && (bIdValid == true))
+            if ((pIdValid == true) && (LidValid == true))
             {
                 vDeleteFromList.RemoveFromList(pId, Lid); //Sletter en person fra en venteliste
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
@@ -125,7 +125,7 @@ namespace SonderBoUdlejning.Admin
         {
 
             string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             vFacade vGetListPos = new vFacade();
 
@@ -138,10 +138,10 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om person ID og lejemål Nr er gyldige
-            if ((pIdValid == true) && (bIdValid == true))
+            if ((pIdValid == true) && (LidValid == true))
             {
                 vGetListPos.GetListPosition(pId, Lid); //Finder en persons position på en venteliste
                 positionTextBox.Text = vGetListPos.Position; //Viser resultatet i position textboxen
@@ -154,7 +154,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnVisVentelisteFor_Click(object sender, EventArgs e)
         {
-            string Lid = bIdTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
 
             //SQL Query, som henter ventelisten for en bestemt lejemål
             string sqlS1 = $"SELECT * FROM Venteliste WHERE Lid = {Lid} ORDER BY signUpDato ASC";
@@ -167,10 +167,10 @@ namespace SonderBoUdlejning.Admin
                 
             }
 
-            bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
+            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Tjekker om lejemål Nr er gyldig
-            if (bIdValid == true)
+            if (LidValid == true)
             {
                 DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt lejemål
             }
@@ -189,12 +189,12 @@ namespace SonderBoUdlejning.Admin
 
             //labels
             labelpId.Visible = true;
-            labelbId.Visible = true;
+            labelLid.Visible = true;
             labelPosition.Visible = false;
 
             //textboxes
             pIdTextbox.Visible = true;
-            bIdTextbox.Visible = true;
+            LidTextbox.Visible = true;
             positionTextBox.Visible = false;
 
             //knapper
@@ -213,12 +213,12 @@ namespace SonderBoUdlejning.Admin
             
             //labels
             labelpId.Visible = true;
-            labelbId.Visible = true;
+            labelLid.Visible = true;
             labelPosition.Visible = false;
 
             //textboxes
             pIdTextbox.Visible = true;
-            bIdTextbox.Visible = true;
+            LidTextbox.Visible = true;
             positionTextBox.Visible = false;
 
             //knapper
@@ -237,12 +237,12 @@ namespace SonderBoUdlejning.Admin
             
             //labels
             labelpId.Visible = true;
-            labelbId.Visible = true;
+            labelLid.Visible = true;
             labelPosition.Visible = true;
 
             //textboxes
             pIdTextbox.Visible = true;
-            bIdTextbox.Visible = true;
+            LidTextbox.Visible = true;
             positionTextBox.Visible = true;
 
             //knapper
@@ -261,12 +261,12 @@ namespace SonderBoUdlejning.Admin
             
             //labels
             labelpId.Visible = false;
-            labelbId.Visible = true;
+            labelLid.Visible = true;
             labelPosition.Visible = false;
 
             //textboxes
             pIdTextbox.Visible = false;
-            bIdTextbox.Visible = true;
+            LidTextbox.Visible = true;
             positionTextBox.Visible = false;
 
             //knapper
