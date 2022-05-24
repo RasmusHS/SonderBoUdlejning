@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SonderBoUdlejning.InputCheck;
-using SonderBoUdlejning.Opsigelse;
 using Microsoft.Data.SqlClient;
 using System.Globalization;
 using SonderBoUdlejning.BoligSystems;

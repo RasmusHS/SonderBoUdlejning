@@ -235,7 +235,6 @@
     <Compile Include="PersonSystems\UpdatePerson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RefreshDGV.cs" />
     <Compile Include="SecretaryMain.cs">
       <SubType>Form</SubType>
     </Compile>
