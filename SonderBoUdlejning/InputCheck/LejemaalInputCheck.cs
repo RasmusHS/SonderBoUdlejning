@@ -14,7 +14,6 @@ namespace SonderBoUdlejning.InputCheck
         //Definere Regex
         private static Regex retal = new Regex(@"(^[0-9 ]*$)");
         private static Regex dato = new Regex(@"(^[0-9]{2}-[0-9]{2}-[0-9]{4}$)");
-        //private static Regex dato = new Regex(@"(^[0-9]{4}-[0-9]{2}-[0-9]{2}$)");
         private static Regex bogstaver = new Regex(@"(^[a-zA-ZæøåÆØÅ ]*$)");
         private static Regex adresseReg = new Regex(@"(^[a-zA-ZæøåÆØÅ0-9 ]*$)");
         private static Regex SQLInject = new Regex(@"(;|--|'|#|=|"")");
