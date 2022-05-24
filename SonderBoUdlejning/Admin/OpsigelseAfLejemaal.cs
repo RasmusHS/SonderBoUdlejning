@@ -49,7 +49,7 @@ namespace SonderBoUdlejning.Admin
             comboBoxMonth.Items.AddRange(comboBoxListMonth);
 
             //Indlæser år comboboxen med alle år fra 2022 til 2044
-            comboBoxYear.Items.Add("");
+            
             for (int year = DateTime.Now.Year; year < DateTime.Now.Year + 50; year++)
             {
                 comboBoxYear.Items.Add(year);
