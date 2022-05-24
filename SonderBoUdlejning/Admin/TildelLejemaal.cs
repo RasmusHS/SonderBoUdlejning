@@ -200,20 +200,29 @@ namespace SonderBoUdlejning.Admin
                 readPVdgv.ReadVenteListe(dummyPId, Lid, signUpDato);
                 dgvVenteliste.DataSource = tableConn.tableBinder(readPVdgv.ReadVente);
 
+                
                 //Fylder navn tekstboksen
                 pRead.ReadPerson(navnColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
                 tbMedlemsNavn.Text = tableConn.textBoxBinder(pRead.ReadQuery);
 
-                //Fylder mail tekstboksen  
-                pRead.ReadPerson(mailColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                tbMedlemsEmail.Text = tableConn.textBoxBinder(pRead.ReadQuery);
+                if (tableConn.textBoxBinder(pRead.ReadQuery) == null)
+                {
+                    MessageBox.Show("Beboer findes ikke i databasen");
+                }
+                else
+                {
+                    //Fylder mail tekstboksen  
+                    pRead.ReadPerson(mailColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                    tbMedlemsEmail.Text = tableConn.textBoxBinder(pRead.ReadQuery);
 
-                //Fylder tlf tekstboksen
-                pRead.ReadPerson(tlfColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
-                tbMedlemsTLF.Text = tableConn.textBoxBinder(pRead.ReadQuery);
+                    //Fylder tlf tekstboksen
+                    pRead.ReadPerson(tlfColumn, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                    tbMedlemsTLF.Text = tableConn.textBoxBinder(pRead.ReadQuery);
 
-                //Sætter checkboxen i fokus
-                ckbJaTilLejlighed.Focus();
+                    //Sætter checkboxen i fokus
+                    ckbJaTilLejlighed.Focus();
+                }
+                
             }
             else
             {

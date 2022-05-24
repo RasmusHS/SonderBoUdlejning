@@ -98,10 +98,18 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
                 string sqlS = sqlStatement; //SQL statement sent from the form
                 SqlCommand cmd = new SqlCommand(sqlS, conn); //Encapsulates SQL statement in an object
 
-                textBoxContent = cmd.ExecuteScalar().ToString(); //Executes the SQL statement and returns the first column of the first row of the result set
+                if (cmd.ExecuteScalar() == null)
+                {
+                    return null;
+                }
+                else 
+                {
+                    textBoxContent = cmd.ExecuteScalar().ToString(); //Executes the SQL statement and returns the first column of the first row of the result set
 
-                conn.Close(); //Closes the connection to the database
-                return textBoxContent; //Returnerer textBoxContent til formen som kaldte metoden
+                    conn.Close(); //Closes the connection to the database
+                    return textBoxContent; //Returnerer textBoxContent til formen som kaldte metoden
+                }
+                
             }
             catch
             {
