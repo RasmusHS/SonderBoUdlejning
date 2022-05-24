@@ -228,7 +228,6 @@
     <Compile Include="LoginMain.Designer.cs">
       <DependentUpon>LoginMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Opsigelse\OpsigFunktioner.cs" />
     <Compile Include="PersonSystems\CreatePerson.cs" />
     <Compile Include="PersonSystems\DeletePerson.cs" />
     <Compile Include="PersonSystems\PersonFacade.cs" />
