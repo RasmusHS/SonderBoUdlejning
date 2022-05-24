@@ -292,6 +292,7 @@ namespace SonderBoUdlejning.Admin
         {
             BookingSystems.Create.CreateDir();
             string username = Environment.UserName;
+            string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Ressourcer.txt";
             string[] rTypeNavnArray = new string[30];
             string[] antalReservationerArray = new string[30];
             SqlConnection conn = new SqlConnection(connString.connStr);
@@ -321,10 +322,11 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
                 
             }
-            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Ressourcer.txt")) 
+            using (StreamWriter sw = new StreamWriter(filePath)) 
             {
                 sw.WriteLine(sb.ToString());
             }
+            MessageBox.Show($"Fil er gemt i {filePath}");
             
         }
 
@@ -332,6 +334,7 @@ namespace SonderBoUdlejning.Admin
         {
             BookingSystems.Create.CreateDir();
             string username = Environment.UserName;
+            string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt";
             SqlConnection conn = new SqlConnection(connString.connStr);
             dtpStatistik.CustomFormat = "yyyy-MM-dd";
             string query = $"SELECT COUNT(DISTINCT Person.pId) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId INNER JOIN Person ON Reservationer.pId = Person.pId WHERE'{dtpStatistik.Text}'BETWEEN rStartDato AND rSlutDato;";
@@ -400,13 +403,13 @@ namespace SonderBoUdlejning.Admin
                 sb.Append(Environment.NewLine); //Change line
 
             }
-            using (StreamWriter sw = new StreamWriter($@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt"))
+            using (StreamWriter sw = new StreamWriter(filePath))
             {
                 sw.WriteLine(sb.ToString());
                 MessageBox.Show($@"Statistik blev genereret og ligger i C:\Brugere\{username}\Dokumenter\SønderBoUdlejning\Statistik");
             }
 
-
+            MessageBox.Show($"Fil er gemt i {filePath}");
             
         }
     }
