@@ -49,7 +49,7 @@ namespace SonderBoUdlejning
 
         }
 
-        private void btnTildelingBoligAdmin_Click(object sender, EventArgs e)
+        private void btnTildelingLejemaalAdmin_Click(object sender, EventArgs e)
         {
             openFormsLoader(new TildelLejemaal()); 
         }
@@ -64,7 +64,7 @@ namespace SonderBoUdlejning
             openFormsLoader(new OpsigelseAfLejemaal());
         }
 
-        private void btnBoligCRUD_Click(object sender, EventArgs e)
+        private void btnLejemaalCRUD_Click(object sender, EventArgs e)
         {
             openFormsLoader(new LejemaalCRUD());
         }

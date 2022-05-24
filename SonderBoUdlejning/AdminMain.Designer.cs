@@ -127,7 +127,7 @@
             this.btnLejemaalCRUD.TabIndex = 3;
             this.btnLejemaalCRUD.Text = "Admin. Lejemål";
             this.btnLejemaalCRUD.UseVisualStyleBackColor = false;
-            this.btnLejemaalCRUD.Click += new System.EventHandler(this.btnBoligCRUD_Click);
+            this.btnLejemaalCRUD.Click += new System.EventHandler(this.btnLejemaalCRUD_Click);
             // 
             // btnOpsigelse
             // 
@@ -157,7 +157,7 @@
             this.btnTildelingLejemaalAdmin.TabIndex = 1;
             this.btnTildelingLejemaalAdmin.Text = "Tildeling af Lejemål";
             this.btnTildelingLejemaalAdmin.UseVisualStyleBackColor = false;
-            this.btnTildelingLejemaalAdmin.Click += new System.EventHandler(this.btnTildelingBoligAdmin_Click);
+            this.btnTildelingLejemaalAdmin.Click += new System.EventHandler(this.btnTildelingLejemaalAdmin_Click);
             // 
             // panel2
             // 

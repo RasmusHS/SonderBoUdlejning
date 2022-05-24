@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using SonderBoUdlejning.InputCheck;
 
-namespace SonderBoUdlejning.BoligSystems
+namespace SonderBoUdlejning.LejemaalSystems
 {
     internal class CreateLejemaal
     {
@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opretter en lejemål
-        public void opretBolig(string adresse, string postNr, string Lid)
+        public void opretLejemaal(string adresse, string postNr, string Lid)
         {
             string sqlS = "INSERT INTO Lejemaal VALUES (@adresse, @postNr, @Lid, NULL, NULL, NULL)"; //Definere SQL Query med parametrenavne
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen

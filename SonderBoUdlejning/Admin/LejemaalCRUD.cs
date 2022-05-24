@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SonderBoUdlejning.BoligSystems;
+using SonderBoUdlejning.LejemaalSystems;
 using SonderBoUdlejning.InputCheck;
 
 namespace SonderBoUdlejning.Admin
@@ -22,7 +22,7 @@ namespace SonderBoUdlejning.Admin
             InitializeComponent();
         }
 
-        private void BoligCRUD_Load(object sender, EventArgs e)
+        private void LejemaalCRUD_Load(object sender, EventArgs e)
         {
             //Forbinder dataGridViews til tabeller
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
@@ -58,7 +58,7 @@ namespace SonderBoUdlejning.Admin
             string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
             string postNr = "";
             //string postNr = comboBoxPostNr.SelectedItem.ToString(); //Tager inputtet fra postNr comboboxen
-            string Lid = tbBoligID.Text; //Tager inputtet fra boligID textboxen
+            string Lid = tbLejemaalID.Text; //Tager inputtet fra boligID textboxen
 
             try
             {
@@ -87,8 +87,8 @@ namespace SonderBoUdlejning.Admin
             if ((adresseValid == true) && (postNrValid == true) && (bIdValid == true))
             {
                 //Hvis inputtene passerer begge tjek og er gyldige, så opretter vi en ny lejemål
-                LejemaalFacade CreateBolig = new LejemaalFacade();
-                CreateBolig.cBolig(adresse, postNr, Lid); //opretter lejemål
+                LejemaalFacade CreateLejemaal = new LejemaalFacade();
+                CreateLejemaal.cLejemaal(adresse, postNr, Lid); //opretter lejemål
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
@@ -123,7 +123,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             //Tager Lid input og tjekker det for ugyldige tegn
-            string Lid = tbBoligID.Text; //
+            string Lid = tbLejemaalID.Text; //
             bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Ikke muligt at søge baseret på person ID. Input felt findes ikke i formen
@@ -136,17 +136,17 @@ namespace SonderBoUdlejning.Admin
             //Hvis Lid inputtet ikke er tomt, så bruges Lid til at finde dens lType
             string lType = "";
 
-            if ((LidValid == false) || (string.IsNullOrEmpty(tbBoligID.Text)))
+            if ((LidValid == false) || (string.IsNullOrEmpty(tbLejemaalID.Text)))
             {
                 lType = "";
             }
             else
             {
-                lType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
+                lType = tbLejemaalType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
             }
 
             /*if (!string.IsNullOrEmpty(Lid)) 
-                lType = tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");*/
+                lType = tbLejemaalType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");*/
             
             //antalRum bruges ikke endnu og har heller ikke noget input felt at tage fra
             string antalRum = "";
@@ -172,17 +172,17 @@ namespace SonderBoUdlejning.Admin
             //Sætter tabControl fokus til Lejemaal tabellen
             tabControl1.SelectedTab = LejemaalPage;
 
-            //Laver et objekt af BoligFacade klassen
+            //Laver et objekt af LejemaalFacade klassen
             LejemaalFacade readTilLeje = new LejemaalFacade();
 
             //Hvis alle inputtet er gyldige, så kaldes metoden readTilLeje
             if ((adresseValid == true) && (LidValid == true) && (minKvmValid == true) && (maksKvmValid == true) && (minLejePrisValid == true) && (maksLejePrisValid == true))
             {
                 //Kalder en speciel read metode for lejemål til leje
-                readTilLeje.rBolig(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
+                readTilLeje.rLejemaal(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
 
                 //Viser read metodens resultat i Lejemaal dataGridView
-                dgvLejemaal.DataSource = tableConn.tableBinder(readTilLeje.rBoligQuery); 
+                dgvLejemaal.DataSource = tableConn.tableBinder(readTilLeje.rLejemaalQuery); 
             }
             else //Ellers vises en fejlbesked, samt nulstilles dataGridViews
             {
@@ -213,13 +213,13 @@ namespace SonderBoUdlejning.Admin
             else
                 adresse = tbAdresse.Text;
             
-            if ((string.IsNullOrEmpty(tbBoligID.Text)) && (lejemaalValid == true))
+            if ((string.IsNullOrEmpty(tbLejemaalID.Text)) && (lejemaalValid == true))
                 Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
             else
-                Lid = tbBoligID.Text;
+                Lid = tbLejemaalID.Text;
 
             //Tjekker om der er der er skrevet noget i et af felterne
-            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbBoligID.Text)))
+            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbLejemaalID.Text)))
             {
                 MessageBox.Show("Indtast venligst enten en adresse eller et lejemål Nr!");
                 return;
@@ -243,8 +243,8 @@ namespace SonderBoUdlejning.Admin
                 udflytDato = LejemaalInputCheck.udDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), udflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
                 //Opdaterer lejemål Nr'et i Lejemaal tabellen
-                LejemaalFacade UpdateBolig = new LejemaalFacade();
-                UpdateBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato);
+                LejemaalFacade UpdateLejemaal = new LejemaalFacade();
+                UpdateLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
@@ -271,8 +271,8 @@ namespace SonderBoUdlejning.Admin
             if ((lejemaalValid == true))
             {
                 //Sletter lejemål fra Lejemaal tabellen
-                LejemaalFacade DeleteBolig = new LejemaalFacade();
-                DeleteBolig.dBolig(lejemaalNr);
+                LejemaalFacade DeleteLejemaal = new LejemaalFacade();
+                DeleteLejemaal.dLejemaal(lejemaalNr);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
             }
@@ -295,9 +295,9 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Event metode som aktiveres hver gang lejemål Nr tekstboxen bliver ændret
-        private void tbBoligID_TextChanged(object sender, EventArgs e)
+        private void tbLejemaalID_TextChanged(object sender, EventArgs e)
         {
-            string Lid = tbBoligID.Text; //Sætter lejemål Nr'et i en string variabel
+            string Lid = tbLejemaalID.Text; //Sætter lejemål Nr'et i en string variabel
             bool bIdValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
@@ -309,7 +309,7 @@ namespace SonderBoUdlejning.Admin
                 }
                 //Hvis lejemål Nr'et ikke er tomt, så kaldes metoden textBoxBinder og resultatet vises i lejemål type tekstboxen
                 if (!string.IsNullOrEmpty(Lid))
-                    tbBoligType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
+                    tbLejemaalType.Text = tableConn.textBoxBinder($"SELECT lType FROM LejemaalsInfo WHERE Lid = {Lid}");
             }
             catch //hvis lejemål Nr'et ikke er et tal, så vises en fejlbesked
             {
@@ -349,10 +349,10 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = true; //
             tbBy.Visible = true; //
-            tbBoligID.Visible = true; //
+            tbLejemaalID.Visible = true; //
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbBoligType.Visible = true; //
+            tbLejemaalType.Visible = true; //
             tbMinPris.Visible = false;
             tbMaksPris.Visible= false;
         }
@@ -391,10 +391,10 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = true; //
             tbBy.Visible = false;
-            tbBoligID.Visible = true; //
+            tbLejemaalID.Visible = true; //
             tbMinKvm.Visible = true; //
             tbMaksKvm.Visible = true; //
-            tbBoligType.Visible = false; //
+            tbLejemaalType.Visible = false; //
             tbMinPris.Visible = true; //
             tbMaksPris.Visible = true; //
         }
@@ -427,16 +427,16 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Visible = true; //
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
-            tbBoligID.Visible = true; //
+            tbLejemaalID.Visible = true; //
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbBoligType.Visible = false;
+            tbLejemaalType.Visible = false;
             tbMinPris.Visible = false;
             tbMaksPris.Visible = false;
         }
 
         //Knap som viser felter relevant for at slette en eksisterende lejemål
-        private void btnVisDBolig_Click(object sender, EventArgs e)
+        private void btnVisDLejemaal_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
@@ -463,10 +463,10 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Visible = false;
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
-            tbBoligID.Visible = false;
+            tbLejemaalID.Visible = false;
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbBoligType.Visible = false;
+            tbLejemaalType.Visible = false;
             tbMinPris.Visible = false;
             tbMaksPris.Visible = false;
         }

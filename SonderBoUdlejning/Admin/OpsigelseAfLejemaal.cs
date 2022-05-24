@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SonderBoUdlejning.InputCheck;
 using Microsoft.Data.SqlClient;
 using System.Globalization;
-using SonderBoUdlejning.BoligSystems;
+using SonderBoUdlejning.LejemaalSystems;
 
 namespace SonderBoUdlejning.Admin
 {
@@ -37,7 +37,7 @@ namespace SonderBoUdlejning.Admin
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
 
-        private void OpsigelseAfBolig_Load(object sender, EventArgs e)
+        private void OpsigelseAfLejemaal_Load(object sender, EventArgs e)
         {
             //Indlæser dataGridViews med standard queries
             DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
@@ -108,9 +108,9 @@ namespace SonderBoUdlejning.Admin
                 postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
                 indflytDato = LejemaalInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
-                LejemaalFacade opsigBolig = new LejemaalFacade();
+                LejemaalFacade opsigLejemaal = new LejemaalFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
-                opsigBolig.uBolig(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateBolig metoden til at opsige boligen
+                opsigLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateLejemaal metoden til at opsige boligen
                 DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
                 DGVPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
             }

@@ -8,7 +8,7 @@ using iTextSharp.text; //Der gøres brug af iTextSharp NuGet pakken
 using iTextSharp.text.pdf;
 using System.Windows.Forms;
 
-namespace SonderBoUdlejning.TildelBoligSystems
+namespace SonderBoUdlejning.TildelLejemaalSystems
 {
     internal class LejekontraktFacade //Facade til kreation og udprintning af lejekontrakt
     {  

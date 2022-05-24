@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using SonderBoUdlejning.InputCheck;
 
-namespace SonderBoUdlejning.BoligSystems
+namespace SonderBoUdlejning.LejemaalSystems
 {
     internal class UpdateLejemaal
     {
@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opdaterer en lejemål
-        public void updateBolig(string lejemaalNr, string adresse, string postNr, string Lid, string pId, string indDato, string udDato)
+        public void updateLejemaal(string lejemaalNr, string adresse, string postNr, string Lid, string pId, string indDato, string udDato)
         {
             //Definere SQL Query med parametrenavne
             string sqlS = "UPDATE Lejemaal SET adresse = @adresse, postNr = @postNr, Lid = @Lid, pId = @pId, indflytDato = @indflytDato, udflytDato = @udflytDato WHERE lejemaalNr = @lejemaalNr";

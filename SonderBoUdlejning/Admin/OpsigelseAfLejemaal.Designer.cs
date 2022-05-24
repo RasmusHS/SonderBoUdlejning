@@ -41,7 +41,7 @@
             this.labelMånedOpsig = new System.Windows.Forms.Label();
             this.DGVLejemaal = new System.Windows.Forms.DataGridView();
             this.DGVPerson = new System.Windows.Forms.DataGridView();
-            this.lblBoligTabel = new System.Windows.Forms.Label();
+            this.lblLejemaalTabel = new System.Windows.Forms.Label();
             this.lblPersonTabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVLejemaal)).BeginInit();
@@ -188,15 +188,15 @@
             this.DGVPerson.Size = new System.Drawing.Size(553, 180);
             this.DGVPerson.TabIndex = 11;
             // 
-            // lblBoligTabel
+            // lblLejemaalTabel
             // 
-            this.lblBoligTabel.AutoSize = true;
-            this.lblBoligTabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBoligTabel.Location = new System.Drawing.Point(8, 11);
-            this.lblBoligTabel.Name = "lblBoligTabel";
-            this.lblBoligTabel.Size = new System.Drawing.Size(129, 24);
-            this.lblBoligTabel.TabIndex = 12;
-            this.lblBoligTabel.Text = "Lejemål Tabel";
+            this.lblLejemaalTabel.AutoSize = true;
+            this.lblLejemaalTabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaalTabel.Location = new System.Drawing.Point(8, 11);
+            this.lblLejemaalTabel.Name = "lblLejemaalTabel";
+            this.lblLejemaalTabel.Size = new System.Drawing.Size(129, 24);
+            this.lblLejemaalTabel.TabIndex = 12;
+            this.lblLejemaalTabel.Text = "Lejemål Tabel";
             // 
             // lblPersonTabel
             // 
@@ -208,20 +208,20 @@
             this.lblPersonTabel.TabIndex = 13;
             this.lblPersonTabel.Text = "Medlems Tabel";
             // 
-            // OpsigelseAfBolig
+            // OpsigelseAfLejemaal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 549);
             this.Controls.Add(this.lblPersonTabel);
-            this.Controls.Add(this.lblBoligTabel);
+            this.Controls.Add(this.lblLejemaalTabel);
             this.Controls.Add(this.DGVPerson);
             this.Controls.Add(this.DGVLejemaal);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "OpsigelseAfBolig";
-            this.Text = "OpsigelseAfBolig";
-            this.Load += new System.EventHandler(this.OpsigelseAfBolig_Load);
+            this.Name = "OpsigelseAfLejemaal";
+            this.Text = "OpsigelseAfLejemaal";
+            this.Load += new System.EventHandler(this.OpsigelseAfLejemaal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVLejemaal)).EndInit();
@@ -245,7 +245,7 @@
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.DataGridView DGVLejemaal;
         private System.Windows.Forms.DataGridView DGVPerson;
-        private System.Windows.Forms.Label lblBoligTabel;
+        private System.Windows.Forms.Label lblLejemaalTabel;
         private System.Windows.Forms.Label lblPersonTabel;
     }
 }

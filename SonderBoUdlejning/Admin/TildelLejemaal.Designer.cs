@@ -410,7 +410,7 @@
             this.tbBID.TabIndex = 0;
             this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
             // 
-            // TildelBolig
+            // TildelLejemaal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -421,9 +421,9 @@
             this.Controls.Add(this.dgvLejemaal);
             this.Controls.Add(this.panelBaggrund);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "TildelBolig";
-            this.Text = "TildelBolig";
-            this.Load += new System.EventHandler(this.TildelBolig_Load);
+            this.Name = "TildelLejemaal";
+            this.Text = "TildelLejemaal";
+            this.Load += new System.EventHandler(this.TildelLejemaal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteliste)).EndInit();
             this.panelBaggrund.ResumeLayout(false);

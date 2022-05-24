@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using SonderBoUdlejning.InputCheck;
 
-namespace SonderBoUdlejning.BoligSystems
+namespace SonderBoUdlejning.LejemaalSystems
 {
     internal class DeleteLejemaal
     {
@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der sletter en lejemål fra databasen
-        public void deleteBolig(string lejemaalNr)
+        public void deleteLejemaal(string lejemaalNr)
         {
             string sqlS = "IF EXISTS (SELECT lejemaalNr FROM Lejemaal WHERE lejemaalNr = @lejemaalNr) BEGIN DELETE FROM Lejemaal WHERE lejemaalNr = @lejemaalNr END"; //Definere DELETE Querien
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen

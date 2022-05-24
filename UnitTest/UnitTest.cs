@@ -69,7 +69,7 @@ namespace UnitTest
         }
 
 
-        //BoligInputCheck.cs
+        //LejemaalInputCheck.cs
         [TestMethod]
         public void bIdCheck_Valid()
         {

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SonderBoUdlejning.InputCheck;
 using SonderBoUdlejning.personCRUD;
-using SonderBoUdlejning.TildelBoligSystems;
+using SonderBoUdlejning.TildelLejemaalSystems;
 using SonderBoUdlejning.VentelisteSystems;
-using SonderBoUdlejning.BoligSystems;
+using SonderBoUdlejning.LejemaalSystems;
 
 namespace SonderBoUdlejning.Admin
 {
@@ -31,7 +31,7 @@ namespace SonderBoUdlejning.Admin
             InitializeComponent();
         }
 
-        private void TildelBolig_Load(object sender, EventArgs e)
+        private void TildelLejemaal_Load(object sender, EventArgs e)
         {
             //Indlæser boliger
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
@@ -77,7 +77,7 @@ namespace SonderBoUdlejning.Admin
 
             string[] comboBoxListPostNr;
 
-            LejemaalFacade readBolig = new LejemaalFacade();
+            LejemaalFacade readLejemaal = new LejemaalFacade();
             vFacade venteListeFor = new vFacade();
 
             //While loop der kører hver gang der ændres i textboxen
@@ -113,8 +113,8 @@ namespace SonderBoUdlejning.Admin
                         MessageBox.Show("Vælg venligst et postnummer!");
                     }
 
-                    readBolig.rBolig(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser lejemål data
-                    dgvLejemaal.DataSource = tableConn.tableBinder(readBolig.rBoligQuery); //Indlæser lejemål data i lejemål dataGridView
+                    readLejemaal.rLejemaal(sqlTemplate, adresse, postNr, Lid, pId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje); //Indlæser lejemål data
+                    dgvLejemaal.DataSource = tableConn.tableBinder(readLejemaal.rLejemaalQuery); //Indlæser lejemål data i lejemål dataGridView
 
                     venteListeFor.ReadVenteListe(pId, Lid, signUpDato); //Indlæser venteliste
                     dgvVenteliste.DataSource = tableConn.tableBinder(venteListeFor.ReadVente);
@@ -158,7 +158,7 @@ namespace SonderBoUdlejning.Admin
             bool erBeboer = false; //Sætter erBeboer til at være false
             bool alt = false; //Sætter alt til at være false
 
-            LejemaalFacade readBolig = new LejemaalFacade();
+            LejemaalFacade readLejemaal = new LejemaalFacade();
             vFacade readPVdgv = new vFacade();
             PersonFacade pRead = new PersonFacade();
 
@@ -193,8 +193,8 @@ namespace SonderBoUdlejning.Admin
             if ((bIdValid == true) && (pIdValid == true))
             {
                 //sortere Lejemaal dgv
-                readBolig.rBolig(sqlTemplate, adresse, postNr, Lid, dummyPId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
-                dgvLejemaal.DataSource = tableConn.tableBinder(readBolig.rBoligQuery);
+                readLejemaal.rLejemaal(sqlTemplate, adresse, postNr, Lid, dummyPId, indDato, udDato, lType, minKvm, maksKvm, minLejePris, maksLejePris, tilLeje);
+                dgvLejemaal.DataSource = tableConn.tableBinder(readLejemaal.rLejemaalQuery);
 
                 //sortere Venteliste dgv
                 readPVdgv.ReadVenteListe(dummyPId, Lid, signUpDato);
@@ -376,9 +376,9 @@ namespace SonderBoUdlejning.Admin
                     pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
                     pUpdate.UpdatePerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
 
-                    //Boligen opdateres i Lejemaal tabellen
+                    //Lejemaalen opdateres i Lejemaal tabellen
                     LejemaalFacade boligUpdate = new LejemaalFacade();
-                    boligUpdate.uBolig(lejemaalNr, adresse, postNr, Lid, pId, startDato, slutDato);
+                    boligUpdate.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, startDato, slutDato);
                     dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
 
                     //Sletter personen fra ventelisten

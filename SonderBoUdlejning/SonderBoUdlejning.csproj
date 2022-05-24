@@ -208,10 +208,10 @@
     <Compile Include="Admin\VenteListe.Designer.cs">
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
-    <Compile Include="BoligSystems\LejemaalFacade.cs" />
-    <Compile Include="BoligSystems\CreateLejemaal.cs" />
-    <Compile Include="BoligSystems\DeleteLejemaal.cs" />
-    <Compile Include="BoligSystems\UpdateLejemaal.cs" />
+    <Compile Include="LejemaalSystems\LejemaalFacade.cs" />
+    <Compile Include="LejemaalSystems\CreateLejemaal.cs" />
+    <Compile Include="LejemaalSystems\DeleteLejemaal.cs" />
+    <Compile Include="LejemaalSystems\UpdateLejemaal.cs" />
     <Compile Include="BookingSystems\CheckMellemDatoer.cs" />
     <Compile Include="BookingSystems\CheckResourceIdType.cs" />
     <Compile Include="BookingSystems\CheckSlutDato.cs" />
@@ -250,7 +250,7 @@
     <Compile Include="SloganThread.cs" />
     <Compile Include="SQLExecutionHandler.cs" />
     <Compile Include="TildelLejemaalSystems\LejekontraktFacade.cs" />
-    <Compile Include="BoligSystems\ReadLejemaal.cs" />
+    <Compile Include="LejemaalSystems\ReadLejemaal.cs" />
     <Compile Include="UserIdentification.cs" />
     <Compile Include="VentelisteSystems\ReadVenteliste.cs" />
     <Compile Include="VentelisteSystems\vAddToList.cs" />

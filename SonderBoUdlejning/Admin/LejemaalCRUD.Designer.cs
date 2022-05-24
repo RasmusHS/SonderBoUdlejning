@@ -42,13 +42,13 @@
             this.lblMinPris = new System.Windows.Forms.Label();
             this.tbMaksKvm = new System.Windows.Forms.TextBox();
             this.lblMaksKvm = new System.Windows.Forms.Label();
-            this.tbBoligType = new System.Windows.Forms.TextBox();
+            this.tbLejemaalType = new System.Windows.Forms.TextBox();
             this.lblLejemaalType = new System.Windows.Forms.Label();
             this.tbMinKvm = new System.Windows.Forms.TextBox();
             this.lblMinKvm = new System.Windows.Forms.Label();
             this.tbBy = new System.Windows.Forms.TextBox();
             this.lblBy = new System.Windows.Forms.Label();
-            this.tbBoligID = new System.Windows.Forms.TextBox();
+            this.tbLejemaalID = new System.Windows.Forms.TextBox();
             this.lblLejemaalNr = new System.Windows.Forms.Label();
             this.lblPostNr = new System.Windows.Forms.Label();
             this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
@@ -125,7 +125,7 @@
             this.btnVisBDelete.TabIndex = 4;
             this.btnVisBDelete.Text = "Slet Lejemål";
             this.btnVisBDelete.UseVisualStyleBackColor = true;
-            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisDBolig_Click);
+            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisDLejemaal_Click);
             // 
             // panelContainer
             // 
@@ -138,13 +138,13 @@
             this.panelContainer.Controls.Add(this.lblMinPris);
             this.panelContainer.Controls.Add(this.tbMaksKvm);
             this.panelContainer.Controls.Add(this.lblMaksKvm);
-            this.panelContainer.Controls.Add(this.tbBoligType);
+            this.panelContainer.Controls.Add(this.tbLejemaalType);
             this.panelContainer.Controls.Add(this.lblLejemaalType);
             this.panelContainer.Controls.Add(this.tbMinKvm);
             this.panelContainer.Controls.Add(this.lblMinKvm);
             this.panelContainer.Controls.Add(this.tbBy);
             this.panelContainer.Controls.Add(this.lblBy);
-            this.panelContainer.Controls.Add(this.tbBoligID);
+            this.panelContainer.Controls.Add(this.tbLejemaalID);
             this.panelContainer.Controls.Add(this.lblLejemaalNr);
             this.panelContainer.Controls.Add(this.lblPostNr);
             this.panelContainer.Controls.Add(this.comboBoxPostNr);
@@ -231,14 +231,14 @@
             this.lblMaksKvm.TabIndex = 16;
             this.lblMaksKvm.Text = "Maksimum Kvm";
             // 
-            // tbBoligType
+            // tbLejemaalType
             // 
-            this.tbBoligType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBoligType.Location = new System.Drawing.Point(144, 116);
-            this.tbBoligType.Name = "tbBoligType";
-            this.tbBoligType.ReadOnly = true;
-            this.tbBoligType.Size = new System.Drawing.Size(100, 23);
-            this.tbBoligType.TabIndex = 15;
+            this.tbLejemaalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaalType.Location = new System.Drawing.Point(144, 116);
+            this.tbLejemaalType.Name = "tbLejemaalType";
+            this.tbLejemaalType.ReadOnly = true;
+            this.tbLejemaalType.Size = new System.Drawing.Size(100, 23);
+            this.tbLejemaalType.TabIndex = 15;
             // 
             // lblLejemaalType
             // 
@@ -287,14 +287,14 @@
             this.lblBy.TabIndex = 10;
             this.lblBy.Text = "By";
             // 
-            // tbBoligID
+            // tbLejemaalID
             // 
-            this.tbBoligID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBoligID.Location = new System.Drawing.Point(22, 116);
-            this.tbBoligID.Name = "tbBoligID";
-            this.tbBoligID.Size = new System.Drawing.Size(100, 23);
-            this.tbBoligID.TabIndex = 9;
-            this.tbBoligID.TextChanged += new System.EventHandler(this.tbBoligID_TextChanged);
+            this.tbLejemaalID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaalID.Location = new System.Drawing.Point(22, 116);
+            this.tbLejemaalID.Name = "tbLejemaalID";
+            this.tbLejemaalID.Size = new System.Drawing.Size(100, 23);
+            this.tbLejemaalID.TabIndex = 9;
+            this.tbLejemaalID.TextChanged += new System.EventHandler(this.tbLejemaalID_TextChanged);
             // 
             // lblLejemaalNr
             // 
@@ -434,7 +434,7 @@
             this.dgvLejemaalsInfo.Size = new System.Drawing.Size(662, 268);
             this.dgvLejemaalsInfo.TabIndex = 0;
             // 
-            // BoligCRUD
+            // LejemaalCRUD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -445,9 +445,9 @@
             this.Controls.Add(this.btnVisBUpdate);
             this.Controls.Add(this.btnVisBRead);
             this.Controls.Add(this.btnVisBCreate);
-            this.Name = "BoligCRUD";
-            this.Text = "BoligCRUD";
-            this.Load += new System.EventHandler(this.BoligCRUD_Load);
+            this.Name = "LejemaalCRUD";
+            this.Text = "LejemaalCRUD";
+            this.Load += new System.EventHandler(this.LejemaalCRUD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).EndInit();
             this.panelContainer.ResumeLayout(false);
             this.panelContainer.PerformLayout();
@@ -475,7 +475,7 @@
         private System.Windows.Forms.Label lblPostNr;
         private System.Windows.Forms.ComboBox comboBoxPostNr;
         private System.Windows.Forms.TextBox tbAdresse;
-        private System.Windows.Forms.TextBox tbBoligID;
+        private System.Windows.Forms.TextBox tbLejemaalID;
         private System.Windows.Forms.Label lblLejemaalNr;
         private System.Windows.Forms.TextBox tbBy;
         private System.Windows.Forms.Label lblBy;
@@ -483,7 +483,7 @@
         private System.Windows.Forms.TabPage LejemaalPage;
         private System.Windows.Forms.TabPage LejemaalsInfoPage;
         private System.Windows.Forms.DataGridView dgvLejemaalsInfo;
-        private System.Windows.Forms.TextBox tbBoligType;
+        private System.Windows.Forms.TextBox tbLejemaalType;
         private System.Windows.Forms.Label lblLejemaalType;
         private System.Windows.Forms.TextBox tbMinKvm;
         private System.Windows.Forms.Label lblMinKvm;

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using SonderBoUdlejning.InputCheck;
 
-namespace SonderBoUdlejning.BoligSystems
+namespace SonderBoUdlejning.LejemaalSystems
 {
     internal class ReadLejemaal
     {
@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.BoligSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der indlæser boliger fra databasen ud fra de givne parametre
-        public string readBolig(string sqlTemplate, string adresse, string postNr, string Lid, string pId, string indDato, string udDato, string lType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
+        public string readLejemaal(string sqlTemplate, string adresse, string postNr, string Lid, string pId, string indDato, string udDato, string lType, string minKvm, string maxKvm, string minLejePris, string maxLejePris, bool tilLeje)
         {
             string sqlS = $"{sqlTemplate}"; //Skabelon for SQL-sætning
 
