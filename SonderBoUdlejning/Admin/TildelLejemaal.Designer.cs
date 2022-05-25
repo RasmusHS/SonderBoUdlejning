@@ -75,13 +75,13 @@
             this.dgvLejemaal.AllowUserToDeleteRows = false;
             this.dgvLejemaal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvLejemaal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLejemaal.Location = new System.Drawing.Point(44, 54);
-            this.dgvLejemaal.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvLejemaal.Location = new System.Drawing.Point(103, 120);
+            this.dgvLejemaal.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dgvLejemaal.Name = "dgvLejemaal";
             this.dgvLejemaal.ReadOnly = true;
             this.dgvLejemaal.RowHeadersWidth = 51;
             this.dgvLejemaal.RowTemplate.Height = 24;
-            this.dgvLejemaal.Size = new System.Drawing.Size(596, 165);
+            this.dgvLejemaal.Size = new System.Drawing.Size(1391, 368);
             this.dgvLejemaal.TabIndex = 0;
             // 
             // dgvVenteliste
@@ -90,23 +90,23 @@
             this.dgvVenteliste.AllowUserToDeleteRows = false;
             this.dgvVenteliste.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenteliste.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVenteliste.Location = new System.Drawing.Point(682, 54);
-            this.dgvVenteliste.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvVenteliste.Location = new System.Drawing.Point(1591, 120);
+            this.dgvVenteliste.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.dgvVenteliste.Name = "dgvVenteliste";
             this.dgvVenteliste.ReadOnly = true;
             this.dgvVenteliste.RowHeadersWidth = 51;
             this.dgvVenteliste.RowTemplate.Height = 24;
-            this.dgvVenteliste.Size = new System.Drawing.Size(329, 165);
+            this.dgvVenteliste.Size = new System.Drawing.Size(768, 368);
             this.dgvVenteliste.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 28);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(93, 62);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 24);
+            this.label1.Size = new System.Drawing.Size(269, 48);
             this.label1.TabIndex = 2;
             this.label1.Text = "Lejemål tabel";
             // 
@@ -114,10 +114,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(678, 28);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(1582, 62);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 24);
+            this.label2.Size = new System.Drawing.Size(205, 48);
             this.label2.TabIndex = 3;
             this.label2.Text = "Venteliste";
             // 
@@ -127,10 +127,10 @@
             this.panelBaggrund.Controls.Add(this.panelØnskerLejlighed);
             this.panelBaggrund.Controls.Add(this.panelPid);
             this.panelBaggrund.Controls.Add(this.panelBid);
-            this.panelBaggrund.Location = new System.Drawing.Point(139, 238);
-            this.panelBaggrund.Margin = new System.Windows.Forms.Padding(2);
+            this.panelBaggrund.Location = new System.Drawing.Point(324, 531);
+            this.panelBaggrund.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelBaggrund.Name = "panelBaggrund";
-            this.panelBaggrund.Size = new System.Drawing.Size(761, 323);
+            this.panelBaggrund.Size = new System.Drawing.Size(1776, 721);
             this.panelBaggrund.TabIndex = 4;
             // 
             // panelØnskerLejlighed
@@ -140,10 +140,10 @@
             this.panelØnskerLejlighed.Controls.Add(this.panelUdskrivLejekontrakt);
             this.panelØnskerLejlighed.Controls.Add(this.ckbJaTilLejlighed);
             this.panelØnskerLejlighed.Controls.Add(this.lblØnskerLejlighed);
-            this.panelØnskerLejlighed.Location = new System.Drawing.Point(20, 162);
-            this.panelØnskerLejlighed.Margin = new System.Windows.Forms.Padding(2);
+            this.panelØnskerLejlighed.Location = new System.Drawing.Point(47, 361);
+            this.panelØnskerLejlighed.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelØnskerLejlighed.Name = "panelØnskerLejlighed";
-            this.panelØnskerLejlighed.Size = new System.Drawing.Size(726, 127);
+            this.panelØnskerLejlighed.Size = new System.Drawing.Size(1694, 283);
             this.panelØnskerLejlighed.TabIndex = 15;
             this.panelØnskerLejlighed.Visible = false;
             // 
@@ -151,9 +151,10 @@
             // 
             this.combAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combAdresser.FormattingEnabled = true;
-            this.combAdresser.Location = new System.Drawing.Point(42, 86);
+            this.combAdresser.Location = new System.Drawing.Point(98, 192);
+            this.combAdresser.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.combAdresser.Name = "combAdresser";
-            this.combAdresser.Size = new System.Drawing.Size(185, 21);
+            this.combAdresser.Size = new System.Drawing.Size(426, 37);
             this.combAdresser.TabIndex = 23;
             // 
             // panelUdskrivLejekontrakt
@@ -163,10 +164,10 @@
             this.panelUdskrivLejekontrakt.Controls.Add(this.lblIndflytMåned);
             this.panelUdskrivLejekontrakt.Controls.Add(this.combIndflytMåned);
             this.panelUdskrivLejekontrakt.Controls.Add(this.btnUdskrivLejekontrakt);
-            this.panelUdskrivLejekontrakt.Location = new System.Drawing.Point(242, 25);
-            this.panelUdskrivLejekontrakt.Margin = new System.Windows.Forms.Padding(2);
+            this.panelUdskrivLejekontrakt.Location = new System.Drawing.Point(565, 56);
+            this.panelUdskrivLejekontrakt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelUdskrivLejekontrakt.Name = "panelUdskrivLejekontrakt";
-            this.panelUdskrivLejekontrakt.Size = new System.Drawing.Size(475, 82);
+            this.panelUdskrivLejekontrakt.Size = new System.Drawing.Size(1108, 183);
             this.panelUdskrivLejekontrakt.TabIndex = 22;
             this.panelUdskrivLejekontrakt.Visible = false;
             // 
@@ -174,28 +175,29 @@
             // 
             this.combIndflytÅr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combIndflytÅr.FormattingEnabled = true;
-            this.combIndflytÅr.Location = new System.Drawing.Point(107, 41);
+            this.combIndflytÅr.Location = new System.Drawing.Point(250, 91);
+            this.combIndflytÅr.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.combIndflytÅr.Name = "combIndflytÅr";
-            this.combIndflytÅr.Size = new System.Drawing.Size(91, 21);
+            this.combIndflytÅr.Size = new System.Drawing.Size(207, 37);
             this.combIndflytÅr.TabIndex = 22;
             // 
             // lblIndflytÅrstal
             // 
             this.lblIndflytÅrstal.AutoSize = true;
-            this.lblIndflytÅrstal.Location = new System.Drawing.Point(104, 25);
-            this.lblIndflytÅrstal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIndflytÅrstal.Location = new System.Drawing.Point(243, 56);
+            this.lblIndflytÅrstal.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblIndflytÅrstal.Name = "lblIndflytÅrstal";
-            this.lblIndflytÅrstal.Size = new System.Drawing.Size(33, 13);
+            this.lblIndflytÅrstal.Size = new System.Drawing.Size(73, 29);
             this.lblIndflytÅrstal.TabIndex = 21;
             this.lblIndflytÅrstal.Text = "Årstal";
             // 
             // lblIndflytMåned
             // 
             this.lblIndflytMåned.AutoSize = true;
-            this.lblIndflytMåned.Location = new System.Drawing.Point(8, 26);
-            this.lblIndflytMåned.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIndflytMåned.Location = new System.Drawing.Point(19, 58);
+            this.lblIndflytMåned.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblIndflytMåned.Name = "lblIndflytMåned";
-            this.lblIndflytMåned.Size = new System.Drawing.Size(40, 13);
+            this.lblIndflytMåned.Size = new System.Drawing.Size(87, 29);
             this.lblIndflytMåned.TabIndex = 16;
             this.lblIndflytMåned.Text = "Måned";
             // 
@@ -203,19 +205,19 @@
             // 
             this.combIndflytMåned.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combIndflytMåned.FormattingEnabled = true;
-            this.combIndflytMåned.Location = new System.Drawing.Point(10, 41);
-            this.combIndflytMåned.Margin = new System.Windows.Forms.Padding(2);
+            this.combIndflytMåned.Location = new System.Drawing.Point(23, 91);
+            this.combIndflytMåned.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.combIndflytMåned.Name = "combIndflytMåned";
-            this.combIndflytMåned.Size = new System.Drawing.Size(92, 21);
+            this.combIndflytMåned.Size = new System.Drawing.Size(209, 37);
             this.combIndflytMåned.TabIndex = 19;
             // 
             // btnUdskrivLejekontrakt
             // 
             this.btnUdskrivLejekontrakt.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.btnUdskrivLejekontrakt.Location = new System.Drawing.Point(224, 16);
-            this.btnUdskrivLejekontrakt.Margin = new System.Windows.Forms.Padding(2);
+            this.btnUdskrivLejekontrakt.Location = new System.Drawing.Point(523, 36);
+            this.btnUdskrivLejekontrakt.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnUdskrivLejekontrakt.Name = "btnUdskrivLejekontrakt";
-            this.btnUdskrivLejekontrakt.Size = new System.Drawing.Size(244, 43);
+            this.btnUdskrivLejekontrakt.Size = new System.Drawing.Size(569, 96);
             this.btnUdskrivLejekontrakt.TabIndex = 18;
             this.btnUdskrivLejekontrakt.Text = "Udskriv Lejekontrakt";
             this.btnUdskrivLejekontrakt.UseVisualStyleBackColor = false;
@@ -224,10 +226,10 @@
             // ckbJaTilLejlighed
             // 
             this.ckbJaTilLejlighed.AutoSize = true;
-            this.ckbJaTilLejlighed.Location = new System.Drawing.Point(42, 58);
-            this.ckbJaTilLejlighed.Margin = new System.Windows.Forms.Padding(2);
+            this.ckbJaTilLejlighed.Location = new System.Drawing.Point(98, 129);
+            this.ckbJaTilLejlighed.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.ckbJaTilLejlighed.Name = "ckbJaTilLejlighed";
-            this.ckbJaTilLejlighed.Size = new System.Drawing.Size(185, 17);
+            this.ckbJaTilLejlighed.Size = new System.Drawing.Size(415, 33);
             this.ckbJaTilLejlighed.TabIndex = 17;
             this.ckbJaTilLejlighed.Text = "Ja Medlemmet ønsker lejligheden.";
             this.ckbJaTilLejlighed.UseVisualStyleBackColor = true;
@@ -236,10 +238,10 @@
             // lblØnskerLejlighed
             // 
             this.lblØnskerLejlighed.AutoSize = true;
-            this.lblØnskerLejlighed.Location = new System.Drawing.Point(40, 13);
-            this.lblØnskerLejlighed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblØnskerLejlighed.Location = new System.Drawing.Point(93, 29);
+            this.lblØnskerLejlighed.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblØnskerLejlighed.Name = "lblØnskerLejlighed";
-            this.lblØnskerLejlighed.Size = new System.Drawing.Size(161, 13);
+            this.lblØnskerLejlighed.Size = new System.Drawing.Size(370, 29);
             this.lblØnskerLejlighed.TabIndex = 16;
             this.lblØnskerLejlighed.Text = "Ønsker Medlemmet Lejligheden?";
             // 
@@ -250,10 +252,10 @@
             this.panelPid.Controls.Add(this.lblPID);
             this.panelPid.Controls.Add(this.tbPID);
             this.panelPid.Controls.Add(this.btnFindMedlemsInfo);
-            this.panelPid.Location = new System.Drawing.Point(198, 13);
-            this.panelPid.Margin = new System.Windows.Forms.Padding(2);
+            this.panelPid.Location = new System.Drawing.Point(462, 29);
+            this.panelPid.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelPid.Name = "panelPid";
-            this.panelPid.Size = new System.Drawing.Size(548, 128);
+            this.panelPid.Size = new System.Drawing.Size(1279, 286);
             this.panelPid.TabIndex = 14;
             this.panelPid.Visible = false;
             // 
@@ -265,67 +267,67 @@
             this.panelMedlemsinfo.Controls.Add(this.tbMedlemsEmail);
             this.panelMedlemsinfo.Controls.Add(this.lblMedlemsTLF);
             this.panelMedlemsinfo.Controls.Add(this.lblMedlemsEmail);
-            this.panelMedlemsinfo.Location = new System.Drawing.Point(253, 18);
-            this.panelMedlemsinfo.Margin = new System.Windows.Forms.Padding(2);
+            this.panelMedlemsinfo.Location = new System.Drawing.Point(590, 40);
+            this.panelMedlemsinfo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelMedlemsinfo.Name = "panelMedlemsinfo";
-            this.panelMedlemsinfo.Size = new System.Drawing.Size(286, 95);
+            this.panelMedlemsinfo.Size = new System.Drawing.Size(667, 212);
             this.panelMedlemsinfo.TabIndex = 14;
             this.panelMedlemsinfo.Visible = false;
             // 
             // lblMedlemsNavn
             // 
             this.lblMedlemsNavn.AutoSize = true;
-            this.lblMedlemsNavn.Location = new System.Drawing.Point(5, 22);
-            this.lblMedlemsNavn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMedlemsNavn.Location = new System.Drawing.Point(12, 49);
+            this.lblMedlemsNavn.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMedlemsNavn.Name = "lblMedlemsNavn";
-            this.lblMedlemsNavn.Size = new System.Drawing.Size(76, 13);
+            this.lblMedlemsNavn.Size = new System.Drawing.Size(169, 29);
             this.lblMedlemsNavn.TabIndex = 10;
             this.lblMedlemsNavn.Text = "Medlems navn";
             // 
             // tbMedlemsNavn
             // 
-            this.tbMedlemsNavn.Location = new System.Drawing.Point(8, 46);
-            this.tbMedlemsNavn.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMedlemsNavn.Location = new System.Drawing.Point(19, 103);
+            this.tbMedlemsNavn.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbMedlemsNavn.Name = "tbMedlemsNavn";
             this.tbMedlemsNavn.ReadOnly = true;
-            this.tbMedlemsNavn.Size = new System.Drawing.Size(76, 20);
+            this.tbMedlemsNavn.Size = new System.Drawing.Size(172, 35);
             this.tbMedlemsNavn.TabIndex = 7;
             // 
             // tbMedlemsTLF
             // 
-            this.tbMedlemsTLF.Location = new System.Drawing.Point(110, 46);
-            this.tbMedlemsTLF.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMedlemsTLF.Location = new System.Drawing.Point(257, 103);
+            this.tbMedlemsTLF.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbMedlemsTLF.Name = "tbMedlemsTLF";
             this.tbMedlemsTLF.ReadOnly = true;
-            this.tbMedlemsTLF.Size = new System.Drawing.Size(76, 20);
+            this.tbMedlemsTLF.Size = new System.Drawing.Size(172, 35);
             this.tbMedlemsTLF.TabIndex = 8;
             // 
             // tbMedlemsEmail
             // 
-            this.tbMedlemsEmail.Location = new System.Drawing.Point(203, 46);
-            this.tbMedlemsEmail.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMedlemsEmail.Location = new System.Drawing.Point(474, 103);
+            this.tbMedlemsEmail.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbMedlemsEmail.Name = "tbMedlemsEmail";
             this.tbMedlemsEmail.ReadOnly = true;
-            this.tbMedlemsEmail.Size = new System.Drawing.Size(76, 20);
+            this.tbMedlemsEmail.Size = new System.Drawing.Size(172, 35);
             this.tbMedlemsEmail.TabIndex = 12;
             // 
             // lblMedlemsTLF
             // 
             this.lblMedlemsTLF.AutoSize = true;
-            this.lblMedlemsTLF.Location = new System.Drawing.Point(107, 22);
-            this.lblMedlemsTLF.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMedlemsTLF.Location = new System.Drawing.Point(250, 49);
+            this.lblMedlemsTLF.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMedlemsTLF.Name = "lblMedlemsTLF";
-            this.lblMedlemsTLF.Size = new System.Drawing.Size(71, 13);
+            this.lblMedlemsTLF.Size = new System.Drawing.Size(163, 29);
             this.lblMedlemsTLF.TabIndex = 9;
             this.lblMedlemsTLF.Text = "Medlems TLF";
             // 
             // lblMedlemsEmail
             // 
             this.lblMedlemsEmail.AutoSize = true;
-            this.lblMedlemsEmail.Location = new System.Drawing.Point(201, 22);
-            this.lblMedlemsEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMedlemsEmail.Location = new System.Drawing.Point(469, 49);
+            this.lblMedlemsEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMedlemsEmail.Name = "lblMedlemsEmail";
-            this.lblMedlemsEmail.Size = new System.Drawing.Size(77, 13);
+            this.lblMedlemsEmail.Size = new System.Drawing.Size(180, 29);
             this.lblMedlemsEmail.TabIndex = 11;
             this.lblMedlemsEmail.Text = "Medlems Email";
             // 
@@ -333,28 +335,28 @@
             // 
             this.lblPID.AutoSize = true;
             this.lblPID.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lblPID.Location = new System.Drawing.Point(40, 41);
-            this.lblPID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPID.Location = new System.Drawing.Point(93, 91);
+            this.lblPID.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblPID.Name = "lblPID";
-            this.lblPID.Size = new System.Drawing.Size(57, 13);
+            this.lblPID.Size = new System.Drawing.Size(193, 87);
             this.lblPID.TabIndex = 6;
-            this.lblPID.Text = "Indtast pId";
+            this.lblPID.Text = "Indtast person ID\r\n\r\n";
             // 
             // tbPID
             // 
-            this.tbPID.Location = new System.Drawing.Point(43, 64);
-            this.tbPID.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPID.Location = new System.Drawing.Point(100, 143);
+            this.tbPID.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbPID.Name = "tbPID";
-            this.tbPID.Size = new System.Drawing.Size(76, 20);
+            this.tbPID.Size = new System.Drawing.Size(172, 35);
             this.tbPID.TabIndex = 1;
             // 
             // btnFindMedlemsInfo
             // 
             this.btnFindMedlemsInfo.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.btnFindMedlemsInfo.Location = new System.Drawing.Point(144, 40);
-            this.btnFindMedlemsInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFindMedlemsInfo.Location = new System.Drawing.Point(336, 89);
+            this.btnFindMedlemsInfo.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnFindMedlemsInfo.Name = "btnFindMedlemsInfo";
-            this.btnFindMedlemsInfo.Size = new System.Drawing.Size(95, 45);
+            this.btnFindMedlemsInfo.Size = new System.Drawing.Size(222, 100);
             this.btnFindMedlemsInfo.TabIndex = 13;
             this.btnFindMedlemsInfo.Text = "FIND INFO";
             this.btnFindMedlemsInfo.UseVisualStyleBackColor = false;
@@ -367,18 +369,19 @@
             this.panelBid.Controls.Add(this.comboBoxPostNr);
             this.panelBid.Controls.Add(this.lblBID);
             this.panelBid.Controls.Add(this.tbBID);
-            this.panelBid.Location = new System.Drawing.Point(20, 16);
-            this.panelBid.Margin = new System.Windows.Forms.Padding(2);
+            this.panelBid.Location = new System.Drawing.Point(47, 36);
+            this.panelBid.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.panelBid.Name = "panelBid";
-            this.panelBid.Size = new System.Drawing.Size(153, 125);
+            this.panelBid.Size = new System.Drawing.Size(357, 279);
             this.panelBid.TabIndex = 16;
             // 
             // lblPostNr
             // 
             this.lblPostNr.AutoSize = true;
-            this.lblPostNr.Location = new System.Drawing.Point(19, 73);
+            this.lblPostNr.Location = new System.Drawing.Point(44, 163);
+            this.lblPostNr.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lblPostNr.Name = "lblPostNr";
-            this.lblPostNr.Size = new System.Drawing.Size(42, 13);
+            this.lblPostNr.Size = new System.Drawing.Size(93, 29);
             this.lblPostNr.TabIndex = 7;
             this.lblPostNr.Text = "Post Nr";
             // 
@@ -386,35 +389,36 @@
             // 
             this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPostNr.FormattingEnabled = true;
-            this.comboBoxPostNr.Location = new System.Drawing.Point(22, 89);
+            this.comboBoxPostNr.Location = new System.Drawing.Point(51, 199);
+            this.comboBoxPostNr.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.comboBoxPostNr.Name = "comboBoxPostNr";
-            this.comboBoxPostNr.Size = new System.Drawing.Size(98, 21);
+            this.comboBoxPostNr.Size = new System.Drawing.Size(223, 37);
             this.comboBoxPostNr.TabIndex = 6;
             // 
             // lblBID
             // 
             this.lblBID.AutoSize = true;
-            this.lblBID.Location = new System.Drawing.Point(19, 15);
-            this.lblBID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBID.Location = new System.Drawing.Point(44, 33);
+            this.lblBID.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblBID.Name = "lblBID";
-            this.lblBID.Size = new System.Drawing.Size(56, 13);
+            this.lblBID.Size = new System.Drawing.Size(209, 29);
             this.lblBID.TabIndex = 5;
-            this.lblBID.Text = "Indtast Lid";
+            this.lblBID.Text = "Indtast lejemåls ID";
             // 
             // tbBID
             // 
-            this.tbBID.Location = new System.Drawing.Point(22, 35);
-            this.tbBID.Margin = new System.Windows.Forms.Padding(2);
+            this.tbBID.Location = new System.Drawing.Point(51, 78);
+            this.tbBID.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.tbBID.Name = "tbBID";
-            this.tbBID.Size = new System.Drawing.Size(76, 20);
+            this.tbBID.Size = new System.Drawing.Size(172, 35);
             this.tbBID.TabIndex = 0;
             this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
             // 
             // TildelLejemaal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1063, 592);
+            this.ClientSize = new System.Drawing.Size(2480, 1321);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvVenteliste);
