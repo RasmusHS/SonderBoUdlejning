@@ -24,14 +24,14 @@ namespace SonderBoUdlejning.Admin
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         
         //Standard Query for lejemål dataGridView
-        string sqlS1 = "SELECT lejemaalNr, adresse, postNr, Lid, Lejemaal.pId, indflytDato, udflytDato " +
+        string sqlS1 = "SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', Lejemaal.pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato'" +
                        "FROM Lejemaal " +
                        "INNER JOIN Person ON Lejemaal.pId=Person.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
                        "ORDER BY pId ASC";
 
         //Standard Query for person dataGridView
-        string sqlS2 = "SELECT Person.pId, fNavn, pMail, pTlf, erBeboer " +
+        string sqlS2 = "SELECT Person.pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?'" +
                        "FROM Person " +
                        "INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
@@ -42,6 +42,20 @@ namespace SonderBoUdlejning.Admin
             //Indlæser dataGridViews med standard queries
             DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
+
+            DGVLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            DGVLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVLejemaal.RowTemplate.Height = 30;
+            DGVLejemaal.RowTemplate.DividerHeight = 1;
+            DGVLejemaal.GridColor = Color.Black;
+            DGVLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+
+            DGVPerson.BorderStyle = BorderStyle.FixedSingle;
+            DGVPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVPerson.RowTemplate.Height = 30;
+            DGVPerson.RowTemplate.DividerHeight = 1;
+            DGVPerson.GridColor = Color.Black;
+            DGVPerson.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             //Indlæser måned comboboxen med alle månederne
             string[] comboBoxListMonth;

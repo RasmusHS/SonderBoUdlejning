@@ -15,7 +15,9 @@ namespace SonderBoUdlejning.Admin
     public partial class PersonCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT * FROM Person"; //Standard SQL Query, som bruges til at vise Person tabellen i dens dataGridView
+
+        //Standard SQL Query, som bruges til at vise Person tabellen i dens dataGridView
+        string sqlS1 = "SELECT pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?' FROM Person"; 
 
         public PersonCRUD()
         {
@@ -26,6 +28,13 @@ namespace SonderBoUdlejning.Admin
         {
             //Forbinder dataGridView til tabel
             dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+
+            dgvPersonCRUD.BorderStyle = BorderStyle.FixedSingle;
+            dgvPersonCRUD.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvPersonCRUD.RowTemplate.Height = 30;
+            dgvPersonCRUD.RowTemplate.DividerHeight = 1;
+            dgvPersonCRUD.GridColor = Color.Black;
+            dgvPersonCRUD.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             //gemmer input panelet indtil en knap er trykket
             panelContainer.Visible = false;

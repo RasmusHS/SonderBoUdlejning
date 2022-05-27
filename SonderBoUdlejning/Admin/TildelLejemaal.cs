@@ -21,10 +21,10 @@ namespace SonderBoUdlejning.Admin
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
 
         //Standard SQL Query, som henter alle boliger fra databasen, som er tilgængelige
-        string sqlS1 = "SELECT * FROM Lejemaal WHERE (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
+        string sqlS1 = "SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato' FROM Lejemaal WHERE (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
 
         //Standard SQL Query, som henter ventelisten sorteret efter dato
-        string sqlS2 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
+        string sqlS2 = "SELECT pId AS 'Person ID', Lid AS 'Lejemålstype ID', signUpDato AS 'Opskrivelsesdato' FROM Venteliste ORDER BY signUpDato ASC";
 
         public TildelLejemaal()
         {
@@ -39,6 +39,20 @@ namespace SonderBoUdlejning.Admin
             //Indlæser venteliste
             dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
 
+            dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvLejemaal.RowTemplate.Height = 30;
+            dgvLejemaal.RowTemplate.DividerHeight = 1;
+            dgvLejemaal.GridColor = Color.Black;
+            dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             
+            dgvVenteliste.BorderStyle = BorderStyle.FixedSingle;
+            dgvVenteliste.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvVenteliste.RowTemplate.Height = 30;
+            dgvVenteliste.RowTemplate.DividerHeight = 1;
+            dgvVenteliste.GridColor = Color.Black;
+            dgvVenteliste.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             
             //Indlæser liste over måneder
             string[] comboBoxListMonth;
             comboBoxListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();

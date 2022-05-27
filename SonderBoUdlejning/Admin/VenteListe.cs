@@ -18,13 +18,13 @@ namespace SonderBoUdlejning.Admin
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
 
         //Standard SQL Query, som henter ventelisten sorteret efter dato
-        string sqlS1 = "SELECT * FROM Venteliste ORDER BY signUpDato ASC";
+        string sqlS1 = "SELECT pId AS 'Person ID', Lid AS 'Lejemålstype ID', signUpDato AS 'Opskrivelsesdato' FROM Venteliste ORDER BY signUpDato ASC";
 
         //Standard SQL Query, som henter Person tabellen
-        string sqlS2 = "SELECT * FROM Person";
+        string sqlS2 = "SELECT pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?' FROM Person";
 
         //Standard SQL Query, som henter LejemaalsInfo tabellen
-        string sqlS3 = "SELECT * FROM LejemaalsInfo";
+        string sqlS3 = "SELECT Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM LejemaalsInfo";
         public VenteListe()
         {
             InitializeComponent();
@@ -40,7 +40,28 @@ namespace SonderBoUdlejning.Admin
 
             //Indlæser boligInfo dataGridView
             DGVLejemaal.DataSource = tableConn.tableBinder(sqlS3);
-
+ 
+            DGVVenteListe.BorderStyle = BorderStyle.FixedSingle;
+            DGVVenteListe.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVVenteListe.RowTemplate.Height = 30;
+            DGVVenteListe.RowTemplate.DividerHeight = 1;
+            DGVVenteListe.GridColor = Color.Black;
+            DGVVenteListe.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            
+            DGVPersoner.BorderStyle = BorderStyle.FixedSingle;
+            DGVPersoner.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVPersoner.RowTemplate.Height = 30;
+            DGVPersoner.RowTemplate.DividerHeight = 1;
+            DGVPersoner.GridColor = Color.Black;
+            DGVPersoner.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             
+            DGVLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            DGVLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVLejemaal.RowTemplate.Height = 30;
+            DGVLejemaal.RowTemplate.DividerHeight = 1;
+            DGVLejemaal.GridColor = Color.Black;
+            DGVLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             
             //Skjuler input panel
             panelInputs.Visible = false;
 

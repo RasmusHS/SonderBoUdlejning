@@ -18,8 +18,8 @@ namespace SonderBoUdlejning.Admin
     {
         ConnString connString = ConnString.getConnInstance;
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT resNr as 'prøve', rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
-        string sqlS2 = "SELECT * FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
+        string sqlS1 = "SELECT Person.pId AS 'Person ID', fNavn AS 'Fulde Navn', resNr AS 'Reservations Nr.', Ressourcer.rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type', rStartDato AS 'Start Dato', rSlutDato AS 'Slut Dato' FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId INNER JOIN Person ON Person.pId=Reservationer.pId ORDER BY Person.pId";
+        string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId AS 'Ressource ID' FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
 
         List<string> listBeboer = new List<string>();
         List<int> listBeboerID = new List<int>();
@@ -37,12 +37,37 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
+            DGVReservationer.BorderStyle = BorderStyle.FixedSingle;
+            DGVReservationer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVReservationer.RowTemplate.Height = 30;
+            DGVReservationer.RowTemplate.DividerHeight = 1;
+            DGVReservationer.GridColor = Color.Black;
+            DGVReservationer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+
+            DGVRessourcer.BorderStyle = BorderStyle.FixedSingle;
+            DGVRessourcer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DGVRessourcer.RowTemplate.Height = 30;
+            DGVRessourcer.RowTemplate.DividerHeight = 1;
+            DGVRessourcer.GridColor = Color.Black;
+            DGVRessourcer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+
+            /*
+            .BorderStyle = BorderStyle.FixedSingle;
+            .CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            .RowTemplate.Height = 30;
+            .RowTemplate.DividerHeight = 1;
+            .GridColor = Color.Black;
+            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             */
+
             string date = DateTime.Today.ToString("yyyy-MM-dd");
-            TBStartDato.Text = date;
+            dtpStart.Text = date;
+
+            dtpStart.Format = DateTimePickerFormat.Custom;
+            dtpStart.CustomFormat = "dd-MM-yyyy";
 
             BookingFacade.getPersonList(listBeboerID, listBeboer);
             BookingFacade.getRessourceList(listResourceID, listResource, date);
-
 
             foreach (string item in listResource)
             {
@@ -100,12 +125,12 @@ namespace SonderBoUdlejning.Admin
             }
         }
 
-        private void BtnCheckDato_Click(object sender, EventArgs e)
+        private void BtnCheckLedigeRessourcer_Click(object sender, EventArgs e)
         {
             //Tjekker om den dato man vil leje fra, allerede er i en anden udlejning. 
             //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?   
             dtpStart.CustomFormat = "yyyy-MM-dd";
-            string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
+            string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
             listResource.Clear();
@@ -118,15 +143,34 @@ namespace SonderBoUdlejning.Admin
             }
 
             TBResourceID.Text = "";
-            TBStartDato.Text = dtpStart.Text;
+            dtpStart.CustomFormat = "dd-MM-yyyy";
+        }
+
+        private void dtpStart_ValueChanged(object sender, EventArgs e)
+        {
+            dtpStart.CustomFormat = "yyyy-MM-dd";
+            string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
+            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+
+            listResource.Clear();
+            listResourceID.Clear();
+            CBResource.Items.Clear();
+            BookingFacade.getRessourceList(listResourceID, listResource, dtpStart.Text);
+            foreach (string item in listResource)
+            {
+                CBResource.Items.Add(item);
+            }
+
+            TBResourceID.Text = "";
             dtpStart.CustomFormat = "dd-MM-yyyy";
         }
 
         private void btnConfirmBooking_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(connString.connStr);
+            dtpStart.CustomFormat = "yyyy-MM-dd";
             dtpSlut.CustomFormat = "yyyy-MM-dd";
-            DateTime dateToday = Convert.ToDateTime(TBStartDato.Text);
+            DateTime dateToday = Convert.ToDateTime(dtpStart.Text);
             DateTime dateSlutDato = Convert.ToDateTime(dtpSlut.Text);
                 
             if (dateSlutDato >= dateToday)
@@ -134,7 +178,7 @@ namespace SonderBoUdlejning.Admin
                 BookingFacade.checkSlutDato(dtpSlut.Text, TBResourceID.Text);
                 int antalBookings = BookingFacade.slutDato;
                 
-                BookingFacade.checkMellemDatoer(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
+                BookingFacade.checkMellemDatoer(dtpStart.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
                 int antalBookingsBetweenDates = BookingFacade.mellemDatoer;
 
 
@@ -148,9 +192,9 @@ namespace SonderBoUdlejning.Admin
                     conn.Open();
                     int AlreadyBookedQuery = Convert.ToInt32(cmdAlreadyBooked.ExecuteScalar());
                     conn.Close();
-                    if (AlreadyBookedQuery == 0)
+                    if (AlreadyBookedQuery < 4)
                     {
-                        string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(TBResourceID.Text) + ", " + Convert.ToInt32(TBPID.Text) + ",'" + TBStartDato.Text + "','" + dtpSlut.Text + "')";
+                        string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(TBResourceID.Text) + ", " + Convert.ToInt32(TBPID.Text) + ",'" + dtpStart.Text + "','" + dtpSlut.Text + "')";
                         
                         SqlCommand cmd = new SqlCommand(query, conn);
                         conn.Open();
@@ -166,12 +210,12 @@ namespace SonderBoUdlejning.Admin
                         int index = input.LastIndexOf(" ");
                         if (index > 0)
                                 input = input.Substring(0, index);
-                            MessageBox.Show($"Denne beboer har allerede en booking på en {input}");
+                            MessageBox.Show($"Denne beboer har opnået maks (3) antal bookings af {input}");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Ressource kan ikke bookes da en anden beboer har el reservation i det tidsrum..");
+                    MessageBox.Show("Ressource kan ikke bookes da en anden beboer har en reservation i det tidsrum.");
                 }
 
 
@@ -185,6 +229,7 @@ namespace SonderBoUdlejning.Admin
             {
                 MessageBox.Show("Slut dato kan ikke være før start dato");
             }
+            dtpStart.CustomFormat = "dd-MM-yyyy";
             dtpSlut.CustomFormat = "dd-MM-yyyy";
         }
 
@@ -192,10 +237,6 @@ namespace SonderBoUdlejning.Admin
         {
             string query = "SELECT Person.pId AS PersonID, fNavn AS FuldeNavn, COUNT(resNr) AS AntalReservationer FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
             DGVReservationer.DataSource = tableConn.tableBinder(query);
-        }
-
-        private void cbMembersRes_SelectedIndexChanged(object sender, EventArgs e)
-        { 
         }
 
         private void btnSePersonRes_Click(object sender, EventArgs e)
@@ -416,6 +457,5 @@ namespace SonderBoUdlejning.Admin
             MessageBox.Show($"Fil er gemt i {filePath}");
             
         }
-
     }
 }

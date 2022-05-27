@@ -15,8 +15,13 @@ namespace SonderBoUdlejning.Admin
     public partial class LejemaalCRUD : Form
     {
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT * FROM Lejemaal"; //Standard SQL Query, som bruges til at vise Lejemaal tabellen i dens dataGridView
-        string sqlS2 = "SELECT * FROM LejemaalsInfo"; //Standard SQL Query, som bruges til at vise LejemaalsInfo tabellen i dens dataGridView
+
+        //Standard SQL Query, som bruges til at vise Lejemaal tabellen i dens dataGridView
+        string sqlS1 = "SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato' FROM Lejemaal";
+
+        //Standard SQL Query, som bruges til at vise LejemaalsInfo tabellen i dens dataGridView
+        string sqlS2 = "SELECT Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM LejemaalsInfo"; 
+        
         public LejemaalCRUD()
         {
             InitializeComponent();
@@ -28,6 +33,20 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
+            dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvLejemaal.RowTemplate.Height = 30;
+            dgvLejemaal.RowTemplate.DividerHeight = 1;
+            dgvLejemaal.GridColor = Color.Black;
+            dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            
+            dgvLejemaalsInfo.BorderStyle = BorderStyle.FixedSingle;
+            dgvLejemaalsInfo.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvLejemaalsInfo.RowTemplate.Height = 30;
+            dgvLejemaalsInfo.RowTemplate.DividerHeight = 1;
+            dgvLejemaalsInfo.GridColor = Color.Black;
+            dgvLejemaalsInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+             
             //tilføjer et tomt felt til postNr comboboxen
             comboBoxPostNr.Items.Add("");
 
