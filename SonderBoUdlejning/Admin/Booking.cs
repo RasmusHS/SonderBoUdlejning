@@ -18,7 +18,7 @@ namespace SonderBoUdlejning.Admin
     {
         ConnString connString = ConnString.getConnInstance;
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
-        string sqlS1 = "SELECT resNr, rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
+        string sqlS1 = "SELECT resNr as 'prøve', rTypeNavn, pId, Ressourcer.rId, rType, rStartDato, rSlutDato FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId";
         string sqlS2 = "SELECT * FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE GETDATE() BETWEEN rStartDato AND rSlutDato)";
 
         List<string> listBeboer = new List<string>();
