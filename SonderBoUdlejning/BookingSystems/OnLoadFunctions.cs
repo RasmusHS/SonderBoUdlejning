@@ -10,7 +10,7 @@ namespace SonderBoUdlejning.BookingSystems
     internal class OnLoadFunctions
     {
         
-        public static void GetPeronList(List<int> beboerID, List<string> beboer)
+        public static void GetPersonList(List<int> beboerID, List<string> beboer)
         {
             ConnString connString = ConnString.getConnInstance;
             SQLExecutionHandler tableConn = new SQLExecutionHandler();

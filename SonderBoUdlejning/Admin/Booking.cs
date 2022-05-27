@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.Text.RegularExpressions;
+using SonderBoUdlejning.BookingSystems;
 
 namespace SonderBoUdlejning.Admin
 {
@@ -33,16 +34,14 @@ namespace SonderBoUdlejning.Admin
 
         private void Booking_Load(object sender, EventArgs e)
         {
-
-
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
             string date = DateTime.Today.ToString("yyyy-MM-dd");
             TBStartDato.Text = date;
 
-            BookingSystems.OnLoadFunctions.GetPeronList(listBeboerID, listBeboer);
-            BookingSystems.OnLoadFunctions.GetResourceList(listResourceID, listResource, date);
+            BookingFacade.getPersonList(listBeboerID, listBeboer);
+            BookingFacade.getRessourceList(listResourceID, listResource, date);
 
 
             foreach (string item in listResource)
@@ -107,19 +106,19 @@ namespace SonderBoUdlejning.Admin
             //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?   
             dtpStart.CustomFormat = "yyyy-MM-dd";
             string sqlS2 = "SELECT*FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
-                DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
-                listResource.Clear();
-                listResourceID.Clear();
-                CBResource.Items.Clear();
-                BookingSystems.OnLoadFunctions.GetResourceList(listResourceID, listResource, dtpStart.Text);
-                foreach (string item in listResource)
-                {
-                    CBResource.Items.Add(item);
-                }
+            listResource.Clear();
+            listResourceID.Clear();
+            CBResource.Items.Clear();
+            BookingFacade.getRessourceList(listResourceID, listResource, dtpStart.Text);
+            foreach (string item in listResource)
+            {
+                CBResource.Items.Add(item);
+            }
 
-                TBResourceID.Text = "";
-                TBStartDato.Text = dtpStart.Text;
+            TBResourceID.Text = "";
+            TBStartDato.Text = dtpStart.Text;
             dtpStart.CustomFormat = "dd-MM-yyyy";
         }
 
@@ -130,17 +129,21 @@ namespace SonderBoUdlejning.Admin
             DateTime dateToday = Convert.ToDateTime(TBStartDato.Text);
             DateTime dateSlutDato = Convert.ToDateTime(dtpSlut.Text);
                 
-                if (dateSlutDato >= dateToday)
-                {
-                    int antalBookings = BookingSystems.CheckSlutDato.CheckSlutDate(dtpSlut.Text, TBResourceID.Text);
-                    int antalBookingsBetweenDates = BookingSystems.CheckMellemDatoer.CheckDatesForBookings(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
+            if (dateSlutDato >= dateToday)
+            {
+                BookingFacade.checkSlutDato(dtpSlut.Text, TBResourceID.Text);
+                int antalBookings = BookingFacade.slutDato;
+                
+                BookingFacade.checkMellemDatoer(TBStartDato.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
+                int antalBookingsBetweenDates = BookingFacade.mellemDatoer;
 
 
                 if (antalBookings == 0 && antalBookingsBetweenDates == 0)
                 {
-                    BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text);
+                    //BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text);
+                    BookingFacade.checkRessourceIdType(TBResourceID.Text);
 
-                    string checkAlreadyBookedQuery = $"SELECT COUNT(resNr) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = {Convert.ToInt32(TBPID.Text)} AND rType = {BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text)} AND rSlutDato >= GETDATE();";
+                    string checkAlreadyBookedQuery = $"SELECT COUNT(resNr) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = {Convert.ToInt32(TBPID.Text)} AND rType = {BookingFacade.ressourceIdType} AND rSlutDato >= GETDATE();";
                     SqlCommand cmdAlreadyBooked = new SqlCommand(checkAlreadyBookedQuery, conn);
                     conn.Open();
                     int AlreadyBookedQuery = Convert.ToInt32(cmdAlreadyBooked.ExecuteScalar());
@@ -148,12 +151,12 @@ namespace SonderBoUdlejning.Admin
                     if (AlreadyBookedQuery == 0)
                     {
                         string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(TBResourceID.Text) + ", " + Convert.ToInt32(TBPID.Text) + ",'" + TBStartDato.Text + "','" + dtpSlut.Text + "')";
-
+                        
                         SqlCommand cmd = new SqlCommand(query, conn);
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
-
+                        
                         MessageBox.Show("Reservation oprettet!");
                         DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
                     }
@@ -162,8 +165,8 @@ namespace SonderBoUdlejning.Admin
                         string input = CBResource.Text;
                         int index = input.LastIndexOf(" ");
                         if (index > 0)
-                            input = input.Substring(0, index);
-                        MessageBox.Show($"Denne beboer har allerede en booking på en {input}");
+                                input = input.Substring(0, index);
+                            MessageBox.Show($"Denne beboer har allerede en booking på en {input}");
                     }
                 }
                 else
@@ -172,16 +175,16 @@ namespace SonderBoUdlejning.Admin
                 }
 
 
-                    //Tjek om kunde allerede har en reservation af den resource type, dere r SQL i tableplus der finder ud af det!
-                    //if (0) {udfør booking}
-                    //else {"kunde har allerede en booking på denne resource type"}
+                //Tjek om kunde allerede har en reservation af den resource type, dere r SQL i tableplus der finder ud af det!
+                //if (0) {udfør booking}
+                //else {"kunde har allerede en booking på denne resource type"}
                     
 
-                }
-                else 
-                {
-                    MessageBox.Show("Slut dato kan ikke være før start dato");
-                }
+            }
+            else 
+            {
+                MessageBox.Show("Slut dato kan ikke være før start dato");
+            }
             dtpSlut.CustomFormat = "dd-MM-yyyy";
         }
 
@@ -274,10 +277,11 @@ namespace SonderBoUdlejning.Admin
                     conn.Open();
                     int antalReservationerPRBeboer = Convert.ToInt32(cmd.ExecuteScalar());
                     conn.Close();
+                    MessageBox.Show($"Reservation {resNr} blev slettet");
                 }
                 else if (dialogResult == DialogResult.No)
                 {
- 
+                    MessageBox.Show("Reservationen blev ikke slettet");
                 }
             }
         }
@@ -290,13 +294,13 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetReservations_Click(object sender, EventArgs e)
         {
-            BookingSystems.Create.CreateDir();
+            CreateDir.CreateDirectory();
             string username = Environment.UserName;
             string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Ressourcer.txt";
             string[] rTypeNavnArray = new string[30];
             string[] antalReservationerArray = new string[30];
             SqlConnection conn = new SqlConnection(connString.connStr);
-            BookingSystems.SetArrayInfo.FillArrays(rTypeNavnArray, antalReservationerArray, conn);
+            BookingFacade.setArrayInfo(rTypeNavnArray, antalReservationerArray, conn);
 
             StringBuilder sb = new StringBuilder();
 
@@ -332,7 +336,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetDateReservationer_Click(object sender, EventArgs e)
         {
-            BookingSystems.Create.CreateDir();
+            CreateDir.CreateDirectory();
             string username = Environment.UserName;
             string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt";
             SqlConnection conn = new SqlConnection(connString.connStr);

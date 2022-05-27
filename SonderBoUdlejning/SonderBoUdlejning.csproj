@@ -208,6 +208,7 @@
     <Compile Include="Admin\VenteListe.Designer.cs">
       <DependentUpon>VenteListe.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookingSystems\BookingFacade.cs" />
     <Compile Include="LejemaalSystems\LejemaalFacade.cs" />
     <Compile Include="LejemaalSystems\CreateLejemaal.cs" />
     <Compile Include="LejemaalSystems\DeleteLejemaal.cs" />
@@ -215,7 +216,7 @@
     <Compile Include="BookingSystems\CheckMellemDatoer.cs" />
     <Compile Include="BookingSystems\CheckResourceIdType.cs" />
     <Compile Include="BookingSystems\CheckSlutDato.cs" />
-    <Compile Include="BookingSystems\Create.cs" />
+    <Compile Include="CreateDir.cs" />
     <Compile Include="BookingSystems\OnLoadFunctions.cs" />
     <Compile Include="BookingSystems\SetArrayInfo.cs" />
     <Compile Include="ConnString.cs" />
