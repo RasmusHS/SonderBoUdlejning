@@ -618,6 +618,7 @@
             this.DGVRessourcer.Margin = new System.Windows.Forms.Padding(4);
             this.DGVRessourcer.Name = "DGVRessourcer";
             this.DGVRessourcer.ReadOnly = true;
+            this.DGVRessourcer.RowHeadersVisible = false;
             this.DGVRessourcer.RowHeadersWidth = 92;
             this.DGVRessourcer.Size = new System.Drawing.Size(443, 235);
             this.DGVRessourcer.TabIndex = 29;

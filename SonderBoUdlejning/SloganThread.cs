@@ -36,7 +36,7 @@ namespace SonderBoUdlejning
                 {
 
                     int i = rnd.Next(slogans.Length);
-                    Thread.Sleep(300); //Skifter slogan hver 3 min
+                    Thread.Sleep(180000); //Skifter slogan hver 3 min
                     lblSlogan.Invoke(new Workdelegate(DisplayWorkDelegate), new object[] { slogans[i]});
                     
                 }
