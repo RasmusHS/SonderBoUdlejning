@@ -122,42 +122,67 @@
     <value>Microsoft Sans Serif, 25pt</value>
   </data>
   <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 168</value>
+    <value>103, 207</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="usernameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 45</value>
+    <value>677, 55</value>
   </data>
   <data name="passwordTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 25pt</value>
   </data>
   <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 315</value>
+    <value>103, 388</value>
+  </data>
+  <data name="passwordTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 45</value>
+    <value>677, 55</value>
   </data>
   <data name="usernameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 111</value>
+    <value>97, 137</value>
+  </data>
+  <data name="usernameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="usernameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 39</value>
+    <value>247, 48</value>
   </data>
   <data name="usernameLabel.Text" xml:space="preserve">
     <value>Brugernavn:</value>
   </data>
   <data name="PasswordLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 263</value>
+    <value>97, 324</value>
+  </data>
+  <data name="PasswordLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="PasswordLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 39</value>
+    <value>189, 48</value>
   </data>
   <data name="PasswordLabel.Text" xml:space="preserve">
     <value>Kodeord:</value>
   </data>
   <data name="loginButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 425</value>
+    <value>103, 523</value>
+  </data>
+  <data name="loginButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="loginButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 87</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>869, 569</value>
+    <value>1159, 700</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
 </root>
