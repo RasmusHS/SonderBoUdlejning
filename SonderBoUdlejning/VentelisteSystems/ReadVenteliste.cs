@@ -17,7 +17,7 @@ namespace SonderBoUdlejning.VentelisteSystems
         //Metode der returner en SQL Query, der finder ventelisten for en lejemål type
         public string rVente(string pId, string Lid, string signUpDato)
         {
-            string sqlS = $"SELECT * FROM Venteliste WHERE 1=1"; //Standard SQL Query
+            string sqlS = $"SELECT pId AS 'Person ID', Lid AS 'Lejemålstype ID', signUpDato AS 'Opskrivelsesdato' FROM Venteliste WHERE 1=1"; //Standard SQL Query
 
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
 

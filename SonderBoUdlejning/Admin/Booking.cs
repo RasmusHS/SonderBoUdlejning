@@ -37,6 +37,7 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
             DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
+            DGVReservationer.RowHeadersVisible = false;
             DGVReservationer.BorderStyle = BorderStyle.FixedSingle;
             DGVReservationer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             DGVReservationer.RowTemplate.Height = 30;
@@ -44,6 +45,7 @@ namespace SonderBoUdlejning.Admin
             DGVReservationer.GridColor = Color.Black;
             DGVReservationer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
+            DGVRessourcer.RowHeadersVisible = false;
             DGVRessourcer.BorderStyle = BorderStyle.FixedSingle;
             DGVRessourcer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             DGVRessourcer.RowTemplate.Height = 30;
@@ -52,6 +54,7 @@ namespace SonderBoUdlejning.Admin
             DGVRessourcer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             /*
+            .RowHeadersVisible = false;
             .BorderStyle = BorderStyle.FixedSingle;
             .CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             .RowTemplate.Height = 30;

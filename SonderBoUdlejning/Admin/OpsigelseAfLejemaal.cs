@@ -28,14 +28,14 @@ namespace SonderBoUdlejning.Admin
                        "FROM Lejemaal " +
                        "INNER JOIN Person ON Lejemaal.pId=Person.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
-                       "ORDER BY pId ASC";
+                       "ORDER BY Lejemaal.pId ASC";
 
         //Standard Query for person dataGridView
         string sqlS2 = "SELECT Person.pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?'" +
                        "FROM Person " +
                        "INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
-                       "ORDER BY pId ASC";
+                       "ORDER BY Person.pId ASC";
 
         private void OpsigelseAfLejemaal_Load(object sender, EventArgs e)
         {
@@ -43,6 +43,7 @@ namespace SonderBoUdlejning.Admin
             DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
 
+            DGVLejemaal.RowHeadersVisible = false;
             DGVLejemaal.BorderStyle = BorderStyle.FixedSingle;
             DGVLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             DGVLejemaal.RowTemplate.Height = 30;
@@ -50,6 +51,7 @@ namespace SonderBoUdlejning.Admin
             DGVLejemaal.GridColor = Color.Black;
             DGVLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
+            DGVPerson.RowHeadersVisible = false;
             DGVPerson.BorderStyle = BorderStyle.FixedSingle;
             DGVPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             DGVPerson.RowTemplate.Height = 30;

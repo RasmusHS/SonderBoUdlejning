@@ -39,6 +39,7 @@ namespace SonderBoUdlejning.Admin
             //Indlæser venteliste
             dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
 
+            dgvLejemaal.RowHeadersVisible = false;
             dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
             dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvLejemaal.RowTemplate.Height = 30;
@@ -46,6 +47,7 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaal.GridColor = Color.Black;
             dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
              
+            dgvVenteliste.RowHeadersVisible = false;
             dgvVenteliste.BorderStyle = BorderStyle.FixedSingle;
             dgvVenteliste.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvVenteliste.RowTemplate.Height = 30;
@@ -77,7 +79,10 @@ namespace SonderBoUdlejning.Admin
             string pId = ""; //Sætter person ID til at være tom
             string indDato = ""; //Sætter indflytningsdato til at være tom
             string udDato = ""; //Sætter udflytningsdato til at være tom
-            string sqlTemplate = $"SELECT * FROM Lejemaal WHERE 1=1"; //Definere standard SQL Query
+
+            //Definerer standard SQL Query
+            string sqlTemplate = $"SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato' FROM Lejemaal WHERE 1=1"; 
+            
             string lType = "";
             string minKvm = "";
             string maksKvm = "";
@@ -112,7 +117,7 @@ namespace SonderBoUdlejning.Admin
                 {
                     panelPid.Visible = true; //Viser pId panelet
 
-                    comboBoxListPostNr = tableConn.comboBoxBinder($"SELECT postNr FROM Lejemaal WHERE Lid = {Lid}").ToArray();
+                    comboBoxListPostNr = tableConn.comboBoxBinder($"SELECT DISTINCT(postNr) FROM Lejemaal WHERE Lid = {Lid}").ToArray();
                     comboBoxPostNr.Items.AddRange(comboBoxListPostNr);
 
                     try
@@ -152,7 +157,10 @@ namespace SonderBoUdlejning.Admin
             string indDato = ""; //Sætter indflytningsdato til at være tom
             string udDato = ""; //Sætter udflytningsdato til at være tom
             string signUpDato = ""; //Sætter signup dato til at være tom
-            string sqlTemplate = $"SELECT * FROM Lejemaal WHERE 1=1"; //Definere standard SQL Query
+
+            //Definerer standard SQL Query
+            string sqlTemplate = $"SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato' FROM Lejemaal WHERE 1=1";
+
             string lType = ""; //Sætter lejemål type til at være tom
             string minKvm = ""; //Sætter minimum kvadratmeter til at være tom
             string maksKvm = ""; //Sætter maksimum kvadratmeter til at være tom

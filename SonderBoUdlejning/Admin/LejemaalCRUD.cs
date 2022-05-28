@@ -20,7 +20,7 @@ namespace SonderBoUdlejning.Admin
         string sqlS1 = "SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato' FROM Lejemaal";
 
         //Standard SQL Query, som bruges til at vise LejemaalsInfo tabellen i dens dataGridView
-        string sqlS2 = "SELECT Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM LejemaalsInfo"; 
+        string sqlS2 = "SELECT Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal Værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM LejemaalsInfo"; 
         
         public LejemaalCRUD()
         {
@@ -33,13 +33,15 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
+            dgvLejemaal.RowHeadersVisible = false;
             dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
             dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvLejemaal.RowTemplate.Height = 30;
             dgvLejemaal.RowTemplate.DividerHeight = 1;
             dgvLejemaal.GridColor = Color.Black;
             dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
-            
+
+            dgvLejemaalsInfo.RowHeadersVisible = false;
             dgvLejemaalsInfo.BorderStyle = BorderStyle.FixedSingle;
             dgvLejemaalsInfo.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvLejemaalsInfo.RowTemplate.Height = 30;
@@ -77,7 +79,7 @@ namespace SonderBoUdlejning.Admin
             string adresse = tbAdresse.Text; //Tager inputtet fra adresse textboxen
             string postNr = "";
             //string postNr = comboBoxPostNr.SelectedItem.ToString(); //Tager inputtet fra postNr comboboxen
-            string Lid = tbLejemaalID.Text; //Tager inputtet fra boligID textboxen
+            string Lid = tbLejemaalsTypeID.Text; //Tager inputtet fra boligID textboxen
 
             try
             {
@@ -121,7 +123,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnReadB_Click(object sender, EventArgs e)
         {
-            string sqlTemplate = $"SELECT lejemaalNr, adresse, postNr, Lejemaal.Lid, lType, antalRum, kvm, lejePris FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1";
+            string sqlTemplate = $"SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lejemaal.Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal Værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1";
 
             //Tager adresse input checker det for tegn og længde
             string adresse = tbAdresse.Text;
@@ -142,7 +144,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             //Tager Lid input og tjekker det for ugyldige tegn
-            string Lid = tbLejemaalID.Text; //
+            string Lid = tbLejemaalsTypeID.Text; //
             bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             //Ikke muligt at søge baseret på person ID. Input felt findes ikke i formen
@@ -155,7 +157,7 @@ namespace SonderBoUdlejning.Admin
             //Hvis Lid inputtet ikke er tomt, så bruges Lid til at finde dens lType
             string lType = "";
 
-            if ((LidValid == false) || (string.IsNullOrEmpty(tbLejemaalID.Text)))
+            if ((LidValid == false) || (string.IsNullOrEmpty(tbLejemaalsTypeID.Text)))
             {
                 lType = "";
             }
@@ -214,7 +216,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnUpdateB_Click(object sender, EventArgs e)
         {
-            string lejemaalNr = tbLejemaal.Text;
+            string lejemaalNr = tbLejemaalNr.Text;
             string adresse = ""; //Tager inputtet fra adresse textboxen
             string Lid = ""; //Tager inputtet fra boligID textboxen
 
@@ -232,13 +234,13 @@ namespace SonderBoUdlejning.Admin
             else
                 adresse = tbAdresse.Text;
             
-            if ((string.IsNullOrEmpty(tbLejemaalID.Text)) && (lejemaalValid == true))
+            if ((string.IsNullOrEmpty(tbLejemaalsTypeID.Text)) && (lejemaalValid == true))
                 Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
             else
-                Lid = tbLejemaalID.Text;
+                Lid = tbLejemaalsTypeID.Text;
 
             //Tjekker om der er der er skrevet noget i et af felterne
-            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbLejemaalID.Text)))
+            if ((string.IsNullOrEmpty(tbAdresse.Text)) && (string.IsNullOrEmpty(tbLejemaalsTypeID.Text)))
             {
                 MessageBox.Show("Indtast venligst enten en adresse eller et lejemål Nr!");
                 return;
@@ -275,7 +277,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnDeleteB_Click(object sender, EventArgs e)
         {
-            string lejemaalNr = tbLejemaal.Text; //Tager inputtet fra Lejemål textboxen
+            string lejemaalNr = tbLejemaalNr.Text; //Tager inputtet fra Lejemål textboxen
 
             //Tjekker om adresse feltet er tomt
             if ((string.IsNullOrEmpty(lejemaalNr)))
@@ -316,7 +318,7 @@ namespace SonderBoUdlejning.Admin
         //Event metode som aktiveres hver gang lejemål Nr tekstboxen bliver ændret
         private void tbLejemaalID_TextChanged(object sender, EventArgs e)
         {
-            string Lid = tbLejemaalID.Text; //Sætter lejemål Nr'et i en string variabel
+            string Lid = tbLejemaalsTypeID.Text; //Sætter lejemål Nr'et i en string variabel
             bool LidValid = LejemaalInputCheck.LidCheck(Lid);
 
             try
@@ -348,30 +350,61 @@ namespace SonderBoUdlejning.Admin
             comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
             comboBoxPostNr.Items.AddRange(comboBoxList);
 
+            //Knapper
             btnCreateB.Visible = true;
+            btnCreateB.Location = new Point(0, 0);
+
             btnReadB.Visible = false;
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
-            lblLejemaal.Visible = false;
+            //Labels
+            lblLejemaalNr.Visible = false;
+
             lblAdresse.Visible = true; //
+            lblAdresse.Location = new Point(18, 15);
+
             lblPostNr.Visible = true; //
+            lblPostNr.Location = new Point(159, 15);
+
             lblBy.Visible = true; //
-            lblLejemaalNr.Visible = true; //
+            lblBy.Location = new Point(302, 15);
+
+            lblLejemaalsTypeID.Visible = true; //
+            lblLejemaalsTypeID.Location = new Point(441, 15);
+
+            lblLejemaalType.Visible = true; //
+            lblLejemaalType.Location = new Point(580, 15);
+
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblLejemaalType.Visible = true; //
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbLejemaal.Visible = false;
+            //Textboxes & comboboxes
+            tbLejemaalNr.Visible = false;
+
             tbAdresse.Visible = true; //
+            tbAdresse.Location = new Point(22, 38);
+            tbAdresse.Text = "";
+
             comboBoxPostNr.Visible = true; //
+            comboBoxPostNr.Location = new Point(163, 38);
+
             tbBy.Visible = true; //
-            tbLejemaalID.Visible = true; //
+            tbBy.Location = new Point(306, 38);
+            tbBy.Text = "";
+
+            tbLejemaalsTypeID.Visible = true; //
+            tbLejemaalsTypeID.Location = new Point(444, 38);
+            tbLejemaalsTypeID.Text = "";
+
+            tbLejemaalType.Visible = true; //
+            tbLejemaalType.Location = new Point(584, 38);
+            tbLejemaalType.Text = "";
+
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbLejemaalType.Visible = true; //
             tbMinPris.Visible = false;
             tbMaksPris.Visible= false;
         }
@@ -381,7 +414,7 @@ namespace SonderBoUdlejning.Admin
         {
             panelContainer.Visible = true;
 
-            string sqlTemplate = $"SELECT lejemaalNr, adresse, postNr, Lejemaal.Lid, lType, antalRum, kvm, lejePris FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1 AND (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
+            string sqlTemplate = $"SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lejemaal.Lid AS 'Lejemålstype ID', lType AS 'Lejemålstype Navn', antalRum AS 'Antal Værelser', kvm AS 'Kvm', lejePris AS 'Månedlig Leje' FROM Lejemaal INNER JOIN LejemaalsInfo ON Lejemaal.Lid=LejemaalsInfo.Lid WHERE 1=1 AND (pId IS NULL AND indflytDato IS NULL AND udflytDato IS NULL)";
 
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlTemplate);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
@@ -390,32 +423,77 @@ namespace SonderBoUdlejning.Admin
             comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
             comboBoxPostNr.Items.AddRange(comboBoxList);
 
+            //Knapper
             btnCreateB.Visible = false;
+
             btnReadB.Visible = true;
+            btnReadB.Location = new Point(0, 0);
+
             btnUpdateB.Visible = false;
             btnDeleteB.Visible = false;
 
-            lblLejemaal.Visible = false;
-            lblAdresse.Visible = true; //
-            lblPostNr.Visible = true; //
-            lblBy.Visible = false;
-            lblLejemaalNr.Visible = true; //
-            lblMinKvm.Visible = true; //
-            lblMaksKvm.Visible = true; //
-            lblLejemaalType.Visible = false;
-            lblMinPris.Visible = true; //
-            lblMaksPris.Visible = true; //
+            //Labels
+            lblLejemaalNr.Visible = false;
 
-            tbLejemaal.Visible = false;
+            lblAdresse.Visible = true; //
+            lblAdresse.Location = new Point(18, 15);
+
+            lblPostNr.Visible = true; //
+            lblPostNr.Location = new Point(159, 15);
+
+            lblBy.Visible = false;
+
+            lblLejemaalsTypeID.Visible = true; //
+            lblLejemaalsTypeID.Location = new Point(302, 15);
+
+            lblLejemaalType.Visible = false;
+
+            lblMinKvm.Visible = true; //
+            lblMinKvm.Location = new Point(18, 96);
+
+            lblMaksKvm.Visible = true; //
+            lblMaksKvm.Location = new Point(159, 96);
+
+            lblMinPris.Visible = true; //
+            lblMinPris.Location = new Point(441, 96);
+
+            lblMaksPris.Visible = true; //
+            lblMaksPris.Location = new Point(570, 96);
+
+
+            //Textboxes & comboboxes
+            tbLejemaalNr.Visible = false;
+
             tbAdresse.Visible = true; //
+            tbAdresse.Location = new Point(22, 38);
+            tbAdresse.Text = "";
+
             comboBoxPostNr.Visible = true; //
+            comboBoxPostNr.Location = new Point(163, 38);
+
             tbBy.Visible = false;
-            tbLejemaalID.Visible = true; //
+
+            tbLejemaalsTypeID.Visible = true; //
+            tbLejemaalsTypeID.Location = new Point(306, 38);
+            tbLejemaalsTypeID.Text = "";
+
+            tbLejemaalType.Visible = false;
+
             tbMinKvm.Visible = true; //
+            tbMinKvm.Location = new Point(22, 119);
+            tbMinKvm.Text = "";
+
             tbMaksKvm.Visible = true; //
-            tbLejemaalType.Visible = false; //
+            tbMaksKvm.Location = new Point(163, 119);
+            tbMaksKvm.Text = "";
+
             tbMinPris.Visible = true; //
+            tbMinPris.Location = new Point(444, 119);
+            tbMinPris.Text = "";
+
             tbMaksPris.Visible = true; //
+            tbMaksPris.Location = new Point(574, 119);
+            tbMaksPris.Text = "";
         }
 
         //Knap som viser felter relevant for at opdatere en eksisterende lejemål
@@ -426,30 +504,53 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
+            //Knapper
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
+
             btnUpdateB.Visible = true;
+            btnUpdateB.Location = new Point(0, 0);
+
             btnDeleteB.Visible = false;
 
-            lblLejemaal.Visible = true;
+            //Labels
+            lblLejemaalNr.Visible = true;
+            lblLejemaalNr.Location = new Point(18, 15);
+
             lblAdresse.Visible = true; //
+            lblAdresse.Location = new Point(159, 15);
+
             lblPostNr.Visible = false;
             lblBy.Visible = false;
-            lblLejemaalNr.Visible = true; //
+
+            lblLejemaalsTypeID.Visible = true; //
+            lblLejemaalsTypeID.Location = new Point(302, 15);
+
+            lblLejemaalType.Visible = false;
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblLejemaalType.Visible = false;
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbLejemaal.Visible = true;
+            //Textboxes & comboboxes
+            tbLejemaalNr.Visible = true;
+            tbLejemaalNr.Location = new Point(22, 38);
+            tbLejemaalNr.Text = "";
+
             tbAdresse.Visible = true; //
+            tbAdresse.Location = new Point(163, 38);
+            tbAdresse.Text = "";
+
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
-            tbLejemaalID.Visible = true; //
+
+            tbLejemaalsTypeID.Visible = true; //
+            tbLejemaalsTypeID.Location = new Point(306, 38);
+            tbLejemaalsTypeID.Text = "";
+
+            tbLejemaalType.Visible = false;
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbLejemaalType.Visible = false;
             tbMinPris.Visible = false;
             tbMaksPris.Visible = false;
         }
@@ -461,31 +562,41 @@ namespace SonderBoUdlejning.Admin
 
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
-            
+
+            //Knapper
             btnCreateB.Visible = false;
             btnReadB.Visible = false;
             btnUpdateB.Visible = false;
+
             btnDeleteB.Visible = true;
-            
-            lblLejemaal.Visible = true; //
+            btnDeleteB.Location = new Point(0, 0);
+
+            //Labels
+            lblLejemaalNr.Visible = true; //
+            lblLejemaalNr.Location = new Point(18, 15);
+
             lblAdresse.Visible = false;
             lblPostNr.Visible = false;
             lblBy.Visible = false;
-            lblLejemaalNr.Visible = false;
+            lblLejemaalsTypeID.Visible = false;
+            lblLejemaalType.Visible = false;
             lblMinKvm.Visible = false;
             lblMaksKvm.Visible = false;
-            lblLejemaalType.Visible = false;
             lblMinPris.Visible = false;
             lblMaksPris.Visible = false;
 
-            tbLejemaal.Visible = true; //
+            //Textboxes & comboboxes
+            tbLejemaalNr.Visible = true; //
+            tbLejemaalNr.Location = new Point(22, 38);
+            tbLejemaalNr.Text = "";
+
             tbAdresse.Visible = false;
             comboBoxPostNr.Visible = false;
             tbBy.Visible = false;
-            tbLejemaalID.Visible = false;
+            tbLejemaalsTypeID.Visible = false;
+            tbLejemaalType.Visible = false;
             tbMinKvm.Visible = false;
             tbMaksKvm.Visible = false;
-            tbLejemaalType.Visible = false;
             tbMinPris.Visible = false;
             tbMaksPris.Visible = false;
         }

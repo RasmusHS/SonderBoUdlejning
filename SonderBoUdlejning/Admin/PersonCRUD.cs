@@ -29,6 +29,7 @@ namespace SonderBoUdlejning.Admin
             //Forbinder dataGridView til tabel
             dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
 
+            dgvPersonCRUD.RowHeadersVisible = false;
             dgvPersonCRUD.BorderStyle = BorderStyle.FixedSingle;
             dgvPersonCRUD.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvPersonCRUD.RowTemplate.Height = 30;
@@ -37,7 +38,8 @@ namespace SonderBoUdlejning.Admin
             dgvPersonCRUD.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             //gemmer input panelet indtil en knap er trykket
-            panelContainer.Visible = false;
+            //panelContainer.Visible = false;
+            panelIndhold.Visible = false;
 
             //Tjekker hvilken slags bruger er logget ind
             if (UserIdentification.UserAccess == 1) //admin
@@ -91,7 +93,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnPersonR_Click(object sender, EventArgs e)
         {
-            string columns = "*"; //Sætter hvilke kolonner der skal vises
+            string columns = "pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?'"; //Sætter hvilke kolonner der skal vises
             string pId = ""; //Sætter pId til tomt
             string navn = tbNavn.Text; //Tager input fra navn textbox
             string mail = tbMail.Text.ToLower(); //Tager input fra mail textbox og sætter store bogstaver til at være små
@@ -137,6 +139,52 @@ namespace SonderBoUdlejning.Admin
             }
             
             
+        }
+
+        private void tbPId_TextChanged(object sender, EventArgs e)
+        {
+            string sqlSUpdateHvem = "";
+            string pId = tbPId.Text;
+            bool pIdValid = true;
+
+            if (string.IsNullOrEmpty(tbPId.Text))
+            {
+                btnPersonU.Visible = false;
+
+                lblNavn.Visible = false;
+                tbNavn.Visible = false;
+
+                lblMail.Visible = false;
+                tbMail.Visible = false;
+
+                lblTlf.Visible = false;
+                tbTlf.Visible = false;
+
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+            }
+            else
+            {
+                btnPersonU.Visible = true;
+
+                lblNavn.Visible = true;
+                tbNavn.Visible = true;
+
+                lblMail.Visible = true;
+                tbMail.Visible = true;
+
+                lblTlf.Visible = true;
+                tbTlf.Visible = true;
+
+                pIdValid = PersonInputCheck.PIdCheck(pId);
+                if (pIdValid == false)
+                {
+                    ErrorMessage.errorMessage(); //Fejlbesked hvis input er ugyldig
+                    return;
+                }
+
+                sqlSUpdateHvem = $"SELECT pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?' FROM Person WHERE pId = {pId}";
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlSUpdateHvem);
+            }
         }
 
         private void btnPersonU_Click(object sender, EventArgs e)
@@ -254,95 +302,181 @@ namespace SonderBoUdlejning.Admin
         //Knap som viser felter relevant for oprettelse af en ny person
         private void btnOpretShow_Click(object sender, EventArgs e)
         {
-            panelContainer.Visible = true;
+            dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+
+            //panelContainer.Visible = true;
+            panelIndhold.Visible = true;
             
             btnPersonC.Visible = true;
+            btnPersonC.Location = new Point(327, 72);
+
             btnPersonR.Visible = false;
             btnPersonU.Visible = false;
             btnPersonD.Visible = false;
 
             panelRadioBtns.Visible = false;
-            
+            radioBtnMedlem.Checked = false;
+            radioBtnBeboer.Checked = false;
+            radioBtnAlt.Checked = false;
+
             lblPId.Visible = false;
             tbPId.Visible = false;
+            tbPId.Text = "";
             
             lblNavn.Visible = true;
+            lblNavn.Location = new Point(3, 5); //Base lblPId location
+
             tbNavn.Visible = true;
+            tbNavn.Location = new Point(7, 28); //Base tbPId location
+            tbNavn.Text = "";
+
             lblMail.Visible = true;
+            lblMail.Location = new Point(3, 80); //Base lblNavn location
+
             tbMail.Visible = true;
+            tbMail.Location = new Point(7, 103); //Base tbNavn location
+            tbMail.Text = "";
+
             lblTlf.Visible = true;
+            lblTlf.Location = new Point(3, 155); //Base lblMail location
+
             tbTlf.Visible = true;
+            tbTlf.Location = new Point(7, 178); //Base tbTlf location
+            tbTlf.Text = "";
         }
 
         //Knap som viser felter relevant for indlæsning af personer
         private void btnReadShow_Click(object sender, EventArgs e)
         {
-            panelContainer.Visible = true;
+            dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+
+            //panelContainer.Visible = true;
+            panelIndhold.Visible = true;
 
             btnPersonC.Visible = false;
+
             btnPersonR.Visible = true;
+            btnPersonR.Location = new Point(327, 72);
+
             btnPersonU.Visible = false;
             btnPersonD.Visible = false;
 
             panelRadioBtns.Visible = true;
-            
+            radioBtnMedlem.Checked = false;
+            radioBtnBeboer.Checked = false;
+            radioBtnAlt.Checked = false;
+
             lblPId.Visible = false;
             tbPId.Visible = false;
+            tbPId.Text = "";
 
             lblNavn.Visible = true;
+            lblNavn.Location = new Point(3, 5); //Base lblPId location
+
             tbNavn.Visible = true;
+            tbNavn.Location = new Point(7, 28); //Base tbPId location
+            tbNavn.Text = "";
+
             lblMail.Visible = true;
+            lblMail.Location = new Point(3, 80); //Base lblNavn location
+
             tbMail.Visible = true;
+            tbMail.Location = new Point(7, 103); //Base tbNavn location
+            tbMail.Text = "";
+
             lblTlf.Visible = true;
+            lblTlf.Location = new Point(3, 155); //Base lblMail location
+
             tbTlf.Visible = true;
+            tbTlf.Location = new Point(7, 178); //Base tbMail location
+            tbTlf.Text = "";
         }
 
         //Knap som viser felter relevant for opdatering af en person
         private void btnOpdaterShow_Click(object sender, EventArgs e)
         {
-            panelContainer.Visible = true;
+            dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+
+            //panelContainer.Visible = true;
+            panelIndhold.Visible = true;
 
             btnPersonC.Visible = false;
             btnPersonR.Visible = false;
+
             btnPersonU.Visible = true;
+            btnPersonU.Location = new Point(327, 72);
+
             btnPersonD.Visible = false;
 
             panelRadioBtns.Visible = false;
+            radioBtnMedlem.Checked = false;
+            radioBtnBeboer.Checked = false;
+            radioBtnAlt.Checked = false;
 
             lblPId.Visible = true;
+            lblPId.Location = new Point(3, 5); //Base lblPId location
+
             tbPId.Visible = true;
+            tbPId.Location = new Point(7, 28); //Base tbPId location
+            tbPId.Text = "";
 
-            lblNavn.Visible = true;
-            tbNavn.Visible = true;
-            lblMail.Visible = true;
-            tbMail.Visible = true;
+            lblNavn.Visible = false;
+            lblNavn.Location = new Point(3, 80); //Base lblNavn location
 
-            lblTlf.Visible = true;
-            tbTlf.Visible = true;
+            tbNavn.Visible = false;
+            tbNavn.Location = new Point(7, 103); //Base tbNavn location
+            tbNavn.Text = "";
+
+            lblMail.Visible = false;
+            lblMail.Location = new Point(3, 155); //Base lblMail location
+
+            tbMail.Visible = false;
+            tbMail.Location = new Point(7, 178); //Base tbMail location
+            tbMail.Text = "";
+
+            lblTlf.Visible = false;
+            lblTlf.Location = new Point(3, 228); //Base lblTlf location
+
+            tbTlf.Visible = false;
+            tbTlf.Location = new Point(7, 251); //Base tbTlf location
+            tbTlf.Text = "";
         }
 
         //Knap som viser felter relevant for sletning af en person
         private void btnSletShow_Click(object sender, EventArgs e)
         {
-            panelContainer.Visible = true;
-            
+            dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1);
+
+            //panelContainer.Visible = true;
+            panelIndhold.Visible = true;
+
             btnPersonC.Visible = false;
             btnPersonR.Visible = false;
             btnPersonU.Visible = false;
+
             btnPersonD.Visible = true;
-            
+            btnPersonD.Location = new Point(327, 72);
+
             panelRadioBtns.Visible = false;
-           
+            radioBtnMedlem.Checked = false;
+            radioBtnBeboer.Checked = false;
+            radioBtnAlt.Checked = false;
+
             lblPId.Visible = false;
             tbPId.Visible = false;
 
             lblNavn.Visible = false;
             tbNavn.Visible = false;
+
             lblMail.Visible = false;
             tbMail.Visible = false;
             
             lblTlf.Visible = true;
+            lblTlf.Location = new Point(3, 5); //Base lblTlf location
+
             tbTlf.Visible = true;
+            tbTlf.Location = new Point(7, 28); //Base tbTlf location
+            tbTlf.Text = "";
         }
     }
 }

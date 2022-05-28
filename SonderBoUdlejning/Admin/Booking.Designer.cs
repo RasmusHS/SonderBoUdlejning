@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelReservationer = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblOversigt = new System.Windows.Forms.Label();
@@ -240,8 +240,8 @@
             // 
             this.DGVReservationer.AllowUserToAddRows = false;
             this.DGVReservationer.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.DGVReservationer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.DGVReservationer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVReservationer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DGVReservationer.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DGVReservationer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -249,7 +249,6 @@
             this.DGVReservationer.Location = new System.Drawing.Point(19, 26);
             this.DGVReservationer.Name = "DGVReservationer";
             this.DGVReservationer.ReadOnly = true;
-            this.DGVReservationer.RowHeadersVisible = false;
             this.DGVReservationer.RowHeadersWidth = 92;
             this.DGVReservationer.RowTemplate.DividerHeight = 1;
             this.DGVReservationer.RowTemplate.Height = 30;
@@ -656,7 +655,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1465, 705);
+            this.ClientSize = new System.Drawing.Size(1706, 703);
             this.Controls.Add(this.tabControl1);
             this.Name = "Booking";
             this.Text = "Booking";
