@@ -1,12 +1,29 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System;
+using SonderBoUdlejning.InputCheck;
 
 namespace UnitTest
 {
     [TestClass]
     public class UnitTest
     {
+
+        [TestMethod]
+        public void TestName_Valid()
+        {
+            //Arrange
+            string nameToTest = "Kasper Mark";
+
+            //Act
+            var result = PersonInputCheck.NavnCheck(nameToTest);
+
+            //Assert
+            Assert.IsTrue(result);
+
+
+        }
+
         //PersonInputCheck,cs
         [TestMethod]
         public void NavnCheck_Valid()
