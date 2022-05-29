@@ -14,7 +14,7 @@ namespace SonderBoUdlejning.personCRUD
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opdaterer en person i databasen
-        public void pSQLU(string fNavn, string pMail, string pTlf, string pId, bool erBeboer)
+        public void uPerson(string fNavn, string pMail, string pTlf, string pId, bool erBeboer)
         {
             string sqlS = "UPDATE Person SET fNavn = @Navn, pMail = @Mail, pTlf = @Tlf, erBeboer = @erBeboer WHERE pId = @pId"; //Definere SQL string
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen

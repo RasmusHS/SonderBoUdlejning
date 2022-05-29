@@ -50,7 +50,7 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaalsInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
              
             //tilføjer et tomt felt til postNr comboboxen
-            comboBoxPostNr.Items.Add("");
+            comboPostNr.Items.Add("");
 
             //gemmer input panelet indtil en knap er trykket
             panelContainer.Visible = false;
@@ -83,10 +83,10 @@ namespace SonderBoUdlejning.Admin
 
             try
             {
-                if ((comboBoxPostNr.SelectedItem == null))
+                if ((comboPostNr.SelectedItem == null))
                     postNr = "";
                 else
-                    postNr = comboBoxPostNr.SelectedItem.ToString();
+                    postNr = comboPostNr.SelectedItem.ToString();
             }
             catch
             {
@@ -133,10 +133,10 @@ namespace SonderBoUdlejning.Admin
             string postNr = "";
             try
             {
-                if ((comboBoxPostNr.SelectedItem == null))
+                if ((comboPostNr.SelectedItem == null))
                     postNr = "";
                 else
-                    postNr = comboBoxPostNr.SelectedItem.ToString();
+                    postNr = comboPostNr.SelectedItem.ToString();
             }
             catch
             {
@@ -305,10 +305,10 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Event metode som aktiveres hver gang noget vælges i postNr comboboxen
-        private void comboBoxPostNr_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboPostNr_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Sætter det valgte postNr i en string variabel
-            string postNr = comboBoxPostNr.SelectedItem.ToString();
+            string postNr = comboPostNr.SelectedItem.ToString();
 
             //Hvis postNr ikke er tomt, så kaldes metoden textBoxBinder og resultatet vises i By tekstboxen
             if (!string.IsNullOrEmpty(postNr))
@@ -339,7 +339,7 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Knap som viser felter relevant for at oprette en ny lejemål
-        private void btnVisBCreate_Click(object sender, EventArgs e)
+        private void btnVisLCreate_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
@@ -348,15 +348,15 @@ namespace SonderBoUdlejning.Admin
 
             string[] comboBoxList;
             comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
-            comboBoxPostNr.Items.AddRange(comboBoxList);
+            comboPostNr.Items.AddRange(comboBoxList);
 
             //Knapper
-            btnCreateB.Visible = true;
-            btnCreateB.Location = new Point(0, 0);
+            btnCreateL.Visible = true;
+            btnCreateL.Location = new Point(0, 0);
 
-            btnReadB.Visible = false;
-            btnUpdateB.Visible = false;
-            btnDeleteB.Visible = false;
+            btnReadL.Visible = false;
+            btnUpdateL.Visible = false;
+            btnDeleteL.Visible = false;
 
             //Labels
             lblLejemaalNr.Visible = false;
@@ -388,8 +388,8 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Location = new Point(22, 38);
             tbAdresse.Text = "";
 
-            comboBoxPostNr.Visible = true; //
-            comboBoxPostNr.Location = new Point(163, 38);
+            comboPostNr.Visible = true; //
+            comboPostNr.Location = new Point(163, 38);
 
             tbBy.Visible = true; //
             tbBy.Location = new Point(306, 38);
@@ -410,7 +410,7 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Knap som viser felter relevant for at indlæse en eksisterende boliger
-        private void btnVisBRead_Click(object sender, EventArgs e)
+        private void btnVisLRead_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
@@ -419,18 +419,18 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaal.DataSource = tableConn.tableBinder(sqlTemplate);
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
-            string[] comboBoxList;
-            comboBoxList = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
-            comboBoxPostNr.Items.AddRange(comboBoxList);
+            string[] comboListPostNr;
+            comboListPostNr = tableConn.comboBoxBinder($"SELECT postNr FROM PostNr").ToArray();
+            comboPostNr.Items.AddRange(comboListPostNr);
 
             //Knapper
-            btnCreateB.Visible = false;
+            btnCreateL.Visible = false;
 
-            btnReadB.Visible = true;
-            btnReadB.Location = new Point(0, 0);
+            btnReadL.Visible = true;
+            btnReadL.Location = new Point(0, 0);
 
-            btnUpdateB.Visible = false;
-            btnDeleteB.Visible = false;
+            btnUpdateL.Visible = false;
+            btnDeleteL.Visible = false;
 
             //Labels
             lblLejemaalNr.Visible = false;
@@ -468,8 +468,8 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Location = new Point(22, 38);
             tbAdresse.Text = "";
 
-            comboBoxPostNr.Visible = true; //
-            comboBoxPostNr.Location = new Point(163, 38);
+            comboPostNr.Visible = true; //
+            comboPostNr.Location = new Point(163, 38);
 
             tbBy.Visible = false;
 
@@ -497,7 +497,7 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Knap som viser felter relevant for at opdatere en eksisterende lejemål
-        private void btnVisBUpdate_Click(object sender, EventArgs e)
+        private void btnVisLUpdate_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
@@ -505,13 +505,13 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             //Knapper
-            btnCreateB.Visible = false;
-            btnReadB.Visible = false;
+            btnCreateL.Visible = false;
+            btnReadL.Visible = false;
 
-            btnUpdateB.Visible = true;
-            btnUpdateB.Location = new Point(0, 0);
+            btnUpdateL.Visible = true;
+            btnUpdateL.Location = new Point(0, 0);
 
-            btnDeleteB.Visible = false;
+            btnDeleteL.Visible = false;
 
             //Labels
             lblLejemaalNr.Visible = true;
@@ -541,7 +541,7 @@ namespace SonderBoUdlejning.Admin
             tbAdresse.Location = new Point(163, 38);
             tbAdresse.Text = "";
 
-            comboBoxPostNr.Visible = false;
+            comboPostNr.Visible = false;
             tbBy.Visible = false;
 
             tbLejemaalsTypeID.Visible = true; //
@@ -556,7 +556,7 @@ namespace SonderBoUdlejning.Admin
         }
 
         //Knap som viser felter relevant for at slette en eksisterende lejemål
-        private void btnVisDLejemaal_Click(object sender, EventArgs e)
+        private void btnVisLDelete_Click(object sender, EventArgs e)
         {
             panelContainer.Visible = true;
 
@@ -564,12 +564,12 @@ namespace SonderBoUdlejning.Admin
             dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2);
 
             //Knapper
-            btnCreateB.Visible = false;
-            btnReadB.Visible = false;
-            btnUpdateB.Visible = false;
+            btnCreateL.Visible = false;
+            btnReadL.Visible = false;
+            btnUpdateL.Visible = false;
 
-            btnDeleteB.Visible = true;
-            btnDeleteB.Location = new Point(0, 0);
+            btnDeleteL.Visible = true;
+            btnDeleteL.Location = new Point(0, 0);
 
             //Labels
             lblLejemaalNr.Visible = true; //
@@ -591,7 +591,7 @@ namespace SonderBoUdlejning.Admin
             tbLejemaalNr.Text = "";
 
             tbAdresse.Visible = false;
-            comboBoxPostNr.Visible = false;
+            comboPostNr.Visible = false;
             tbBy.Visible = false;
             tbLejemaalsTypeID.Visible = false;
             tbLejemaalType.Visible = false;

@@ -34,24 +34,24 @@ namespace SonderBoUdlejning.Admin
 
         private void Booking_Load(object sender, EventArgs e)
         {
-            DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
-            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+            dgvReservationer.DataSource = tableConn.tableBinder(sqlS1);
+            dgvRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
-            DGVReservationer.RowHeadersVisible = false;
-            DGVReservationer.BorderStyle = BorderStyle.FixedSingle;
-            DGVReservationer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DGVReservationer.RowTemplate.Height = 30;
-            DGVReservationer.RowTemplate.DividerHeight = 1;
-            DGVReservationer.GridColor = Color.Black;
-            DGVReservationer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            dgvReservationer.RowHeadersVisible = false;
+            dgvReservationer.BorderStyle = BorderStyle.FixedSingle;
+            dgvReservationer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvReservationer.RowTemplate.Height = 30;
+            dgvReservationer.RowTemplate.DividerHeight = 1;
+            dgvReservationer.GridColor = Color.Black;
+            dgvReservationer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
-            DGVRessourcer.RowHeadersVisible = false;
-            DGVRessourcer.BorderStyle = BorderStyle.FixedSingle;
-            DGVRessourcer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DGVRessourcer.RowTemplate.Height = 30;
-            DGVRessourcer.RowTemplate.DividerHeight = 1;
-            DGVRessourcer.GridColor = Color.Black;
-            DGVRessourcer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            dgvRessourcer.RowHeadersVisible = false;
+            dgvRessourcer.BorderStyle = BorderStyle.FixedSingle;
+            dgvRessourcer.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvRessourcer.RowTemplate.Height = 30;
+            dgvRessourcer.RowTemplate.DividerHeight = 1;
+            dgvRessourcer.GridColor = Color.Black;
+            dgvRessourcer.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             /*
             .RowHeadersVisible = false;
@@ -74,14 +74,14 @@ namespace SonderBoUdlejning.Admin
 
             foreach (string item in listResource)
             {
-                CBResource.Items.Add(item);
+                comboResource.Items.Add(item);
             }
 
             foreach (string item in listBeboer) 
             {
-                CBMembers.Items.Add(item);
-                cbMembersRes.Items.Add(item);
-                cbDeleteResFromBeboer.Items.Add(item);
+                comboMembers.Items.Add(item);
+                comboMembersRes.Items.Add(item);
+                comboDeleteResFromBeboer.Items.Add(item);
 
             }
         }
@@ -90,7 +90,7 @@ namespace SonderBoUdlejning.Admin
         {
             int[] arrayBeboerID = listBeboerID.ToArray(); 
             PanelPersonInfo.Visible = true;
-            int personID = arrayBeboerID[CBMembers.SelectedIndex];
+            int personID = arrayBeboerID[comboMembers.SelectedIndex];
             TBPID.Text = personID.ToString();
 
             string queryTlf = $"SELECT pTlf FROM Person WHERE pId = {personID}";
@@ -118,7 +118,7 @@ namespace SonderBoUdlejning.Admin
         {
             //Denne text box skal slettes. det er bare for at se om den ID er korrekt
             int[] arrayResourceID = listResourceID.ToArray();
-            int resourceID = arrayResourceID[CBResource.SelectedIndex];
+            int resourceID = arrayResourceID[comboResource.SelectedIndex];
             TBResourceID.Text = resourceID.ToString();
             PanelResource.Visible = true;
 
@@ -134,15 +134,15 @@ namespace SonderBoUdlejning.Admin
             //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?   
             dtpStart.CustomFormat = "yyyy-MM-dd";
             string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
-            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+            dgvRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
             listResource.Clear();
             listResourceID.Clear();
-            CBResource.Items.Clear();
+            comboResource.Items.Clear();
             BookingFacade.getRessourceList(listResourceID, listResource, dtpStart.Text);
             foreach (string item in listResource)
             {
-                CBResource.Items.Add(item);
+                comboResource.Items.Add(item);
             }
 
             TBResourceID.Text = "";
@@ -153,15 +153,15 @@ namespace SonderBoUdlejning.Admin
         {
             dtpStart.CustomFormat = "yyyy-MM-dd";
             string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
-            DGVRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+            dgvRessourcer.DataSource = tableConn.tableBinder(sqlS2);
 
             listResource.Clear();
             listResourceID.Clear();
-            CBResource.Items.Clear();
+            comboResource.Items.Clear();
             BookingFacade.getRessourceList(listResourceID, listResource, dtpStart.Text);
             foreach (string item in listResource)
             {
-                CBResource.Items.Add(item);
+                comboResource.Items.Add(item);
             }
 
             TBResourceID.Text = "";
@@ -205,11 +205,11 @@ namespace SonderBoUdlejning.Admin
                         conn.Close();
                         
                         MessageBox.Show("Reservation oprettet!");
-                        DGVReservationer.DataSource = tableConn.tableBinder(sqlS1);
+                        dgvReservationer.DataSource = tableConn.tableBinder(sqlS1);
                     }
                     else
                     {
-                        string input = CBResource.Text;
+                        string input = comboResource.Text;
                         int index = input.LastIndexOf(" ");
                         if (index > 0)
                                 input = input.Substring(0, index);
@@ -239,17 +239,17 @@ namespace SonderBoUdlejning.Admin
         private void btnAntalRes_Click(object sender, EventArgs e)
         {
             string query = "SELECT Person.pId AS PersonID, fNavn AS FuldeNavn, COUNT(resNr) AS AntalReservationer FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
-            DGVReservationer.DataSource = tableConn.tableBinder(query);
+            dgvReservationer.DataSource = tableConn.tableBinder(query);
         }
 
         private void btnSePersonRes_Click(object sender, EventArgs e)
         {
             try{
                 int[] arrayBeboerID = listBeboerID.ToArray();
-                int personID = arrayBeboerID[cbMembersRes.SelectedIndex];
+                int personID = arrayBeboerID[comboMembersRes.SelectedIndex];
 
                 string query = $"SELECT fNavn, resNr, rTypeNavn, rStartDato, rSlutDato FROM Reservationer INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE Person.pId = {personID};";
-                DGVReservationer.DataSource = tableConn.tableBinder(query);
+                dgvReservationer.DataSource = tableConn.tableBinder(query);
             }
             catch
             {
@@ -258,21 +258,21 @@ namespace SonderBoUdlejning.Admin
         }
 
         List<int> beboerResID = new List<int>();
-        private void cbDeleteResFromBeboer_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboDeleteResFromBeboer_SelectedIndexChanged(object sender, EventArgs e)
         {
             beboerResID.Clear();
             tbresResNr.Text = "";
             cbDeleteBeboerResource.Items.Clear();
             cbDeleteBeboerResource.Visible = true;
             label13.Visible = true;
-            string query = $"SELECT COUNT(rTypeNavn) FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1;";
+            string query = $"SELECT COUNT(rTypeNavn) FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {comboDeleteResFromBeboer.SelectedIndex} + 1;";
             SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();
             int antalReservationerPRBeboer = Convert.ToInt32(cmd.ExecuteScalar());
             conn.Close();
 
-            string query2 = $"SELECT rTypeNavn FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
+            string query2 = $"SELECT rTypeNavn FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {comboDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
             SqlCommand cmd2 = new SqlCommand(query2, conn);
             conn.Open();
             SqlDataReader reader = cmd2.ExecuteReader();
@@ -287,7 +287,7 @@ namespace SonderBoUdlejning.Admin
 
 
             
-            string query3 = $"SELECT resNr FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {cbDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
+            string query3 = $"SELECT resNr FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {comboDeleteResFromBeboer.SelectedIndex} + 1 ORDER BY rTypeNavn;";
             SqlCommand cmd3 = new SqlCommand(query3, conn);
             conn.Open();
             SqlDataReader reader2 = cmd3.ExecuteReader();
@@ -330,7 +330,7 @@ namespace SonderBoUdlejning.Admin
             }
         }
 
-        private void cbDeleteBeboerResource_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboDeleteBeboerResource_SelectedIndexChanged(object sender, EventArgs e)
         {
             int[] beboerResIDArray = beboerResID.ToArray();
             tbresResNr.Text = Convert.ToString(beboerResIDArray[cbDeleteBeboerResource.SelectedIndex]);

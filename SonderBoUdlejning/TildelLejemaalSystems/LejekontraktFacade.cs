@@ -25,7 +25,7 @@ namespace SonderBoUdlejning.TildelLejemaalSystems
             }
             else
             {
-                DirectoryInfo di = Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path);
                 CreatePdf(lejerNavn, lejePris, adresse, postNr, by, startDato, Lid);
             }
         }

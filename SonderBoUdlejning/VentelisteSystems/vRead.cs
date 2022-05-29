@@ -9,13 +9,13 @@ using SonderBoUdlejning.InputCheck;
 
 namespace SonderBoUdlejning.VentelisteSystems
 {
-    internal class ReadVenteliste
+    internal class vRead
     {
         //Finder connectionstring til databasen frem fra ConnString klassen
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der returner en SQL Query, der finder ventelisten for en lejemål type
-        public string rVente(string pId, string Lid, string signUpDato)
+        public string readVenteliste(string pId, string Lid, string signUpDato)
         {
             string sqlS = $"SELECT pId AS 'Person ID', Lid AS 'Lejemålstype ID', signUpDato AS 'Opskrivelsesdato' FROM Venteliste WHERE 1=1"; //Standard SQL Query
 

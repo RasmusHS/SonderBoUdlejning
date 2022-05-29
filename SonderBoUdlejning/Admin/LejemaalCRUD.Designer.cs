@@ -35,10 +35,10 @@
             this.btnVisBDelete = new System.Windows.Forms.Button();
             this.panelContainer = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCreateB = new System.Windows.Forms.Button();
-            this.btnDeleteB = new System.Windows.Forms.Button();
-            this.btnUpdateB = new System.Windows.Forms.Button();
-            this.btnReadB = new System.Windows.Forms.Button();
+            this.btnCreateL = new System.Windows.Forms.Button();
+            this.btnDeleteL = new System.Windows.Forms.Button();
+            this.btnUpdateL = new System.Windows.Forms.Button();
+            this.btnReadL = new System.Windows.Forms.Button();
             this.lblLejemaalNr = new System.Windows.Forms.Label();
             this.tbLejemaalNr = new System.Windows.Forms.TextBox();
             this.tbMaksPris = new System.Windows.Forms.TextBox();
@@ -56,7 +56,7 @@
             this.tbLejemaalsTypeID = new System.Windows.Forms.TextBox();
             this.lblLejemaalsTypeID = new System.Windows.Forms.Label();
             this.lblPostNr = new System.Windows.Forms.Label();
-            this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
+            this.comboPostNr = new System.Windows.Forms.ComboBox();
             this.tbAdresse = new System.Windows.Forms.TextBox();
             this.lblAdresse = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -95,7 +95,7 @@
             this.btnVisBCreate.TabIndex = 1;
             this.btnVisBCreate.Text = "Opret Lejemål";
             this.btnVisBCreate.UseVisualStyleBackColor = true;
-            this.btnVisBCreate.Click += new System.EventHandler(this.btnVisBCreate_Click);
+            this.btnVisBCreate.Click += new System.EventHandler(this.btnVisLCreate_Click);
             // 
             // btnVisBRead
             // 
@@ -106,7 +106,7 @@
             this.btnVisBRead.TabIndex = 2;
             this.btnVisBRead.Text = "Indlæs Ledige Lejemål";
             this.btnVisBRead.UseVisualStyleBackColor = true;
-            this.btnVisBRead.Click += new System.EventHandler(this.btnVisBRead_Click);
+            this.btnVisBRead.Click += new System.EventHandler(this.btnVisLRead_Click);
             // 
             // btnVisBUpdate
             // 
@@ -117,7 +117,7 @@
             this.btnVisBUpdate.TabIndex = 3;
             this.btnVisBUpdate.Text = "Opdater Lejemål";
             this.btnVisBUpdate.UseVisualStyleBackColor = true;
-            this.btnVisBUpdate.Click += new System.EventHandler(this.btnVisBUpdate_Click);
+            this.btnVisBUpdate.Click += new System.EventHandler(this.btnVisLUpdate_Click);
             // 
             // btnVisBDelete
             // 
@@ -128,7 +128,7 @@
             this.btnVisBDelete.TabIndex = 4;
             this.btnVisBDelete.Text = "Slet Lejemål";
             this.btnVisBDelete.UseVisualStyleBackColor = true;
-            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisDLejemaal_Click);
+            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisLDelete_Click);
             // 
             // panelContainer
             // 
@@ -151,7 +151,7 @@
             this.panelContainer.Controls.Add(this.tbLejemaalsTypeID);
             this.panelContainer.Controls.Add(this.lblLejemaalsTypeID);
             this.panelContainer.Controls.Add(this.lblPostNr);
-            this.panelContainer.Controls.Add(this.comboBoxPostNr);
+            this.panelContainer.Controls.Add(this.comboPostNr);
             this.panelContainer.Controls.Add(this.tbAdresse);
             this.panelContainer.Controls.Add(this.lblAdresse);
             this.panelContainer.Location = new System.Drawing.Point(37, 523);
@@ -161,10 +161,10 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnCreateB);
-            this.panel1.Controls.Add(this.btnDeleteB);
-            this.panel1.Controls.Add(this.btnUpdateB);
-            this.panel1.Controls.Add(this.btnReadB);
+            this.panel1.Controls.Add(this.btnCreateL);
+            this.panel1.Controls.Add(this.btnDeleteL);
+            this.panel1.Controls.Add(this.btnUpdateL);
+            this.panel1.Controls.Add(this.btnReadL);
             this.panel1.Location = new System.Drawing.Point(845, 19);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(156, 229);
@@ -172,47 +172,47 @@
             // 
             // btnCreateB
             // 
-            this.btnCreateB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateB.Location = new System.Drawing.Point(0, 0);
-            this.btnCreateB.Name = "btnCreateB";
-            this.btnCreateB.Size = new System.Drawing.Size(156, 45);
-            this.btnCreateB.TabIndex = 0;
-            this.btnCreateB.Text = "Opret";
-            this.btnCreateB.UseVisualStyleBackColor = true;
-            this.btnCreateB.Click += new System.EventHandler(this.btnCreateB_Click);
+            this.btnCreateL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateL.Location = new System.Drawing.Point(0, 0);
+            this.btnCreateL.Name = "btnCreateB";
+            this.btnCreateL.Size = new System.Drawing.Size(156, 45);
+            this.btnCreateL.TabIndex = 0;
+            this.btnCreateL.Text = "Opret";
+            this.btnCreateL.UseVisualStyleBackColor = true;
+            this.btnCreateL.Click += new System.EventHandler(this.btnCreateB_Click);
             // 
             // btnDeleteB
             // 
-            this.btnDeleteB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteB.Location = new System.Drawing.Point(0, 184);
-            this.btnDeleteB.Name = "btnDeleteB";
-            this.btnDeleteB.Size = new System.Drawing.Size(156, 45);
-            this.btnDeleteB.TabIndex = 3;
-            this.btnDeleteB.Text = "Slet";
-            this.btnDeleteB.UseVisualStyleBackColor = true;
-            this.btnDeleteB.Click += new System.EventHandler(this.btnDeleteB_Click);
+            this.btnDeleteL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteL.Location = new System.Drawing.Point(0, 184);
+            this.btnDeleteL.Name = "btnDeleteB";
+            this.btnDeleteL.Size = new System.Drawing.Size(156, 45);
+            this.btnDeleteL.TabIndex = 3;
+            this.btnDeleteL.Text = "Slet";
+            this.btnDeleteL.UseVisualStyleBackColor = true;
+            this.btnDeleteL.Click += new System.EventHandler(this.btnDeleteB_Click);
             // 
             // btnUpdateB
             // 
-            this.btnUpdateB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateB.Location = new System.Drawing.Point(0, 123);
-            this.btnUpdateB.Name = "btnUpdateB";
-            this.btnUpdateB.Size = new System.Drawing.Size(156, 45);
-            this.btnUpdateB.TabIndex = 2;
-            this.btnUpdateB.Text = "Opdater Lejemål";
-            this.btnUpdateB.UseVisualStyleBackColor = true;
-            this.btnUpdateB.Click += new System.EventHandler(this.btnUpdateB_Click);
+            this.btnUpdateL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateL.Location = new System.Drawing.Point(0, 123);
+            this.btnUpdateL.Name = "btnUpdateB";
+            this.btnUpdateL.Size = new System.Drawing.Size(156, 45);
+            this.btnUpdateL.TabIndex = 2;
+            this.btnUpdateL.Text = "Opdater Lejemål";
+            this.btnUpdateL.UseVisualStyleBackColor = true;
+            this.btnUpdateL.Click += new System.EventHandler(this.btnUpdateB_Click);
             // 
             // btnReadB
             // 
-            this.btnReadB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReadB.Location = new System.Drawing.Point(0, 62);
-            this.btnReadB.Name = "btnReadB";
-            this.btnReadB.Size = new System.Drawing.Size(156, 45);
-            this.btnReadB.TabIndex = 1;
-            this.btnReadB.Text = "Indlæs";
-            this.btnReadB.UseVisualStyleBackColor = true;
-            this.btnReadB.Click += new System.EventHandler(this.btnReadB_Click);
+            this.btnReadL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReadL.Location = new System.Drawing.Point(0, 62);
+            this.btnReadL.Name = "btnReadB";
+            this.btnReadL.Size = new System.Drawing.Size(156, 45);
+            this.btnReadL.TabIndex = 1;
+            this.btnReadL.Text = "Indlæs";
+            this.btnReadL.UseVisualStyleBackColor = true;
+            this.btnReadL.Click += new System.EventHandler(this.btnReadB_Click);
             // 
             // lblLejemaalNr
             // 
@@ -375,14 +375,14 @@
             // 
             // comboBoxPostNr
             // 
-            this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxPostNr.FormattingEnabled = true;
-            this.comboBoxPostNr.Location = new System.Drawing.Point(306, 38);
-            this.comboBoxPostNr.Name = "comboBoxPostNr";
-            this.comboBoxPostNr.Size = new System.Drawing.Size(115, 28);
-            this.comboBoxPostNr.TabIndex = 6;
-            this.comboBoxPostNr.SelectedIndexChanged += new System.EventHandler(this.comboBoxPostNr_SelectedIndexChanged);
+            this.comboPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPostNr.FormattingEnabled = true;
+            this.comboPostNr.Location = new System.Drawing.Point(306, 38);
+            this.comboPostNr.Name = "comboBoxPostNr";
+            this.comboPostNr.Size = new System.Drawing.Size(115, 28);
+            this.comboPostNr.TabIndex = 6;
+            this.comboPostNr.SelectedIndexChanged += new System.EventHandler(this.comboPostNr_SelectedIndexChanged);
             // 
             // tbAdresse
             // 
@@ -487,13 +487,13 @@
         private System.Windows.Forms.Button btnVisBUpdate;
         private System.Windows.Forms.Button btnVisBDelete;
         private System.Windows.Forms.Panel panelContainer;
-        private System.Windows.Forms.Button btnCreateB;
-        private System.Windows.Forms.Button btnReadB;
-        private System.Windows.Forms.Button btnUpdateB;
-        private System.Windows.Forms.Button btnDeleteB;
+        private System.Windows.Forms.Button btnCreateL;
+        private System.Windows.Forms.Button btnReadL;
+        private System.Windows.Forms.Button btnUpdateL;
+        private System.Windows.Forms.Button btnDeleteL;
         private System.Windows.Forms.Label lblAdresse;
         private System.Windows.Forms.Label lblPostNr;
-        private System.Windows.Forms.ComboBox comboBoxPostNr;
+        private System.Windows.Forms.ComboBox comboPostNr;
         private System.Windows.Forms.TextBox tbAdresse;
         private System.Windows.Forms.TextBox tbLejemaalsTypeID;
         private System.Windows.Forms.Label lblLejemaalsTypeID;

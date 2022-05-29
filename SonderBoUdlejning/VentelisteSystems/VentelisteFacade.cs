@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace SonderBoUdlejning.VentelisteSystems
 {
-    public class vFacade //Facade til venteliste systemet
+    public class VentelisteFacade //Facade til venteliste systemet
     {
         //Opretter et medlem på en venteliste
         public void AddToList(string pId, string Lid)
@@ -33,11 +33,11 @@ namespace SonderBoUdlejning.VentelisteSystems
         }
 
         //Metode der kalder read-metoden, som returnerer en liste af medlemmer på en venteliste
-        public string ReadVente;
-        public void ReadVenteListe(string pId, string Lid, string signUpDato)
+        public string readVQuery;
+        public void rVenteliste(string pId, string Lid, string signUpDato)
         {
-            ReadVenteliste readV = new ReadVenteliste();
-            ReadVente = readV.rVente(pId, Lid, signUpDato);
+            vRead vRead = new vRead();
+            readVQuery = vRead.readVenteliste(pId, Lid, signUpDato);
         }
     }
 }

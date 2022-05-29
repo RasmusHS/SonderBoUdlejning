@@ -35,13 +35,13 @@
             this.panelBaggrund = new System.Windows.Forms.Panel();
             this.panelØnskerLejlighed = new System.Windows.Forms.Panel();
             this.lblPickAdresse = new System.Windows.Forms.Label();
-            this.combAdresser = new System.Windows.Forms.ComboBox();
+            this.comboAdresser = new System.Windows.Forms.ComboBox();
             this.panelUdskrivLejekontrakt = new System.Windows.Forms.Panel();
             this.lblPickDato = new System.Windows.Forms.Label();
-            this.combIndflytÅr = new System.Windows.Forms.ComboBox();
+            this.comboIndflytYear = new System.Windows.Forms.ComboBox();
             this.lblIndflytÅrstal = new System.Windows.Forms.Label();
             this.lblIndflytMåned = new System.Windows.Forms.Label();
-            this.combIndflytMåned = new System.Windows.Forms.ComboBox();
+            this.comboIndflytMonth = new System.Windows.Forms.ComboBox();
             this.btnUdskrivLejekontrakt = new System.Windows.Forms.Button();
             this.ckbJaTilLejlighed = new System.Windows.Forms.CheckBox();
             this.lblØnskerLejlighed = new System.Windows.Forms.Label();
@@ -49,18 +49,18 @@
             this.panelMedlemsinfo = new System.Windows.Forms.Panel();
             this.lblMedlemsNavn = new System.Windows.Forms.Label();
             this.tbMedlemsNavn = new System.Windows.Forms.TextBox();
-            this.tbMedlemsTLF = new System.Windows.Forms.TextBox();
+            this.tbMedlemsTlf = new System.Windows.Forms.TextBox();
             this.tbMedlemsEmail = new System.Windows.Forms.TextBox();
             this.lblMedlemsTLF = new System.Windows.Forms.Label();
             this.lblMedlemsEmail = new System.Windows.Forms.Label();
             this.lblPID = new System.Windows.Forms.Label();
-            this.tbPID = new System.Windows.Forms.TextBox();
+            this.tbPId = new System.Windows.Forms.TextBox();
             this.btnFindMedlemsInfo = new System.Windows.Forms.Button();
             this.panelBid = new System.Windows.Forms.Panel();
             this.lblPostNr = new System.Windows.Forms.Label();
-            this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
+            this.comboPostNr = new System.Windows.Forms.ComboBox();
             this.lblBID = new System.Windows.Forms.Label();
-            this.tbBID = new System.Windows.Forms.TextBox();
+            this.tbLid = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).BeginInit();
@@ -114,9 +114,9 @@
             this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 24);
+            this.label1.Size = new System.Drawing.Size(243, 24);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Lejemål tabel";
+            this.label1.Text = "Oversigt over ledige lejemål";
             // 
             // label2
             // 
@@ -125,9 +125,9 @@
             this.label2.Location = new System.Drawing.Point(1071, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 24);
+            this.label2.Size = new System.Drawing.Size(204, 24);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Venteliste";
+            this.label2.Text = "Oversigt over venteliste";
             // 
             // panelBaggrund
             // 
@@ -146,7 +146,7 @@
             // 
             this.panelØnskerLejlighed.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panelØnskerLejlighed.Controls.Add(this.lblPickAdresse);
-            this.panelØnskerLejlighed.Controls.Add(this.combAdresser);
+            this.panelØnskerLejlighed.Controls.Add(this.comboAdresser);
             this.panelØnskerLejlighed.Controls.Add(this.panelUdskrivLejekontrakt);
             this.panelØnskerLejlighed.Controls.Add(this.ckbJaTilLejlighed);
             this.panelØnskerLejlighed.Controls.Add(this.lblØnskerLejlighed);
@@ -168,20 +168,20 @@
             // 
             // combAdresser
             // 
-            this.combAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combAdresser.FormattingEnabled = true;
-            this.combAdresser.Location = new System.Drawing.Point(158, 87);
-            this.combAdresser.Name = "combAdresser";
-            this.combAdresser.Size = new System.Drawing.Size(185, 28);
-            this.combAdresser.TabIndex = 23;
+            this.comboAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAdresser.FormattingEnabled = true;
+            this.comboAdresser.Location = new System.Drawing.Point(158, 87);
+            this.comboAdresser.Name = "combAdresser";
+            this.comboAdresser.Size = new System.Drawing.Size(185, 28);
+            this.comboAdresser.TabIndex = 23;
             // 
             // panelUdskrivLejekontrakt
             // 
             this.panelUdskrivLejekontrakt.Controls.Add(this.lblPickDato);
-            this.panelUdskrivLejekontrakt.Controls.Add(this.combIndflytÅr);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.comboIndflytYear);
             this.panelUdskrivLejekontrakt.Controls.Add(this.lblIndflytÅrstal);
             this.panelUdskrivLejekontrakt.Controls.Add(this.lblIndflytMåned);
-            this.panelUdskrivLejekontrakt.Controls.Add(this.combIndflytMåned);
+            this.panelUdskrivLejekontrakt.Controls.Add(this.comboIndflytMonth);
             this.panelUdskrivLejekontrakt.Controls.Add(this.btnUdskrivLejekontrakt);
             this.panelUdskrivLejekontrakt.Location = new System.Drawing.Point(408, 13);
             this.panelUdskrivLejekontrakt.Margin = new System.Windows.Forms.Padding(2);
@@ -201,12 +201,12 @@
             // 
             // combIndflytÅr
             // 
-            this.combIndflytÅr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combIndflytÅr.FormattingEnabled = true;
-            this.combIndflytÅr.Location = new System.Drawing.Point(107, 56);
-            this.combIndflytÅr.Name = "combIndflytÅr";
-            this.combIndflytÅr.Size = new System.Drawing.Size(91, 28);
-            this.combIndflytÅr.TabIndex = 22;
+            this.comboIndflytYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboIndflytYear.FormattingEnabled = true;
+            this.comboIndflytYear.Location = new System.Drawing.Point(107, 56);
+            this.comboIndflytYear.Name = "combIndflytÅr";
+            this.comboIndflytYear.Size = new System.Drawing.Size(91, 28);
+            this.comboIndflytYear.TabIndex = 22;
             // 
             // lblIndflytÅrstal
             // 
@@ -230,13 +230,13 @@
             // 
             // combIndflytMåned
             // 
-            this.combIndflytMåned.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combIndflytMåned.FormattingEnabled = true;
-            this.combIndflytMåned.Location = new System.Drawing.Point(10, 56);
-            this.combIndflytMåned.Margin = new System.Windows.Forms.Padding(2);
-            this.combIndflytMåned.Name = "combIndflytMåned";
-            this.combIndflytMåned.Size = new System.Drawing.Size(92, 28);
-            this.combIndflytMåned.TabIndex = 19;
+            this.comboIndflytMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboIndflytMonth.FormattingEnabled = true;
+            this.comboIndflytMonth.Location = new System.Drawing.Point(10, 56);
+            this.comboIndflytMonth.Margin = new System.Windows.Forms.Padding(2);
+            this.comboIndflytMonth.Name = "combIndflytMåned";
+            this.comboIndflytMonth.Size = new System.Drawing.Size(92, 28);
+            this.comboIndflytMonth.TabIndex = 19;
             // 
             // btnUdskrivLejekontrakt
             // 
@@ -277,7 +277,7 @@
             this.panelPid.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panelPid.Controls.Add(this.panelMedlemsinfo);
             this.panelPid.Controls.Add(this.lblPID);
-            this.panelPid.Controls.Add(this.tbPID);
+            this.panelPid.Controls.Add(this.tbPId);
             this.panelPid.Controls.Add(this.btnFindMedlemsInfo);
             this.panelPid.Location = new System.Drawing.Point(243, 16);
             this.panelPid.Margin = new System.Windows.Forms.Padding(2);
@@ -290,7 +290,7 @@
             // 
             this.panelMedlemsinfo.Controls.Add(this.lblMedlemsNavn);
             this.panelMedlemsinfo.Controls.Add(this.tbMedlemsNavn);
-            this.panelMedlemsinfo.Controls.Add(this.tbMedlemsTLF);
+            this.panelMedlemsinfo.Controls.Add(this.tbMedlemsTlf);
             this.panelMedlemsinfo.Controls.Add(this.tbMedlemsEmail);
             this.panelMedlemsinfo.Controls.Add(this.lblMedlemsTLF);
             this.panelMedlemsinfo.Controls.Add(this.lblMedlemsEmail);
@@ -322,12 +322,12 @@
             // 
             // tbMedlemsTLF
             // 
-            this.tbMedlemsTLF.Location = new System.Drawing.Point(149, 47);
-            this.tbMedlemsTLF.Margin = new System.Windows.Forms.Padding(2);
-            this.tbMedlemsTLF.Name = "tbMedlemsTLF";
-            this.tbMedlemsTLF.ReadOnly = true;
-            this.tbMedlemsTLF.Size = new System.Drawing.Size(76, 26);
-            this.tbMedlemsTLF.TabIndex = 8;
+            this.tbMedlemsTlf.Location = new System.Drawing.Point(149, 47);
+            this.tbMedlemsTlf.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMedlemsTlf.Name = "tbMedlemsTLF";
+            this.tbMedlemsTlf.ReadOnly = true;
+            this.tbMedlemsTlf.Size = new System.Drawing.Size(76, 26);
+            this.tbMedlemsTlf.TabIndex = 8;
             // 
             // tbMedlemsEmail
             // 
@@ -371,11 +371,11 @@
             // 
             // tbPID
             // 
-            this.tbPID.Location = new System.Drawing.Point(19, 70);
-            this.tbPID.Margin = new System.Windows.Forms.Padding(2);
-            this.tbPID.Name = "tbPID";
-            this.tbPID.Size = new System.Drawing.Size(76, 26);
-            this.tbPID.TabIndex = 1;
+            this.tbPId.Location = new System.Drawing.Point(19, 70);
+            this.tbPId.Margin = new System.Windows.Forms.Padding(2);
+            this.tbPId.Name = "tbPID";
+            this.tbPId.Size = new System.Drawing.Size(76, 26);
+            this.tbPId.TabIndex = 1;
             // 
             // btnFindMedlemsInfo
             // 
@@ -393,9 +393,9 @@
             // 
             this.panelBid.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panelBid.Controls.Add(this.lblPostNr);
-            this.panelBid.Controls.Add(this.comboBoxPostNr);
+            this.panelBid.Controls.Add(this.comboPostNr);
             this.panelBid.Controls.Add(this.lblBID);
-            this.panelBid.Controls.Add(this.tbBID);
+            this.panelBid.Controls.Add(this.tbLid);
             this.panelBid.Location = new System.Drawing.Point(20, 16);
             this.panelBid.Margin = new System.Windows.Forms.Padding(2);
             this.panelBid.Name = "panelBid";
@@ -413,12 +413,12 @@
             // 
             // comboBoxPostNr
             // 
-            this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPostNr.FormattingEnabled = true;
-            this.comboBoxPostNr.Location = new System.Drawing.Point(22, 96);
-            this.comboBoxPostNr.Name = "comboBoxPostNr";
-            this.comboBoxPostNr.Size = new System.Drawing.Size(98, 28);
-            this.comboBoxPostNr.TabIndex = 6;
+            this.comboPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPostNr.FormattingEnabled = true;
+            this.comboPostNr.Location = new System.Drawing.Point(22, 96);
+            this.comboPostNr.Name = "comboBoxPostNr";
+            this.comboPostNr.Size = new System.Drawing.Size(98, 28);
+            this.comboPostNr.TabIndex = 6;
             // 
             // lblBID
             // 
@@ -432,12 +432,12 @@
             // 
             // tbBID
             // 
-            this.tbBID.Location = new System.Drawing.Point(22, 35);
-            this.tbBID.Margin = new System.Windows.Forms.Padding(2);
-            this.tbBID.Name = "tbBID";
-            this.tbBID.Size = new System.Drawing.Size(76, 26);
-            this.tbBID.TabIndex = 0;
-            this.tbBID.TextChanged += new System.EventHandler(this.tbBID_TextChanged);
+            this.tbLid.Location = new System.Drawing.Point(22, 35);
+            this.tbLid.Margin = new System.Windows.Forms.Padding(2);
+            this.tbLid.Name = "tbBID";
+            this.tbLid.Size = new System.Drawing.Size(76, 26);
+            this.tbLid.TabIndex = 0;
+            this.tbLid.TextChanged += new System.EventHandler(this.tbLid_TextChanged);
             // 
             // panel1
             // 
@@ -502,12 +502,12 @@
         private System.Windows.Forms.Panel panelBaggrund;
         private System.Windows.Forms.Label lblMedlemsNavn;
         private System.Windows.Forms.Label lblMedlemsTLF;
-        private System.Windows.Forms.TextBox tbMedlemsTLF;
+        private System.Windows.Forms.TextBox tbMedlemsTlf;
         private System.Windows.Forms.TextBox tbMedlemsNavn;
         private System.Windows.Forms.Label lblPID;
         private System.Windows.Forms.Label lblBID;
-        private System.Windows.Forms.TextBox tbPID;
-        private System.Windows.Forms.TextBox tbBID;
+        private System.Windows.Forms.TextBox tbPId;
+        private System.Windows.Forms.TextBox tbLid;
         private System.Windows.Forms.Panel panelØnskerLejlighed;
         private System.Windows.Forms.Label lblØnskerLejlighed;
         private System.Windows.Forms.Button btnFindMedlemsInfo;
@@ -516,16 +516,16 @@
         private System.Windows.Forms.Panel panelPid;
         private System.Windows.Forms.Label lblIndflytÅrstal;
         private System.Windows.Forms.Label lblIndflytMåned;
-        private System.Windows.Forms.ComboBox combIndflytMåned;
+        private System.Windows.Forms.ComboBox comboIndflytMonth;
         private System.Windows.Forms.Button btnUdskrivLejekontrakt;
         private System.Windows.Forms.CheckBox ckbJaTilLejlighed;
         private System.Windows.Forms.Panel panelBid;
         private System.Windows.Forms.Panel panelMedlemsinfo;
         private System.Windows.Forms.Panel panelUdskrivLejekontrakt;
-        private System.Windows.Forms.ComboBox combIndflytÅr;
-        private System.Windows.Forms.ComboBox combAdresser;
+        private System.Windows.Forms.ComboBox comboIndflytYear;
+        private System.Windows.Forms.ComboBox comboAdresser;
         private System.Windows.Forms.Label lblPostNr;
-        private System.Windows.Forms.ComboBox comboBoxPostNr;
+        private System.Windows.Forms.ComboBox comboPostNr;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblPickAdresse;

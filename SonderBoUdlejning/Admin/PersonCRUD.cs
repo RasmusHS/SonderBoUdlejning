@@ -82,7 +82,7 @@ namespace SonderBoUdlejning.Admin
             //Tjekker inputtene for længde og ugyldige tegn
             if ((navnValid == true) && (mailValid == true) && (tlfValid == true))
             {
-                pCreate.CreatePerson(navn, mail, tlf); //Opretter person
+                pCreate.cPerson(navn, mail, tlf); //Opretter person
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
             }
             else
@@ -126,10 +126,10 @@ namespace SonderBoUdlejning.Admin
             {
                 //Hvis inputtene passerer alle tjek og er gyldige, så opretter vi en ny lejemål
                 //Fortæller en facade at den skal kalde en read metode
-                pRead.ReadPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
+                pRead.rPerson(columns, pId, navn, mail, tlf, medlem, erBeboer, alt);
 
                 //Viser read metodens resultat i Person dataGridView
-                dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.ReadQuery);
+                dgvPersonCRUD.DataSource = tableConn.tableBinder(pRead.readPQuery);
             }
             else
             {
@@ -261,7 +261,7 @@ namespace SonderBoUdlejning.Admin
                 erBeboer = Convert.ToBoolean(tableConn.textBoxBinder($"SELECT erBeboer FROM Person WHERE pId = {pId}"));
 
                 //Opdaterer personen
-                pUpdate.UpdatePerson(navn, mail, tlf, pId, erBeboer);
+                pUpdate.uPerson(navn, mail, tlf, pId, erBeboer);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
             }
             else
@@ -289,7 +289,7 @@ namespace SonderBoUdlejning.Admin
             //Tjekker inputtet for længde og ugyldige tegn
             if ((tlfValid == true))
             {
-                pDelete.DeletePerson(tlf); //Sletter personen
+                pDelete.dPerson(tlf); //Sletter personen
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
             }
             else

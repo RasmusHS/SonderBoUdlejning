@@ -14,7 +14,7 @@ namespace SonderBoUdlejning.personCRUD
         ConnString connString = ConnString.getConnInstance;
 
         //Metode til at slette en person fra databasen
-        public void pSQLD(string pTlf)
+        public void dPerson(string pTlf)
         {
             string sqlS = "DELETE FROM Person WHERE pTlf = @Tlf"; //Definere SQL string
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen

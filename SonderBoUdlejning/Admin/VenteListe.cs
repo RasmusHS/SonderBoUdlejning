@@ -33,37 +33,37 @@ namespace SonderBoUdlejning.Admin
         private void VenteListe_Load(object sender, EventArgs e)
         {
             //Indlæser venteliste dataGridView
-            DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+            dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
 
             //Indlæser person dataGridView
-            DGVPersoner.DataSource = tableConn.tableBinder(sqlS2);
+            dgvPersoner.DataSource = tableConn.tableBinder(sqlS2);
 
             //Indlæser boligInfo dataGridView
-            DGVLejemaal.DataSource = tableConn.tableBinder(sqlS3);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS3);
             
-            DGVVenteListe.RowHeadersVisible = false;
-            DGVVenteListe.BorderStyle = BorderStyle.FixedSingle;
-            DGVVenteListe.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DGVVenteListe.RowTemplate.Height = 30;
-            DGVVenteListe.RowTemplate.DividerHeight = 1;
-            DGVVenteListe.GridColor = Color.Black;
-            DGVVenteListe.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            dgvVenteListe.RowHeadersVisible = false;
+            dgvVenteListe.BorderStyle = BorderStyle.FixedSingle;
+            dgvVenteListe.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvVenteListe.RowTemplate.Height = 30;
+            dgvVenteListe.RowTemplate.DividerHeight = 1;
+            dgvVenteListe.GridColor = Color.Black;
+            dgvVenteListe.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
             
-            DGVPersoner.RowHeadersVisible = false;
-            DGVPersoner.BorderStyle = BorderStyle.FixedSingle;
-            DGVPersoner.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DGVPersoner.RowTemplate.Height = 30;
-            DGVPersoner.RowTemplate.DividerHeight = 1;
-            DGVPersoner.GridColor = Color.Black;
-            DGVPersoner.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            dgvPersoner.RowHeadersVisible = false;
+            dgvPersoner.BorderStyle = BorderStyle.FixedSingle;
+            dgvPersoner.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvPersoner.RowTemplate.Height = 30;
+            dgvPersoner.RowTemplate.DividerHeight = 1;
+            dgvPersoner.GridColor = Color.Black;
+            dgvPersoner.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
             
-            DGVLejemaal.RowHeadersVisible = false;
-            DGVLejemaal.BorderStyle = BorderStyle.FixedSingle;
-            DGVLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            DGVLejemaal.RowTemplate.Height = 30;
-            DGVLejemaal.RowTemplate.DividerHeight = 1;
-            DGVLejemaal.GridColor = Color.Black;
-            DGVLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+            dgvLejemaal.RowHeadersVisible = false;
+            dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvLejemaal.RowTemplate.Height = 30;
+            dgvLejemaal.RowTemplate.DividerHeight = 1;
+            dgvLejemaal.GridColor = Color.Black;
+            dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
              
             //Skjuler input panel
             panelInputs.Visible = false;
@@ -72,27 +72,27 @@ namespace SonderBoUdlejning.Admin
             if (UserIdentification.UserAccess == 1) //admin
             {
                 //Admin har adgang til det hele
-                btnAddToList.Visible = true;
-                btnDeleteFromList.Visible = true;
-                btnGetPosition.Visible = true;
-                btnShowList.Visible = true;
+                btnVisAddToList.Visible = true;
+                btnVisDeleteFromList.Visible = true;
+                btnVisGetPosition.Visible = true;
+                btnVisShowList.Visible = true;
             }
             else if (UserIdentification.UserAccess == 2) //secretary
             {
                 //Sekretæren har ikke adgang til at slette fra en venteliste
-                btnAddToList.Visible = true;
-                btnDeleteFromList.Visible = false;
-                btnGetPosition.Visible = true;
-                btnShowList.Visible = true;
+                btnVisAddToList.Visible = true;
+                btnVisDeleteFromList.Visible = false;
+                btnVisGetPosition.Visible = true;
+                btnVisShowList.Visible = true;
             }
         }
 
         private void InsertToList_Click(object sender, EventArgs e)
         {
-            string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string pId = tbPId.Text; //Tager input fra person ID textboxen
+            string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
-            vFacade vAddToList = new vFacade();
+            VentelisteFacade vAddToList = new VentelisteFacade();
 
             //Tjekker om person ID eller lejemål Nr er tomme
             if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
@@ -108,7 +108,7 @@ namespace SonderBoUdlejning.Admin
             if ((pIdValid == true) && (LidValid == true))
             {
                 vAddToList.AddToList(pId, Lid); //Tilføjer person til venteliste for en lejemål
-                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
+                dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
             }
             else
             {
@@ -118,10 +118,10 @@ namespace SonderBoUdlejning.Admin
 
         private void DeleteFromListButton_Click(object sender, EventArgs e)
         {
-            string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string pId = tbPId.Text; //Tager input fra person ID textboxen
+            string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
-            vFacade vDeleteFromList = new vFacade();
+            VentelisteFacade vDeleteFromList = new VentelisteFacade();
 
             //Tjekker om person ID eller lejemål Nr er tomme
             if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
@@ -137,7 +137,7 @@ namespace SonderBoUdlejning.Admin
             if ((pIdValid == true) && (LidValid == true))
             {
                 vDeleteFromList.RemoveFromList(pId, Lid); //Sletter en person fra en venteliste
-                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
+                dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
             }
             else
             {
@@ -148,10 +148,10 @@ namespace SonderBoUdlejning.Admin
         private void GetPosition_Click(object sender, EventArgs e)
         {
 
-            string pId = pIdTextbox.Text; //Tager input fra person ID textboxen
-            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string pId = tbPId.Text; //Tager input fra person ID textboxen
+            string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
-            vFacade vGetListPos = new vFacade();
+            VentelisteFacade vGetListPos = new VentelisteFacade();
 
             //Tjekker om person ID eller lejemål Nr er tomme
             if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
@@ -168,7 +168,7 @@ namespace SonderBoUdlejning.Admin
             if ((pIdValid == true) && (LidValid == true))
             {
                 vGetListPos.GetListPosition(pId, Lid); //Finder en persons position på en venteliste
-                positionTextBox.Text = vGetListPos.Position; //Viser resultatet i position textboxen
+                tbPosition.Text = vGetListPos.Position; //Viser resultatet i position textboxen
             }
             else
             {
@@ -178,7 +178,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnVisVentelisteFor_Click(object sender, EventArgs e)
         {
-            string Lid = LidTextbox.Text; //Tager input fra lejemål Nr textboxen
+            string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
             //SQL Query, som henter ventelisten for en bestemt lejemål
             string sqlS1 = $"SELECT * FROM Venteliste WHERE Lid = {Lid} ORDER BY signUpDato ASC";
@@ -196,7 +196,7 @@ namespace SonderBoUdlejning.Admin
             //Tjekker om lejemål Nr er gyldig
             if (LidValid == true)
             {
-                DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt lejemål
+                dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Viser venteliste for en bestemt lejemål
             }
             else
             {
@@ -210,34 +210,34 @@ namespace SonderBoUdlejning.Admin
             panelInputs.Visible = true;
             panelInputs.Size = new Size(331, 192);
 
-            DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+            dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
 
             //labels
-            labelpId.Visible = true;
-            labelpId.Location = new Point(6, 11); //Base labelpId location
+            lblPId.Visible = true;
+            lblPId.Location = new Point(6, 11); //Base labelpId location
 
-            labelLid.Visible = true;
-            labelLid.Location = new Point(6, 74); //Base labelLid location
+            lblLid.Visible = true;
+            lblLid.Location = new Point(6, 74); //Base labelLid location
 
-            labelPosition.Visible = false;
+            lblPosition.Visible = false;
 
             //textboxes
-            pIdTextbox.Visible = true;
-            pIdTextbox.Location = new Point(10, 32); //Base pIdTextbox location
-            pIdTextbox.Text = "";
+            tbPId.Visible = true;
+            tbPId.Location = new Point(10, 32); //Base pIdTextbox location
+            tbPId.Text = "";
 
-            LidTextbox.Visible = true;
-            LidTextbox.Location = new Point(10, 94); //Base LidTextbox location
-            LidTextbox.Text = "";
+            tbLid.Visible = true;
+            tbLid.Location = new Point(10, 94); //Base LidTextbox location
+            tbLid.Text = "";
 
-            positionTextBox.Visible = false;
+            tbPosition.Visible = false;
 
             //knapper
-            InsertToList.Visible = true;
-            InsertToList.Location = new Point(0, 0); //Base btnVisVentelisteFor location
-            DeleteFromListButton.Visible = false;
-            btnVisVentelisteFor.Visible = false;
-            GetPosition.Visible = false;
+            btnInsertToList.Visible = true;
+            btnInsertToList.Location = new Point(0, 0); //Base btnVisVentelisteFor location
+            btnDeleteFromListButton.Visible = false;
+            btnShowList.Visible = false;
+            btnGetPosition.Visible = false;
         }
 
         //Knap som viser felter relevant for at fjerne en person fra en venteliste
@@ -246,76 +246,76 @@ namespace SonderBoUdlejning.Admin
             panelInputs.Visible = true;
             panelInputs.Size = new Size(331, 192);
 
-            DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+            dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             
             //labels
-            labelpId.Visible = true;
-            labelpId.Location = new Point(6, 11); //Base labelpId location
+            lblPId.Visible = true;
+            lblPId.Location = new Point(6, 11); //Base labelpId location
 
-            labelLid.Visible = true;
-            labelLid.Location = new Point(6, 74); //Base labelLid location
+            lblLid.Visible = true;
+            lblLid.Location = new Point(6, 74); //Base labelLid location
 
-            labelPosition.Visible = false;
+            lblPosition.Visible = false;
 
             //textboxes
-            pIdTextbox.Visible = true;
-            pIdTextbox.Location = new Point(10, 32); //Base pIdTextbox location
-            pIdTextbox.Text = "";
+            tbPId.Visible = true;
+            tbPId.Location = new Point(10, 32); //Base pIdTextbox location
+            tbPId.Text = "";
 
-            LidTextbox.Visible = true;
-            LidTextbox.Location = new Point(10, 94); //Base LidTextbox location
-            LidTextbox.Text = "";
+            tbLid.Visible = true;
+            tbLid.Location = new Point(10, 94); //Base LidTextbox location
+            tbLid.Text = "";
 
-            positionTextBox.Visible = false;
+            tbPosition.Visible = false;
 
             //knapper
-            InsertToList.Visible = false;
+            btnInsertToList.Visible = false;
 
-            DeleteFromListButton.Visible = true;
-            DeleteFromListButton.Location = new Point(0, 0); //Base btnVisVentelisteFor location
+            btnDeleteFromListButton.Visible = true;
+            btnDeleteFromListButton.Location = new Point(0, 0); //Base btnVisVentelisteFor location
 
-            btnVisVentelisteFor.Visible = false;
-            GetPosition.Visible = false;
+            btnShowList.Visible = false;
+            btnGetPosition.Visible = false;
         }
 
         //Knap som viser felter relevant for at finde en persons position på en venteliste
-        private void btnGetPosition_Click(object sender, EventArgs e)
+        private void btnGetPos_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
             panelInputs.Size = new Size(331, 192);
 
-            DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+            dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             
             //labels
-            labelpId.Visible = true;
-            labelpId.Location = new Point(6, 11); //Base labelpId location
+            lblPId.Visible = true;
+            lblPId.Location = new Point(6, 11); //Base labelpId location
 
-            labelLid.Visible = true;
-            labelLid.Location = new Point(6, 74); //Base labelLid location
+            lblLid.Visible = true;
+            lblLid.Location = new Point(6, 74); //Base labelLid location
 
-            labelPosition.Visible = true;
-            labelPosition.Location = new Point(-4, 0);
+            lblPosition.Visible = true;
+            lblPosition.Location = new Point(-4, 0);
 
             //textboxes
-            pIdTextbox.Visible = true;
-            pIdTextbox.Location = new Point(10, 32); //Base pIdTextbox location
-            pIdTextbox.Text = "";
+            tbPId.Visible = true;
+            tbPId.Location = new Point(10, 32); //Base pIdTextbox location
+            tbPId.Text = "";
 
-            LidTextbox.Visible = true;
-            LidTextbox.Location = new Point(10, 94); //Base LidTextbox location
-            LidTextbox.Text = "";
+            tbLid.Visible = true;
+            tbLid.Location = new Point(10, 94); //Base LidTextbox location
+            tbLid.Text = "";
 
-            positionTextBox.Visible = true;
-            positionTextBox.Location = new Point(0, 21);
-            positionTextBox.Text = "";
+            tbPosition.Visible = true;
+            tbPosition.Location = new Point(0, 21);
+            tbPosition.Text = "";
 
             //knapper
-            InsertToList.Visible = false;
-            DeleteFromListButton.Visible = false;
-            btnVisVentelisteFor.Visible = false;
+            btnInsertToList.Visible = false;
+            btnDeleteFromListButton.Visible = false;
+            btnShowList.Visible = false;
 
-            GetPosition.Visible = true;
-            GetPosition.Location = new Point(0, 57);
+            btnGetPosition.Visible = true;
+            btnGetPosition.Location = new Point(0, 57);
         }
 
         //Knap som viser felter relevant for at se en venteliste
@@ -324,33 +324,33 @@ namespace SonderBoUdlejning.Admin
             panelInputs.Visible = true;
             panelInputs.Size = new Size(331, 192);
 
-            DGVVenteListe.DataSource = tableConn.tableBinder(sqlS1);
+            dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             
             //labels
-            labelpId.Visible = false;
+            lblPId.Visible = false;
 
-            labelLid.Visible = true;
-            labelLid.Location = new Point(6, 11); //Base labelpId location
+            lblLid.Visible = true;
+            lblLid.Location = new Point(6, 11); //Base labelpId location
 
-            labelPosition.Visible = false;
+            lblPosition.Visible = false;
 
             //textboxes
-            pIdTextbox.Visible = false;
+            tbPId.Visible = false;
 
-            LidTextbox.Visible = true;
-            LidTextbox.Location = new Point(10, 32); //Base pIdTextbox location
-            LidTextbox.Text = "";
+            tbLid.Visible = true;
+            tbLid.Location = new Point(10, 32); //Base pIdTextbox location
+            tbLid.Text = "";
 
-            positionTextBox.Visible = false;
+            tbPosition.Visible = false;
 
             //knapper
-            InsertToList.Visible = false;
-            DeleteFromListButton.Visible = false;
+            btnInsertToList.Visible = false;
+            btnDeleteFromListButton.Visible = false;
 
-            btnVisVentelisteFor.Visible = true;
-            btnVisVentelisteFor.Location = new Point(0, 0); //Base btnVisVentelisteFor location
+            btnShowList.Visible = true;
+            btnShowList.Location = new Point(0, 0); //Base btnVisVentelisteFor location
 
-            GetPosition.Visible = false;
+            btnGetPosition.Visible = false;
         }
     }
 }

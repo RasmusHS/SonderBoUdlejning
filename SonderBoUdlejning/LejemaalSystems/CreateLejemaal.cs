@@ -15,7 +15,7 @@ namespace SonderBoUdlejning.LejemaalSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opretter en lejemål
-        public void opretLejemaal(string adresse, string postNr, string Lid)
+        public void createLejemaal(string adresse, string postNr, string Lid)
         {
             string sqlS = "INSERT INTO Lejemaal VALUES (@adresse, @postNr, @Lid, NULL, NULL, NULL)"; //Definere SQL Query med parametrenavne
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
