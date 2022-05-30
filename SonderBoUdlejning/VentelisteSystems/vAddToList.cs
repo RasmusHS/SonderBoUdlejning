@@ -17,7 +17,7 @@ namespace SonderBoUdlejning.VentelisteSystems
         public void vAddTo(string pId, string Lid)
         {
             //Standard SQL Query (Kasper ved mere om den her)
-            string sqlS = "IF NOT EXISTS (SELECT * FROM Venteliste WHERE pId = @pId AND bid = @Lid) BEGIN INSERT INTO Venteliste(pId, Lid, signUpDato) VALUES (@pId, @Lid, getdate()) END";
+            string sqlS = "IF NOT EXISTS (SELECT * FROM Venteliste WHERE pId = @pId AND Lid = @Lid) BEGIN INSERT INTO Venteliste(pId, Lid, signUpDato) VALUES (@pId, @Lid, getdate()) END";
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
             SqlCommand cmd = new SqlCommand(sqlS, conn); //Opretter SQL kommandoen
             cmd.Parameters.Clear(); //Rydder parametre fra kommandoen
@@ -35,12 +35,14 @@ namespace SonderBoUdlejning.VentelisteSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 if (cmd.ExecuteNonQuery() == -1) //Tjekker om personen allerede er på ventelisten til en bestemt lejemål type
                 {
-                    MessageBox.Show("Denne person er allerede på ventelisten til denne lejemål!");
+                    //MessageBox.Show("Denne person er allerede på ventelisten til denne lejemål!");
+                    ErrorMessage.ErrorList.Add("\nDenne person er allerede på ventelisten til denne lejemål!");
                 }
                 else
                 {
                     //cmd.ExecuteNonQuery();
-                    MessageBox.Show("Personen er blevet tilføjet til ventelisten");
+                    //MessageBox.Show("Personen er blevet tilføjet til ventelisten");
+                    ErrorMessage.ErrorList.Add("\nPersonen er blevet tilføjet til ventelisten");
                 }
                 conn.Close();
             }

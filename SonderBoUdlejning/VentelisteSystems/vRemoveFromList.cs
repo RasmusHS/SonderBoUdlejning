@@ -14,7 +14,7 @@ namespace SonderBoUdlejning.VentelisteSystems
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der fjerner en person fra en venteliste
-        public void vRemoveFrList(string pId, string Lid)
+        public void vRemoveFrList(string pId, string Lid, bool prompt)
         {
             string sqlS = "DELETE FROM Venteliste WHERE pId = @pId AND Lid = @Lid"; //Standard SQL Query
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen
@@ -32,23 +32,29 @@ namespace SonderBoUdlejning.VentelisteSystems
             try
             {
                 conn.Open(); //Åbner forbindelsen til databasen
-                
-                //Dobbelt tjekker om man ønsker at fjerne personen fra en venteliste
-                DialogResult dialogResult = MessageBox.Show("Er du sikker på du vil slette denne entry på ventelisten?", "Er du sikker?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes) //Hvis ja
+
+                if (prompt == true)
+                {
+                    //Dobbelt tjekker om man ønsker at fjerne personen fra en venteliste
+                    DialogResult dialogResult = MessageBox.Show("Er du sikker på du vil slette denne entry på ventelisten?", "Er du sikker?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) //Hvis ja
+                    {
+                        cmd.ExecuteNonQuery(); //Udfører kommandoen
+                        //MessageBox.Show($"SUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Vis beskedboks med besked om succes
+                        ErrorMessage.ErrorList.Add($"\nSUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Genbruger ErrorMessage klassen til at vise respons til brugeren
+                    }
+                    else if (dialogResult == DialogResult.No) //Hvis nej
+                    {
+                        cmd.Cancel(); //Aflys kommandoen
+                        conn.Close(); //Lukker forbindelsen til databasen
+                        ErrorMessage.ErrorList.Add("\nIntet blev slettet"); //Genbruger ErrorMessage klassen til at vise respons til brugeren
+                        return; //Afslutter metoden
+                    }
+                }
+                else
                 {
                     cmd.ExecuteNonQuery(); //Udfører kommandoen
-                    MessageBox.Show("SUCCESS :\nEntry blev fjernet med værdierne:\n(" + //Vis beskedboks med besked om succes
-                                    cmd.Parameters["@pId"].Value + ", " +
-                                    cmd.Parameters["@Lid"].Value +
-                                    ")");
-                }
-                else if (dialogResult == DialogResult.No) //Hvis nej
-                {
-                    cmd.Cancel(); //Aflys kommandoen
-                    conn.Close(); //Lukker forbindelsen til databasen
-                    MessageBox.Show("Intet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
-                    return; //Afslutter metoden
+                    ErrorMessage.ErrorList.Add($"\nSUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Genbruger ErrorMessage klassen til at vise respons til brugeren
                 }
                 conn.Close(); //Lukker forbindelsen til databasen
             }

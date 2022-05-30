@@ -33,13 +33,13 @@ namespace SonderBoUdlejning.personCRUD
                 if (dialogResult == DialogResult.Yes)
                 {
                     cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
-                    MessageBox.Show($"SUCCESS :\nMedlem med tlf nr. {pTlf} blev slettet fra databasen."); //Vis beskedboks med besked om succes
+                    ErrorMessage.ErrorList.Add($"\nSUCCESS :\nMedlem med tlf nr. {pTlf} blev slettet fra databasen."); //Vis beskedboks med besked om succes
                 }
                 else if (dialogResult == DialogResult.No) //Hvis nej
                 {
                     cmd.Cancel(); //Aflys kommandoen
                     conn.Close(); //Lukker forbindelsen til databasen
-                    MessageBox.Show("Intet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
+                    ErrorMessage.ErrorList.Add("\nIntet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
                     return; //Afslutter metoden
                 }
                 conn.Close(); //Lukker forbindelsen til databasen

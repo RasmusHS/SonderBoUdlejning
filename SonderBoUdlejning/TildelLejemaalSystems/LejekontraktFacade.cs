@@ -119,7 +119,7 @@ namespace SonderBoUdlejning.TildelLejemaalSystems
                 document.Close(); //Lukker pdf dokumentet
                 writer.Close(); //Lukker pdf dokumentets writer
             }
-            MessageBox.Show($@"Lejekontrakt blev genereret og ligger i C:\Brugere\{userName}\Dokumenter\SønderBoUdlejning\Kontrakter\Aktive_Lejekontrakter");
+            ErrorMessage.ErrorList.Add($@"Lejekontrakt blev genereret og ligger i C:\Brugere\{userName}\Dokumenter\SønderBoUdlejning\Kontrakter\Aktive_Lejekontrakter");
         }
     }
 }

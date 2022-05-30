@@ -24,7 +24,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(lejemaalNr))
             {
-                ErrorMessage.ErrorList.Add("Lejemåls nr. indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nLejemåls nr. indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -34,7 +34,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(lejemaalNr)))
                     {
-                        ErrorMessage.ErrorList.Add("Lejemåls nr. må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("\nLejemåls nr. må kun indeholde tal");
                         return false;
                     }
                     else
@@ -54,7 +54,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(adresse)) //Tjekker efter SQL injection
             {
-                ErrorMessage.ErrorList.Add("Adresse indeholder ugyldige tegn"); //Tilføjer fejlbesked til errorlist
+                ErrorMessage.ErrorList.Add("\nAdresse indeholder ugyldige tegn"); //Tilføjer fejlbesked til errorlist
                 ErrorMessage.injectedSQL = 1; //Sætter injectedSQL til 1
                 return false; //Returnerer false
             }
@@ -64,7 +64,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!adresseReg.IsMatch(adresse)) || (adresse.Length > 50)) //Tjekker om adresse indeholder ugyldige tegn og at adressen ikke er længere end 50 tegn
                     {
-                        ErrorMessage.ErrorList.Add("Adresse må ikke indeholde ugyldige tegne eller være længere end 50 tegn"); //Tilføjer fejlbesked til errorlist
+                        ErrorMessage.ErrorList.Add("\nAdresse må ikke indeholde ugyldige tegne eller være længere end 50 tegn"); //Tilføjer fejlbesked til errorlist
                         return false; //Returnerer false
                     }
                     else //Hvis adresse er gyldig
@@ -84,7 +84,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(postNr))
             {
-                ErrorMessage.ErrorList.Add("PostNr indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nPostNr indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -94,7 +94,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(postNr)) || (postNr.Length != 4))
                     {
-                        ErrorMessage.ErrorList.Add("PostNr må kun indeholde tal og skal være 4 cifre");
+                        ErrorMessage.ErrorList.Add("\nPostNr må kun indeholde tal og skal være 4 cifre");
                         return false;
                     }
                     else
@@ -114,7 +114,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(Lid))
             {
-                ErrorMessage.ErrorList.Add("Lejemål ID indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nLejemål ID indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -124,7 +124,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(Lid)))
                     {
-                        ErrorMessage.ErrorList.Add("Lejemål ID må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("\nLejemål ID må kun indeholde tal");
                         return false;
                     }
                     else
@@ -145,7 +145,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(indDato))
             {
-                ErrorMessage.ErrorList.Add("Indflytningsdato indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nIndflytningsdato indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -155,7 +155,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((indDato.Length != 10) || (!dato.IsMatch(indDato)))
                     {
-                        ErrorMessage.ErrorList.Add("Indflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
+                        ErrorMessage.ErrorList.Add("\nIndflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
                         return false;
                     }
                     else
@@ -176,7 +176,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(udDato))
             {
-                ErrorMessage.ErrorList.Add("Udflytningsdato indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nUdflytningsdato indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -186,13 +186,13 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((udDato.Length != 10) || (!dato.IsMatch(udDato)))
                     {
-                        ErrorMessage.ErrorList.Add("Udflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
+                        ErrorMessage.ErrorList.Add("\nUdflytningsdato skal være på formatet dd-mm-åååå, skal være 10 tegn langt og må ikke indeholde bogstaver");
                         return false;
                     }
                     else if ((Convert.ToDateTime(udDato) < Convert.ToDateTime(indDato))) //Hvis udflytningsDato input er før indflytningsDato input
                     {
                         //Denne del bruges primært til opsigelse af boliger
-                        ErrorMessage.ErrorList.Add("Udflytningsdato skal være efter indflytningsdato"); //Tilføjer fejlbesked til errorlist
+                        ErrorMessage.ErrorList.Add("\nUdflytningsdato skal være efter indflytningsdato"); //Tilføjer fejlbesked til errorlist
                         return false; //Returnerer false
                     }
                     else
@@ -212,7 +212,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(lType))
             {
-                ErrorMessage.ErrorList.Add("lType indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nlType indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -220,7 +220,7 @@ namespace SonderBoUdlejning.InputCheck
             {
                 if ((!bogstaver.IsMatch(lType)))
                 {
-                    ErrorMessage.ErrorList.Add("lType må kun indeholde bogstaver");
+                    ErrorMessage.ErrorList.Add("\nlType må kun indeholde bogstaver");
                     return false;
                 }
                 else
@@ -235,7 +235,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(antalRum))
             {
-                ErrorMessage.ErrorList.Add("antalRum indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nantalRum indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -243,7 +243,7 @@ namespace SonderBoUdlejning.InputCheck
             {
                 if ((!retal.IsMatch(antalRum)))
                 {
-                    ErrorMessage.ErrorList.Add("antalRum må kun indeholde tal");
+                    ErrorMessage.ErrorList.Add("\nantalRum må kun indeholde tal");
                     return false;
                 }
                 else
@@ -258,7 +258,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(kvm))
             {
-                ErrorMessage.ErrorList.Add("kvm indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nkvm indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -266,7 +266,7 @@ namespace SonderBoUdlejning.InputCheck
             {
                 if ((!retal.IsMatch(kvm)))
                 {
-                    ErrorMessage.ErrorList.Add("kvm må kun indeholde tal");
+                    ErrorMessage.ErrorList.Add("\nkvm må kun indeholde tal");
                     return false;
                 }
                 else
@@ -281,7 +281,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(lejePris))
             {
-                ErrorMessage.ErrorList.Add("lejePris indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nlejePris indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -289,7 +289,7 @@ namespace SonderBoUdlejning.InputCheck
             {
                 if ((!retal.IsMatch(lejePris)))
                 {
-                    ErrorMessage.ErrorList.Add("lejePris må kun indeholde tal");
+                    ErrorMessage.ErrorList.Add("\nlejePris må kun indeholde tal");
                     return false;
                 }
                 else

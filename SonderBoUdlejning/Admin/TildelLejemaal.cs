@@ -344,6 +344,8 @@ namespace SonderBoUdlejning.Admin
             string slutDato = null;
 
             int checkForpId;
+            int pIdNavnMatch;
+            bool prompt;
 
             try
             {
@@ -370,8 +372,9 @@ namespace SonderBoUdlejning.Admin
                 if ((LidValid == true) && (pIdValid == true) && (indflytDatoValid == true))
                 {
                     checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Lejemaal WHERE pId = {pId}"));
+                    pIdNavnMatch = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Person WHERE pId = {pId} AND fNavn = '{lejerNavn}'"));
 
-                    if (checkForpId > 0)
+                    if ((checkForpId > 0) || (pIdNavnMatch != 1))
                     {
                         MessageBox.Show("Der er allerede en beboer med det pId i systemet");
                         return;
@@ -409,8 +412,10 @@ namespace SonderBoUdlejning.Admin
 
                         //Sletter personen fra ventelisten
                         VentelisteFacade vDelete = new VentelisteFacade();
-                        vDelete.RemoveFromList(pId, Lid);
+                        prompt = false;
+                        vDelete.RemoveFromList(pId, Lid, prompt);
                         dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
+                        ErrorMessage.errorMessage(); //Viser succesfuld respons til brugeren
                     }
                 }
                 else

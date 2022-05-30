@@ -36,11 +36,11 @@ namespace SonderBoUdlejning.LejemaalSystems
                 {
                     if (cmd.ExecuteNonQuery() == -1)
                     {
-                        MessageBox.Show("Lejemålet blev ikke slettet, da den ikke eksisterede i forvejen"); //Besked om at boligen er slettet
+                        ErrorMessage.ErrorList.Add("\nLejemålet blev ikke slettet, da den ikke eksisterede i forvejen"); //Besked om at boligen er slettet
                     }
                     else
                     {
-                        MessageBox.Show($"Lejemål {lejemaalNr} blev slettet");
+                        ErrorMessage.ErrorList.Add($"\nLejemål {lejemaalNr} blev slettet");
                         //MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + cmd.Parameters["@lejemaalNr"].Value + ")"); //Vis besked om at kommandoen er udført
                     }
                 }
@@ -48,7 +48,7 @@ namespace SonderBoUdlejning.LejemaalSystems
                 {
                     cmd.Cancel(); //Aflys kommandoen
                     conn.Close(); //Lukker forbindelsen til databasen
-                    MessageBox.Show("Intet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
+                    ErrorMessage.ErrorList.Add("\nIntet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
                     return; //Afslutter metoden
                 }
                 conn.Close(); //Lukker forbindelsen

@@ -109,6 +109,7 @@ namespace SonderBoUdlejning.Admin
             {
                 vAddToList.AddToList(pId, Lid); //Tilføjer person til venteliste for en lejemål
                 dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
+                ErrorMessage.errorMessage(); //Viser success meddelelse
             }
             else
             {
@@ -132,12 +133,14 @@ namespace SonderBoUdlejning.Admin
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
             bool LidValid = LejemaalInputCheck.LidCheck(Lid);
+            bool prompt = true;
 
             //Tjekker om person ID og lejemål Nr er gyldige
             if ((pIdValid == true) && (LidValid == true))
             {
-                vDeleteFromList.RemoveFromList(pId, Lid); //Sletter en person fra en venteliste
+                vDeleteFromList.RemoveFromList(pId, Lid, prompt); //Sletter en person fra en venteliste
                 dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer venteliste dataGridView
+                ErrorMessage.errorMessage(); //Viser success meddelelse
             }
             else
             {
@@ -207,7 +210,7 @@ namespace SonderBoUdlejning.Admin
         private void btnAddToList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
-            panelInputs.Size = new Size(331, 192);
+            panelInputs.Size = new Size(360, 192);
 
             dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
 
@@ -243,7 +246,7 @@ namespace SonderBoUdlejning.Admin
         private void btnDeleteFromList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
-            panelInputs.Size = new Size(331, 192);
+            panelInputs.Size = new Size(360, 192);
 
             dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             
@@ -281,7 +284,7 @@ namespace SonderBoUdlejning.Admin
         private void btnGetPos_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
-            panelInputs.Size = new Size(331, 192);
+            panelInputs.Size = new Size(360, 192);
 
             dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             
@@ -321,7 +324,7 @@ namespace SonderBoUdlejning.Admin
         private void btnShowList_Click(object sender, EventArgs e)
         {
             panelInputs.Visible = true;
-            panelInputs.Size = new Size(331, 192);
+            panelInputs.Size = new Size(360, 192);
 
             dgvVenteListe.DataSource = tableConn.tableBinder(sqlS1);
             

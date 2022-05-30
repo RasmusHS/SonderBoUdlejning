@@ -24,7 +24,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(pId))
             {
-                ErrorMessage.ErrorList.Add("Person ID indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nPerson ID indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -34,7 +34,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(pId)))
                     {
-                        ErrorMessage.ErrorList.Add("Person ID må kun indeholde tal");
+                        ErrorMessage.ErrorList.Add("\nPerson ID må kun indeholde tal");
                         return false;
                     }
                     else
@@ -54,7 +54,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(navn))
             {
-                ErrorMessage.ErrorList.Add("Navn indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nNavn indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -62,7 +62,7 @@ namespace SonderBoUdlejning.InputCheck
             {
                 if ((!bogstaver.IsMatch(navn)) || (navn.Length > 50))
                 {
-                    ErrorMessage.ErrorList.Add("Navn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
+                    ErrorMessage.ErrorList.Add("\nNavn må kun indeholde bogstaver og må ikke være længere end 50 tegn");
                     return false;
                 }
                 else
@@ -77,7 +77,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(mail))
             {
-                ErrorMessage.ErrorList.Add("Mail indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nMail indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -87,7 +87,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((mail.Length > 50) || (!email.IsMatch(mail)))
                     {
-                        ErrorMessage.ErrorList.Add("Mail må ikke være længere end 50 tegn og skal være en gyldig email uden æ, ø eller å");
+                        ErrorMessage.ErrorList.Add("\nMail må ikke være længere end 50 tegn og skal være en gyldig email uden æ, ø eller å");
                         return false;
                     }
                     else
@@ -107,7 +107,7 @@ namespace SonderBoUdlejning.InputCheck
         {
             if (SQLInject.IsMatch(tlf))
             {
-                ErrorMessage.ErrorList.Add("Telefonnummer indeholder ugyldige tegn");
+                ErrorMessage.ErrorList.Add("\nTelefonnummer indeholder ugyldige tegn");
                 ErrorMessage.injectedSQL = 1;
                 return false;
             }
@@ -117,7 +117,7 @@ namespace SonderBoUdlejning.InputCheck
                 {
                     if ((!retal.IsMatch(tlf)) || (tlf.Length != 8))
                     {
-                        ErrorMessage.ErrorList.Add("Telefonnummer må kun indeholde tal og skal være 8 cifre");
+                        ErrorMessage.ErrorList.Add("\nTelefonnummer må kun indeholde tal og skal være 8 cifre");
                         return false;
                     }
                     else

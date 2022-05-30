@@ -76,10 +76,11 @@ namespace SonderBoUdlejning.Admin
         {
             string pId = tbPId.Text; //Tager inputtet fra person ID textboxen
 
-            string Lid = tbLid.Text; //Tager inputtet fra lejemål Nr textboxen
+            string lejemaalNr = tbLid.Text; //Tager inputtet fra lejemål Nr textboxen
 
             //Bruger inputtene fra person ID og lejemål Nr textboxene til finde adresse, postNr og hvornår personen flyttede ind
-            string lejemaalNr = "";
+            //string lejemaalNr = "";
+            string Lid = "";
             string adresse = "";
             string postNr = "";
             string indflytDato = "";
@@ -97,7 +98,7 @@ namespace SonderBoUdlejning.Admin
             //MessageBox.Show($"{adresse}\n{postNr}\n{Lid}\n{pId}\n{indflytDato}\n{udflytDato}");
 
             //Checker om person ID eller lejemål Nr. er tomt
-            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(Lid)))
+            if ((string.IsNullOrEmpty(pId)) || (string.IsNullOrEmpty(lejemaalNr)))
             {
                 //Viser fejlbesked hvis person ID eller lejemål Nr er tomt
                 MessageBox.Show("Alle felter skal udfyldes");
@@ -105,7 +106,7 @@ namespace SonderBoUdlejning.Admin
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
-            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
+            bool lejemaalNrValid = LejemaalInputCheck.LejemaalCheck(lejemaalNr);
 
             try
             {
@@ -116,19 +117,38 @@ namespace SonderBoUdlejning.Admin
                 udflytDatoValid = false;
             }
 
+            int checklejemaalNrPIdMatch;
+            
             //Checker inputtene for længde og karakterer
-            if ((pIdValid == true) && (LidValid == true) && (udflytDatoValid == true))
+            if ((pIdValid == true) && (lejemaalNrValid == true) && (udflytDatoValid == true))
             {
-                lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
-                adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND Lid = {Lid}");
-                postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
-                indflytDato = LejemaalInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                checklejemaalNrPIdMatch = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(lejemaalNr) FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}"));
+                if ((checklejemaalNrPIdMatch != 1))
+                {
+                    Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}");
+                    adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}");
+                    postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
+                    indflytDato = LejemaalInputCheck.indDato = tableConn.textBoxBinder($"SELECT CONVERT(VARCHAR(10), indflytDato, 105) FROM Lejemaal WHERE lejemaalNr = {lejemaalNr}");
 
-                LejemaalFacade opsigLejemaal = new LejemaalFacade();
-                erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
-                opsigLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateLejemaal metoden til at opsige boligen
-                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
-                dgvPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
+                    LejemaalFacade opsigLejemaal = new LejemaalFacade();
+                    erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
+                    opsigLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateLejemaal metoden til at opsige boligen
+                    dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
+                    dgvPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
+                    ErrorMessage.errorMessage(); //Viser success besked
+                }
+                else if ((checklejemaalNrPIdMatch > 1))
+                {
+                    //Viser fejlbesked hvis person ID og lejemål nr. matcher flere gange
+                    MessageBox.Show("Person ID og lejemål Nr. matcher flere gange. Kontakt administrator");
+                    return; //Stopper koden
+                }
+                else
+                {
+                    //Viser fejlbesked hvis person ID og lejemål nr. ikke matcher
+                    MessageBox.Show($"Personen med person ID {pId} er ikke lejer af lejemål nr. {lejemaalNr}");
+                    return; //Stopper koden
+                }
             }
             else
             {

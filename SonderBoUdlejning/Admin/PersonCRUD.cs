@@ -84,6 +84,7 @@ namespace SonderBoUdlejning.Admin
             {
                 pCreate.cPerson(navn, mail, tlf); //Opretter person
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+                ErrorMessage.errorMessage(); //Viser succesfuld respons til brugeren
             }
             else
             {
@@ -269,6 +270,7 @@ namespace SonderBoUdlejning.Admin
                 //Opdaterer personen
                 pUpdate.uPerson(navn, mail, tlf, pId, erBeboer);
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+                ErrorMessage.errorMessage(); //Viser succesfuld respons til brugeren
             }
             else
             {
@@ -302,6 +304,7 @@ namespace SonderBoUdlejning.Admin
             {
                 pDelete.dPerson(tlf); //Sletter personen
                 dgvPersonCRUD.DataSource = tableConn.tableBinder(sqlS1); //Opdaterer dataGridView
+                ErrorMessage.errorMessage(); //Viser succesfuld respons til brugeren
             }
             else
             {

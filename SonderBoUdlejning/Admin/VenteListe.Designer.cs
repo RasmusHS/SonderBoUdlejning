@@ -44,6 +44,7 @@
             this.btnDeleteFromListButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnVisGetPosition = new System.Windows.Forms.Button();
+            this.btnGetPosition = new System.Windows.Forms.Button();
             this.tbPosition = new System.Windows.Forms.TextBox();
             this.lblPosition = new System.Windows.Forms.Label();
             this.panelInputs = new System.Windows.Forms.Panel();
@@ -52,7 +53,6 @@
             this.btnVisAddToList = new System.Windows.Forms.Button();
             this.btnVisDeleteFromList = new System.Windows.Forms.Button();
             this.btnVisShowList = new System.Windows.Forms.Button();
-            this.btnGetPosition = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteListe)).BeginInit();
@@ -176,7 +176,7 @@
             this.tbPId.Location = new System.Drawing.Point(10, 32);
             this.tbPId.Margin = new System.Windows.Forms.Padding(1);
             this.tbPId.Name = "tbPId";
-            this.tbPId.Size = new System.Drawing.Size(129, 26);
+            this.tbPId.Size = new System.Drawing.Size(167, 26);
             this.tbPId.TabIndex = 3;
             // 
             // tbLid
@@ -185,7 +185,7 @@
             this.tbLid.Location = new System.Drawing.Point(10, 94);
             this.tbLid.Margin = new System.Windows.Forms.Padding(0);
             this.tbLid.Name = "tbLid";
-            this.tbLid.Size = new System.Drawing.Size(129, 26);
+            this.tbLid.Size = new System.Drawing.Size(167, 26);
             this.tbLid.TabIndex = 4;
             // 
             // lblPId
@@ -206,9 +206,9 @@
             this.lblLid.Location = new System.Drawing.Point(6, 74);
             this.lblLid.Margin = new System.Windows.Forms.Padding(0);
             this.lblLid.Name = "lblLid";
-            this.lblLid.Size = new System.Drawing.Size(134, 20);
+            this.lblLid.Size = new System.Drawing.Size(171, 20);
             this.lblLid.TabIndex = 6;
-            this.lblLid.Text = "Indtast lejemål nr.";
+            this.lblLid.Text = "Indtast lejemålstype ID";
             // 
             // btnDeleteFromListButton
             // 
@@ -236,6 +236,20 @@
             this.toolTip.SetToolTip(this.btnVisGetPosition, "Få en persons positionen på en specifik lejemål");
             this.btnVisGetPosition.UseVisualStyleBackColor = true;
             this.btnVisGetPosition.Click += new System.EventHandler(this.btnGetPos_Click);
+            // 
+            // btnGetPosition
+            // 
+            this.btnGetPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGetPosition.Location = new System.Drawing.Point(0, 287);
+            this.btnGetPosition.Name = "btnGetPosition";
+            this.btnGetPosition.Size = new System.Drawing.Size(152, 54);
+            this.btnGetPosition.TabIndex = 12;
+            this.btnGetPosition.Text = "Få position";
+            this.toolTip.SetToolTip(this.btnGetPosition, "Indtast kun pId for at slette den person fra alle ventelister.\r\nIndtast både pId " +
+        "og Lid for at slette en person på en specifik lejemål.\r\nIndtast kun Lid for at s" +
+        "lette alle på den boligs venteliste.");
+            this.btnGetPosition.UseVisualStyleBackColor = true;
+            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click);
             // 
             // tbPosition
             // 
@@ -267,7 +281,7 @@
             this.panelInputs.Location = new System.Drawing.Point(220, 338);
             this.panelInputs.Margin = new System.Windows.Forms.Padding(1);
             this.panelInputs.Name = "panelInputs";
-            this.panelInputs.Size = new System.Drawing.Size(331, 355);
+            this.panelInputs.Size = new System.Drawing.Size(360, 355);
             this.panelInputs.TabIndex = 11;
             // 
             // panel1
@@ -278,7 +292,7 @@
             this.panel1.Controls.Add(this.btnDeleteFromListButton);
             this.panel1.Controls.Add(this.lblPosition);
             this.panel1.Controls.Add(this.tbPosition);
-            this.panel1.Location = new System.Drawing.Point(163, 11);
+            this.panel1.Location = new System.Drawing.Point(195, 11);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(152, 341);
             this.panel1.TabIndex = 12;
@@ -330,20 +344,6 @@
             this.btnVisShowList.Text = "Vis venteliste";
             this.btnVisShowList.UseVisualStyleBackColor = true;
             this.btnVisShowList.Click += new System.EventHandler(this.btnShowList_Click);
-            // 
-            // btnGetPosition
-            // 
-            this.btnGetPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetPosition.Location = new System.Drawing.Point(0, 287);
-            this.btnGetPosition.Name = "btnGetPosition";
-            this.btnGetPosition.Size = new System.Drawing.Size(152, 54);
-            this.btnGetPosition.TabIndex = 12;
-            this.btnGetPosition.Text = "Få position";
-            this.toolTip.SetToolTip(this.btnGetPosition, "Indtast kun pId for at slette den person fra alle ventelister.\r\nIndtast både pId " +
-        "og Lid for at slette en person på en specifik lejemål.\r\nIndtast kun Lid for at s" +
-        "lette alle på den boligs venteliste.");
-            this.btnGetPosition.UseVisualStyleBackColor = true;
-            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click);
             // 
             // VenteListe
             // 

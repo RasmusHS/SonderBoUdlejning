@@ -18,10 +18,10 @@ namespace SonderBoUdlejning.VentelisteSystems
         }
 
         //Fjerner et medlem fra en venteliste
-        public void RemoveFromList(string pId, string Lid)
+        public void RemoveFromList(string pId, string Lid, bool prompt)
         {
             vRemoveFromList vRemove = new vRemoveFromList();
-            vRemove.vRemoveFrList(pId, Lid);
+            vRemove.vRemoveFrList(pId, Lid, prompt);
         }
 
         //Finder et medlems position i en venteliste

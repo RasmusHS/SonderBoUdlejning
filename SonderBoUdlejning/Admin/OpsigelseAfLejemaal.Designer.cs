@@ -30,8 +30,8 @@
         {
             this.tbLid = new System.Windows.Forms.TextBox();
             this.tbPId = new System.Windows.Forms.TextBox();
-            this.labelPiD = new System.Windows.Forms.Label();
-            this.labelLid = new System.Windows.Forms.Label();
+            this.lblPId = new System.Windows.Forms.Label();
+            this.lblLejemaalNr = new System.Windows.Forms.Label();
             this.CBOpsig = new System.Windows.Forms.CheckBox();
             this.comboMonth = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -52,45 +52,45 @@
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbBiD
+            // tbLid
             // 
             this.tbLid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbLid.Location = new System.Drawing.Point(176, 37);
             this.tbLid.Margin = new System.Windows.Forms.Padding(2);
-            this.tbLid.Name = "tbBiD";
+            this.tbLid.Name = "tbLid";
             this.tbLid.Size = new System.Drawing.Size(134, 26);
             this.tbLid.TabIndex = 2;
             // 
-            // tbPiD
+            // tbPId
             // 
             this.tbPId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPId.Location = new System.Drawing.Point(16, 37);
             this.tbPId.Margin = new System.Windows.Forms.Padding(2);
-            this.tbPId.Name = "tbPiD";
+            this.tbPId.Name = "tbPId";
             this.tbPId.Size = new System.Drawing.Size(133, 26);
             this.tbPId.TabIndex = 3;
             // 
-            // labelPiD
+            // lblPId
             // 
-            this.labelPiD.AutoSize = true;
-            this.labelPiD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPiD.Location = new System.Drawing.Point(12, 15);
-            this.labelPiD.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelPiD.Name = "labelPiD";
-            this.labelPiD.Size = new System.Drawing.Size(137, 20);
-            this.labelPiD.TabIndex = 4;
-            this.labelPiD.Text = "Indtast person ID:";
+            this.lblPId.AutoSize = true;
+            this.lblPId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPId.Location = new System.Drawing.Point(12, 15);
+            this.lblPId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPId.Name = "lblPId";
+            this.lblPId.Size = new System.Drawing.Size(137, 20);
+            this.lblPId.TabIndex = 4;
+            this.lblPId.Text = "Indtast person ID:";
             // 
-            // labelLid
+            // lblLejemaalNr
             // 
-            this.labelLid.AutoSize = true;
-            this.labelLid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLid.Location = new System.Drawing.Point(172, 15);
-            this.labelLid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelLid.Name = "labelLid";
-            this.labelLid.Size = new System.Drawing.Size(138, 20);
-            this.labelLid.TabIndex = 5;
-            this.labelLid.Text = "Indtast lejemål nr: ";
+            this.lblLejemaalNr.AutoSize = true;
+            this.lblLejemaalNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaalNr.Location = new System.Drawing.Point(172, 15);
+            this.lblLejemaalNr.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLejemaalNr.Name = "lblLejemaalNr";
+            this.lblLejemaalNr.Size = new System.Drawing.Size(142, 20);
+            this.lblLejemaalNr.TabIndex = 5;
+            this.lblLejemaalNr.Text = "Indtast lejemål nr.: ";
             // 
             // CBOpsig
             // 
@@ -104,14 +104,14 @@
             this.CBOpsig.Text = "Ønsker at opsige lejemål?";
             this.CBOpsig.UseVisualStyleBackColor = true;
             // 
-            // comboBoxMonth
+            // comboMonth
             // 
             this.comboMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboMonth.FormattingEnabled = true;
             this.comboMonth.Location = new System.Drawing.Point(15, 166);
             this.comboMonth.Margin = new System.Windows.Forms.Padding(2);
-            this.comboMonth.Name = "comboBoxMonth";
+            this.comboMonth.Name = "comboMonth";
             this.comboMonth.Size = new System.Drawing.Size(114, 28);
             this.comboMonth.TabIndex = 7;
             // 
@@ -124,8 +124,8 @@
             this.panel1.Controls.Add(this.labelMånedOpsig);
             this.panel1.Controls.Add(this.comboMonth);
             this.panel1.Controls.Add(this.CBOpsig);
-            this.panel1.Controls.Add(this.labelLid);
-            this.panel1.Controls.Add(this.labelPiD);
+            this.panel1.Controls.Add(this.lblLejemaalNr);
+            this.panel1.Controls.Add(this.lblPId);
             this.panel1.Controls.Add(this.tbPId);
             this.panel1.Controls.Add(this.tbLid);
             this.panel1.Location = new System.Drawing.Point(22, 474);
@@ -134,13 +134,13 @@
             this.panel1.Size = new System.Drawing.Size(518, 218);
             this.panel1.TabIndex = 9;
             // 
-            // comboBoxYear
+            // comboYear
             // 
             this.comboYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboYear.FormattingEnabled = true;
             this.comboYear.Location = new System.Drawing.Point(157, 166);
-            this.comboYear.Name = "comboBoxYear";
+            this.comboYear.Name = "comboYear";
             this.comboYear.Size = new System.Drawing.Size(121, 28);
             this.comboYear.TabIndex = 12;
             // 
@@ -178,7 +178,7 @@
             this.labelMånedOpsig.TabIndex = 9;
             this.labelMånedOpsig.Text = "Måned";
             // 
-            // DGVLejemaal
+            // dgvLejemaal
             // 
             this.dgvLejemaal.AllowUserToAddRows = false;
             this.dgvLejemaal.AllowUserToDeleteRows = false;
@@ -186,12 +186,12 @@
             this.dgvLejemaal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLejemaal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLejemaal.Location = new System.Drawing.Point(6, 6);
-            this.dgvLejemaal.Name = "DGVLejemaal";
+            this.dgvLejemaal.Name = "dgvLejemaal";
             this.dgvLejemaal.ReadOnly = true;
             this.dgvLejemaal.Size = new System.Drawing.Size(896, 391);
             this.dgvLejemaal.TabIndex = 10;
             // 
-            // DGVPerson
+            // dgvPerson
             // 
             this.dgvPerson.AllowUserToAddRows = false;
             this.dgvPerson.AllowUserToDeleteRows = false;
@@ -199,7 +199,7 @@
             this.dgvPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPerson.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPerson.Location = new System.Drawing.Point(6, 6);
-            this.dgvPerson.Name = "DGVPerson";
+            this.dgvPerson.Name = "dgvPerson";
             this.dgvPerson.ReadOnly = true;
             this.dgvPerson.Size = new System.Drawing.Size(728, 391);
             this.dgvPerson.TabIndex = 11;
@@ -272,8 +272,8 @@
         #endregion
         private System.Windows.Forms.TextBox tbLid;
         private System.Windows.Forms.TextBox tbPId;
-        private System.Windows.Forms.Label labelPiD;
-        private System.Windows.Forms.Label labelLid;
+        private System.Windows.Forms.Label lblPId;
+        private System.Windows.Forms.Label lblLejemaalNr;
         private System.Windows.Forms.CheckBox CBOpsig;
         private System.Windows.Forms.ComboBox comboMonth;
         private System.Windows.Forms.Panel panel1;

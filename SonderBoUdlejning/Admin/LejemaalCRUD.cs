@@ -112,6 +112,7 @@ namespace SonderBoUdlejning.Admin
                 CreateLejemaal.cLejemaal(adresse, postNr, Lid); //opretter lejemål
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                ErrorMessage.errorMessage(); //Viser success besked
             }
             else
             {
@@ -268,6 +269,7 @@ namespace SonderBoUdlejning.Admin
                 UpdateLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                ErrorMessage.errorMessage(); //Viser success besked                
             }
             else
             {
@@ -296,6 +298,7 @@ namespace SonderBoUdlejning.Admin
                 DeleteLejemaal.dLejemaal(lejemaalNr);
                 dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //Refresher lejemål dataGridView
                 dgvLejemaalsInfo.DataSource = tableConn.tableBinder(sqlS2); //Refresher boligInfo dataGridView
+                ErrorMessage.errorMessage(); //Viser success besked
             }
             else
             {
