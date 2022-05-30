@@ -255,9 +255,9 @@
     <Compile Include="TildelLejemaalSystems\LejekontraktFacade.cs" />
     <Compile Include="LejemaalSystems\ReadLejemaal.cs" />
     <Compile Include="UserIdentification.cs" />
-    <Compile Include="VentelisteSystems\ReadVenteliste.cs" />
+    <Compile Include="VentelisteSystems\vRead.cs" />
     <Compile Include="VentelisteSystems\vAddToList.cs" />
-    <Compile Include="VentelisteSystems\vFacade.cs" />
+    <Compile Include="VentelisteSystems\VentelisteFacade.cs" />
     <Compile Include="VentelisteSystems\vGetPos.cs" />
     <Compile Include="VentelisteSystems\vRemoveFromList.cs" />
     <EmbeddedResource Include="AdminMain.resx">

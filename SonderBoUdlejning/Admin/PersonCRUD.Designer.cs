@@ -44,16 +44,20 @@
             this.lblTlf = new System.Windows.Forms.Label();
             this.tbPId = new System.Windows.Forms.TextBox();
             this.lblPId = new System.Windows.Forms.Label();
-            this.panelContainer = new System.Windows.Forms.Panel();
-            this.panelRadioBtns = new System.Windows.Forms.Panel();
             this.panelIndhold = new System.Windows.Forms.Panel();
+            this.panelRadioBtns = new System.Windows.Forms.Panel();
+            this.panelBtns = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnOpret = new System.Windows.Forms.Button();
             this.btnRead = new System.Windows.Forms.Button();
             this.btnOpdater = new System.Windows.Forms.Button();
             this.btnSlet = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonCRUD)).BeginInit();
-            this.panelContainer.SuspendLayout();
+            this.panelIndhold.SuspendLayout();
             this.panelRadioBtns.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvPersonCRUD
@@ -62,17 +66,18 @@
             this.dgvPersonCRUD.AllowUserToDeleteRows = false;
             this.dgvPersonCRUD.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPersonCRUD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersonCRUD.Location = new System.Drawing.Point(27, 26);
+            this.dgvPersonCRUD.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPersonCRUD.Location = new System.Drawing.Point(6, 6);
             this.dgvPersonCRUD.Name = "dgvPersonCRUD";
             this.dgvPersonCRUD.ReadOnly = true;
             this.dgvPersonCRUD.RowHeadersWidth = 92;
-            this.dgvPersonCRUD.Size = new System.Drawing.Size(589, 209);
+            this.dgvPersonCRUD.Size = new System.Drawing.Size(785, 251);
             this.dgvPersonCRUD.TabIndex = 0;
             // 
             // tbNavn
             // 
             this.tbNavn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNavn.Location = new System.Drawing.Point(26, 88);
+            this.tbNavn.Location = new System.Drawing.Point(7, 103);
             this.tbNavn.Name = "tbNavn";
             this.tbNavn.Size = new System.Drawing.Size(171, 29);
             this.tbNavn.TabIndex = 1;
@@ -80,7 +85,7 @@
             // tbMail
             // 
             this.tbMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMail.Location = new System.Drawing.Point(26, 157);
+            this.tbMail.Location = new System.Drawing.Point(7, 178);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(171, 29);
             this.tbMail.TabIndex = 2;
@@ -88,7 +93,7 @@
             // tbTlf
             // 
             this.tbTlf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTlf.Location = new System.Drawing.Point(26, 221);
+            this.tbTlf.Location = new System.Drawing.Point(7, 251);
             this.tbTlf.Name = "tbTlf";
             this.tbTlf.Size = new System.Drawing.Size(171, 29);
             this.tbTlf.TabIndex = 3;
@@ -120,7 +125,7 @@
             // btnPersonC
             // 
             this.btnPersonC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPersonC.Location = new System.Drawing.Point(247, 127);
+            this.btnPersonC.Location = new System.Drawing.Point(327, 72);
             this.btnPersonC.Name = "btnPersonC";
             this.btnPersonC.Size = new System.Drawing.Size(130, 49);
             this.btnPersonC.TabIndex = 6;
@@ -131,7 +136,7 @@
             // btnPersonR
             // 
             this.btnPersonR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPersonR.Location = new System.Drawing.Point(403, 127);
+            this.btnPersonR.Location = new System.Drawing.Point(327, 127);
             this.btnPersonR.Name = "btnPersonR";
             this.btnPersonR.Size = new System.Drawing.Size(130, 49);
             this.btnPersonR.TabIndex = 7;
@@ -142,7 +147,7 @@
             // btnPersonU
             // 
             this.btnPersonU.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPersonU.Location = new System.Drawing.Point(247, 201);
+            this.btnPersonU.Location = new System.Drawing.Point(327, 182);
             this.btnPersonU.Name = "btnPersonU";
             this.btnPersonU.Size = new System.Drawing.Size(130, 49);
             this.btnPersonU.TabIndex = 8;
@@ -153,7 +158,7 @@
             // btnPersonD
             // 
             this.btnPersonD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPersonD.Location = new System.Drawing.Point(403, 201);
+            this.btnPersonD.Location = new System.Drawing.Point(327, 237);
             this.btnPersonD.Name = "btnPersonD";
             this.btnPersonD.Size = new System.Drawing.Size(130, 49);
             this.btnPersonD.TabIndex = 9;
@@ -176,90 +181,103 @@
             // lblNavn
             // 
             this.lblNavn.AutoSize = true;
-            this.lblNavn.Location = new System.Drawing.Point(23, 72);
+            this.lblNavn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNavn.Location = new System.Drawing.Point(3, 80);
             this.lblNavn.Name = "lblNavn";
-            this.lblNavn.Size = new System.Drawing.Size(36, 13);
+            this.lblNavn.Size = new System.Drawing.Size(49, 20);
             this.lblNavn.TabIndex = 11;
             this.lblNavn.Text = "Navn:";
             // 
             // lblMail
             // 
             this.lblMail.AutoSize = true;
-            this.lblMail.Location = new System.Drawing.Point(23, 141);
+            this.lblMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMail.Location = new System.Drawing.Point(3, 155);
             this.lblMail.Name = "lblMail";
-            this.lblMail.Size = new System.Drawing.Size(29, 13);
+            this.lblMail.Size = new System.Drawing.Size(41, 20);
             this.lblMail.TabIndex = 12;
             this.lblMail.Text = "Mail:";
             // 
             // lblTlf
             // 
             this.lblTlf.AutoSize = true;
-            this.lblTlf.Location = new System.Drawing.Point(23, 205);
+            this.lblTlf.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTlf.Location = new System.Drawing.Point(3, 228);
             this.lblTlf.Name = "lblTlf";
-            this.lblTlf.Size = new System.Drawing.Size(83, 13);
+            this.lblTlf.Size = new System.Drawing.Size(124, 20);
             this.lblTlf.TabIndex = 13;
             this.lblTlf.Text = "Telefonnummer:";
             // 
             // tbPId
             // 
             this.tbPId.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPId.Location = new System.Drawing.Point(26, 27);
+            this.tbPId.Location = new System.Drawing.Point(7, 28);
             this.tbPId.Name = "tbPId";
             this.tbPId.Size = new System.Drawing.Size(171, 29);
             this.tbPId.TabIndex = 14;
+            this.tbPId.TextChanged += new System.EventHandler(this.tbPId_TextChanged);
             // 
             // lblPId
             // 
             this.lblPId.AutoSize = true;
-            this.lblPId.Location = new System.Drawing.Point(23, 11);
+            this.lblPId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPId.Location = new System.Drawing.Point(3, 5);
             this.lblPId.Name = "lblPId";
-            this.lblPId.Size = new System.Drawing.Size(57, 13);
+            this.lblPId.Size = new System.Drawing.Size(84, 20);
             this.lblPId.TabIndex = 15;
             this.lblPId.Text = "Person ID:";
             // 
-            // panelContainer
+            // panelIndhold
             // 
-            this.panelContainer.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelContainer.Controls.Add(this.panelRadioBtns);
-            this.panelContainer.Controls.Add(this.lblPId);
-            this.panelContainer.Controls.Add(this.btnPersonD);
-            this.panelContainer.Controls.Add(this.tbPId);
-            this.panelContainer.Controls.Add(this.btnPersonU);
-            this.panelContainer.Controls.Add(this.btnPersonC);
-            this.panelContainer.Controls.Add(this.btnPersonR);
-            this.panelContainer.Controls.Add(this.tbNavn);
-            this.panelContainer.Controls.Add(this.lblTlf);
-            this.panelContainer.Controls.Add(this.tbMail);
-            this.panelContainer.Controls.Add(this.lblMail);
-            this.panelContainer.Controls.Add(this.tbTlf);
-            this.panelContainer.Controls.Add(this.lblNavn);
-            this.panelContainer.Controls.Add(this.panelIndhold);
-            this.panelContainer.Location = new System.Drawing.Point(27, 355);
-            this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(589, 272);
-            this.panelContainer.TabIndex = 16;
+            this.panelIndhold.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelIndhold.Controls.Add(this.btnPersonC);
+            this.panelIndhold.Controls.Add(this.btnPersonR);
+            this.panelIndhold.Controls.Add(this.panelRadioBtns);
+            this.panelIndhold.Controls.Add(this.btnPersonD);
+            this.panelIndhold.Controls.Add(this.btnPersonU);
+            this.panelIndhold.Controls.Add(this.panelBtns);
+            this.panelIndhold.Controls.Add(this.panel1);
+            this.panelIndhold.Location = new System.Drawing.Point(134, 385);
+            this.panelIndhold.Name = "panelIndhold";
+            this.panelIndhold.Size = new System.Drawing.Size(589, 306);
+            this.panelIndhold.TabIndex = 21;
             // 
             // panelRadioBtns
             // 
             this.panelRadioBtns.Controls.Add(this.radioBtnAlt);
             this.panelRadioBtns.Controls.Add(this.radioBtnBeboer);
             this.panelRadioBtns.Controls.Add(this.radioBtnMedlem);
-            this.panelRadioBtns.Location = new System.Drawing.Point(216, 11);
+            this.panelRadioBtns.Location = new System.Drawing.Point(220, 6);
             this.panelRadioBtns.Name = "panelRadioBtns";
-            this.panelRadioBtns.Size = new System.Drawing.Size(352, 45);
+            this.panelRadioBtns.Size = new System.Drawing.Size(352, 57);
             this.panelRadioBtns.TabIndex = 16;
             // 
-            // panelIndhold
+            // panelBtns
             // 
-            this.panelIndhold.Location = new System.Drawing.Point(0, 0);
-            this.panelIndhold.Name = "panelIndhold";
-            this.panelIndhold.Size = new System.Drawing.Size(589, 272);
-            this.panelIndhold.TabIndex = 21;
+            this.panelBtns.Location = new System.Drawing.Point(327, 72);
+            this.panelBtns.Name = "panelBtns";
+            this.panelBtns.Size = new System.Drawing.Size(130, 214);
+            this.panelBtns.TabIndex = 15;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblPId);
+            this.panel1.Controls.Add(this.tbNavn);
+            this.panel1.Controls.Add(this.lblNavn);
+            this.panel1.Controls.Add(this.lblMail);
+            this.panel1.Controls.Add(this.lblTlf);
+            this.panel1.Controls.Add(this.tbPId);
+            this.panel1.Controls.Add(this.tbTlf);
+            this.panel1.Controls.Add(this.tbMail);
+            this.panel1.Location = new System.Drawing.Point(20, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(177, 280);
+            this.panel1.TabIndex = 16;
             // 
             // btnOpret
             // 
             this.btnOpret.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpret.Location = new System.Drawing.Point(27, 264);
+            this.btnOpret.Location = new System.Drawing.Point(33, 296);
             this.btnOpret.Name = "btnOpret";
             this.btnOpret.Size = new System.Drawing.Size(135, 66);
             this.btnOpret.TabIndex = 17;
@@ -270,7 +288,7 @@
             // btnRead
             // 
             this.btnRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRead.Location = new System.Drawing.Point(168, 264);
+            this.btnRead.Location = new System.Drawing.Point(242, 296);
             this.btnRead.Name = "btnRead";
             this.btnRead.Size = new System.Drawing.Size(135, 66);
             this.btnRead.TabIndex = 18;
@@ -281,7 +299,7 @@
             // btnOpdater
             // 
             this.btnOpdater.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpdater.Location = new System.Drawing.Point(340, 264);
+            this.btnOpdater.Location = new System.Drawing.Point(464, 296);
             this.btnOpdater.Name = "btnOpdater";
             this.btnOpdater.Size = new System.Drawing.Size(135, 66);
             this.btnOpdater.TabIndex = 19;
@@ -292,7 +310,7 @@
             // btnSlet
             // 
             this.btnSlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSlet.Location = new System.Drawing.Point(481, 264);
+            this.btnSlet.Location = new System.Drawing.Point(683, 296);
             this.btnSlet.Name = "btnSlet";
             this.btnSlet.Size = new System.Drawing.Size(135, 66);
             this.btnSlet.TabIndex = 20;
@@ -300,25 +318,37 @@
             this.btnSlet.UseVisualStyleBackColor = true;
             this.btnSlet.Click += new System.EventHandler(this.btnSletShow_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgvPersonCRUD);
+            this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel2.Location = new System.Drawing.Point(27, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(6);
+            this.panel2.Size = new System.Drawing.Size(797, 263);
+            this.panel2.TabIndex = 21;
+            // 
             // PersonCRUD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 647);
+            this.ClientSize = new System.Drawing.Size(1706, 703);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelIndhold);
             this.Controls.Add(this.btnSlet);
             this.Controls.Add(this.btnOpdater);
             this.Controls.Add(this.btnRead);
             this.Controls.Add(this.btnOpret);
-            this.Controls.Add(this.dgvPersonCRUD);
-            this.Controls.Add(this.panelContainer);
             this.Name = "PersonCRUD";
             this.Text = "PersonCRUD";
             this.Load += new System.EventHandler(this.PersonCRUD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonCRUD)).EndInit();
-            this.panelContainer.ResumeLayout(false);
-            this.panelContainer.PerformLayout();
+            this.panelIndhold.ResumeLayout(false);
             this.panelRadioBtns.ResumeLayout(false);
             this.panelRadioBtns.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,12 +373,14 @@
         private System.Windows.Forms.Label lblTlf;
         private System.Windows.Forms.TextBox tbPId;
         private System.Windows.Forms.Label lblPId;
-        private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.Button btnOpret;
         private System.Windows.Forms.Button btnRead;
         private System.Windows.Forms.Button btnOpdater;
         private System.Windows.Forms.Button btnSlet;
         private System.Windows.Forms.Panel panelRadioBtns;
         private System.Windows.Forms.Panel panelIndhold;
+        private System.Windows.Forms.Panel panelBtns;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

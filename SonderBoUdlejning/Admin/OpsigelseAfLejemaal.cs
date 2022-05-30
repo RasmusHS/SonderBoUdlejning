@@ -24,43 +24,59 @@ namespace SonderBoUdlejning.Admin
         SQLExecutionHandler tableConn = new SQLExecutionHandler();
         
         //Standard Query for lejemål dataGridView
-        string sqlS1 = "SELECT lejemaalNr, adresse, postNr, Lid, Lejemaal.pId, indflytDato, udflytDato " +
+        string sqlS1 = "SELECT lejemaalNr AS 'Lejemål Nr.', adresse AS 'Adresse', postNr AS 'Post Nr.', Lid AS 'Lejemålstype ID', Lejemaal.pId AS 'Person ID', indflytDato AS 'Indflytningsdato', udflytDato AS 'Udflytningsdato'" +
                        "FROM Lejemaal " +
                        "INNER JOIN Person ON Lejemaal.pId=Person.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
-                       "ORDER BY pId ASC";
+                       "ORDER BY Lejemaal.pId ASC";
 
         //Standard Query for person dataGridView
-        string sqlS2 = "SELECT Person.pId, fNavn, pMail, pTlf, erBeboer " +
+        string sqlS2 = "SELECT Person.pId AS 'Person ID', fNavn AS 'Fulde Navn', pMail AS 'E-mail', pTlf AS 'Tlf. Nr.', erBeboer AS 'Er Beboer?'" +
                        "FROM Person " +
                        "INNER JOIN Lejemaal ON Person.pId=Lejemaal.pId " +
                        "WHERE Lejemaal.pId IS NOT NULL AND erBeboer = 1 AND udflytDato IS NULL " +
-                       "ORDER BY pId ASC";
+                       "ORDER BY Person.pId ASC";
 
         private void OpsigelseAfLejemaal_Load(object sender, EventArgs e)
         {
             //Indlæser dataGridViews med standard queries
-            DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1);
-            DGVPerson.DataSource = tableConn.tableBinder(sqlS2);
+            dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+            dgvPerson.DataSource = tableConn.tableBinder(sqlS2);
+
+            dgvLejemaal.RowHeadersVisible = false;
+            dgvLejemaal.BorderStyle = BorderStyle.FixedSingle;
+            dgvLejemaal.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvLejemaal.RowTemplate.Height = 30;
+            dgvLejemaal.RowTemplate.DividerHeight = 1;
+            dgvLejemaal.GridColor = Color.Black;
+            dgvLejemaal.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+
+            dgvPerson.RowHeadersVisible = false;
+            dgvPerson.BorderStyle = BorderStyle.FixedSingle;
+            dgvPerson.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvPerson.RowTemplate.Height = 30;
+            dgvPerson.RowTemplate.DividerHeight = 1;
+            dgvPerson.GridColor = Color.Black;
+            dgvPerson.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
 
             //Indlæser måned comboboxen med alle månederne
-            string[] comboBoxListMonth;
-            comboBoxListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
-            comboBoxMonth.Items.AddRange(comboBoxListMonth);
+            string[] comboListMonth;
+            comboListMonth = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray();
+            comboMonth.Items.AddRange(comboListMonth);
 
             //Indlæser år comboboxen med alle år fra 2022 til 2044
             
             for (int year = DateTime.Now.Year; year < DateTime.Now.Year + 50; year++)
             {
-                comboBoxYear.Items.Add(year);
+                comboYear.Items.Add(year);
             }
         }
 
         private void btnOpsigelse_Click(object sender, EventArgs e)
         {
-            string pId = tbPiD.Text; //Tager inputtet fra person ID textboxen
+            string pId = tbPId.Text; //Tager inputtet fra person ID textboxen
 
-            string Lid = tbBiD.Text; //Tager inputtet fra lejemål Nr textboxen
+            string Lid = tbLid.Text; //Tager inputtet fra lejemål Nr textboxen
 
             //Bruger inputtene fra person ID og lejemål Nr textboxene til finde adresse, postNr og hvornår personen flyttede ind
             string lejemaalNr = "";
@@ -71,10 +87,10 @@ namespace SonderBoUdlejning.Admin
             bool erBeboer; //Bruges ikke i øjeblikket
 
             string udflytDato = ""; //Pladsholder for udflytningsdato
-            if ((comboBoxMonth.SelectedIndex + 1) < 10)
-                udflytDato = $"01-0{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
+            if ((comboMonth.SelectedIndex + 1) < 10)
+                udflytDato = $"01-0{comboMonth.SelectedIndex + 1}-{comboYear.SelectedItem}";
             else
-                udflytDato = $"01-{comboBoxMonth.SelectedIndex + 1}-{comboBoxYear.SelectedItem}";
+                udflytDato = $"01-{comboMonth.SelectedIndex + 1}-{comboYear.SelectedItem}";
             bool udflytDatoValid = true;//
             
             //Messageboxen bruges til debugging
@@ -111,8 +127,8 @@ namespace SonderBoUdlejning.Admin
                 LejemaalFacade opsigLejemaal = new LejemaalFacade();
                 erBeboer = true; //Er der for at sikre at querien ikke sætter personen til ikke beboer
                 opsigLejemaal.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, indflytDato, udflytDato); //Kalder updateLejemaal metoden til at opsige boligen
-                DGVLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
-                DGVPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
+                dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1); //refresher lejemål dataGridview
+                dgvPerson.DataSource = tableConn.tableBinder(sqlS2); //refresher person dataGridview
             }
             else
             {

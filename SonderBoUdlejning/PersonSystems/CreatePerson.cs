@@ -14,7 +14,7 @@ namespace SonderBoUdlejning
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der opretter en ny person i databasen
-        public void pSQLC(string fNavn, string pMail, string pTlf)
+        public void createPerson(string fNavn, string pMail, string pTlf)
         {
             string sqlS = "INSERT INTO Person VALUES (@Navn, @Mail, @Tlf, @ErBeboer)"; //Definere SQL string
             SqlConnection conn = new SqlConnection(connString.connStr); //Opretter forbindelse til databasen

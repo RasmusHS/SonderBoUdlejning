@@ -12,7 +12,7 @@ namespace SonderBoUdlejning.LejemaalSystems
         public void cLejemaal(string adresse, string postNr, string Lid)
         {
             CreateLejemaal createLejemaal = new CreateLejemaal();
-            createLejemaal.opretLejemaal(adresse, postNr, Lid);
+            createLejemaal.createLejemaal(adresse, postNr, Lid);
         }
 
         //Metode som kalder metoden, som indlæser boliger ud fra givne parametre

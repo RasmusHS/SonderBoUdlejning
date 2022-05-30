@@ -14,7 +14,7 @@ namespace SonderBoUdlejning.personCRUD
         ConnString connString = ConnString.getConnInstance;
 
         //Metode der indlæser personer fra person tabellen ud fra givne parametre
-        public string pSQLR(string columns, string pId, string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
+        public string readPerson(string columns, string pId, string fNavn, string pMail, string pTlf, bool medlem, bool erBeboer, bool alt)
         {
             //Hvis der ikke er specificeret nogen kolonner, så indlæses alle kolonner
             if (string.IsNullOrEmpty(columns))

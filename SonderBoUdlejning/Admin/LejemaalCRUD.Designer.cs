@@ -34,8 +34,13 @@
             this.btnVisBUpdate = new System.Windows.Forms.Button();
             this.btnVisBDelete = new System.Windows.Forms.Button();
             this.panelContainer = new System.Windows.Forms.Panel();
-            this.lblLejemaal = new System.Windows.Forms.Label();
-            this.tbLejemaal = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCreateL = new System.Windows.Forms.Button();
+            this.btnDeleteL = new System.Windows.Forms.Button();
+            this.btnUpdateL = new System.Windows.Forms.Button();
+            this.btnReadL = new System.Windows.Forms.Button();
+            this.lblLejemaalNr = new System.Windows.Forms.Label();
+            this.tbLejemaalNr = new System.Windows.Forms.TextBox();
             this.tbMaksPris = new System.Windows.Forms.TextBox();
             this.lblMaksPris = new System.Windows.Forms.Label();
             this.tbMinPris = new System.Windows.Forms.TextBox();
@@ -48,22 +53,19 @@
             this.lblMinKvm = new System.Windows.Forms.Label();
             this.tbBy = new System.Windows.Forms.TextBox();
             this.lblBy = new System.Windows.Forms.Label();
-            this.tbLejemaalID = new System.Windows.Forms.TextBox();
-            this.lblLejemaalNr = new System.Windows.Forms.Label();
+            this.tbLejemaalsTypeID = new System.Windows.Forms.TextBox();
+            this.lblLejemaalsTypeID = new System.Windows.Forms.Label();
             this.lblPostNr = new System.Windows.Forms.Label();
-            this.comboBoxPostNr = new System.Windows.Forms.ComboBox();
+            this.comboPostNr = new System.Windows.Forms.ComboBox();
             this.tbAdresse = new System.Windows.Forms.TextBox();
             this.lblAdresse = new System.Windows.Forms.Label();
-            this.btnDeleteB = new System.Windows.Forms.Button();
-            this.btnUpdateB = new System.Windows.Forms.Button();
-            this.btnReadB = new System.Windows.Forms.Button();
-            this.btnCreateB = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.LejemaalPage = new System.Windows.Forms.TabPage();
             this.LejemaalsInfoPage = new System.Windows.Forms.TabPage();
             this.dgvLejemaalsInfo = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).BeginInit();
             this.panelContainer.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.LejemaalPage.SuspendLayout();
             this.LejemaalsInfoPage.SuspendLayout();
@@ -81,58 +83,59 @@
             this.dgvLejemaal.Name = "dgvLejemaal";
             this.dgvLejemaal.ReadOnly = true;
             this.dgvLejemaal.RowHeadersWidth = 92;
-            this.dgvLejemaal.Size = new System.Drawing.Size(662, 268);
+            this.dgvLejemaal.Size = new System.Drawing.Size(1004, 348);
             this.dgvLejemaal.TabIndex = 0;
             // 
             // btnVisBCreate
             // 
             this.btnVisBCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVisBCreate.Location = new System.Drawing.Point(30, 334);
+            this.btnVisBCreate.Location = new System.Drawing.Point(37, 429);
             this.btnVisBCreate.Name = "btnVisBCreate";
-            this.btnVisBCreate.Size = new System.Drawing.Size(133, 65);
+            this.btnVisBCreate.Size = new System.Drawing.Size(155, 65);
             this.btnVisBCreate.TabIndex = 1;
             this.btnVisBCreate.Text = "Opret Lejemål";
             this.btnVisBCreate.UseVisualStyleBackColor = true;
-            this.btnVisBCreate.Click += new System.EventHandler(this.btnVisBCreate_Click);
+            this.btnVisBCreate.Click += new System.EventHandler(this.btnVisLCreate_Click);
             // 
             // btnVisBRead
             // 
             this.btnVisBRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVisBRead.Location = new System.Drawing.Point(201, 334);
+            this.btnVisBRead.Location = new System.Drawing.Point(265, 429);
             this.btnVisBRead.Name = "btnVisBRead";
-            this.btnVisBRead.Size = new System.Drawing.Size(143, 65);
+            this.btnVisBRead.Size = new System.Drawing.Size(209, 65);
             this.btnVisBRead.TabIndex = 2;
             this.btnVisBRead.Text = "Indlæs Ledige Lejemål";
             this.btnVisBRead.UseVisualStyleBackColor = true;
-            this.btnVisBRead.Click += new System.EventHandler(this.btnVisBRead_Click);
+            this.btnVisBRead.Click += new System.EventHandler(this.btnVisLRead_Click);
             // 
             // btnVisBUpdate
             // 
             this.btnVisBUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVisBUpdate.Location = new System.Drawing.Point(393, 334);
+            this.btnVisBUpdate.Location = new System.Drawing.Point(613, 429);
             this.btnVisBUpdate.Name = "btnVisBUpdate";
-            this.btnVisBUpdate.Size = new System.Drawing.Size(133, 65);
+            this.btnVisBUpdate.Size = new System.Drawing.Size(183, 65);
             this.btnVisBUpdate.TabIndex = 3;
             this.btnVisBUpdate.Text = "Opdater Lejemål";
             this.btnVisBUpdate.UseVisualStyleBackColor = true;
-            this.btnVisBUpdate.Click += new System.EventHandler(this.btnVisBUpdate_Click);
+            this.btnVisBUpdate.Click += new System.EventHandler(this.btnVisLUpdate_Click);
             // 
             // btnVisBDelete
             // 
             this.btnVisBDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVisBDelete.Location = new System.Drawing.Point(573, 334);
+            this.btnVisBDelete.Location = new System.Drawing.Point(881, 429);
             this.btnVisBDelete.Name = "btnVisBDelete";
-            this.btnVisBDelete.Size = new System.Drawing.Size(133, 65);
+            this.btnVisBDelete.Size = new System.Drawing.Size(160, 65);
             this.btnVisBDelete.TabIndex = 4;
             this.btnVisBDelete.Text = "Slet Lejemål";
             this.btnVisBDelete.UseVisualStyleBackColor = true;
-            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisDLejemaal_Click);
+            this.btnVisBDelete.Click += new System.EventHandler(this.btnVisLDelete_Click);
             // 
             // panelContainer
             // 
             this.panelContainer.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panelContainer.Controls.Add(this.lblLejemaal);
-            this.panelContainer.Controls.Add(this.tbLejemaal);
+            this.panelContainer.Controls.Add(this.panel1);
+            this.panelContainer.Controls.Add(this.lblLejemaalNr);
+            this.panelContainer.Controls.Add(this.tbLejemaalNr);
             this.panelContainer.Controls.Add(this.tbMaksPris);
             this.panelContainer.Controls.Add(this.lblMaksPris);
             this.panelContainer.Controls.Add(this.tbMinPris);
@@ -145,270 +148,280 @@
             this.panelContainer.Controls.Add(this.lblMinKvm);
             this.panelContainer.Controls.Add(this.tbBy);
             this.panelContainer.Controls.Add(this.lblBy);
-            this.panelContainer.Controls.Add(this.tbLejemaalID);
-            this.panelContainer.Controls.Add(this.lblLejemaalNr);
+            this.panelContainer.Controls.Add(this.tbLejemaalsTypeID);
+            this.panelContainer.Controls.Add(this.lblLejemaalsTypeID);
             this.panelContainer.Controls.Add(this.lblPostNr);
-            this.panelContainer.Controls.Add(this.comboBoxPostNr);
+            this.panelContainer.Controls.Add(this.comboPostNr);
             this.panelContainer.Controls.Add(this.tbAdresse);
             this.panelContainer.Controls.Add(this.lblAdresse);
-            this.panelContainer.Controls.Add(this.btnDeleteB);
-            this.panelContainer.Controls.Add(this.btnUpdateB);
-            this.panelContainer.Controls.Add(this.btnReadB);
-            this.panelContainer.Controls.Add(this.btnCreateB);
-            this.panelContainer.Location = new System.Drawing.Point(30, 423);
+            this.panelContainer.Location = new System.Drawing.Point(37, 523);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(676, 328);
+            this.panelContainer.Size = new System.Drawing.Size(1004, 168);
             this.panelContainer.TabIndex = 5;
             // 
-            // lblLejemaal
+            // panel1
             // 
-            this.lblLejemaal.AutoSize = true;
-            this.lblLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLejemaal.Location = new System.Drawing.Point(19, 18);
-            this.lblLejemaal.Name = "lblLejemaal";
-            this.lblLejemaal.Size = new System.Drawing.Size(57, 17);
-            this.lblLejemaal.TabIndex = 23;
-            this.lblLejemaal.Text = "Lejemål";
+            this.panel1.Controls.Add(this.btnCreateL);
+            this.panel1.Controls.Add(this.btnDeleteL);
+            this.panel1.Controls.Add(this.btnUpdateL);
+            this.panel1.Controls.Add(this.btnReadL);
+            this.panel1.Location = new System.Drawing.Point(845, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(156, 229);
+            this.panel1.TabIndex = 24;
             // 
-            // tbLejemaal
+            // btnCreateB
             // 
-            this.tbLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLejemaal.Location = new System.Drawing.Point(22, 38);
-            this.tbLejemaal.Name = "tbLejemaal";
-            this.tbLejemaal.Size = new System.Drawing.Size(100, 23);
-            this.tbLejemaal.TabIndex = 22;
+            this.btnCreateL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateL.Location = new System.Drawing.Point(0, 0);
+            this.btnCreateL.Name = "btnCreateB";
+            this.btnCreateL.Size = new System.Drawing.Size(156, 45);
+            this.btnCreateL.TabIndex = 0;
+            this.btnCreateL.Text = "Opret";
+            this.btnCreateL.UseVisualStyleBackColor = true;
+            this.btnCreateL.Click += new System.EventHandler(this.btnCreateB_Click);
+            // 
+            // btnDeleteB
+            // 
+            this.btnDeleteL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteL.Location = new System.Drawing.Point(0, 184);
+            this.btnDeleteL.Name = "btnDeleteB";
+            this.btnDeleteL.Size = new System.Drawing.Size(156, 45);
+            this.btnDeleteL.TabIndex = 3;
+            this.btnDeleteL.Text = "Slet";
+            this.btnDeleteL.UseVisualStyleBackColor = true;
+            this.btnDeleteL.Click += new System.EventHandler(this.btnDeleteB_Click);
+            // 
+            // btnUpdateB
+            // 
+            this.btnUpdateL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateL.Location = new System.Drawing.Point(0, 123);
+            this.btnUpdateL.Name = "btnUpdateB";
+            this.btnUpdateL.Size = new System.Drawing.Size(156, 45);
+            this.btnUpdateL.TabIndex = 2;
+            this.btnUpdateL.Text = "Opdater Lejemål";
+            this.btnUpdateL.UseVisualStyleBackColor = true;
+            this.btnUpdateL.Click += new System.EventHandler(this.btnUpdateB_Click);
+            // 
+            // btnReadB
+            // 
+            this.btnReadL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReadL.Location = new System.Drawing.Point(0, 62);
+            this.btnReadL.Name = "btnReadB";
+            this.btnReadL.Size = new System.Drawing.Size(156, 45);
+            this.btnReadL.TabIndex = 1;
+            this.btnReadL.Text = "Indlæs";
+            this.btnReadL.UseVisualStyleBackColor = true;
+            this.btnReadL.Click += new System.EventHandler(this.btnReadB_Click);
+            // 
+            // lblLejemaalNr
+            // 
+            this.lblLejemaalNr.AutoSize = true;
+            this.lblLejemaalNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaalNr.Location = new System.Drawing.Point(18, 15);
+            this.lblLejemaalNr.Name = "lblLejemaalNr";
+            this.lblLejemaalNr.Size = new System.Drawing.Size(88, 20);
+            this.lblLejemaalNr.TabIndex = 23;
+            this.lblLejemaalNr.Text = "Lejemål Nr.";
+            // 
+            // tbLejemaalNr
+            // 
+            this.tbLejemaalNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaalNr.Location = new System.Drawing.Point(22, 38);
+            this.tbLejemaalNr.Name = "tbLejemaalNr";
+            this.tbLejemaalNr.Size = new System.Drawing.Size(115, 26);
+            this.tbLejemaalNr.TabIndex = 22;
             // 
             // tbMaksPris
             // 
-            this.tbMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMaksPris.Location = new System.Drawing.Point(145, 268);
+            this.tbMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMaksPris.Location = new System.Drawing.Point(574, 119);
             this.tbMaksPris.Name = "tbMaksPris";
-            this.tbMaksPris.Size = new System.Drawing.Size(100, 23);
+            this.tbMaksPris.Size = new System.Drawing.Size(119, 26);
             this.tbMaksPris.TabIndex = 21;
             // 
             // lblMaksPris
             // 
             this.lblMaksPris.AutoSize = true;
-            this.lblMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaksPris.Location = new System.Drawing.Point(142, 248);
+            this.lblMaksPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaksPris.Location = new System.Drawing.Point(570, 96);
             this.lblMaksPris.Name = "lblMaksPris";
-            this.lblMaksPris.Size = new System.Drawing.Size(102, 17);
+            this.lblMaksPris.Size = new System.Drawing.Size(115, 20);
             this.lblMaksPris.TabIndex = 20;
             this.lblMaksPris.Text = "Maksimum Pris";
             // 
             // tbMinPris
             // 
-            this.tbMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMinPris.Location = new System.Drawing.Point(22, 268);
+            this.tbMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMinPris.Location = new System.Drawing.Point(444, 119);
             this.tbMinPris.Name = "tbMinPris";
-            this.tbMinPris.Size = new System.Drawing.Size(100, 23);
+            this.tbMinPris.Size = new System.Drawing.Size(100, 26);
             this.tbMinPris.TabIndex = 19;
             // 
             // lblMinPris
             // 
             this.lblMinPris.AutoSize = true;
-            this.lblMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinPris.Location = new System.Drawing.Point(19, 248);
+            this.lblMinPris.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinPris.Location = new System.Drawing.Point(441, 96);
             this.lblMinPris.Name = "lblMinPris";
-            this.lblMinPris.Size = new System.Drawing.Size(91, 17);
+            this.lblMinPris.Size = new System.Drawing.Size(102, 20);
             this.lblMinPris.TabIndex = 18;
             this.lblMinPris.Text = "Minimum Pris";
             // 
             // tbMaksKvm
             // 
-            this.tbMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMaksKvm.Location = new System.Drawing.Point(145, 192);
+            this.tbMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMaksKvm.Location = new System.Drawing.Point(163, 119);
             this.tbMaksKvm.Name = "tbMaksKvm";
-            this.tbMaksKvm.Size = new System.Drawing.Size(100, 23);
+            this.tbMaksKvm.Size = new System.Drawing.Size(115, 26);
             this.tbMaksKvm.TabIndex = 17;
             // 
             // lblMaksKvm
             // 
             this.lblMaksKvm.AutoSize = true;
-            this.lblMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaksKvm.Location = new System.Drawing.Point(142, 172);
+            this.lblMaksKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaksKvm.Location = new System.Drawing.Point(159, 96);
             this.lblMaksKvm.Name = "lblMaksKvm";
-            this.lblMaksKvm.Size = new System.Drawing.Size(105, 17);
+            this.lblMaksKvm.Size = new System.Drawing.Size(119, 20);
             this.lblMaksKvm.TabIndex = 16;
             this.lblMaksKvm.Text = "Maksimum Kvm";
             // 
             // tbLejemaalType
             // 
-            this.tbLejemaalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLejemaalType.Location = new System.Drawing.Point(145, 116);
-            this.tbLejemaalType.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tbLejemaalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaalType.Location = new System.Drawing.Point(718, 38);
+            this.tbLejemaalType.Margin = new System.Windows.Forms.Padding(1);
             this.tbLejemaalType.Name = "tbLejemaalType";
             this.tbLejemaalType.ReadOnly = true;
-            this.tbLejemaalType.Size = new System.Drawing.Size(100, 23);
+            this.tbLejemaalType.Size = new System.Drawing.Size(115, 26);
             this.tbLejemaalType.TabIndex = 15;
             // 
             // lblLejemaalType
             // 
             this.lblLejemaalType.AutoSize = true;
-            this.lblLejemaalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLejemaalType.Location = new System.Drawing.Point(142, 96);
+            this.lblLejemaalType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaalType.Location = new System.Drawing.Point(714, 15);
             this.lblLejemaalType.Name = "lblLejemaalType";
-            this.lblLejemaalType.Size = new System.Drawing.Size(93, 17);
+            this.lblLejemaalType.Size = new System.Drawing.Size(102, 20);
             this.lblLejemaalType.TabIndex = 14;
             this.lblLejemaalType.Text = "Lejemål Type";
             // 
             // tbMinKvm
             // 
-            this.tbMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMinKvm.Location = new System.Drawing.Point(22, 192);
+            this.tbMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMinKvm.Location = new System.Drawing.Point(22, 119);
             this.tbMinKvm.Name = "tbMinKvm";
-            this.tbMinKvm.Size = new System.Drawing.Size(100, 23);
+            this.tbMinKvm.Size = new System.Drawing.Size(115, 26);
             this.tbMinKvm.TabIndex = 13;
             // 
             // lblMinKvm
             // 
             this.lblMinKvm.AutoSize = true;
-            this.lblMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinKvm.Location = new System.Drawing.Point(19, 172);
+            this.lblMinKvm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMinKvm.Location = new System.Drawing.Point(18, 96);
             this.lblMinKvm.Name = "lblMinKvm";
-            this.lblMinKvm.Size = new System.Drawing.Size(94, 17);
+            this.lblMinKvm.Size = new System.Drawing.Size(106, 20);
             this.lblMinKvm.TabIndex = 12;
             this.lblMinKvm.Text = "Minimum Kvm";
             // 
             // tbBy
             // 
-            this.tbBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBy.Location = new System.Drawing.Point(413, 38);
+            this.tbBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBy.Location = new System.Drawing.Point(444, 38);
             this.tbBy.Name = "tbBy";
             this.tbBy.ReadOnly = true;
-            this.tbBy.Size = new System.Drawing.Size(100, 23);
+            this.tbBy.Size = new System.Drawing.Size(115, 26);
             this.tbBy.TabIndex = 11;
             // 
             // lblBy
             // 
             this.lblBy.AutoSize = true;
-            this.lblBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBy.Location = new System.Drawing.Point(410, 18);
+            this.lblBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBy.Location = new System.Drawing.Point(441, 15);
             this.lblBy.Name = "lblBy";
-            this.lblBy.Size = new System.Drawing.Size(24, 17);
+            this.lblBy.Size = new System.Drawing.Size(27, 20);
             this.lblBy.TabIndex = 10;
             this.lblBy.Text = "By";
             // 
-            // tbLejemaalID
+            // tbLejemaalsTypeID
             // 
-            this.tbLejemaalID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLejemaalID.Location = new System.Drawing.Point(22, 114);
-            this.tbLejemaalID.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.tbLejemaalID.Name = "tbLejemaalID";
-            this.tbLejemaalID.Size = new System.Drawing.Size(100, 23);
-            this.tbLejemaalID.TabIndex = 9;
-            this.tbLejemaalID.TextChanged += new System.EventHandler(this.tbLejemaalID_TextChanged);
+            this.tbLejemaalsTypeID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLejemaalsTypeID.Location = new System.Drawing.Point(574, 38);
+            this.tbLejemaalsTypeID.Margin = new System.Windows.Forms.Padding(1);
+            this.tbLejemaalsTypeID.Name = "tbLejemaalsTypeID";
+            this.tbLejemaalsTypeID.Size = new System.Drawing.Size(119, 26);
+            this.tbLejemaalsTypeID.TabIndex = 9;
+            this.tbLejemaalsTypeID.TextChanged += new System.EventHandler(this.tbLejemaalID_TextChanged);
             // 
-            // lblLejemaalNr
+            // lblLejemaalsTypeID
             // 
-            this.lblLejemaalNr.AutoSize = true;
-            this.lblLejemaalNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLejemaalNr.Location = new System.Drawing.Point(19, 96);
-            this.lblLejemaalNr.Name = "lblLejemaalNr";
-            this.lblLejemaalNr.Size = new System.Drawing.Size(76, 17);
-            this.lblLejemaalNr.TabIndex = 8;
-            this.lblLejemaalNr.Text = "Lejemål Nr";
+            this.lblLejemaalsTypeID.AutoSize = true;
+            this.lblLejemaalsTypeID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLejemaalsTypeID.Location = new System.Drawing.Point(570, 15);
+            this.lblLejemaalsTypeID.Name = "lblLejemaalsTypeID";
+            this.lblLejemaalsTypeID.Size = new System.Drawing.Size(123, 20);
+            this.lblLejemaalsTypeID.TabIndex = 8;
+            this.lblLejemaalsTypeID.Text = "Lejemålstype ID";
             // 
             // lblPostNr
             // 
             this.lblPostNr.AutoSize = true;
-            this.lblPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPostNr.Location = new System.Drawing.Point(265, 18);
+            this.lblPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPostNr.Location = new System.Drawing.Point(302, 15);
             this.lblPostNr.Name = "lblPostNr";
-            this.lblPostNr.Size = new System.Drawing.Size(59, 17);
+            this.lblPostNr.Size = new System.Drawing.Size(65, 20);
             this.lblPostNr.TabIndex = 7;
             this.lblPostNr.Text = "Post Nr.";
             // 
             // comboBoxPostNr
             // 
-            this.comboBoxPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxPostNr.FormattingEnabled = true;
-            this.comboBoxPostNr.Location = new System.Drawing.Point(268, 37);
-            this.comboBoxPostNr.Name = "comboBoxPostNr";
-            this.comboBoxPostNr.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxPostNr.TabIndex = 6;
-            this.comboBoxPostNr.SelectedIndexChanged += new System.EventHandler(this.comboBoxPostNr_SelectedIndexChanged);
+            this.comboPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPostNr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPostNr.FormattingEnabled = true;
+            this.comboPostNr.Location = new System.Drawing.Point(306, 38);
+            this.comboPostNr.Name = "comboBoxPostNr";
+            this.comboPostNr.Size = new System.Drawing.Size(115, 28);
+            this.comboPostNr.TabIndex = 6;
+            this.comboPostNr.SelectedIndexChanged += new System.EventHandler(this.comboPostNr_SelectedIndexChanged);
             // 
             // tbAdresse
             // 
-            this.tbAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbAdresse.Location = new System.Drawing.Point(145, 38);
+            this.tbAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAdresse.Location = new System.Drawing.Point(163, 38);
             this.tbAdresse.Name = "tbAdresse";
-            this.tbAdresse.Size = new System.Drawing.Size(100, 23);
+            this.tbAdresse.Size = new System.Drawing.Size(115, 26);
             this.tbAdresse.TabIndex = 5;
             // 
             // lblAdresse
             // 
             this.lblAdresse.AutoSize = true;
-            this.lblAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdresse.Location = new System.Drawing.Point(142, 18);
+            this.lblAdresse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdresse.Location = new System.Drawing.Point(159, 15);
             this.lblAdresse.Name = "lblAdresse";
-            this.lblAdresse.Size = new System.Drawing.Size(60, 17);
+            this.lblAdresse.Size = new System.Drawing.Size(68, 20);
             this.lblAdresse.TabIndex = 4;
             this.lblAdresse.Text = "Adresse";
-            // 
-            // btnDeleteB
-            // 
-            this.btnDeleteB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteB.Location = new System.Drawing.Point(534, 251);
-            this.btnDeleteB.Name = "btnDeleteB";
-            this.btnDeleteB.Size = new System.Drawing.Size(124, 61);
-            this.btnDeleteB.TabIndex = 3;
-            this.btnDeleteB.Text = "Slet";
-            this.btnDeleteB.UseVisualStyleBackColor = true;
-            this.btnDeleteB.Click += new System.EventHandler(this.btnDeleteB_Click);
-            // 
-            // btnUpdateB
-            // 
-            this.btnUpdateB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateB.Location = new System.Drawing.Point(534, 172);
-            this.btnUpdateB.Name = "btnUpdateB";
-            this.btnUpdateB.Size = new System.Drawing.Size(124, 61);
-            this.btnUpdateB.TabIndex = 2;
-            this.btnUpdateB.Text = "Opdater Lejemål";
-            this.btnUpdateB.UseVisualStyleBackColor = true;
-            this.btnUpdateB.Click += new System.EventHandler(this.btnUpdateB_Click);
-            // 
-            // btnReadB
-            // 
-            this.btnReadB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReadB.Location = new System.Drawing.Point(534, 96);
-            this.btnReadB.Name = "btnReadB";
-            this.btnReadB.Size = new System.Drawing.Size(124, 61);
-            this.btnReadB.TabIndex = 1;
-            this.btnReadB.Text = "Indlæs";
-            this.btnReadB.UseVisualStyleBackColor = true;
-            this.btnReadB.Click += new System.EventHandler(this.btnReadB_Click);
-            // 
-            // btnCreateB
-            // 
-            this.btnCreateB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateB.Location = new System.Drawing.Point(534, 18);
-            this.btnCreateB.Name = "btnCreateB";
-            this.btnCreateB.Size = new System.Drawing.Size(124, 61);
-            this.btnCreateB.TabIndex = 0;
-            this.btnCreateB.Text = "Opret";
-            this.btnCreateB.UseVisualStyleBackColor = true;
-            this.btnCreateB.Click += new System.EventHandler(this.btnCreateB_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.LejemaalPage);
             this.tabControl1.Controls.Add(this.LejemaalsInfoPage);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(30, 12);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(6, 6);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(676, 300);
+            this.tabControl1.Size = new System.Drawing.Size(1018, 393);
             this.tabControl1.TabIndex = 6;
             // 
             // LejemaalPage
             // 
             this.LejemaalPage.Controls.Add(this.dgvLejemaal);
-            this.LejemaalPage.Location = new System.Drawing.Point(4, 22);
+            this.LejemaalPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LejemaalPage.Location = new System.Drawing.Point(4, 35);
             this.LejemaalPage.Name = "LejemaalPage";
-            this.LejemaalPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.LejemaalPage.Size = new System.Drawing.Size(668, 274);
+            this.LejemaalPage.Padding = new System.Windows.Forms.Padding(3);
+            this.LejemaalPage.Size = new System.Drawing.Size(1010, 354);
             this.LejemaalPage.TabIndex = 0;
             this.LejemaalPage.Text = "Lejemål";
             this.LejemaalPage.UseVisualStyleBackColor = true;
@@ -416,10 +429,11 @@
             // LejemaalsInfoPage
             // 
             this.LejemaalsInfoPage.Controls.Add(this.dgvLejemaalsInfo);
-            this.LejemaalsInfoPage.Location = new System.Drawing.Point(4, 22);
+            this.LejemaalsInfoPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LejemaalsInfoPage.Location = new System.Drawing.Point(4, 35);
             this.LejemaalsInfoPage.Name = "LejemaalsInfoPage";
-            this.LejemaalsInfoPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.LejemaalsInfoPage.Size = new System.Drawing.Size(668, 274);
+            this.LejemaalsInfoPage.Padding = new System.Windows.Forms.Padding(3);
+            this.LejemaalsInfoPage.Size = new System.Drawing.Size(1010, 261);
             this.LejemaalsInfoPage.TabIndex = 1;
             this.LejemaalsInfoPage.Text = "LejemålsInfo";
             this.LejemaalsInfoPage.UseVisualStyleBackColor = true;
@@ -435,27 +449,28 @@
             this.dgvLejemaalsInfo.Name = "dgvLejemaalsInfo";
             this.dgvLejemaalsInfo.ReadOnly = true;
             this.dgvLejemaalsInfo.RowHeadersWidth = 92;
-            this.dgvLejemaalsInfo.Size = new System.Drawing.Size(662, 268);
+            this.dgvLejemaalsInfo.Size = new System.Drawing.Size(1004, 255);
             this.dgvLejemaalsInfo.TabIndex = 0;
             // 
             // LejemaalCRUD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 780);
+            this.ClientSize = new System.Drawing.Size(1706, 703);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.btnVisBDelete);
             this.Controls.Add(this.btnVisBUpdate);
             this.Controls.Add(this.btnVisBRead);
             this.Controls.Add(this.btnVisBCreate);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "LejemaalCRUD";
             this.Text = "LejemaalCRUD";
             this.Load += new System.EventHandler(this.LejemaalCRUD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLejemaal)).EndInit();
             this.panelContainer.ResumeLayout(false);
             this.panelContainer.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.LejemaalPage.ResumeLayout(false);
             this.LejemaalsInfoPage.ResumeLayout(false);
@@ -472,16 +487,16 @@
         private System.Windows.Forms.Button btnVisBUpdate;
         private System.Windows.Forms.Button btnVisBDelete;
         private System.Windows.Forms.Panel panelContainer;
-        private System.Windows.Forms.Button btnCreateB;
-        private System.Windows.Forms.Button btnReadB;
-        private System.Windows.Forms.Button btnUpdateB;
-        private System.Windows.Forms.Button btnDeleteB;
+        private System.Windows.Forms.Button btnCreateL;
+        private System.Windows.Forms.Button btnReadL;
+        private System.Windows.Forms.Button btnUpdateL;
+        private System.Windows.Forms.Button btnDeleteL;
         private System.Windows.Forms.Label lblAdresse;
         private System.Windows.Forms.Label lblPostNr;
-        private System.Windows.Forms.ComboBox comboBoxPostNr;
+        private System.Windows.Forms.ComboBox comboPostNr;
         private System.Windows.Forms.TextBox tbAdresse;
-        private System.Windows.Forms.TextBox tbLejemaalID;
-        private System.Windows.Forms.Label lblLejemaalNr;
+        private System.Windows.Forms.TextBox tbLejemaalsTypeID;
+        private System.Windows.Forms.Label lblLejemaalsTypeID;
         private System.Windows.Forms.TextBox tbBy;
         private System.Windows.Forms.Label lblBy;
         private System.Windows.Forms.TabControl tabControl1;
@@ -498,7 +513,8 @@
         private System.Windows.Forms.Label lblMaksPris;
         private System.Windows.Forms.TextBox tbMinPris;
         private System.Windows.Forms.Label lblMinPris;
-        private System.Windows.Forms.Label lblLejemaal;
-        private System.Windows.Forms.TextBox tbLejemaal;
+        private System.Windows.Forms.Label lblLejemaalNr;
+        private System.Windows.Forms.TextBox tbLejemaalNr;
+        private System.Windows.Forms.Panel panel1;
     }
 }
