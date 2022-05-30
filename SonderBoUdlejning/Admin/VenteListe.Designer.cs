@@ -256,6 +256,7 @@
             this.tbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPosition.Location = new System.Drawing.Point(0, 255);
             this.tbPosition.Name = "tbPosition";
+            this.tbPosition.ReadOnly = true;
             this.tbPosition.Size = new System.Drawing.Size(152, 26);
             this.tbPosition.TabIndex = 9;
             // 
