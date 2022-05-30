@@ -181,7 +181,7 @@
             this.btnAntalRes.Name = "btnAntalRes";
             this.btnAntalRes.Size = new System.Drawing.Size(214, 59);
             this.btnAntalRes.TabIndex = 4;
-            this.btnAntalRes.Text = "Antal Reservationer lige nu";
+            this.btnAntalRes.Text = "Antal Reservationer pr beboer";
             this.btnAntalRes.UseVisualStyleBackColor = true;
             this.btnAntalRes.Click += new System.EventHandler(this.btnAntalRes_Click);
             // 

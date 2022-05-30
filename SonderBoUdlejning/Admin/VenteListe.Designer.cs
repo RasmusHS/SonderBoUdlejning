@@ -44,6 +44,7 @@
             this.btnDeleteFromListButton = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnVisGetPosition = new System.Windows.Forms.Button();
+            this.btnGetPosition = new System.Windows.Forms.Button();
             this.tbPosition = new System.Windows.Forms.TextBox();
             this.lblPosition = new System.Windows.Forms.Label();
             this.panelInputs = new System.Windows.Forms.Panel();
@@ -52,7 +53,6 @@
             this.btnVisAddToList = new System.Windows.Forms.Button();
             this.btnVisDeleteFromList = new System.Windows.Forms.Button();
             this.btnVisShowList = new System.Windows.Forms.Button();
-            this.btnGetPosition = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVenteListe)).BeginInit();
@@ -237,11 +237,26 @@
             this.btnVisGetPosition.UseVisualStyleBackColor = true;
             this.btnVisGetPosition.Click += new System.EventHandler(this.btnGetPos_Click);
             // 
+            // btnGetPosition
+            // 
+            this.btnGetPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGetPosition.Location = new System.Drawing.Point(0, 287);
+            this.btnGetPosition.Name = "btnGetPosition";
+            this.btnGetPosition.Size = new System.Drawing.Size(152, 54);
+            this.btnGetPosition.TabIndex = 12;
+            this.btnGetPosition.Text = "Få position";
+            this.toolTip.SetToolTip(this.btnGetPosition, "Indtast kun pId for at slette den person fra alle ventelister.\r\nIndtast både pId " +
+        "og Lid for at slette en person på en specifik lejemål.\r\nIndtast kun Lid for at s" +
+        "lette alle på den boligs venteliste.");
+            this.btnGetPosition.UseVisualStyleBackColor = true;
+            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click);
+            // 
             // tbPosition
             // 
             this.tbPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPosition.Location = new System.Drawing.Point(0, 255);
             this.tbPosition.Name = "tbPosition";
+            this.tbPosition.ReadOnly = true;
             this.tbPosition.Size = new System.Drawing.Size(152, 26);
             this.tbPosition.TabIndex = 9;
             // 
@@ -330,20 +345,6 @@
             this.btnVisShowList.Text = "Vis venteliste";
             this.btnVisShowList.UseVisualStyleBackColor = true;
             this.btnVisShowList.Click += new System.EventHandler(this.btnShowList_Click);
-            // 
-            // btnGetPosition
-            // 
-            this.btnGetPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetPosition.Location = new System.Drawing.Point(0, 287);
-            this.btnGetPosition.Name = "btnGetPosition";
-            this.btnGetPosition.Size = new System.Drawing.Size(152, 54);
-            this.btnGetPosition.TabIndex = 12;
-            this.btnGetPosition.Text = "Få position";
-            this.toolTip.SetToolTip(this.btnGetPosition, "Indtast kun pId for at slette den person fra alle ventelister.\r\nIndtast både pId " +
-        "og Lid for at slette en person på en specifik lejemål.\r\nIndtast kun Lid for at s" +
-        "lette alle på den boligs venteliste.");
-            this.btnGetPosition.UseVisualStyleBackColor = true;
-            this.btnGetPosition.Click += new System.EventHandler(this.btnGetPosition_Click);
             // 
             // VenteListe
             // 
