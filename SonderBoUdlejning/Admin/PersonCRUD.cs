@@ -89,6 +89,12 @@ namespace SonderBoUdlejning.Admin
             {
                 ErrorMessage.errorMessage(); //Viser fejlbesked
             }
+
+            //Tømmer felternes input
+            tbPId.Text = "";
+            tbNavn.Text = "";
+            tbMail.Text = "";
+            tbTlf.Text = "";
         }
 
         private void btnPersonR_Click(object sender, EventArgs e)
@@ -268,7 +274,12 @@ namespace SonderBoUdlejning.Admin
             {
                 ErrorMessage.errorMessage(); //Vis fejlbesked
             }
-
+            
+            //Tømmer felternes input
+            tbPId.Text = "";
+            tbNavn.Text = "";
+            tbMail.Text = "";
+            tbTlf.Text = "";
         }
 
         private void btnPersonD_Click(object sender, EventArgs e)
@@ -297,6 +308,11 @@ namespace SonderBoUdlejning.Admin
                 ErrorMessage.errorMessage(); //Vis fejlbesked
             }
 
+            //Tømmer felternes input
+            tbPId.Text = "";
+            tbNavn.Text = "";
+            tbMail.Text = "";
+            tbTlf.Text = "";
         }
 
         //Knap som viser felter relevant for oprettelse af en ny person

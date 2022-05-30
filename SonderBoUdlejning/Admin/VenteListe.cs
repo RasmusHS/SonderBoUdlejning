@@ -74,7 +74,7 @@ namespace SonderBoUdlejning.Admin
                 //Admin har adgang til det hele
                 btnVisAddToList.Visible = true;
                 btnVisDeleteFromList.Visible = true;
-                btnVisGetPosition.Visible = true;
+                btnGetPosition.Visible = true;
                 btnVisShowList.Visible = true;
             }
             else if (UserIdentification.UserAccess == 2) //secretary
@@ -82,7 +82,7 @@ namespace SonderBoUdlejning.Admin
                 //Sekretæren har ikke adgang til at slette fra en venteliste
                 btnVisAddToList.Visible = true;
                 btnVisDeleteFromList.Visible = false;
-                btnVisGetPosition.Visible = true;
+                btnGetPosition.Visible = true;
                 btnVisShowList.Visible = true;
             }
         }
@@ -145,9 +145,8 @@ namespace SonderBoUdlejning.Admin
             }
         }
 
-        private void GetPosition_Click(object sender, EventArgs e)
+        private void btnGetPosition_Click(object sender, EventArgs e)
         {
-
             string pId = tbPId.Text; //Tager input fra person ID textboxen
             string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
@@ -158,7 +157,7 @@ namespace SonderBoUdlejning.Admin
             {
                 MessageBox.Show("Indtast venligst både et person ID og et lejemål Nr!");
                 return;
-                
+
             }
 
             bool pIdValid = PersonInputCheck.PIdCheck(pId);
@@ -181,7 +180,7 @@ namespace SonderBoUdlejning.Admin
             string Lid = tbLid.Text; //Tager input fra lejemål Nr textboxen
 
             //SQL Query, som henter ventelisten for en bestemt lejemål
-            string sqlS1 = $"SELECT * FROM Venteliste WHERE Lid = {Lid} ORDER BY signUpDato ASC";
+            string sqlS1 = $"SELECT pId AS 'Person ID', Lid AS 'Lejemålstype ID', signUpDato AS 'Opskrivelsesdato' FROM Venteliste WHERE Lid = {Lid} ORDER BY signUpDato ASC";
 
             //Tjekker om lejemål Nr er tom
             if (string.IsNullOrEmpty(Lid))
@@ -352,5 +351,7 @@ namespace SonderBoUdlejning.Admin
 
             btnGetPosition.Visible = false;
         }
+
+        
     }
 }

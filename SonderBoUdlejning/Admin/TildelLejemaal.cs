@@ -326,7 +326,7 @@ namespace SonderBoUdlejning.Admin
             string lejerMail = tbMedlemsEmail.Text; //Tager input fra mail textboxen
             string lejerTlf = tbMedlemsTlf.Text; //Tager input fra tlf textboxen
             bool erBeboer; //Pladsholder variabel for erBeboer
-            string adresse = comboAdresser.SelectedItem.ToString(); //Tager den valgte adresse fra comboboxen
+            
             string lejemaalNr = "";
 
             string postNr = ""; //Pladsholder variabel for postNr
@@ -345,73 +345,82 @@ namespace SonderBoUdlejning.Admin
 
             int checkForpId;
 
-            if ((string.IsNullOrEmpty(Lid)) || (string.IsNullOrEmpty(lejerNavn)) || (string.IsNullOrEmpty(pId)))
-            {
-                MessageBox.Show("Indtast venligst både et lejemål Nr og et person ID!");
-                return;
-            }
-
-            bool LidValid = LejemaalInputCheck.LidCheck(Lid);
-            bool pIdValid = PersonInputCheck.PIdCheck(pId);
-
             try
             {
-                indflytDatoValid = LejemaalInputCheck.indflytDato(startDato);
-            }
-            catch
-            {
-                indflytDatoValid = false;
-            }
-
-            if ((LidValid == true) && (pIdValid == true) && (indflytDatoValid == true))
-            {
-                checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Lejemaal WHERE pId = {pId}"));
-
-                if (checkForpId > 0)
+                string adresse = comboAdresser.SelectedItem.ToString(); //Tager den valgte adresse fra comboboxen
+                
+                if ((string.IsNullOrEmpty(Lid)) || (string.IsNullOrEmpty(lejerNavn)) || (string.IsNullOrEmpty(pId)))
                 {
-                    MessageBox.Show("Der er allerede en beboer med det pId i systemet");
+                    MessageBox.Show("Indtast venligst både et lejemål Nr og et person ID!");
                     return;
+                }
+
+                bool LidValid = LejemaalInputCheck.LidCheck(Lid);
+                bool pIdValid = PersonInputCheck.PIdCheck(pId);
+
+                try
+                {
+                    indflytDatoValid = LejemaalInputCheck.indflytDato(startDato);
+                }
+                catch
+                {
+                    indflytDatoValid = false;
+                }
+
+                if ((LidValid == true) && (pIdValid == true) && (indflytDatoValid == true))
+                {
+                    checkForpId = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(pId) FROM Lejemaal WHERE pId = {pId}"));
+
+                    if (checkForpId > 0)
+                    {
+                        MessageBox.Show("Der er allerede en beboer med det pId i systemet");
+                        return;
+                    }
+                    else
+                    {
+                        //Finder postNr ved hjælp af adresse
+                        postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE adresse = '{adresse}'");
+
+                        //Finder by ved hjælp af postNr
+                        by = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = '{postNr}'");
+
+                        //Finder lejePris ved hjælp af lejemål Nr
+                        lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM LejemaalsInfo WHERE Lid = {Lid}");
+
+                        lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE adresse = '{adresse}' AND postNr = '{postNr}' AND Lid = {Lid}");
+
+                        //Nedenstående MessageBox bruges til debugging
+                        //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
+
+                        //Lejekontrakt printes
+                        LejekontraktFacade lejekontrakt = new LejekontraktFacade();
+                        lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, Lid);
+
+                        //Personen opdateres i Person tabellen
+                        PersonFacade pUpdate = new PersonFacade();
+                        erBeboer = true;
+                        pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
+                        pUpdate.uPerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
+
+                        //Lejemaalen opdateres i Lejemaal tabellen
+                        LejemaalFacade lejemaalUpdate = new LejemaalFacade();
+                        lejemaalUpdate.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, startDato, slutDato);
+                        dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
+
+                        //Sletter personen fra ventelisten
+                        VentelisteFacade vDelete = new VentelisteFacade();
+                        vDelete.RemoveFromList(pId, Lid);
+                        dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
+                    }
                 }
                 else
                 {
-                    //Finder postNr ved hjælp af adresse
-                    postNr = tableConn.textBoxBinder($"SELECT postNr FROM Lejemaal WHERE adresse = '{adresse}'");
-                    
-                    //Finder by ved hjælp af postNr
-                    by = tableConn.textBoxBinder($"SELECT byNavn FROM PostNr WHERE postNr = '{postNr}'");
-
-                    //Finder lejePris ved hjælp af lejemål Nr
-                    lejePris = tableConn.textBoxBinder($"SELECT lejePris FROM LejemaalsInfo WHERE Lid = {Lid}");
-
-                    lejemaalNr = tableConn.textBoxBinder($"SELECT lejemaalNr FROM Lejemaal WHERE adresse = '{adresse}' AND postNr = '{postNr}' AND Lid = {Lid}");
-                    
-                    //Nedenstående MessageBox bruges til debugging
-                    //MessageBox.Show($"{lejerNavn}\n{lejerMail}\n{lejerTlf}\n{adresse}\n{postNr}\n{by}\n{startDato}");
-                    
-                    //Lejekontrakt printes
-                    LejekontraktFacade lejekontrakt = new LejekontraktFacade();
-                    lejekontrakt.PrintKontrakt(lejerNavn, lejePris, adresse, postNr, by, startDato, Lid);
-
-                    //Personen opdateres i Person tabellen
-                    PersonFacade pUpdate = new PersonFacade();
-                    erBeboer = true;
-                    pId = tableConn.textBoxBinder($"SELECT pId FROM Person WHERE fNavn = '{lejerNavn}'");
-                    pUpdate.uPerson(lejerNavn, lejerMail, lejerTlf, pId, erBeboer);
-
-                    //Lejemaalen opdateres i Lejemaal tabellen
-                    LejemaalFacade lejemaalUpdate = new LejemaalFacade();
-                    lejemaalUpdate.uLejemaal(lejemaalNr, adresse, postNr, Lid, pId, startDato, slutDato);
-                    dgvLejemaal.DataSource = tableConn.tableBinder(sqlS1);
-
-                    //Sletter personen fra ventelisten
-                    VentelisteFacade vDelete = new VentelisteFacade();
-                    vDelete.RemoveFromList(pId, Lid);
-                    dgvVenteliste.DataSource = tableConn.tableBinder(sqlS2);
+                    ErrorMessage.errorMessage(); //Viser fejlmeddelelse
                 }
             }
-            else
+            catch
             {
-                ErrorMessage.errorMessage(); //Viser fejlmeddelelse
+                MessageBox.Show("Husk at vælge en adresse, måned og år");
             }
         }
     }

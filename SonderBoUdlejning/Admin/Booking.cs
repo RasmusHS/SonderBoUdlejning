@@ -91,7 +91,7 @@ namespace SonderBoUdlejning.Admin
             int[] arrayBeboerID = listBeboerID.ToArray(); 
             PanelPersonInfo.Visible = true;
             int personID = arrayBeboerID[comboMembers.SelectedIndex];
-            TBPID.Text = personID.ToString();
+            tbPId.Text = personID.ToString();
 
             string queryTlf = $"SELECT pTlf FROM Person WHERE pId = {personID}";
             string queryMail = $"SELECT pMail FROM Person WHERE pId = {personID}";
@@ -99,12 +99,12 @@ namespace SonderBoUdlejning.Admin
             SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(queryTlf, conn);
             conn.Open();
-            TBTLF.Text = Convert.ToString(cmd.ExecuteScalar());
+            tbTlf.Text = Convert.ToString(cmd.ExecuteScalar());
             conn.Close();
 
             SqlCommand cmd2 = new SqlCommand(queryMail, conn);
             conn.Open();
-            TBMail.Text = Convert.ToString(cmd2.ExecuteScalar());
+            tbMail.Text = Convert.ToString(cmd2.ExecuteScalar());
             conn.Close();
 
             if (PanelResource.Visible == true)
@@ -119,34 +119,13 @@ namespace SonderBoUdlejning.Admin
             //Denne text box skal slettes. det er bare for at se om den ID er korrekt
             int[] arrayResourceID = listResourceID.ToArray();
             int resourceID = arrayResourceID[comboResource.SelectedIndex];
-            TBResourceID.Text = resourceID.ToString();
+            tbResourceID.Text = resourceID.ToString();
             PanelResource.Visible = true;
 
             if (PanelPersonInfo.Visible == true) 
             {
                 btnConfirmBooking.Visible = true;
             }
-        }
-
-        private void BtnCheckLedigeRessourcer_Click(object sender, EventArgs e)
-        {
-            //Tjekker om den dato man vil leje fra, allerede er i en anden udlejning. 
-            //Indput validate dato. er der en funktion i winforms hvor man kan vælge på en kalender og få dato i string format?   
-            dtpStart.CustomFormat = "yyyy-MM-dd";
-            string sqlS2 = "SELECT rId AS 'Ressource ID', rTypeNavn AS 'Ressource Navn', rType AS 'Ressource Type' FROM Ressourcer WHERE rId NOT IN(SELECT rId FROM Reservationer WHERE '" + dtpStart.Text + "' BETWEEN rStartDato AND rSlutDato)";
-            dgvRessourcer.DataSource = tableConn.tableBinder(sqlS2);
-
-            listResource.Clear();
-            listResourceID.Clear();
-            comboResource.Items.Clear();
-            BookingFacade.getRessourceList(listResourceID, listResource, dtpStart.Text);
-            foreach (string item in listResource)
-            {
-                comboResource.Items.Add(item);
-            }
-
-            TBResourceID.Text = "";
-            dtpStart.CustomFormat = "dd-MM-yyyy";
         }
 
         private void dtpStart_ValueChanged(object sender, EventArgs e)
@@ -164,7 +143,7 @@ namespace SonderBoUdlejning.Admin
                 comboResource.Items.Add(item);
             }
 
-            TBResourceID.Text = "";
+            tbResourceID.Text = "";
             dtpStart.CustomFormat = "dd-MM-yyyy";
         }
 
@@ -178,47 +157,53 @@ namespace SonderBoUdlejning.Admin
                 
             if (dateSlutDato >= dateToday)
             {
-                BookingFacade.checkSlutDato(dtpSlut.Text, TBResourceID.Text);
+                BookingFacade.checkSlutDato(dtpSlut.Text, tbResourceID.Text);
                 int antalBookings = BookingFacade.slutDato;
                 
-                BookingFacade.checkMellemDatoer(dtpStart.Text, dtpSlut.Text, Convert.ToInt32(TBResourceID.Text));
+                BookingFacade.checkMellemDatoer(dtpStart.Text, dtpSlut.Text, Convert.ToInt32(tbResourceID.Text));
                 int antalBookingsBetweenDates = BookingFacade.mellemDatoer;
 
-
-                if (antalBookings == 0 && antalBookingsBetweenDates == 0)
+                try
                 {
-                    //BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text);
-                    BookingFacade.checkRessourceIdType(TBResourceID.Text);
-
-                    string checkAlreadyBookedQuery = $"SELECT COUNT(resNr) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = {Convert.ToInt32(TBPID.Text)} AND rType = {BookingFacade.ressourceIdType} AND rSlutDato >= GETDATE();";
-                    SqlCommand cmdAlreadyBooked = new SqlCommand(checkAlreadyBookedQuery, conn);
-                    conn.Open();
-                    int AlreadyBookedQuery = Convert.ToInt32(cmdAlreadyBooked.ExecuteScalar());
-                    conn.Close();
-                    if (AlreadyBookedQuery < 4)
+                    if (antalBookings == 0 && antalBookingsBetweenDates == 0)
                     {
-                        string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(TBResourceID.Text) + ", " + Convert.ToInt32(TBPID.Text) + ",'" + dtpStart.Text + "','" + dtpSlut.Text + "')";
-                        
-                        SqlCommand cmd = new SqlCommand(query, conn);
+                        //BookingSystems.CheckResourceIdType.getResourceIdType(TBResourceID.Text);
+                        BookingFacade.checkRessourceIdType(tbResourceID.Text);
+
+                        string checkAlreadyBookedQuery = $"SELECT COUNT(resNr) FROM Reservationer INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE pId = {Convert.ToInt32(tbPId.Text)} AND rType = {BookingFacade.ressourceIdType} AND rSlutDato >= GETDATE();";
+                        SqlCommand cmdAlreadyBooked = new SqlCommand(checkAlreadyBookedQuery, conn);
                         conn.Open();
-                        cmd.ExecuteNonQuery();
+                        int AlreadyBookedQuery = Convert.ToInt32(cmdAlreadyBooked.ExecuteScalar());
                         conn.Close();
-                        
-                        MessageBox.Show("Reservation oprettet!");
-                        dgvReservationer.DataSource = tableConn.tableBinder(sqlS1);
+                        if (AlreadyBookedQuery < 4)
+                        {
+                            string query = "INSERT INTO Reservationer VALUES(" + Convert.ToInt32(tbResourceID.Text) + ", " + Convert.ToInt32(tbPId.Text) + ",'" + dtpStart.Text + "','" + dtpSlut.Text + "')";
+
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+
+                            MessageBox.Show("Reservation oprettet!");
+                            dgvReservationer.DataSource = tableConn.tableBinder(sqlS1);
+                        }
+                        else
+                        {
+                            string input = comboResource.Text;
+                            int index = input.LastIndexOf(" ");
+                            if (index > 0)
+                                input = input.Substring(0, index);
+                            MessageBox.Show($"Denne beboer har opnået maks (3) antal bookings af {input}");
+                        }
                     }
                     else
                     {
-                        string input = comboResource.Text;
-                        int index = input.LastIndexOf(" ");
-                        if (index > 0)
-                                input = input.Substring(0, index);
-                            MessageBox.Show($"Denne beboer har opnået maks (3) antal bookings af {input}");
+                        MessageBox.Show("Ressource kan ikke bookes da en anden beboer har en reservation i det tidsrum.");
                     }
                 }
-                else
+                catch
                 {
-                    MessageBox.Show("Ressource kan ikke bookes da en anden beboer har en reservation i det tidsrum.");
+                    MessageBox.Show("Husk at vælge både beboer og en ressource.");
                 }
 
 
@@ -238,7 +223,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnAntalRes_Click(object sender, EventArgs e)
         {
-            string query = "SELECT Person.pId AS PersonID, fNavn AS FuldeNavn, COUNT(resNr) AS AntalReservationer FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
+            string query = "SELECT Person.pId AS 'Person ID', fNavn AS 'Fulde Navn', COUNT(resNr) AS 'Antal Reservationer' FROM Reservationer LEFT JOIN Person ON Reservationer.pId = Person.pId GROUP BY Person.pId, fNavn;";
             dgvReservationer.DataSource = tableConn.tableBinder(query);
         }
 
@@ -248,12 +233,13 @@ namespace SonderBoUdlejning.Admin
                 int[] arrayBeboerID = listBeboerID.ToArray();
                 int personID = arrayBeboerID[comboMembersRes.SelectedIndex];
 
-                string query = $"SELECT fNavn, resNr, rTypeNavn, rStartDato, rSlutDato FROM Reservationer INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE Person.pId = {personID};";
+                //string query = $"SELECT fNavn, resNr, rTypeNavn, rStartDato, rSlutDato FROM Reservationer INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE Person.pId = {personID};";
+                string query = $"SELECT fNavn AS 'Fulde navn', resNr AS 'Reservations nr.', rTypeNavn AS 'Ressource navn', rStartDato AS 'Start dato', rSlutDato AS 'Slut dato' FROM Reservationer INNER JOIN Person ON Reservationer.pId = Person.pId INNER JOIN Ressourcer ON Reservationer.rId = Ressourcer.rId WHERE Person.pId = {personID};";
                 dgvReservationer.DataSource = tableConn.tableBinder(query);
             }
             catch
             {
-                MessageBox.Show("Du skal vælge person for at deres reservationer");
+                MessageBox.Show("Du skal vælge person for at se deres reservationer");
             }
         }
 
@@ -261,10 +247,10 @@ namespace SonderBoUdlejning.Admin
         private void comboDeleteResFromBeboer_SelectedIndexChanged(object sender, EventArgs e)
         {
             beboerResID.Clear();
-            tbresResNr.Text = "";
-            cbDeleteBeboerResource.Items.Clear();
-            cbDeleteBeboerResource.Visible = true;
-            label13.Visible = true;
+            tbResNr.Text = "";
+            comboDeleteBeboerResource.Items.Clear();
+            comboDeleteBeboerResource.Visible = true;
+            lblPickPRes.Visible = true;
             string query = $"SELECT COUNT(rTypeNavn) FROM Ressourcer INNER JOIN Reservationer ON Ressourcer.rId = Reservationer.rId WHERE pId = {comboDeleteResFromBeboer.SelectedIndex} + 1;";
             SqlConnection conn = new SqlConnection(connString.connStr);
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -280,7 +266,7 @@ namespace SonderBoUdlejning.Admin
             {
                 while (reader.Read())
                 {
-                    cbDeleteBeboerResource.Items.Add(reader.GetString(i));
+                    comboDeleteBeboerResource.Items.Add(reader.GetString(i));
                 }
             }
             conn.Close();
@@ -305,7 +291,7 @@ namespace SonderBoUdlejning.Admin
         {
             
             int[] listBeboerIDArray = listBeboerID.ToArray();
-            if (string.IsNullOrEmpty(tbresResNr.Text))
+            if (string.IsNullOrEmpty(tbResNr.Text))
             {
                 MessageBox.Show("Vælg venligst en beboer og en af deres reservationer");
             }
@@ -314,7 +300,7 @@ namespace SonderBoUdlejning.Admin
                 DialogResult dialogResult = MessageBox.Show("Er du sikker på du vil slette denne reservation?", "Sikker?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    int resNr = Convert.ToInt32(tbresResNr.Text);
+                    int resNr = Convert.ToInt32(tbResNr.Text);
                     string query = $"DELETE FROM Reservationer WHERE resNr = {resNr};";
                     SqlConnection conn = new SqlConnection(connString.connStr);
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -333,11 +319,12 @@ namespace SonderBoUdlejning.Admin
         private void comboDeleteBeboerResource_SelectedIndexChanged(object sender, EventArgs e)
         {
             int[] beboerResIDArray = beboerResID.ToArray();
-            tbresResNr.Text = Convert.ToString(beboerResIDArray[cbDeleteBeboerResource.SelectedIndex]);
+            tbResNr.Text = Convert.ToString(beboerResIDArray[comboDeleteBeboerResource.SelectedIndex]);
         }
 
         private void btnGetReservations_Click(object sender, EventArgs e)
         {
+            //Statistik over alle ressourcer
             CreateDir.CreateDirectory();
             string username = Environment.UserName;
             string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\AntalReservationer For Ressourcer.txt";
@@ -380,6 +367,7 @@ namespace SonderBoUdlejning.Admin
 
         private void btnGetDateReservationer_Click(object sender, EventArgs e)
         {
+            //Statistik over hvem har brugt hvad
             CreateDir.CreateDirectory();
             string username = Environment.UserName;
             string filePath = $@"C:\Users\{username}\Documents\SønderBoUdlejning\Statistik\Individuelle Reservationer.txt";
@@ -459,6 +447,38 @@ namespace SonderBoUdlejning.Admin
 
             MessageBox.Show($"Fil er gemt i {filePath}");
             
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvReservationer.DataSource = tableConn.tableBinder(sqlS1);
+            dgvRessourcer.DataSource = tableConn.tableBinder(sqlS2);
+
+            comboResource.Items.Clear();
+            comboMembers.Items.Clear();
+            comboMembersRes.Items.Clear();
+            comboDeleteResFromBeboer.Items.Clear();
+            tbPId.Text = "";
+            tbMail.Text = "";
+            tbTlf.Text = "";
+            tbResourceID.Text = "";
+            tbResNr.Text = "";
+            comboDeleteBeboerResource.Items.Clear();
+            comboDeleteBeboerResource.Visible = false;
+            lblPickPRes.Visible = false;
+
+            foreach (string item in listResource)
+            {
+                comboResource.Items.Add(item);
+            }
+
+            foreach (string item in listBeboer)
+            {
+                comboMembers.Items.Add(item);
+                comboMembersRes.Items.Add(item);
+                comboDeleteResFromBeboer.Items.Add(item);
+
+            }
         }
     }
 }
