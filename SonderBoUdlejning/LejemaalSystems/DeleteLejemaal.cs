@@ -31,24 +31,26 @@ namespace SonderBoUdlejning.LejemaalSystems
             {
                 conn.Open(); //Åbner forbindelsen
                 
-                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette lejemål {lejemaalNr} fra lejemål tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"Er du sikker på du vil slette lejemål nr. {lejemaalNr} fra lejemål tabellen?", "Er du sikker?", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     if (cmd.ExecuteNonQuery() == -1)
                     {
-                        ErrorMessage.ErrorList.Add("\nLejemålet blev ikke slettet, da den ikke eksisterede i forvejen"); //Besked om at boligen er slettet
+                        //Besked om at lejemålet er slettet
+                        ErrorMessage.ErrorList.Add("\nLejemålet blev ikke slettet, da den ikke eksisterede i forvejen");
                     }
                     else
                     {
-                        ErrorMessage.ErrorList.Add($"\nLejemål {lejemaalNr} blev slettet");
-                        //MessageBox.Show("SUCCESS :\n" + sqlS + "\nmed værdierne: (" + cmd.Parameters["@lejemaalNr"].Value + ")"); //Vis besked om at kommandoen er udført
+                        ErrorMessage.ErrorList.Add($"\nLejemål nr. {lejemaalNr} blev slettet.");
                     }
                 }
                 else if (dialogResult == DialogResult.No) //Hvis nej
                 {
                     cmd.Cancel(); //Aflys kommandoen
                     conn.Close(); //Lukker forbindelsen til databasen
-                    ErrorMessage.ErrorList.Add("\nIntet blev slettet"); //Vis beskedboks med besked om at intet blev slettet
+
+                    //Vis beskedboks med besked om at intet blev slettet
+                    ErrorMessage.ErrorList.Add("\nIntet blev slettet."); 
                     return; //Afslutter metoden
                 }
                 conn.Close(); //Lukker forbindelsen

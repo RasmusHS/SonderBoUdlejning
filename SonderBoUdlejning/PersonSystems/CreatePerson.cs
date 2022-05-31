@@ -40,12 +40,9 @@ namespace SonderBoUdlejning
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                ErrorMessage.ErrorList.Add("\nSUCCESS :\nNyt medlem oprettet med værdierne:\n(" + //Vis beskedboks med besked om succes
-                                    cmd.Parameters["@Navn"].Value + ", " +
-                                    cmd.Parameters["@Mail"].Value + ", " +
-                                    cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@ErBeboer"].Value +
-                                    ")");
+
+                //Vis beskedboks med besked om succes
+                ErrorMessage.ErrorList.Add("\nNyt medlem oprettet."); 
             }
             catch (Exception ex) //Hvis der er fejl
             {

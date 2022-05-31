@@ -40,21 +40,26 @@ namespace SonderBoUdlejning.VentelisteSystems
                     if (dialogResult == DialogResult.Yes) //Hvis ja
                     {
                         cmd.ExecuteNonQuery(); //Udfører kommandoen
-                        //MessageBox.Show($"SUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Vis beskedboks med besked om succes
-                        ErrorMessage.ErrorList.Add($"\nSUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Genbruger ErrorMessage klassen til at vise respons til brugeren
+
+                        //Genbruger ErrorMessage klassen til at vise respons til brugeren
+                        ErrorMessage.ErrorList.Add($"\nMedlem med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); 
                     }
                     else if (dialogResult == DialogResult.No) //Hvis nej
                     {
                         cmd.Cancel(); //Aflys kommandoen
                         conn.Close(); //Lukker forbindelsen til databasen
-                        ErrorMessage.ErrorList.Add("\nIntet blev slettet"); //Genbruger ErrorMessage klassen til at vise respons til brugeren
+
+                        //Genbruger ErrorMessage klassen til at vise respons til brugeren
+                        ErrorMessage.ErrorList.Add("\nIntet blev slettet"); 
                         return; //Afslutter metoden
                     }
                 }
                 else
                 {
                     cmd.ExecuteNonQuery(); //Udfører kommandoen
-                    ErrorMessage.ErrorList.Add($"\nSUCCESS :\nPerson med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}."); //Genbruger ErrorMessage klassen til at vise respons til brugeren
+
+                    //Genbruger ErrorMessage klassen til at vise respons til brugeren
+                    ErrorMessage.ErrorList.Add($"\nMedlem med ID {pId} blev fjernet fra ventelisten for lejemål med type ID {Lid}.");
                 }
                 conn.Close(); //Lukker forbindelsen til databasen
             }

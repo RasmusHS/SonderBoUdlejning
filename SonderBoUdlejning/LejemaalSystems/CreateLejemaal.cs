@@ -38,11 +38,9 @@ namespace SonderBoUdlejning.LejemaalSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                ErrorMessage.ErrorList.Add("\nSUCCESS :\nOprettede ny lejemål med værdierne:\n(" + //Vis beskedboks med besked om succes
-                                    cmd.Parameters["@adresse"].Value + ", " +
-                                    cmd.Parameters["@postNr"].Value + ", " +
-                                    cmd.Parameters["@Lid"].Value +
-                                    ")");
+
+                //Vis beskedboks med besked om succes
+                ErrorMessage.ErrorList.Add("\nNyt lejemål oprettet.");
             }
             catch (Exception ex) //Hvis der er fejl
             {

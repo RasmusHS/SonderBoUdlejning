@@ -35,20 +35,17 @@ namespace SonderBoUdlejning.VentelisteSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 if (cmd.ExecuteNonQuery() == -1) //Tjekker om personen allerede er på ventelisten til en bestemt lejemål type
                 {
-                    //MessageBox.Show("Denne person er allerede på ventelisten til denne lejemål!");
-                    ErrorMessage.ErrorList.Add("\nDenne person er allerede på ventelisten til denne lejemål!");
+                    ErrorMessage.ErrorList.Add("\nDenne person er allerede på ventelisten til dette lejemål!");
                 }
                 else
                 {
-                    //cmd.ExecuteNonQuery();
-                    //MessageBox.Show("Personen er blevet tilføjet til ventelisten");
-                    ErrorMessage.ErrorList.Add("\nPersonen er blevet tilføjet til ventelisten");
+                    ErrorMessage.ErrorList.Add("\nPersonen er blevet tilføjet til ventelisten!");
                 }
                 conn.Close();
             }
             catch
             {
-                MessageBox.Show("Lejemål Nr eller person ID findes ikke i databasen!");
+                MessageBox.Show("Lejemål nr. eller person ID findes ikke i databasen!");
             }
         }
     }

@@ -43,12 +43,9 @@ namespace SonderBoUdlejning.personCRUD
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Udfører SQL kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                ErrorMessage.ErrorList.Add($"\nSUCCESS :\nMedlem med person ID {pId} opdateret til værdierne:\n(" + //Vis beskedboks med besked om succes
-                                    cmd.Parameters["@Navn"].Value + ", " +
-                                    cmd.Parameters["@Mail"].Value + ", " +
-                                    cmd.Parameters["@Tlf"].Value + ", " +
-                                    cmd.Parameters["@erBeboer"].Value +
-                                    ")");
+
+                //Vis beskedboks med besked om succes
+                ErrorMessage.ErrorList.Add($"\nMedlem med ID {pId} er blevet opdateret.");
             }
             catch (Exception ex) //Hvis der er fejl i SQL kommandoen
             {

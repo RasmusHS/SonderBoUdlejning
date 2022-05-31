@@ -61,14 +61,9 @@ namespace SonderBoUdlejning.LejemaalSystems
                 conn.Open(); //Åbner forbindelsen til databasen
                 cmd.ExecuteNonQuery(); //Forsøger at udføre kommandoen
                 conn.Close(); //Lukker forbindelsen til databasen
-                ErrorMessage.ErrorList.Add($"\nSUCCESS :\nOpdaterede lejemål {lejemaalNr} med værdierne:\n(" + //Vis beskedboks med besked om succes
-                                    cmd.Parameters["@adresse"].Value + ", " +
-                                    cmd.Parameters["@postNr"].Value + ", " +
-                                    cmd.Parameters["@Lid"].Value + ", " +
-                                    cmd.Parameters["@pId"].Value + ", " +
-                                    cmd.Parameters["@indflytDato"].Value + ", " +
-                                    cmd.Parameters["@udflytDato"].Value +
-                                    ")");
+
+                //Vis beskedboks med besked om succes
+                ErrorMessage.ErrorList.Add($"\nOpdaterede lejemål nr. {lejemaalNr}.");
             }
             catch (Exception ex) //Hvis der er fejl
             {
