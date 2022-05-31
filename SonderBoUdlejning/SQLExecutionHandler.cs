@@ -104,7 +104,8 @@ namespace SonderBoUdlejning //Change this to match your projects namespace
                 }
                 else 
                 {
-                    textBoxContent = cmd.ExecuteScalar().ToString(); //Executes the SQL statement and returns the first column of the first row of the result set
+                    //Executes the SQL statement and returns the first column of the first row of the result set
+                    textBoxContent = cmd.ExecuteScalar().ToString(); 
 
                     conn.Close(); //Closes the connection to the database
                     return textBoxContent; //Returnerer textBoxContent til formen som kaldte metoden
