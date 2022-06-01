@@ -10,7 +10,7 @@ namespace SonderBoUdlejning.BookingSystems
     internal class SetArrayInfo
     {
         
-        public static void FillArrays (string[] rTypeNavnArray, string[] antalReservationerArray, SqlConnection conn)
+        public static void FillArrays(string[] rTypeNavnArray, string[] antalReservationerArray, SqlConnection conn)
             {
             
             conn.Open();
