@@ -44,7 +44,7 @@ namespace SonderBoUdlejning
                     conn4.Open();
                     conn5.Open();
                     string sqlUpdatePerson = $"UPDATE Person SET erBeboer = 0 WHERE pId = {reader2.GetInt32(0)}";
-                    string sqlUpdateLejemaal = $"UPDATE Lejemaal SET pId = NULL, indflytDato = NULL, udflytDato = NULL WHERE lejemaalNr = '{reader3.GetString(0)}'";
+                    string sqlUpdateLejemaal = $"UPDATE Lejemaal SET pId = NULL, indflytDato = NULL, udflytDato = NULL WHERE lejemaalNr = {reader3.GetInt32(0)}";
                     SqlCommand cmd4 = new SqlCommand(sqlUpdatePerson, conn4);
                     SqlCommand cmd5 = new SqlCommand(sqlUpdateLejemaal, conn5);
                     cmd4.ExecuteNonQuery();
