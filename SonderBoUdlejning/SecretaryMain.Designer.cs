@@ -52,12 +52,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(602, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(452, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(386, 95);
+            this.label1.Size = new System.Drawing.Size(308, 76);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sekratær";
+            this.label1.Text = "Sekretær";
             // 
             // logOutButton
             // 
@@ -65,10 +64,9 @@
             this.logOutButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.logOutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logOutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logOutButton.Location = new System.Drawing.Point(1197, 0);
-            this.logOutButton.Margin = new System.Windows.Forms.Padding(4);
+            this.logOutButton.Location = new System.Drawing.Point(898, 0);
             this.logOutButton.Name = "logOutButton";
-            this.logOutButton.Size = new System.Drawing.Size(132, 123);
+            this.logOutButton.Size = new System.Drawing.Size(99, 100);
             this.logOutButton.TabIndex = 1;
             this.logOutButton.Text = "Log ud";
             this.logOutButton.UseVisualStyleBackColor = false;
@@ -86,9 +84,8 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(267, 894);
+            this.panel1.Size = new System.Drawing.Size(200, 726);
             this.panel1.TabIndex = 2;
             // 
             // btnReservationer
@@ -97,10 +94,9 @@
             this.btnReservationer.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReservationer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReservationer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReservationer.Location = new System.Drawing.Point(0, 493);
-            this.btnReservationer.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReservationer.Location = new System.Drawing.Point(0, 400);
             this.btnReservationer.Name = "btnReservationer";
-            this.btnReservationer.Size = new System.Drawing.Size(267, 74);
+            this.btnReservationer.Size = new System.Drawing.Size(200, 60);
             this.btnReservationer.TabIndex = 5;
             this.btnReservationer.Text = "Reservationer";
             this.btnReservationer.UseVisualStyleBackColor = false;
@@ -112,10 +108,9 @@
             this.btnLejemaalCRUD.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnLejemaalCRUD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLejemaalCRUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLejemaalCRUD.Location = new System.Drawing.Point(0, 419);
-            this.btnLejemaalCRUD.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLejemaalCRUD.Location = new System.Drawing.Point(0, 340);
             this.btnLejemaalCRUD.Name = "btnLejemaalCRUD";
-            this.btnLejemaalCRUD.Size = new System.Drawing.Size(267, 74);
+            this.btnLejemaalCRUD.Size = new System.Drawing.Size(200, 60);
             this.btnLejemaalCRUD.TabIndex = 4;
             this.btnLejemaalCRUD.Text = "Søg Lejemål";
             this.btnLejemaalCRUD.UseVisualStyleBackColor = false;
@@ -127,10 +122,9 @@
             this.btnOpsigLejemaal.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnOpsigLejemaal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpsigLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpsigLejemaal.Location = new System.Drawing.Point(0, 345);
-            this.btnOpsigLejemaal.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOpsigLejemaal.Location = new System.Drawing.Point(0, 280);
             this.btnOpsigLejemaal.Name = "btnOpsigLejemaal";
-            this.btnOpsigLejemaal.Size = new System.Drawing.Size(267, 74);
+            this.btnOpsigLejemaal.Size = new System.Drawing.Size(200, 60);
             this.btnOpsigLejemaal.TabIndex = 3;
             this.btnOpsigLejemaal.Text = "Opsig Lejemål";
             this.btnOpsigLejemaal.UseVisualStyleBackColor = false;
@@ -142,10 +136,9 @@
             this.btnTildelLejemaal.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnTildelLejemaal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTildelLejemaal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTildelLejemaal.Location = new System.Drawing.Point(0, 271);
-            this.btnTildelLejemaal.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTildelLejemaal.Location = new System.Drawing.Point(0, 220);
             this.btnTildelLejemaal.Name = "btnTildelLejemaal";
-            this.btnTildelLejemaal.Size = new System.Drawing.Size(267, 74);
+            this.btnTildelLejemaal.Size = new System.Drawing.Size(200, 60);
             this.btnTildelLejemaal.TabIndex = 2;
             this.btnTildelLejemaal.Text = "Tildel Lejemål";
             this.btnTildelLejemaal.UseVisualStyleBackColor = false;
@@ -157,10 +150,9 @@
             this.btnVenteliste.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnVenteliste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVenteliste.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVenteliste.Location = new System.Drawing.Point(0, 197);
-            this.btnVenteliste.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVenteliste.Location = new System.Drawing.Point(0, 160);
             this.btnVenteliste.Name = "btnVenteliste";
-            this.btnVenteliste.Size = new System.Drawing.Size(267, 74);
+            this.btnVenteliste.Size = new System.Drawing.Size(200, 60);
             this.btnVenteliste.TabIndex = 6;
             this.btnVenteliste.Text = "Venteliste";
             this.btnVenteliste.UseVisualStyleBackColor = false;
@@ -172,10 +164,9 @@
             this.btnOpretBorger.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnOpretBorger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpretBorger.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpretBorger.Location = new System.Drawing.Point(0, 123);
-            this.btnOpretBorger.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOpretBorger.Location = new System.Drawing.Point(0, 100);
             this.btnOpretBorger.Name = "btnOpretBorger";
-            this.btnOpretBorger.Size = new System.Drawing.Size(267, 74);
+            this.btnOpretBorger.Size = new System.Drawing.Size(200, 60);
             this.btnOpretBorger.TabIndex = 1;
             this.btnOpretBorger.Text = "Opret Borger";
             this.btnOpretBorger.UseVisualStyleBackColor = false;
@@ -187,17 +178,17 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(267, 123);
+            this.panel2.Size = new System.Drawing.Size(200, 100);
             this.panel2.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SonderBoUdlejning.Properties.Resources.Soenderbo_logo;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(267, 123);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -206,9 +197,10 @@
             // 
             this.labelSlogan.AutoSize = true;
             this.labelSlogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSlogan.Location = new System.Drawing.Point(2, 49);
+            this.labelSlogan.Location = new System.Drawing.Point(2, 40);
+            this.labelSlogan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSlogan.Name = "labelSlogan";
-            this.labelSlogan.Size = new System.Drawing.Size(377, 31);
+            this.labelSlogan.Size = new System.Drawing.Size(305, 26);
             this.labelSlogan.TabIndex = 5;
             this.labelSlogan.Text = "Bo godt – bo hos SønderBo (1)";
             // 
@@ -219,31 +211,28 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.logOutButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(267, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(200, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1329, 123);
+            this.panel3.Size = new System.Drawing.Size(997, 100);
             this.panel3.TabIndex = 3;
             // 
             // panelSecFormsLoader
             // 
             this.panelSecFormsLoader.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelSecFormsLoader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSecFormsLoader.Location = new System.Drawing.Point(267, 123);
-            this.panelSecFormsLoader.Margin = new System.Windows.Forms.Padding(4);
+            this.panelSecFormsLoader.Location = new System.Drawing.Point(200, 100);
             this.panelSecFormsLoader.Name = "panelSecFormsLoader";
-            this.panelSecFormsLoader.Size = new System.Drawing.Size(1329, 771);
+            this.panelSecFormsLoader.Size = new System.Drawing.Size(997, 626);
             this.panelSecFormsLoader.TabIndex = 4;
             // 
             // SecretaryMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1596, 894);
+            this.ClientSize = new System.Drawing.Size(1197, 726);
             this.Controls.Add(this.panelSecFormsLoader);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SecretaryMain";
             this.Text = "SecretaryMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

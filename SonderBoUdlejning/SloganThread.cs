@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SonderBoUdlejning
 {
-    public class SloganThread
+    public class SloganThread 
     {
         Label lblSlogan;
 
