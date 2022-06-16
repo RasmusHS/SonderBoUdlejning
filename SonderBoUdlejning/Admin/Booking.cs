@@ -442,7 +442,7 @@ namespace SonderBoUdlejning.Admin
             using (StreamWriter sw = new StreamWriter(filePath))
             {
                 sw.WriteLine(sb.ToString());
-                MessageBox.Show($@"Statistik blev genereret og ligger i C:\Brugere\{username}\Dokumenter\SønderBoUdlejning\Statistik");
+                //MessageBox.Show($@"Statistik blev genereret og ligger i C:\Brugere\{username}\Dokumenter\SønderBoUdlejning\Statistik");
             }
 
             MessageBox.Show($"Fil er gemt i {filePath}");

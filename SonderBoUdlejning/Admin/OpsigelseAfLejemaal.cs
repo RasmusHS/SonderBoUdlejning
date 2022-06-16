@@ -123,7 +123,7 @@ namespace SonderBoUdlejning.Admin
             if ((pIdValid == true) && (lejemaalNrValid == true) && (udflytDatoValid == true))
             {
                 checklejemaalNrPIdMatch = Convert.ToInt32(tableConn.textBoxBinder($"SELECT COUNT(lejemaalNr) FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}"));
-                if ((checklejemaalNrPIdMatch != 1))
+                if ((checklejemaalNrPIdMatch == 1))
                 {
                     Lid = tableConn.textBoxBinder($"SELECT Lid FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}");
                     adresse = tableConn.textBoxBinder($"SELECT adresse FROM Lejemaal WHERE pId = {pId} AND lejemaalNr = {lejemaalNr}");

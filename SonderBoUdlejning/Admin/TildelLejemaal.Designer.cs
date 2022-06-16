@@ -166,12 +166,12 @@
             this.lblPickAdresse.TabIndex = 24;
             this.lblPickAdresse.Text = "Vælg adresse:";
             // 
-            // combAdresser
+            // comboAdresser
             // 
             this.comboAdresser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboAdresser.FormattingEnabled = true;
             this.comboAdresser.Location = new System.Drawing.Point(158, 87);
-            this.comboAdresser.Name = "combAdresser";
+            this.comboAdresser.Name = "comboAdresser";
             this.comboAdresser.Size = new System.Drawing.Size(185, 28);
             this.comboAdresser.TabIndex = 23;
             // 
@@ -199,12 +199,12 @@
             this.lblPickDato.TabIndex = 23;
             this.lblPickDato.Text = "Vælg måned og år";
             // 
-            // combIndflytÅr
+            // comboIndflytYear
             // 
             this.comboIndflytYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboIndflytYear.FormattingEnabled = true;
             this.comboIndflytYear.Location = new System.Drawing.Point(107, 56);
-            this.comboIndflytYear.Name = "combIndflytÅr";
+            this.comboIndflytYear.Name = "comboIndflytYear";
             this.comboIndflytYear.Size = new System.Drawing.Size(91, 28);
             this.comboIndflytYear.TabIndex = 22;
             // 
@@ -228,13 +228,13 @@
             this.lblIndflytMåned.TabIndex = 16;
             this.lblIndflytMåned.Text = "Måned";
             // 
-            // combIndflytMåned
+            // comboIndflytMonth
             // 
             this.comboIndflytMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboIndflytMonth.FormattingEnabled = true;
             this.comboIndflytMonth.Location = new System.Drawing.Point(10, 56);
             this.comboIndflytMonth.Margin = new System.Windows.Forms.Padding(2);
-            this.comboIndflytMonth.Name = "combIndflytMåned";
+            this.comboIndflytMonth.Name = "comboIndflytMonth";
             this.comboIndflytMonth.Size = new System.Drawing.Size(92, 28);
             this.comboIndflytMonth.TabIndex = 19;
             // 
@@ -320,11 +320,11 @@
             this.tbMedlemsNavn.Size = new System.Drawing.Size(76, 26);
             this.tbMedlemsNavn.TabIndex = 7;
             // 
-            // tbMedlemsTLF
+            // tbMedlemsTlf
             // 
             this.tbMedlemsTlf.Location = new System.Drawing.Point(149, 47);
             this.tbMedlemsTlf.Margin = new System.Windows.Forms.Padding(2);
-            this.tbMedlemsTlf.Name = "tbMedlemsTLF";
+            this.tbMedlemsTlf.Name = "tbMedlemsTlf";
             this.tbMedlemsTlf.ReadOnly = true;
             this.tbMedlemsTlf.Size = new System.Drawing.Size(76, 26);
             this.tbMedlemsTlf.TabIndex = 8;
@@ -369,11 +369,11 @@
             this.lblPID.TabIndex = 6;
             this.lblPID.Text = "Indtast person ID";
             // 
-            // tbPID
+            // tbPId
             // 
             this.tbPId.Location = new System.Drawing.Point(19, 70);
             this.tbPId.Margin = new System.Windows.Forms.Padding(2);
-            this.tbPId.Name = "tbPID";
+            this.tbPId.Name = "tbPId";
             this.tbPId.Size = new System.Drawing.Size(76, 26);
             this.tbPId.TabIndex = 1;
             // 
@@ -399,7 +399,7 @@
             this.panelBid.Location = new System.Drawing.Point(20, 16);
             this.panelBid.Margin = new System.Windows.Forms.Padding(2);
             this.panelBid.Name = "panelBid";
-            this.panelBid.Size = new System.Drawing.Size(183, 144);
+            this.panelBid.Size = new System.Drawing.Size(199, 144);
             this.panelBid.TabIndex = 16;
             // 
             // lblPostNr
@@ -411,12 +411,12 @@
             this.lblPostNr.TabIndex = 7;
             this.lblPostNr.Text = "Vælg post nr.";
             // 
-            // comboBoxPostNr
+            // comboPostNr
             // 
             this.comboPostNr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboPostNr.FormattingEnabled = true;
             this.comboPostNr.Location = new System.Drawing.Point(22, 96);
-            this.comboPostNr.Name = "comboBoxPostNr";
+            this.comboPostNr.Name = "comboPostNr";
             this.comboPostNr.Size = new System.Drawing.Size(98, 28);
             this.comboPostNr.TabIndex = 6;
             // 
@@ -426,15 +426,15 @@
             this.lblBID.Location = new System.Drawing.Point(16, 13);
             this.lblBID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBID.Name = "lblBID";
-            this.lblBID.Size = new System.Drawing.Size(141, 20);
+            this.lblBID.Size = new System.Drawing.Size(171, 20);
             this.lblBID.TabIndex = 5;
-            this.lblBID.Text = "Indtast lejemåls ID";
+            this.lblBID.Text = "Indtast lejemålstype ID";
             // 
-            // tbBID
+            // tbLid
             // 
             this.tbLid.Location = new System.Drawing.Point(22, 35);
             this.tbLid.Margin = new System.Windows.Forms.Padding(2);
-            this.tbLid.Name = "tbBID";
+            this.tbLid.Name = "tbLid";
             this.tbLid.Size = new System.Drawing.Size(76, 26);
             this.tbLid.TabIndex = 0;
             this.tbLid.TextChanged += new System.EventHandler(this.tbLid_TextChanged);
