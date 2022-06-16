@@ -12,6 +12,7 @@ namespace SonderBoUdlejning
         //Sætter databasens connectionstring til at være readonly
         public readonly string connStr = @"SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False";
         //Data Source=RASMUSHS;Initial Catalog=SonderBoOfflineDB;Integrated Security=True;TrustServerCertificate=True
+        //Data Source=RASMUS-LAPTOP;Initial Catalog=SonderBoOfflineDB;Integrated Security=True;TrustServerCertificate=True
         //SERVER=mssql13.unoeuro.com; DATABASE=kaspermark_dk_db_skolesql; UID=kaspermark_dk; PASSWORD=69qom3u9PW; Encrypt=False
 
         //eager initialization. Initialisere connectionstring når programmet starter.

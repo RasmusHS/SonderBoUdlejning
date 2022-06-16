@@ -15,6 +15,8 @@ namespace SonderBoUdlejning
         public static string DBUsername = "kaspermark_dk";
         public static string DBPass = "69qom3u9PW";
         public static string conString = "SERVER=" + serverHost + ";" + "DATABASE=" + databaseName + ";" + "UID=" + DBUsername + ";" + "PASSWORD=" + DBPass + "; Encrypt=False";
+        //public static string conString = "Data Source=RASMUSHS;Initial Catalog=SonderBoOfflineDB;Integrated Security=True;TrustServerCertificate=True";
+        //public static string conString = "Data Source=RASMUS-LAPTOP;Initial Catalog=SonderBoOfflineDB;Integrated Security=True;TrustServerCertificate=True";
 
         public static int UserAccess { get; set; }
         
